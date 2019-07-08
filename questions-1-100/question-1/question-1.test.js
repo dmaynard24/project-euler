@@ -11,5 +11,6 @@ function getSum(max) {
     .reduce((acc, n) => acc + n);
 }
 
-console.log(getSum(1000));
-// 233168
+test('gets the sum of all multiples of 3 or 5 below 1000 to be 233168', () => {
+  expect(getSum(1000)).toBe(233168);
+});

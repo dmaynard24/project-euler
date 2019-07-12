@@ -31,9 +31,6 @@ function getPrimes(limit) {
   return primes;
 }
 
-console.log(getPrimeSum(2000000));
-// 142913828922
-
 test('gets the sum of all the primes below two million to be 142913828922', () => {
   expect(getPrimeSum(2000000)).toBe(142913828922);
 });

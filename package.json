@@ -4,6 +4,7 @@
   "description": "JavaScript solutions for the https://projecteuler.net/archives questions.",
   "main": "index.js",
   "devDependencies": {
+    "big-integer": "^1.6.44",
     "jest": "^24.8.0"
   },
   "scripts": {

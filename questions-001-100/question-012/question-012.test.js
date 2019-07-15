@@ -18,8 +18,6 @@
 
 // What is the value of the first triangle number to have over five hundred divisors?
 
-const time0 = performance.now();
-
 function getFirstTriangleWithDivisors(divisors) {
   let i = 1,
     triangle = 1,

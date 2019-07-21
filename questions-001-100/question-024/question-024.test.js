@@ -7,8 +7,6 @@
 
 // What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-const time0 = performance.now();
-
 function getNthPermutation(n) {
   let digits = [...Array(10).keys()],
     target = n - 1,

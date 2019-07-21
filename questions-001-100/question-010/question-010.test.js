@@ -5,8 +5,6 @@
 
 // Find the sum of all the primes below two million.
 
-const time0 = performance.now();
-
 function getPrimeSum(limit) {
   return getPrimes(limit).reduce((a, c, i) => (c ? a + i : a), 0);
 }

@@ -9,8 +9,6 @@
 
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-const time0 = performance.now();
-
 function getSum() {
   let lower = 12,
     upper = 28123,

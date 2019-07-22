@@ -5,7 +5,7 @@
 
 // What is the sum of the digits of the number 2^1000?
 
-var bigInt = require('big-integer');
+const bigInt = require('big-integer');
 
 function getPowerDigitSum(power) {
   return [

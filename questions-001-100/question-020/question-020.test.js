@@ -8,7 +8,7 @@
 
 // Find the sum of the digits in the number 100!
 
-var bigInt = require('big-integer');
+const bigInt = require('big-integer');
 
 function getFactorialDigitSum(num) {
   return [

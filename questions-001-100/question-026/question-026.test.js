@@ -100,6 +100,6 @@ function getPrimes(limit) {
   return primes;
 }
 
-test('gets the index of the first term in the Fibonacci sequence to contain 1000 digits to be 983', () => {
+test('gets the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part to be 983', () => {
   expect(getDenominator()).toBe(983);
 });

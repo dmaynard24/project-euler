@@ -79,6 +79,6 @@ function getCoefficientProduct() {
   }
 }
 
-test('gets the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part to be -59231', () => {
+test('gets the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0 to be -59231', () => {
   expect(getCoefficientProduct()).toBe(-59231);
 });

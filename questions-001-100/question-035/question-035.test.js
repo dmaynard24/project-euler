@@ -13,20 +13,19 @@ function getCircularPrimeCount(limit) {
 
   primes.forEach((prime, i) => {
     if (prime) {
-      let digitsStr = i.toString();
+      let digits = getDigits(i);
 
-      if (digitsStr.length == 1) {
+      if (digits.length == 1) {
         circularPrimeCount++;
       } else {
-        let digitsArr = digitsStr.split(''),
-          evenDigit = digitsArr.find(digit => parseInt(digit) % 2 == 0);
+        let evenDigit = digits.find(digit => digit % 2 == 0);
 
         if (!evenDigit) {
           let allPrime = true;
-          for (let i = 0; i < digitsArr.length - 1; i++) {
-            digitsArr = [...digitsArr.slice(1), ...digitsArr[0]];
-            let digitsInt = parseInt(digitsArr.join(''));
-            allPrime = primes[digitsInt];
+          for (let i = 0; i < digits.length - 1; i++) {
+            digits = [...digits.slice(1), digits[0]];
+            let digitRotation = digits.join('');
+            allPrime = primes[digitRotation];
             if (!allPrime) {
               break;
             }
@@ -61,6 +60,18 @@ function getPrimes(limit) {
   }
 
   return primes;
+}
+
+// getDigits takes an int value, returns array of ints
+function getDigits(val) {
+  let digits = [];
+
+  while (val > 0) {
+    digits.push(val % 10);
+    val = Math.floor(val / 10);
+  }
+
+  return digits.reverse();
 }
 
 test('gets the count of circular primes below one hundred to be 13', () => {

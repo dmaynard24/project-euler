@@ -13,23 +13,24 @@
 // What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
 function getLargestPandigital() {
-  let largest = 0;
-
-  for (let num = 1; num <= 9999; num++) {
+  for (let num = 9999; num > 0; num--) {
     let concat = '',
       n = 1;
     while (concat.length < 9) {
-      concat += (num * n).toString();
+      let product = num * n;
+      if (!isPandigital(product)) {
+        break;
+      }
+
+      concat += product.toString();
       n++;
     }
 
     let concatInt = parseInt(concat, 10);
-    if (concatInt > largest && isPandigital(concatInt)) {
-      largest = concatInt;
+    if (concat.length == 9 && isPandigital(concatInt)) {
+      return concatInt;
     }
   }
-
-  return largest;
 }
 
 function isPandigital(val) {
@@ -48,6 +49,6 @@ function isPandigital(val) {
   return true;
 }
 
-test('gets the sum of the only eleven truncatable primes to be 932718654', () => {
+test('gets the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1, 2, ... , n) where n > 1 to be 932718654', () => {
   expect(getLargestPandigital()).toBe(932718654);
 });

@@ -13,6 +13,8 @@
 // What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
 function getLargestPandigital() {
+  let largest = 0;
+
   for (let num = 9999; num > 0; num--) {
     let concat = '',
       n = 1;
@@ -21,16 +23,18 @@ function getLargestPandigital() {
       if (!isPandigital(product)) {
         break;
       }
-
       concat += product.toString();
+
       n++;
     }
 
     let concatInt = parseInt(concat, 10);
-    if (concat.length == 9 && isPandigital(concatInt)) {
-      return concatInt;
+    if (concat.length == 9 && isPandigital(concatInt) && concatInt > largest) {
+      largest = concatInt;
     }
   }
+
+  return largest;
 }
 
 function isPandigital(val) {

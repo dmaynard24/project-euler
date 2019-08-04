@@ -28,16 +28,6 @@ function getDigitFactorialSum() {
   return sum;
 }
 
-function factorialize(num) {
-  let val = 1;
-  while (num > 1) {
-    val *= num;
-    num--;
-  }
-
-  return val;
-}
-
 // getDigits takes an int value, returns array of ints
 function getDigits(val) {
   let digits = [];

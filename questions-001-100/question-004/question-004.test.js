@@ -31,8 +31,8 @@ function getLargestPalindromeProduct(digits) {
   return largest;
 }
 
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
+// getDigitsReversed takes an int value, returns array of ints
+function getDigitsReversed(val) {
   let digits = [];
 
   while (val > 0) {
@@ -40,11 +40,11 @@ function getDigits(val) {
     val = Math.floor(val / 10);
   }
 
-  return digits.reverse();
+  return digits;
 }
 
 function isPalindrome(val) {
-  let digits = getDigits(val),
+  let digits = getDigitsReversed(val),
     reverse = [...digits].reverse();
 
   for (let i = 0; i < digits.length; i++) {

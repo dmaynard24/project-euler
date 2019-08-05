@@ -18,8 +18,7 @@ function getLargestPalindromeProduct(digits) {
     while (m >= lower) {
       let product = m * n;
       if (product > largest) {
-        let str = product.toString();
-        if (str == [...str].reverse().join('')) {
+        if (isPalindrome(product)) {
           largest = product;
           lower = Math.min(m, n);
         }
@@ -30,6 +29,31 @@ function getLargestPalindromeProduct(digits) {
   }
 
   return largest;
+}
+
+// getDigits takes an int value, returns array of ints
+function getDigits(val) {
+  let digits = [];
+
+  while (val > 0) {
+    digits.push(val % 10);
+    val = Math.floor(val / 10);
+  }
+
+  return digits.reverse();
+}
+
+function isPalindrome(val) {
+  let digits = getDigits(val),
+    reverse = [...digits].reverse();
+
+  for (let i = 0; i < digits.length; i++) {
+    if (digits[i] != reverse[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 test('gets the largest palindrome made from the product of two 3-digit numbers to be 906609', () => {

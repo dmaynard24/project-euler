@@ -9,14 +9,14 @@
 
 function getCircularPrimeCount(limit) {
   let primes = getPrimes(limit - 1),
-    circularPrimeCount = [];
+    count = 0;
 
   primes.forEach((prime, i) => {
     if (prime) {
       let digits = getDigits(i);
 
       if (digits.length == 1) {
-        circularPrimeCount++;
+        count++;
       } else {
         let evenDigit = digits.find(digit => digit % 2 == 0);
 
@@ -32,14 +32,14 @@ function getCircularPrimeCount(limit) {
           }
 
           if (allPrime) {
-            circularPrimeCount++;
+            count++;
           }
         }
       }
     }
   });
 
-  return circularPrimeCount;
+  return count;
 }
 
 // primes using Sieve of Eratosthenes

@@ -10,7 +10,7 @@
 function getPalindromicSum(limit) {
   let sum = 0;
 
-  for (let i = 1; i < limit; i++) {
+  for (let i = 1; i < limit; i += 2) {
     if (isPalindrome(i)) {
       let binary = i.toString(2);
       if (isPalindrome(binary)) {

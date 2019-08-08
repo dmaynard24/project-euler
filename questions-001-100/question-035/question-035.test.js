@@ -9,10 +9,10 @@
 
 function getCircularPrimeCount(limit) {
   let primes = getPrimes(limit - 1),
-    count = 0;
+    count = 1;
 
-  primes.forEach((prime, i) => {
-    if (prime) {
+  for (let i = 3; i < limit; i += 2) {
+    if (isPrime(i, primes)) {
       let digits = getDigits(i);
 
       if (digits.length == 1) {
@@ -29,7 +29,7 @@ function getCircularPrimeCount(limit) {
               rotation *= 10;
               rotation += digits[(j + k) % length];
             }
-            allPrime = primes[rotation];
+            allPrime = isPrime(rotation, primes);
             if (!allPrime) {
               break;
             }
@@ -41,29 +41,37 @@ function getCircularPrimeCount(limit) {
         }
       }
     }
-  });
+  }
 
   return count;
 }
 
-// primes using Sieve of Eratosthenes
+// primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let primes = Array(limit + 1).fill(true);
+  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+    primes = Array(oddsOnlyLimit).fill(true);
 
   primes[0] = false;
-  primes[1] = false;
 
-  let step = 2;
-  for (let i = 2; i <= Math.sqrt(limit); i++) {
+  for (let i = 1; i <= Math.sqrt(limit); i++) {
+    let n = 2 * i + 1;
     if (primes[i]) {
-      step = i;
-      for (let j = step * step; j <= limit; j += step) {
+      let step = n;
+      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
         primes[j] = false;
       }
     }
   }
 
   return primes;
+}
+
+function isPrime(n, primes) {
+  if (n % 2 == 0) {
+    return n == 2;
+  }
+
+  return primes[(n - 1) / 2];
 }
 
 // getDigits takes an int value, returns array of ints

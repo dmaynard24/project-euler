@@ -16,10 +16,12 @@ function getPrimeSum(limit) {
   return sum;
 }
 
-// primes using Sieve of Eratosthenes
+// primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1;
-  let primes = Array(oddsOnlyLimit).fill(true);
+  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+    primes = Array(oddsOnlyLimit).fill(true);
+
+  primes[0] = false;
 
   for (let i = 1; i <= Math.sqrt(limit); i++) {
     let n = 2 * i + 1;

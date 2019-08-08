@@ -6,43 +6,53 @@
 // What is the 10 001st prime number?
 
 function getNthPrime(n) {
-  let i = 2,
-    primeCount = 0,
-    prime;
-  while (primeCount < n) {
-    if (isPrime(i)) {
-      prime = i;
-      primeCount++;
+  let limit = 105000,
+    primes = getPrimes(limit),
+    count = 1;
+
+  for (let i = 3; i < limit; i += 2) {
+    if (isPrime(i, primes)) {
+      count++;
     }
-    if (i == 2) {
-      i++;
-    } else {
-      i += 2;
+    if (count == n) {
+      return i;
     }
   }
 
-  return prime;
+  return count;
 }
 
-function isPrime(num) {
-  if (num < 1) {
-    return true;
-  } else if (num == 2 || num == 3) {
-    return true;
-  } else if (num % 2 == 0 || num % 3 == 0) {
-    return false;
-  }
+// primes using Sieve of Eratosthenes (storing only odds)
+function getPrimes(limit) {
+  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+    primes = Array(oddsOnlyLimit).fill(true);
 
-  let i = 5;
-  while (i * i <= num) {
-    if (num % i == 0 || num % (i + 2) == 0) {
-      return false;
+  primes[0] = false;
+
+  for (let i = 1; i <= Math.sqrt(limit); i++) {
+    let n = 2 * i + 1;
+    if (primes[i]) {
+      let step = n;
+      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
+        primes[j] = false;
+      }
     }
-    i += 6;
   }
 
-  return true;
+  return primes;
 }
+
+function isPrime(n, primes) {
+  if (n % 2 == 0) {
+    return n == 2;
+  }
+
+  return primes[(n - 1) / 2];
+}
+
+test('gets the 6th prime number to be 13', () => {
+  expect(getNthPrime(6)).toBe(13);
+});
 
 test('gets the 10001st prime number to be 104743', () => {
   expect(getNthPrime(10001)).toBe(104743);

@@ -7,8 +7,8 @@
 
 function getPrimeSum(limit) {
   let primes = getPrimes(limit),
-    sum = 0;
-  for (let i = 2; i < limit; i++) {
+    sum = 2;
+  for (let i = 3; i < limit; i += 2) {
     if (isPrime(i, primes)) {
       sum += i;
     }

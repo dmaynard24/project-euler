@@ -8,15 +8,16 @@
 // NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 function getTruncatablePrimeSum() {
-  let primes = getPrimes(800000),
+  let limit = 800000,
+    primes = getPrimes(limit),
     sum = 0;
 
-  primes.forEach((prime, val) => {
-    // 23 is the first truncatable prime
-    if (val >= 23 && prime && isTruncatablePrime(val)) {
-      sum += val;
+  // 23 is the first truncatable prime
+  for (let i = 23; i <= limit; i += 2) {
+    if (isPrime(i, primes) && isTruncatablePrime(i)) {
+      sum += i;
     }
-  });
+  }
 
   function isTruncatablePrime(val) {
     let is = true,
@@ -24,8 +25,12 @@ function getTruncatablePrimeSum() {
 
     // ltr
     for (let i = 1; i < digits.length; i++) {
-      let truncated = digits.slice(i).join('');
-      is = primes[truncated];
+      let truncated = 0;
+      for (let j = i; j < digits.length; j++) {
+        truncated *= 10;
+        truncated += digits[j];
+      }
+      is = isPrime(truncated, primes);
       if (!is) {
         return false;
       }
@@ -33,8 +38,12 @@ function getTruncatablePrimeSum() {
 
     // rtl
     for (let i = digits.length - 1; i > 0; i--) {
-      let truncated = digits.slice(0, i).join('');
-      is = primes[truncated];
+      let truncated = 0;
+      for (let j = 0; j < i; j++) {
+        truncated *= 10;
+        truncated += digits[j];
+      }
+      is = isPrime(truncated, primes);
       if (!is) {
         return false;
       }
@@ -46,24 +55,32 @@ function getTruncatablePrimeSum() {
   return sum;
 }
 
-// primes using Sieve of Eratosthenes
+// primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let primes = Array(limit + 1).fill(true);
+  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+    primes = Array(oddsOnlyLimit).fill(true);
 
   primes[0] = false;
-  primes[1] = false;
 
-  let step = 2;
-  for (let i = 2; i <= Math.sqrt(limit); i++) {
+  for (let i = 1; i <= Math.sqrt(limit); i++) {
+    let n = 2 * i + 1;
     if (primes[i]) {
-      step = i;
-      for (let j = step * step; j <= limit; j += step) {
+      let step = n;
+      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
         primes[j] = false;
       }
     }
   }
 
   return primes;
+}
+
+function isPrime(n, primes) {
+  if (n % 2 == 0) {
+    return n == 2;
+  }
+
+  return primes[(n - 1) / 2];
 }
 
 // getDigits takes an int value, returns array of ints

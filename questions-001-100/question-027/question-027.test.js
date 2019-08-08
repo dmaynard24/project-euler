@@ -21,15 +21,12 @@ function getCoefficientProduct() {
     largestCount = 0,
     largestProduct = 0;
 
-  let primesToThousand = primes
-      .reduce((a, c, i) => {
-        return c ? [...a, i] : a;
-      }, [])
-      .filter(prime => prime < 1000),
-    negativePrimesFromThousand = primesToThousand
-      .map(prime => prime * -1)
-      .reverse(),
-    primesRange = negativePrimesFromThousand.concat(primesToThousand);
+  // store all primes between -1000 and 1000
+  let positives = primes.reduce((a, c, i) => {
+      return c && i * 2 + 1 < 1000 ? [...a, i * 2 + 1] : a;
+    }, []),
+    negatives = positives.map(prime => prime * -1).reverse(),
+    primesRange = negatives.concat(positives);
 
   primesRange.forEach(a => {
     primesRange.forEach(b => {
@@ -41,42 +38,49 @@ function getCoefficientProduct() {
     });
   });
 
-  return largestProduct;
-
   function getConsecutivePrimeCount(a, b) {
     let n = 0,
       value = n * n + a * n + b,
-      allPrime = value > -1 && primes[value];
+      allPrime = value > -1 && isPrime(value, primes);
 
     while (allPrime) {
       n++;
       value = n * n + a * n + b;
-      allPrime = value > -1 && primes[value];
+      allPrime = value > -1 && isPrime(value, primes);
     }
 
     return n;
   }
 
-  // primes using Sieve of Eratosthenes
-  function getPrimes(limit) {
-    limit = Math.abs(limit);
-    let primes = Array(limit + 1).fill(true);
+  return largestProduct;
+}
 
-    primes[0] = false;
-    primes[1] = false;
+// primes using Sieve of Eratosthenes (storing only odds)
+function getPrimes(limit) {
+  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+    primes = Array(oddsOnlyLimit).fill(true);
 
-    let step = 2;
-    for (let i = 2; i <= Math.sqrt(limit); i++) {
-      if (primes[i]) {
-        step = i;
-        for (let j = step * step; j <= limit; j += step) {
-          primes[j] = false;
-        }
+  primes[0] = false;
+
+  for (let i = 1; i <= Math.sqrt(limit); i++) {
+    let n = 2 * i + 1;
+    if (primes[i]) {
+      let step = n;
+      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
+        primes[j] = false;
       }
     }
-
-    return primes;
   }
+
+  return primes;
+}
+
+function isPrime(n, primes) {
+  if (n % 2 == 0) {
+    return n == 2;
+  }
+
+  return primes[(n - 1) / 2];
 }
 
 test('gets the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0 to be -59231', () => {

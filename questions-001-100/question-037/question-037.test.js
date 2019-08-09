@@ -23,27 +23,18 @@ function getTruncatablePrimeSum() {
     let is = true,
       digits = getDigits(val);
 
-    // ltr
     for (let i = 1; i < digits.length; i++) {
-      let truncated = 0;
-      for (let j = i; j < digits.length; j++) {
-        truncated *= 10;
-        truncated += digits[j];
-      }
-      is = isPrime(truncated, primes);
-      if (!is) {
-        return false;
-      }
-    }
-
-    // rtl
-    for (let i = digits.length - 1; i > 0; i--) {
-      let truncated = 0;
+      let ltr = 0,
+        rtl = 0;
       for (let j = 0; j < i; j++) {
-        truncated *= 10;
-        truncated += digits[j];
+        rtl *= 10;
+        rtl += digits[j];
       }
-      is = isPrime(truncated, primes);
+      for (let j = i; j < digits.length; j++) {
+        ltr *= 10;
+        ltr += digits[j];
+      }
+      is = isPrime(ltr, primes) && isPrime(rtl, primes);
       if (!is) {
         return false;
       }

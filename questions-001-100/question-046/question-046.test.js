@@ -27,8 +27,8 @@ function getSmallestOddComposite() {
         if (isPrime(j, primes)) {
           let prime = j,
             k = 1;
-          while (prime + getDoubleSquare(k) <= composite && !proof) {
-            if (prime + getDoubleSquare(k) == composite) {
+          while (prime + 2 * Math.pow(k, 2) <= composite && !proof) {
+            if (prime + 2 * Math.pow(k, 2) == composite) {
               proof = true;
             }
 
@@ -48,10 +48,6 @@ function getSmallestOddComposite() {
   }
 
   return `unable to disprove Goldbach's other conjecture under ${limit}`;
-}
-
-function getDoubleSquare(num) {
-  return 2 * Math.pow(num, 2);
 }
 
 // primes using Sieve of Eratosthenes (storing only odds)

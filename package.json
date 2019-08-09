@@ -6,7 +6,8 @@
   "devDependencies": {
     "big-integer": "^1.6.44",
     "decimal.js": "^10.2.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "performance-now": "^2.1.0"
   },
   "scripts": {
     "test": "jest"

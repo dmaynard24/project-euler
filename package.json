@@ -31,5 +31,10 @@
   "bugs": {
     "url": "https://github.com/dmaynard24/project-euler/issues"
   },
-  "homepage": "https://github.com/dmaynard24/project-euler#readme"
+  "homepage": "https://github.com/dmaynard24/project-euler#readme",
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2
+  }
 }

@@ -26,14 +26,16 @@ function getTruncatablePrimeSum() {
     for (let i = 1; i < digits.length; i++) {
       let ltr = 0,
         rtl = 0;
-      for (let j = 0; j < i; j++) {
-        rtl *= 10;
-        rtl += digits[j];
+      for (let j = 0; j < digits.length; j++) {
+        if (j >= i) {
+          ltr *= 10;
+          ltr += digits[j];
+        } else {
+          rtl *= 10;
+          rtl += digits[j];
+        }
       }
-      for (let j = i; j < digits.length; j++) {
-        ltr *= 10;
-        ltr += digits[j];
-      }
+
       is = isPrime(ltr, primes) && isPrime(rtl, primes);
       if (!is) {
         return false;

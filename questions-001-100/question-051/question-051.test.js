@@ -40,7 +40,12 @@ function getSmallestPrime(count) {
               otherPrimes.push(newDigits);
 
               if (otherPrimes.length == count) {
-                return otherPrimes[0].join('');
+                let concat = 0;
+                for (let l = 0; l < otherPrimes[0].length; l++) {
+                  concat *= 10;
+                  concat += otherPrimes[0][l];
+                }
+                return concat;
               }
             }
 
@@ -132,5 +137,5 @@ function getIntFromDigits(digits) {
 }
 
 test('gets the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family to be 121313', () => {
-  expect(getSmallestPrime(8)).toBe('121313');
+  expect(getSmallestPrime(8)).toBe(121313);
 });

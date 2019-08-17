@@ -10,7 +10,6 @@
 function getNumberLetterCount(max) {
   const arr = x => Array.from(x),
     num = x => Number(x) || 0,
-    str = x => String(x),
     isEmpty = xs => xs.length === 0,
     take = n => xs => xs.slice(0, n),
     drop = n => xs => xs.slice(n),

@@ -63,10 +63,7 @@ function getCycleLength(entireValue, maxCycleLength) {
 
         for (let j = 0; j < setCount; j++) {
           let nextSetIndex = nextIndex + j * set.length,
-            nextSet = entireValue.substring(
-              nextSetIndex,
-              nextSetIndex + set.length
-            );
+            nextSet = entireValue.substring(nextSetIndex, nextSetIndex + set.length);
           isCycle = set == nextSet;
         }
 

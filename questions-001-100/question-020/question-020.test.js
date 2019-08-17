@@ -12,11 +12,8 @@ const bigInt = require('big-integer');
 
 function getFactorialDigitSum(num) {
   return [
-    ...bigInt(
-      [...Array(num).keys()]
-        .map(key => bigInt(key + 1).value)
-        .reduce((acc, curr) => acc * curr)
-    ).toArray(10).value
+    ...bigInt([...Array(num).keys()].map(key => bigInt(key + 1).value).reduce((acc, curr) => acc * curr)).toArray(10)
+      .value
   ].reduce((acc, curr) => acc + curr);
 }
 

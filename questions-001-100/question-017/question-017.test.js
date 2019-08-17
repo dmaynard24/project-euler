@@ -17,8 +17,7 @@ function getNumberLetterCount(max) {
     reverse = xs => xs.slice(0).reverse(),
     comp = f => g => x => f(g(x)),
     not = x => !x,
-    chunk = n => xs =>
-      isEmpty(xs) ? [] : [take(n)(xs), ...chunk(n)(drop(n)(xs))];
+    chunk = n => xs => (isEmpty(xs) ? [] : [take(n)(xs), ...chunk(n)(drop(n)(xs))]);
 
   let numToWords = n => {
     let a = [
@@ -44,18 +43,7 @@ function getNumberLetterCount(max) {
       'nineteen'
     ];
 
-    let b = [
-      '',
-      '',
-      'twenty',
-      'thirty',
-      'forty',
-      'fifty',
-      'sixty',
-      'seventy',
-      'eighty',
-      'ninety'
-    ];
+    let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
     let g = [
       '',

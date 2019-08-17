@@ -66,10 +66,26 @@ function isPrime(n, primes) {
 }
 
 function isPermutation(val, testVal) {
-  let valDigits = getDigits(val).sort(),
-    testValDigits = getDigits(testVal).sort();
+  let valDigits = getDigits(val),
+    testValDigits = getDigits(testVal);
 
-  return valDigits.length == testValDigits.length && valDigits.join('') == testValDigits.join('');
+  if (valDigits.length == testValDigits.length) {
+    valDigits.sort();
+    testValDigits.sort();
+
+    let valConcat = 0,
+      testValConcat = 0;
+    for (let i = 0; i < valDigits.length; i++) {
+      valConcat *= 10;
+      valConcat += valDigits[i];
+      testValConcat *= 10;
+      testValConcat += testValDigits[i];
+    }
+
+    return valConcat == testValConcat;
+  }
+
+  return false;
 }
 
 // getDigits takes an int value, returns array of ints

@@ -7,12 +7,14 @@
 
 // How many circular primes are there below one million?
 
+const primal = require('../../util/primal');
+
 function getCircularPrimeCount(limit) {
-  let primes = getPrimes(limit - 1),
+  let primes = primal.getPrimes(limit - 1),
     count = 1;
 
   for (let i = 3; i < limit; i += 2) {
-    if (isPrime(i, primes)) {
+    if (primal.isPrime(i, primes)) {
       let digits = getDigits(i);
 
       if (digits.length == 1) {
@@ -29,7 +31,7 @@ function getCircularPrimeCount(limit) {
               rotation *= 10;
               rotation += digits[(j + k) % length];
             }
-            allPrime = isPrime(rotation, primes);
+            allPrime = primal.isPrime(rotation, primes);
             if (!allPrime) {
               break;
             }
@@ -44,34 +46,6 @@ function getCircularPrimeCount(limit) {
   }
 
   return count;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 // getDigits takes an int value, returns array of ints

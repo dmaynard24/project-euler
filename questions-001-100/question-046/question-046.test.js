@@ -14,17 +14,19 @@
 
 // What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
+const primal = require('../../util/primal');
+
 function getSmallestOddComposite() {
   let limit = 6000,
-    primes = getPrimes(limit);
+    primes = primal.getPrimes(limit);
 
   for (let i = 35; i < limit; i += 2) {
-    if (!isPrime(i, primes)) {
+    if (!primal.isPrime(i, primes)) {
       let composite = i,
         proof = false;
 
       for (let j = 2; j < i; j++) {
-        if (isPrime(j, primes)) {
+        if (primal.isPrime(j, primes)) {
           let prime = j,
             k = 1;
           while (prime + 2 * Math.pow(k, 2) <= composite && !proof) {
@@ -48,34 +50,6 @@ function getSmallestOddComposite() {
   }
 
   return `unable to disprove Goldbach's other conjecture under ${limit}`;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 test('gets the smallest odd composite that cannot be written as the sum of a prime and twice a square to be 5777', () => {

@@ -16,8 +16,10 @@
 // e.g. |11| = 11 and |−4| = 4
 // Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
 
+const primal = require('../../util/primal');
+
 function getCoefficientProduct() {
-  let primes = getPrimes(13000),
+  let primes = primal.getPrimes(13000),
     largestCount = 0,
     largestProduct = 0;
 
@@ -41,46 +43,18 @@ function getCoefficientProduct() {
   function getConsecutivePrimeCount(a, b) {
     let n = 0,
       value = n * n + a * n + b,
-      allPrime = value > -1 && isPrime(value, primes);
+      allPrime = value > -1 && primal.isPrime(value, primes);
 
     while (allPrime) {
       n++;
       value = n * n + a * n + b;
-      allPrime = value > -1 && isPrime(value, primes);
+      allPrime = value > -1 && primal.isPrime(value, primes);
     }
 
     return n;
   }
 
   return largestProduct;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 test('gets the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0 to be -59231', () => {

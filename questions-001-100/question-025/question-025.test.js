@@ -31,9 +31,6 @@ function getFibonacciTerm(digitCount) {
   return Math.round((digitCount - 1 + Math.log10(sqrtFive)) / Math.log10(e) / Math.log(phi));
 }
 
-console.log(getFibonacciTerm(1000));
-// 4782
-
 test('gets the index of the first term in the Fibonacci sequence to contain 1000 digits to be 4782', () => {
   expect(getFibonacciTerm(1000)).toBe(4782);
 });

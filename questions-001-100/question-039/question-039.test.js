@@ -7,6 +7,8 @@
 
 // For which value of p ≤ 1000, is the number of solutions maximised?
 
+const areCoprime = require('../../util/coprime');
+
 function getMostCommonPerimeter(pMax) {
   let primitives = getPrimitiveTriples(pMax),
     perimeterCounts = [],
@@ -58,19 +60,6 @@ function getPrimitiveTriples(pMax) {
   }
 
   return triples;
-}
-
-// gets greatest common divisor of two numbers
-function getGcd(a, b) {
-  if (!b) {
-    return a;
-  }
-
-  return getGcd(b, a % b);
-}
-
-function areCoprime(a, b) {
-  return getGcd(a, b) == 1;
 }
 
 test('gets the value of p ≤ 1000 where the number of solutions is maximised to be 840', () => {

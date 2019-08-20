@@ -7,14 +7,16 @@
 
 // NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
+const primal = require('../../util/primal');
+
 function getTruncatablePrimeSum() {
   let limit = 800000,
-    primes = getPrimes(limit),
+    primes = primal.getPrimes(limit),
     sum = 0;
 
   // 23 is the first truncatable prime
   for (let i = 23; i <= limit; i += 2) {
-    if (isPrime(i, primes) && isTruncatablePrime(i)) {
+    if (primal.isPrime(i, primes) && isTruncatablePrime(i)) {
       sum += i;
     }
   }
@@ -36,7 +38,7 @@ function getTruncatablePrimeSum() {
         }
       }
 
-      is = isPrime(ltr, primes) && isPrime(rtl, primes);
+      is = primal.isPrime(ltr, primes) && primal.isPrime(rtl, primes);
       if (!is) {
         return false;
       }
@@ -46,34 +48,6 @@ function getTruncatablePrimeSum() {
   }
 
   return sum;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 // getDigits takes an int value, returns array of ints

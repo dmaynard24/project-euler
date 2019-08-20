@@ -16,7 +16,8 @@
 
 // Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 
-const Decimal = require('decimal.js');
+const primal = require('../../util/primal'),
+  Decimal = require('decimal.js');
 
 function getDenominator() {
   let limit = 999,
@@ -26,14 +27,14 @@ function getDenominator() {
   // set the precision and rounding of the default Decimal constructor
   Decimal.set({ precision: limit * 2, rounding: 1 });
 
-  let primes = getPrimes(limit);
+  let primes = primal.getPrimes(limit);
 
-  for (let i = primes.length - 1; i >= 0; i--) {
+  for (let i = limit - 1; i >= 0; i--) {
     if (largestCycleLength > i) {
       break;
     }
 
-    if (primes[i]) {
+    if (primal.isPrime(i, primes)) {
       let quotient = Decimal(1)
           .div(i)
           .toString(),
@@ -75,26 +76,6 @@ function getCycleLength(entireValue, maxCycleLength) {
   }
 
   return 0;
-}
-
-// primes using Sieve of Eratosthenes
-function getPrimes(limit) {
-  let primes = Array(limit + 1).fill(true);
-
-  primes[0] = false;
-  primes[1] = false;
-
-  let step = 2;
-  for (let i = 2; i <= Math.sqrt(limit); i++) {
-    if (primes[i]) {
-      step = i;
-      for (let j = step * step; j <= limit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
 }
 
 test('gets the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part to be 983', () => {

@@ -7,16 +7,18 @@
 
 // Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 
+const primal = require('../../util/primal');
+
 function getSmallestPrime(count) {
   let limit = 999999,
-    primes = getPrimes(limit),
+    primes = primal.getPrimes(limit),
     combos = {
       5: getAllCombos(5),
       6: getAllCombos(6)
     };
 
   for (let i = 56003; i <= limit; i += 2) {
-    if (isPrime(i, primes)) {
+    if (primal.isPrime(i, primes)) {
       let originalDigits = getDigits(i);
       for (let replaceCount = 1; replaceCount < originalDigits.length; replaceCount++) {
         let digitReplaceCombos = combos[originalDigits.length];
@@ -36,7 +38,7 @@ function getSmallestPrime(count) {
             });
 
             let newDigitsInt = getIntFromDigits(newDigits);
-            if (isPrime(newDigitsInt, primes)) {
+            if (primal.isPrime(newDigitsInt, primes)) {
               otherPrimes.push(newDigits);
 
               if (otherPrimes.length == count) {
@@ -86,34 +88,6 @@ function getAllCombos(length) {
   }
 
   return combos;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 // getDigits takes an int value, returns array of ints

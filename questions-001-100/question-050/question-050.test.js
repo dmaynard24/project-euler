@@ -10,8 +10,10 @@
 
 // Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
+const primal = require('../../util/primal');
+
 function getSumOfConsecutivePrimes(limit) {
-  let primes = getPrimes(limit),
+  let primes = primal.getPrimes(limit),
     largestConsecutiveCount = 0,
     largestSum = 0;
 
@@ -19,17 +21,17 @@ function getSumOfConsecutivePrimes(limit) {
     let consecutiveCount = 0,
       sum = 0;
 
-    if (isPrime(i, primes)) {
+    if (primal.isPrime(i, primes)) {
       consecutiveCount++;
       sum += i;
 
       let j = i + 1;
       while (sum < limit && j < primes.length) {
-        if (isPrime(j, primes)) {
+        if (primal.isPrime(j, primes)) {
           consecutiveCount++;
           sum += j;
 
-          if (isPrime(sum, primes) && consecutiveCount > largestConsecutiveCount) {
+          if (primal.isPrime(sum, primes) && consecutiveCount > largestConsecutiveCount) {
             largestConsecutiveCount = consecutiveCount;
             largestSum = sum;
           }
@@ -41,34 +43,6 @@ function getSumOfConsecutivePrimes(limit) {
   }
 
   return largestSum;
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 test('gets the prime, below one-million, that can be written as the sum of the most consecutive primes to be 997651', () => {

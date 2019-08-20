@@ -7,21 +7,23 @@
 
 // What 12-digit number do you form by concatenating the three terms in this sequence?
 
+const primal = require('../../util/primal');
+
 function getPrimePermutationTerms(digits) {
   let limit = Math.pow(10, digits) - 1,
-    primes = getPrimes(limit),
+    primes = primal.getPrimes(limit),
     terms = [];
 
   // 1489 is the next prime
   for (let i = 1489; i < limit; i += 2) {
-    if (isPrime(i, primes)) {
+    if (primal.isPrime(i, primes)) {
       let maxAddend = Math.floor((limit - i) / 2);
 
       for (let addend = 1; addend <= maxAddend; addend++) {
         terms = [i];
         for (let j = 1; j <= 2; j++) {
           let nextTerm = i + addend * j;
-          if (isPrime(nextTerm, primes) && isPermutation(i, nextTerm)) {
+          if (primal.isPrime(nextTerm, primes) && isPermutation(i, nextTerm)) {
             terms.push(nextTerm);
           } else {
             terms = [i];
@@ -35,34 +37,6 @@ function getPrimePermutationTerms(digits) {
       }
     }
   }
-}
-
-// primes using Sieve of Eratosthenes (storing only odds)
-function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
-    primes = Array(oddsOnlyLimit).fill(true);
-
-  primes[0] = false;
-
-  for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
-    if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
-        primes[j] = false;
-      }
-    }
-  }
-
-  return primes;
-}
-
-function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
-  }
-
-  return primes[(n - 1) / 2];
 }
 
 function isPermutation(val, testVal) {

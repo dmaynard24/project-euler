@@ -30,25 +30,21 @@ function getMostCommonPerimeter(perimeterLimit) {
   return mostCommon;
 }
 
-function getPrimitiveTriples(perimeterLimit) {
+function getPrimitiveTriples(pLimit) {
   let triples = [];
 
-  let n = 1,
-    m = n + 1,
-    p = m * m - n * n + 2 * m * n + m * m + n * n;
-
-  while (p < perimeterLimit) {
-    while (p < perimeterLimit) {
-      while (!areCoprime(m, n) || (m % 2 == 1 && n % 2 == 1)) {
-        m++;
+  // by looking at the values of b and c below, I'm able to limit the range of m based on the pLimit
+  for (let m = 2; m * m + 2 * m < pLimit; m++) {
+    for (let n = 1; n < m; n++) {
+      let p = m * m - n * n + 2 * m * n + m * m + n * n;
+      if (p > pLimit) {
+        break;
       }
 
       let a = m * m - n * n,
-        b = 2 * m * n,
-        c = m * m + n * n;
-      p = a + b + c;
-
-      if (p <= perimeterLimit) {
+        b = 2 * m * n;
+      if (areCoprime(a, b)) {
+        let c = m * m + n * n;
         triples.push({
           a: a,
           b: b,
@@ -56,13 +52,7 @@ function getPrimitiveTriples(perimeterLimit) {
           p: p
         });
       }
-
-      m++;
     }
-
-    n++;
-    m = n + 1;
-    p = m * m - n * n + 2 * m * n + m * m + n * n;
   }
 
   return triples;

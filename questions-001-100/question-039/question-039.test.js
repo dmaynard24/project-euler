@@ -36,15 +36,16 @@ function getPrimitiveTriples(pLimit) {
   // by looking at the values of b and c below, I'm able to limit the range of m based on the pLimit
   for (let m = 2; m * m + 2 * m < pLimit; m++) {
     for (let n = 1; n < m; n++) {
-      let p = m * m - n * n + 2 * m * n + m * m + n * n;
+      let a = m * m - n * n,
+        b = 2 * m * n,
+        c = m * m + n * n,
+        p = a + b + c;
+
       if (p > pLimit) {
         break;
       }
 
-      let a = m * m - n * n,
-        b = 2 * m * n;
       if (areCoprime(a, b)) {
-        let c = m * m + n * n;
         triples.push({
           a: a,
           b: b,

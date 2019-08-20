@@ -7,15 +7,15 @@
 
 // For which value of p ≤ 1000, is the number of solutions maximised?
 
-function getMostCommonPerimeter(perimeterLimit) {
-  let primitives = getPrimitiveTriples(perimeterLimit),
+function getMostCommonPerimeter(pMax) {
+  let primitives = getPrimitiveTriples(pMax),
     perimeterCounts = [],
     mostCommon = 120,
     mostCommonCount = 3;
 
   primitives.forEach(primitive => {
     let p = primitive.p;
-    while (p <= perimeterLimit) {
+    while (p <= pMax) {
       perimeterCounts[p] = perimeterCounts[p] ? perimeterCounts[p] + 1 : 1;
 
       if (perimeterCounts[p] > mostCommonCount) {
@@ -30,18 +30,18 @@ function getMostCommonPerimeter(perimeterLimit) {
   return mostCommon;
 }
 
-function getPrimitiveTriples(pLimit) {
+function getPrimitiveTriples(pMax) {
   let triples = [];
 
   // by looking at the values of b and c below, I'm able to limit the range of m based on the pLimit
-  for (let m = 2; m * m + 2 * m < pLimit; m++) {
+  for (let m = 2; m * m + 2 * m < pMax; m++) {
     for (let n = 1; n < m; n++) {
       let a = m * m - n * n,
         b = 2 * m * n,
         c = m * m + n * n,
         p = a + b + c;
 
-      if (p > pLimit) {
+      if (p > pMax) {
         break;
       }
 

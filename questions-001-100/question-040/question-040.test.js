@@ -66,6 +66,10 @@ function getConstantProduct(limit) {
 
 // getDigits takes an int value, returns array of ints
 function getDigits(val) {
+  if (val < 10) {
+    return [val];
+  }
+
   let digits = [];
 
   while (val > 0) {

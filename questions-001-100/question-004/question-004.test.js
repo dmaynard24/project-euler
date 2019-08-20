@@ -33,6 +33,10 @@ function getLargestPalindromeProduct(digits) {
 
 // getDigitsReversed takes an int value, returns array of ints
 function getDigitsReversed(val) {
+  if (val < 10) {
+    return [val];
+  }
+
   let digits = [];
 
   while (val > 0) {

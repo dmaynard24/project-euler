@@ -134,6 +134,10 @@ function getDigits(val) {
 
 // getIntFromDigits takes an array of ints, returns an int
 function getIntFromDigits(digits) {
+  if (digits.length == 1) {
+    return digits[0];
+  }
+
   return digits.reduce((a, c) => {
     a *= 10;
     return (a += c);

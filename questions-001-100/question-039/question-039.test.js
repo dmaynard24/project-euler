@@ -33,7 +33,7 @@ function getMostCommonPerimeter(pMax) {
 function getPrimitiveTriples(pMax) {
   let triples = [];
 
-  // by looking at the values of b and c below, I'm able to limit the range of m based on the pLimit
+  // by looking at the values of b and c below, I'm able to limit the range of m based on the pMax
   for (let m = 2; m * m + 2 * m < pMax; m++) {
     for (let n = 1; n < m; n++) {
       let a = m * m - n * n,

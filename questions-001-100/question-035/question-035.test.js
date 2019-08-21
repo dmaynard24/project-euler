@@ -7,7 +7,8 @@
 
 // How many circular primes are there below one million?
 
-const primal = require('../../util/primal');
+const primal = require('../../util/primal'),
+  digits = require('../../util/digits');
 
 function getCircularPrimeCount(limit) {
   let primes = primal.getPrimes(limit - 1),
@@ -15,21 +16,21 @@ function getCircularPrimeCount(limit) {
 
   for (let i = 3; i < limit; i += 2) {
     if (primal.isPrime(i, primes)) {
-      let digits = getDigits(i);
+      let numDigits = digits.getDigits(i);
 
-      if (digits.length == 1) {
+      if (numDigits.length == 1) {
         count++;
       } else {
-        let evenDigit = digits.find(digit => digit % 2 == 0);
+        let evenDigit = numDigits.find(digit => digit % 2 == 0);
 
         if (!evenDigit) {
           let allPrime = true,
-            length = digits.length;
+            length = numDigits.length;
           for (let j = 1; j < length; j++) {
             let rotation = 0;
             for (let k = 0; k < length; k++) {
               rotation *= 10;
-              rotation += digits[(j + k) % length];
+              rotation += numDigits[(j + k) % length];
             }
             allPrime = primal.isPrime(rotation, primes);
             if (!allPrime) {
@@ -46,40 +47,6 @@ function getCircularPrimeCount(limit) {
   }
 
   return count;
-}
-
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
-  if (val < 10) {
-    return [val];
-  }
-
-  let digits = [];
-
-  while (val > 0) {
-    digits.push(val % 10);
-    val = Math.floor(val / 10);
-  }
-
-  return digits.reverse();
-}
-
-// getRotations takes an int value, requires getDigits
-function getRotations(num) {
-  let rotations = [],
-    digits = getDigits(num);
-
-  let length = digits.length;
-  for (let j = 1; j < length; j++) {
-    let rotation = 0;
-    for (let k = 0; k < length; k++) {
-      rotation *= 10;
-      rotation += digits[(j + k) % length];
-    }
-    rotations.push(rotation);
-  }
-
-  return rotations;
 }
 
 test('gets the count of circular primes below one hundred to be 13', () => {

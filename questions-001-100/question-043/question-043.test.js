@@ -14,6 +14,8 @@
 // d8d9d10=289 is divisible by 17
 // Find the sum of all 0 to 9 pandigital numbers with this property.
 
+const isPandigital = require('../../util/pandigital');
+
 function getSubstringPandigitalSum() {
   let possibles = {
       1: getPossibleMultiples(2),
@@ -78,19 +80,6 @@ function getPossibleMultiples(multiplicand) {
   }
 
   return multiples;
-}
-
-// this one takes a string value
-function isPandigital(str) {
-  let digits = str.split('').sort();
-
-  for (let i = 1; i < digits.length; i++) {
-    if (digits[i] == digits[i - 1]) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 function getRemainingDigit(str) {

@@ -12,6 +12,8 @@
 
 // What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
+const isPandigital = require('../../util/pandigital');
+
 function getLargestPandigital() {
   // we're able to deduce a few things about the range of input values to check:
   // 1. the input value must start with a 9 (because the largest example given starts with a 9 and we're concatenating products onto the starting value).
@@ -24,28 +26,12 @@ function getLargestPandigital() {
   for (let num = 9876; num >= 9183; num--) {
     let concat = num * 100002;
 
-    if (isPandigital(concat)) {
+    if (isPandigital(concat, { excludeZero: true })) {
       return concat;
     }
   }
 
   return 918273645;
-}
-
-function isPandigital(val) {
-  let digits = [];
-
-  while (val > 0) {
-    let mod = val % 10;
-    if (mod == 0 || digits[mod] == 1) {
-      return false;
-    }
-
-    digits[mod] = 1;
-    val = Math.floor(val / 10);
-  }
-
-  return true;
 }
 
 test('gets the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1, 2, ... , n) where n > 1 to be 932718654', () => {

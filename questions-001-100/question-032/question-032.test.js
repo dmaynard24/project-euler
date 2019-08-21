@@ -9,6 +9,8 @@
 
 // HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
+const isPandigital = require('../../util/pandigital');
+
 function getPandigitalSum() {
   let products = [],
     sum = 0;
@@ -16,17 +18,17 @@ function getPandigitalSum() {
   for (let i = 2; i <= 100; i++) {
     let limit = Math.ceil(9876 / i);
 
-    if (!isPandigital(i)) {
+    if (!isPandigital(i, { excludeZero: true })) {
       continue;
     }
 
     for (let j = 1; j <= limit; j++) {
-      if (!isPandigital(j)) {
+      if (!isPandigital(j, { excludeZero: true })) {
         continue;
       }
 
       let product = i * j;
-      if (!isPandigital(product)) {
+      if (!isPandigital(product, { excludeZero: true })) {
         continue;
       }
 
@@ -35,7 +37,7 @@ function getPandigitalSum() {
         break;
       }
 
-      if (concat.length == 9 && isPandigital(parseInt(concat, 10))) {
+      if (concat.length == 9 && isPandigital(parseInt(concat, 10), { excludeZero: true })) {
         if (!products[product]) {
           products[product] = true;
           sum += product;
@@ -45,22 +47,6 @@ function getPandigitalSum() {
   }
 
   return sum;
-}
-
-function isPandigital(val) {
-  let digits = [];
-
-  while (val > 0) {
-    let mod = val % 10;
-    if (mod == 0 || digits[mod] == 1) {
-      return false;
-    }
-
-    digits[mod] = 1;
-    val = Math.floor(val / 10);
-  }
-
-  return true;
 }
 
 test('gets the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital to be 45228', () => {

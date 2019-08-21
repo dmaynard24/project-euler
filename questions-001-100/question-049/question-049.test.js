@@ -7,7 +7,8 @@
 
 // What 12-digit number do you form by concatenating the three terms in this sequence?
 
-const primal = require('../../util/primal');
+const primal = require('../../util/primal'),
+  isPermutation = require('../../util/permutation');
 
 function getPrimePermutationTerms(digits) {
   let limit = Math.pow(10, digits) - 1,
@@ -37,45 +38,6 @@ function getPrimePermutationTerms(digits) {
       }
     }
   }
-}
-
-function isPermutation(val, testVal) {
-  let valDigits = getDigits(val),
-    testValDigits = getDigits(testVal);
-
-  if (valDigits.length == testValDigits.length) {
-    valDigits.sort();
-    testValDigits.sort();
-
-    let valConcat = 0,
-      testValConcat = 0;
-    for (let i = 0; i < valDigits.length; i++) {
-      valConcat *= 10;
-      valConcat += valDigits[i];
-      testValConcat *= 10;
-      testValConcat += testValDigits[i];
-    }
-
-    return valConcat == testValConcat;
-  }
-
-  return false;
-}
-
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
-  if (val < 10) {
-    return [val];
-  }
-
-  let digits = [];
-
-  while (val > 0) {
-    digits.push(val % 10);
-    val = Math.floor(val / 10);
-  }
-
-  return digits.reverse();
 }
 
 test('gets the 12-digit number formed by concatenating the three terms in this arithmetic sequence to be 296962999629', () => {

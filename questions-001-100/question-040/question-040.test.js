@@ -11,6 +11,8 @@
 
 // d_1 × d_10 × d_100 × d_1000 × d_10000 × d_100000 × d_1000000
 
+const digits = require('../../util/digits');
+
 function getConstantProduct(limit) {
   let digitCounts = [],
     length = 0,
@@ -55,29 +57,14 @@ function getConstantProduct(limit) {
     let diff = lengthSum - target;
     product *=
       diff > 0
-        ? getDigits(num)
+        ? digits
+            .getDigits(num)
             .reverse()
             .slice(diff, diff + 1)
-        : getDigits(num).slice(0, 1);
+        : digits.getDigits(num).slice(0, 1);
   });
 
   return product;
-}
-
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
-  if (val < 10) {
-    return [val];
-  }
-
-  let digits = [];
-
-  while (val > 0) {
-    digits.push(val % 10);
-    val = Math.floor(val / 10);
-  }
-
-  return digits.reverse();
 }
 
 test('gets the value of d_1 × d_10 × d_100 × d_1000 × d_10000 × d_100000 × d_1000000 to be 210', () => {

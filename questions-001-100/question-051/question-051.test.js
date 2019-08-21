@@ -7,7 +7,8 @@
 
 // Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 
-const primal = require('../../util/primal');
+const primal = require('../../util/primal'),
+  digits = require('../../util/digits');
 
 function getSmallestPrime(count) {
   let limit = 999999,
@@ -19,7 +20,7 @@ function getSmallestPrime(count) {
 
   for (let i = 56003; i <= limit; i += 2) {
     if (primal.isPrime(i, primes)) {
-      let originalDigits = getDigits(i);
+      let originalDigits = digits.getDigits(i);
       for (let replaceCount = 1; replaceCount < originalDigits.length; replaceCount++) {
         let digitReplaceCombos = combos[originalDigits.length];
         for (let j = 0; j < digitReplaceCombos.length; j++) {
@@ -37,7 +38,7 @@ function getSmallestPrime(count) {
               newDigits.splice(digit, 1, k);
             });
 
-            let newDigitsInt = getIntFromDigits(newDigits);
+            let newDigitsInt = digits.getIntFromDigits(newDigits);
             if (primal.isPrime(newDigitsInt, primes)) {
               otherPrimes.push(newDigits);
 
@@ -88,34 +89,6 @@ function getAllCombos(length) {
   }
 
   return combos;
-}
-
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
-  if (val < 10) {
-    return [val];
-  }
-
-  let digits = [];
-
-  while (val > 0) {
-    digits.push(val % 10);
-    val = Math.floor(val / 10);
-  }
-
-  return digits.reverse();
-}
-
-// getIntFromDigits takes an array of ints, returns an int
-function getIntFromDigits(digits) {
-  if (digits.length == 1) {
-    return digits[0];
-  }
-
-  return digits.reduce((a, c) => {
-    a *= 10;
-    return (a += c);
-  }, 0);
 }
 
 test('gets the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family to be 121313', () => {

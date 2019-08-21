@@ -19,11 +19,32 @@ function getPrimes(limit) {
 }
 
 function isPrime(n, primes) {
-  if (n % 2 == 0) {
-    return n == 2;
+  if (primes && primes.length) {
+    if (n % 2 == 0) {
+      return n == 2;
+    }
+
+    return primes[(n - 1) / 2];
   }
 
-  return primes[(n - 1) / 2];
+  // primes (sieve) wasn't passed as an argument, naive check if n is prime
+  if (n < 1) {
+    return true;
+  } else if (n == 2 || n == 3) {
+    return true;
+  } else if (n % 2 == 0 || n % 3 == 0) {
+    return false;
+  }
+
+  let i = 5;
+  while (i * i <= n) {
+    if (n % i == 0 || n % (i + 2) == 0) {
+      return false;
+    }
+    i += 6;
+  }
+
+  return true;
 }
 
 function getPrimeFactors(num, primes) {

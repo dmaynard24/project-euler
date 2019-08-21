@@ -7,7 +7,8 @@
 
 // NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-const primal = require('../../util/primal');
+const primal = require('../../util/primal'),
+  digits = require('../../util/digits');
 
 function getTruncatablePrimeSum() {
   let limit = 800000,
@@ -21,20 +22,20 @@ function getTruncatablePrimeSum() {
     }
   }
 
-  function isTruncatablePrime(val) {
+  function isTruncatablePrime(num) {
     let is = true,
-      digits = getDigits(val);
+      numDigits = digits.getDigits(num);
 
-    for (let i = 1; i < digits.length; i++) {
+    for (let i = 1; i < numDigits.length; i++) {
       let ltr = 0,
         rtl = 0;
-      for (let j = 0; j < digits.length; j++) {
+      for (let j = 0; j < numDigits.length; j++) {
         if (j >= i) {
           ltr *= 10;
-          ltr += digits[j];
+          ltr += numDigits[j];
         } else {
           rtl *= 10;
-          rtl += digits[j];
+          rtl += numDigits[j];
         }
       }
 
@@ -48,22 +49,6 @@ function getTruncatablePrimeSum() {
   }
 
   return sum;
-}
-
-// getDigits takes an int value, returns array of ints
-function getDigits(val) {
-  if (val < 10) {
-    return [val];
-  }
-
-  let digits = [];
-
-  while (val > 0) {
-    digits.push(val % 10);
-    val = Math.floor(val / 10);
-  }
-
-  return digits.reverse();
 }
 
 test('gets the sum of the only eleven truncatable primes to be 748317', () => {

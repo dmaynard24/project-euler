@@ -13,14 +13,18 @@
 
 const digits = require('../../util/digits');
 
-function getConstantProduct(limit) {
-  let digitCounts = [],
-    length = 0,
-    digitLength = 1;
+function getConstantProduct() {
+  const targets = [1, 10, 100, 1000, 10000, 100000],
+    limit = targets[targets.length - 1],
+    digitCounts = [];
+
+  let length = 0,
+    digitLength = 1,
+    product = 1;
 
   while (length < limit) {
-    let firstNum = Math.pow(10, digitLength - 1),
-      digitCount = Math.pow(10, digitLength) - firstNum;
+    let firstNum = targets[digitLength - 1],
+      digitCount = targets[digitLength] - firstNum;
 
     digitCounts.push({
       length: digitLength,
@@ -32,15 +36,14 @@ function getConstantProduct(limit) {
     digitLength++;
   }
 
-  let product = 1;
-  // we can remove 1 and 10 because it's obvious they both equal 1
-  let targets = [100, 1000, 10000, 100000, 1000000];
-
-  targets.forEach(target => {
+  // we can remove 1 and 10 because they both equal 1
+  let prevI = 0;
+  targets.slice(2).forEach(target => {
     let dc = digitCounts[digitCounts.length - 1];
-    for (let i = 0; i < digitCounts.length; i++) {
+    for (let i = prevI; i < digitCounts.length; i++) {
       if (digitCounts[i].prevLengthSum > target) {
         dc = digitCounts[i - 1];
+        prevI = i;
         break;
       }
     }
@@ -68,5 +71,5 @@ function getConstantProduct(limit) {
 }
 
 test('gets the value of d_1 × d_10 × d_100 × d_1000 × d_10000 × d_100000 × d_1000000 to be 210', () => {
-  expect(getConstantProduct(1000000)).toBe(210);
+  expect(getConstantProduct()).toBe(210);
 });

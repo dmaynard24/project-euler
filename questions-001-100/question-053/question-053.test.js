@@ -17,6 +17,7 @@ function getCombinationCounts(nLimit) {
   let factorials = [],
     count = 0;
 
+  // cache factorials of all digits 1 - 9
   factorials.push(1);
   for (let i = 1; i <= nLimit; i++) {
     factorials.push(i * factorials[i - 1]);

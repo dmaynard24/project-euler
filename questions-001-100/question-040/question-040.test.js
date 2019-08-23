@@ -36,8 +36,8 @@ function getConstantProduct() {
     digitLength++;
   }
 
-  // we can remove 1 and 10 because they both equal 1
   let prevI = 0;
+  // we can remove 1 and 10 because they both equal 1
   targets.slice(2).forEach(target => {
     let dc = digitCounts[digitCounts.length - 1];
     for (let i = prevI; i < digitCounts.length; i++) {

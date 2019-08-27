@@ -9,11 +9,27 @@ const digits = require('../../util/digits'),
   primal = require('../../util/primal');
 
 function getLargestPandigitalPrime() {
-  let largest = 2143;
+  let largest = 2143,
+    validRanges = [];
 
-  for (let i = 7654321; i >= largest; i -= 2) {
-    if (isPandigital(i) && primal.isPrime(i)) {
-      return i;
+  // max number of digits is 9, min is 4 (given by the example)
+  for (let i = 9; i >= 4; i--) {
+    let allDigits = [...Array(i + 1).keys()].slice(1),
+      digitsSum = allDigits.reduce((a, c) => a + c);
+    // a number is divisible by 3 if the sum of its digits is divisible by 3, making it non-prime
+    if (digitsSum % 3 != 0) {
+      validRanges.push({
+        start: digits.getIntFromDigits(allDigits),
+        end: digits.getIntFromDigits(allDigits.reverse())
+      });
+    }
+  }
+
+  for (let i = 0; i < validRanges.length; i++) {
+    for (j = validRanges[i].end; j >= validRanges[i].start; j -= 2) {
+      if (isPandigital(j) && primal.isPrime(j)) {
+        return j;
+      }
     }
   }
 

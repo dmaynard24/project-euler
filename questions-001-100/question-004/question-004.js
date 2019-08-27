@@ -5,7 +5,7 @@
 
 // Find the largest palindrome made from the product of two 3-digit numbers.
 
-const digits = require('../../util/digits');
+const isPalindrome = require('../../util/palindrome');
 
 function getLargestPalindromeProduct(digits) {
   let upper = Math.pow(10, digits) - 1,
@@ -31,19 +31,6 @@ function getLargestPalindromeProduct(digits) {
   }
 
   return largest;
-}
-
-function isPalindrome(num) {
-  let numDigits = digits.getDigitsReversed(num),
-    reverse = [...numDigits].reverse();
-
-  for (let i = 0; i < numDigits.length; i++) {
-    if (numDigits[i] != reverse[i]) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 module.exports = getLargestPalindromeProduct;

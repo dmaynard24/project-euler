@@ -17,7 +17,8 @@
 
 // How many Lychrel numbers are there below ten-thousand?
 
-const digits = require('../../util/digits');
+const digits = require('../../util/digits'),
+  isPalindrome = require('../../util/palindrome');
 
 function getLychrelCount(limit) {
   let count = 0,
@@ -48,19 +49,6 @@ function getLychrelCount(limit) {
   }
 
   return count;
-}
-
-function isPalindrome(num) {
-  let numDigits = digits.getDigitsReversed(num),
-    reverse = [...numDigits].reverse();
-
-  for (let i = 0; i < numDigits.length; i++) {
-    if (numDigits[i] != reverse[i]) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 module.exports = getLychrelCount;

@@ -22,22 +22,25 @@ const digits = require('../../util/digits'),
 
 function getLychrelCount(limit) {
   let count = 0,
-    reverseSums = [];
+    reverseSums = [],
+    palindromeSums = [];
 
   for (let i = 1; i < limit; i++) {
     let sum = i,
       isLychrel = true;
 
     for (let j = 0; j < 50; j++) {
+      // cache reverse sums
       if (!reverseSums[sum]) {
-        let reverseSum = digits.getIntFromDigits(digits.getDigitsReversed(sum));
-        reverseSums[sum] = reverseSum;
-        sum += reverseSum;
-      } else {
-        sum += reverseSums[sum];
+        reverseSums[sum] = digits.getIntFromDigits(digits.getDigitsReversed(sum));
       }
+      sum += reverseSums[sum];
 
-      if (isPalindrome(sum)) {
+      // cache palindrome sums
+      if (palindromeSums[sum] == undefined) {
+        palindromeSums[sum] = isPalindrome(sum);
+      }
+      if (palindromeSums[sum]) {
         isLychrel = false;
         break;
       }

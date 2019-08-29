@@ -12,15 +12,13 @@
 const words = require('./words');
 
 function getTriangleWordCount() {
-  let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    letterValues = [];
-  [...letters].forEach(l => {
-    letterValues[l] = l.charCodeAt() - 64;
-  });
-
-  let limit = words.sort((a, b) => b.length - a.length)[0].length * 26,
-    triangles = getTriangles(limit),
-    count = 0;
+  let values = [...Array(27).keys()].slice(1),
+    letterValues = values.reduce((a, c) => {
+      a[String.fromCharCode(c + 64)] = c;
+      return a;
+    }, []),
+    limit = words.sort((a, b) => b.length - a.length)[0].length * 26,
+    triangles = getTriangles(limit);
 
   function getWordValue(word) {
     return [...word].reduce((a, c) => {
@@ -28,13 +26,7 @@ function getTriangleWordCount() {
     }, 0);
   }
 
-  words.forEach(word => {
-    if (triangles[getWordValue(word)]) {
-      count++;
-    }
-  });
-
-  return count;
+  return words.reduce((a, c) => (a += triangles[getWordValue(c)] ? 1 : 0), 0);
 }
 
 function getTriangles(limit) {

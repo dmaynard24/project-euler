@@ -10,32 +10,25 @@
 // How many different ways can £2 be made using any number of coins?
 
 function getTwoPoundCombinationCount() {
-  let coinValues = [200, 100, 50, 20, 10, 5, 2, 1],
-    count = 0;
+  let coinValues = [200, 100, 50, 20, 10, 5, 2, 1];
 
-  function setCoinValueAtIndex(i, target) {
-    let coinVal = coinValues[i];
-    if (coinVal == 1) {
-      count++;
+  function getCoinComboCount(i, target, count) {
+    let newCount = count,
+      coinVal = coinValues[i];
+    if (i == coinValues.length - 1) {
+      newCount++;
     } else {
       let maxCoinCount = Math.floor(target / coinVal);
       for (let coinCount = maxCoinCount; coinCount >= 0; coinCount--) {
         let newTarget = target - coinVal * coinCount;
-        if (newTarget == 0) {
-          count++;
-        } else {
-          if (i + 1 < coinValues.length) {
-            setCoinValueAtIndex(i + 1, newTarget);
-          }
-        }
+        newTarget == 0 ? newCount++ : (newCount += getCoinComboCount(i + 1, newTarget, count));
       }
     }
+
+    return newCount;
   }
 
-  // recursively set coin values
-  setCoinValueAtIndex(0, coinValues[0]);
-
-  return count;
+  return getCoinComboCount(0, coinValues[0], 0);
 }
 
 module.exports = getTwoPoundCombinationCount;

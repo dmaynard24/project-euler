@@ -48,12 +48,11 @@ function isPrime(n, primes) {
 }
 
 function getPrimeFactors(num, primes) {
-  let primeFactors = [];
-
   if (isPrime(num, primes)) {
-    return primeFactors;
+    return [];
   }
 
+  let primeFactors = [];
   if (num % 2 == 0) {
     let baseExp = {
       base: 2,

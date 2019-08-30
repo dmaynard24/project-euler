@@ -10,12 +10,12 @@
 // How many different ways can £2 be made using any number of coins?
 
 function getTwoPoundCombinationCount() {
-  let coinValues = [200, 100, 50, 20, 10, 5, 2, 1];
+  const coinValues = [200, 100, 50, 20, 10, 5, 2, 1];
 
   function getCoinComboCount(i, target) {
     let coinVal = coinValues[i];
 
-    if (i == coinValues.length - 1) {
+    if (target == 0 || i == coinValues.length - 1) {
       return 1;
     }
 

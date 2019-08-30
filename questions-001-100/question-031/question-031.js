@@ -12,23 +12,23 @@
 function getTwoPoundCombinationCount() {
   let coinValues = [200, 100, 50, 20, 10, 5, 2, 1];
 
-  function getCoinComboCount(i, target, count) {
-    let newCount = count,
-      coinVal = coinValues[i];
+  function getCoinComboCount(i, target) {
+    let coinVal = coinValues[i];
+
     if (i == coinValues.length - 1) {
-      newCount++;
-    } else {
-      let maxCoinCount = Math.floor(target / coinVal);
-      for (let coinCount = maxCoinCount; coinCount >= 0; coinCount--) {
-        let newTarget = target - coinVal * coinCount;
-        newTarget == 0 ? newCount++ : (newCount += getCoinComboCount(i + 1, newTarget, count));
-      }
+      return 1;
     }
 
-    return newCount;
+    let maxCoinCount = Math.floor(target / coinVal),
+      count = 0;
+    for (let coinCount = maxCoinCount; coinCount >= 0; coinCount--) {
+      count += getCoinComboCount(i + 1, target - coinVal * coinCount);
+    }
+
+    return count;
   }
 
-  return getCoinComboCount(0, coinValues[0], 0);
+  return getCoinComboCount(0, coinValues[0]);
 }
 
 module.exports = getTwoPoundCombinationCount;

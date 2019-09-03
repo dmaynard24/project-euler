@@ -26,7 +26,7 @@ function getTriangleWordCount() {
     }, 0);
   }
 
-  return words.reduce((a, c) => (a += triangles[getWordValue(c)] ? 1 : 0), 0);
+  return words.filter(word => triangles[getWordValue(word)]).length;
 }
 
 function getTriangles(limit) {

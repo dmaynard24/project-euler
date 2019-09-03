@@ -18,17 +18,18 @@ const isPandigital = require('../../util/pandigital');
 
 function getSubstringPandigitalSum() {
   let possibles = {
-      1: getPossibleMultiples(2),
-      2: getPossibleMultiples(3),
-      3: getPossibleMultiples(5),
-      4: getPossibleMultiples(7),
-      5: getPossibleMultiples(11),
-      6: getPossibleMultiples(13),
-      7: getPossibleMultiples(17)
-    },
-    pandigitals = [];
+    1: getPossibleMultiples(2),
+    2: getPossibleMultiples(3),
+    3: getPossibleMultiples(5),
+    4: getPossibleMultiples(7),
+    5: getPossibleMultiples(11),
+    6: getPossibleMultiples(13),
+    7: getPossibleMultiples(17)
+  };
 
   function getSetAtIndex(index, set, concat) {
+    let pandigitals = [];
+
     for (let i = 0; i < set.length; i++) {
       let newConcat = index == 7 ? set[i] : set[i].substring(0, 1) + concat;
 
@@ -39,16 +40,18 @@ function getSubstringPandigitalSum() {
               return match.substring(1, 3) == sub;
             });
 
-          getSetAtIndex(index - 1, newSet, newConcat);
+          pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
         } else {
           pandigitals.push(newConcat);
         }
       }
     }
+
+    return pandigitals;
   }
 
   // recursively create concatenated strings beginning with an empty string
-  getSetAtIndex(7, possibles[7], '');
+  let pandigitals = getSetAtIndex(7, possibles[7], '');
 
   // get remaining first digit of each pandigital, add them all up
   let sum = 0;

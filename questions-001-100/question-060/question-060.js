@@ -12,10 +12,11 @@ function getLowestPrimeSum(count) {
   let nonPrimePerms = [],
     sumLimit = Infinity,
     initialLimit = 10000,
-    primes = primal.getPrimes(initialLimit),
-    sets = [];
+    primes = primal.getPrimes(initialLimit);
 
   function getSets(set) {
+    let sets = [];
+
     let setSum = set.length ? set.reduce((a, c) => a + c) : 0;
     if (setSum < sumLimit) {
       let termLimit = sumLimit != Infinity ? sumLimit - set[set.length - 1] * (count - set.length) : initialLimit;
@@ -52,10 +53,10 @@ function getLowestPrimeSum(count) {
           }
 
           if (allPrime) {
-            let newSet = [...set, i];
+            let newSet = set.concat(i);
 
             if (newSet.length < count) {
-              getSets(newSet);
+              sets = sets.concat(getSets(newSet));
             } else {
               sets.push(newSet);
 
@@ -68,9 +69,11 @@ function getLowestPrimeSum(count) {
         }
       }
     }
+
+    return sets;
   }
 
-  getSets([]);
+  let sets = getSets([]);
 
   if (sets.length) {
     let smallest = sets[0].reduce((a, c) => a + c);

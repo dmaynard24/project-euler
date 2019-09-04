@@ -116,7 +116,4 @@ function areCyclical(a, b) {
   );
 }
 
-console.log(getOrderedSet());
-// 1533776805
-
 module.exports = getOrderedSet;

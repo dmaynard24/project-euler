@@ -9,19 +9,21 @@
 
 // Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
+const shapes = require('../../util/shapes');
+
 function getPentagonDifference() {
   let limit = 9000000,
-    pentagons = getPentagons(limit),
+    pentagons = shapes.getPentagons(limit),
     upper = Math.floor(Math.sqrt((limit * 2) / 3 + 1 / 36) + 1 / 6),
     d;
 
   let j = 1;
   while (j < upper) {
-    let pj = getNthPentagon(j);
+    let pj = shapes.getNthPentagon(j);
 
     let k = upper;
     while (k > j) {
-      let pk = getNthPentagon(k),
+      let pk = shapes.getNthPentagon(k),
         sum = pj + pk,
         diff = pk - pj;
 
@@ -36,25 +38,6 @@ function getPentagonDifference() {
   }
 
   return d;
-}
-
-function getPentagons(limit) {
-  let pentagons = [],
-    n = 1,
-    term = 1;
-
-  while (term < limit) {
-    term = getNthPentagon(n);
-    pentagons[term] = true;
-
-    n++;
-  }
-
-  return pentagons;
-}
-
-function getNthPentagon(n) {
-  return (n * (3 * n - 1)) / 2;
 }
 
 module.exports = getPentagonDifference;

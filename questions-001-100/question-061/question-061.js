@@ -20,8 +20,7 @@ const shapes = require('../../util/shapes'),
   digits = require('../../util/digits');
 
 function getOrderedSet() {
-  let start = 1010,
-    limit = 10000,
+  const limit = 10000,
     termSets = {
       3: shapes.getTriangles(limit),
       4: shapes.getSquares(limit),
@@ -30,22 +29,12 @@ function getOrderedSet() {
       7: shapes.getHeptagons(limit),
       8: shapes.getOctagons(limit)
     },
-    setCount = Object.keys(termSets).length,
-    matchedSets = {
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false
-    },
-    unmatchedKeys = Object.keys(matchedSets),
-    returnSet = [];
+    setCount = Object.keys(termSets).length;
 
-  // recursively find terms
-  getNextTerm(-1, [], start, unmatchedKeys);
+  function getNextTerm(prevIndex, set, startValue, matchedSets) {
+    let returnSet = [],
+      unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
 
-  function getNextTerm(prevIndex, set, startValue, unmatchedKeys) {
     for (let i = startValue; i < limit; i++) {
       for (let j = 0; j < unmatchedKeys.length; j++) {
         if (termSets[unmatchedKeys[j]][i]) {
@@ -72,19 +61,17 @@ function getOrderedSet() {
 
           // store matches
           matchedSets[unmatchedKeys[j]] = true;
-          let newUnmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
           set.push(i);
 
-          // exit condition
+          // immediately after pushing a new term, check exit condition
           if (set.length == setCount) {
-            returnSet = [...set];
-            return returnSet;
+            return set;
           }
 
           // continue
           if (returnSet.length == 0) {
             let newStartValue = getNewStartValue(i);
-            getNextTerm(prevIndex + 1, set, newStartValue, newUnmatchedKeys);
+            returnSet = returnSet.concat(getNextTerm(prevIndex + 1, set, newStartValue, matchedSets));
           }
 
           // pop off the value and update the matches
@@ -94,9 +81,21 @@ function getOrderedSet() {
         }
       }
     }
+
+    return returnSet;
   }
 
-  return returnSet.reduce((a, c) => a + c);
+  // 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
+  let onlySet = getNextTerm(-1, [], 1010, {
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+    8: false
+  });
+
+  return onlySet.reduce((a, c) => a + c);
 }
 
 function getNewStartValue(i) {

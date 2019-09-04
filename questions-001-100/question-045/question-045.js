@@ -10,11 +10,13 @@
 
 // Find the next triangle number that is also pentagonal and hexagonal.
 
+const shapes = require('../../util/shapes');
+
 function getTrianglePentagonHexagon() {
   let limit = 2000000000,
-    triangles = getTriangles(limit),
-    pentagons = getPentagons(limit),
-    hexagons = getHexagons(limit),
+    triangles = shapes.getTriangles(limit),
+    pentagons = shapes.getPentagons(limit),
+    hexagons = shapes.getHexagons(limit),
     triangleKeys = Object.keys(triangles),
     start = triangleKeys.indexOf('40755') + 1,
     tph;
@@ -28,63 +30,6 @@ function getTrianglePentagonHexagon() {
   }
 
   return tph;
-}
-
-function getTriangles(limit) {
-  let triangles = [],
-    n = 1,
-    term = 1;
-
-  while (term < limit) {
-    term = getNthTriangle(n);
-    triangles[term] = true;
-
-    n++;
-  }
-
-  return triangles;
-}
-
-function getNthTriangle(n) {
-  return (n / 2) * (n + 1);
-}
-
-function getPentagons(limit) {
-  let pentagons = [],
-    n = 1,
-    term = 1;
-
-  while (term < limit) {
-    term = getNthPentagon(n);
-    pentagons[term] = true;
-
-    n++;
-  }
-
-  return pentagons;
-}
-
-function getNthPentagon(n) {
-  return (n * (3 * n - 1)) / 2;
-}
-
-function getHexagons(limit) {
-  let hexagons = [],
-    n = 1,
-    term = 1;
-
-  while (term < limit) {
-    term = getNthHexagon(n);
-    hexagons[term] = true;
-
-    n++;
-  }
-
-  return hexagons;
-}
-
-function getNthHexagon(n) {
-  return n * (2 * n - 1);
 }
 
 module.exports = getTrianglePentagonHexagon;

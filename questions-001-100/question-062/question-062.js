@@ -14,16 +14,13 @@ function getSmallestCube(count) {
 
   for (let i = start; i < limit; i++) {
     let cube = Math.pow(i, 3),
-      sortedValue = digits
-        .getDigits(cube)
-        .sort()
-        .join('');
+      sortedValue = digits.getIntFromDigits(digits.getDigits(cube).sort((a, b) => b - a));
 
     if (sortedCubes[sortedValue]) {
       sortedCubes[sortedValue].count++;
       sortedCubes[sortedValue].cubes.push(cube);
 
-      if (i > start + count && sortedCubes[sortedValue].count == count) {
+      if (sortedCubes[sortedValue].count == count) {
         return Math.min.apply(null, sortedCubes[sortedValue].cubes);
       }
     } else {

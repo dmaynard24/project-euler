@@ -55,20 +55,18 @@ function getMaximumPathSum() {
     ),
     sums = [];
 
-  for (let i = 0; i < twoD.length; i++) {
+  sums[0] = [];
+  sums[0].push(twoD[0][0]);
+
+  for (let i = 1; i < twoD.length; i++) {
     sums[i] = [];
 
     for (let j = 0; j < twoD[i].length; j++) {
       let sum,
-        curr = twoD[i][j];
-
-      if (i > 0) {
-        let left = sums[i - 1][j - 1] ? sums[i - 1][j - 1] : 0,
-          right = sums[i - 1][j] ? sums[i - 1][j] : 0;
-        sum = Math.max(left, right) + curr;
-      } else {
-        sum = curr;
-      }
+        curr = twoD[i][j],
+        left = sums[i - 1][j - 1] ? sums[i - 1][j - 1] : 0,
+        right = sums[i - 1][j] ? sums[i - 1][j] : 0;
+      sum = Math.max(left, right) + curr;
       sums[i].push(sum);
     }
   }

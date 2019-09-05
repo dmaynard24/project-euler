@@ -67,7 +67,7 @@ function getMaximumPathSum() {
           right = sums[i - 1][j] ? sums[i - 1][j] : 0;
         sum = Math.max(left, right) + curr;
       } else {
-        sum = twoD[i][j];
+        sum = curr;
       }
       sums[i].push(sum);
     }

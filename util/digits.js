@@ -58,4 +58,8 @@ function getIntFromDigits(digits) {
   }, 0);
 }
 
-module.exports = { getDigits, getDigitsReversed, getDigitsRotations, getIntFromDigits };
+function getDigitCount(num) {
+  return Math.floor(Math.log10(num)) + 1;
+}
+
+module.exports = { getDigits, getDigitsReversed, getDigitsRotations, getIntFromDigits, getDigitCount };

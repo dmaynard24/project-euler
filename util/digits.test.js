@@ -17,5 +17,9 @@ test('gets the rotations of digits in 379 to be [793, 937]', () => {
 });
 
 test('gets the int value of an array of digits in [1, 0, 4, 7, 9] to be 10479', () => {
-  expect(digits.getIntFromDigits([1, 0, 4])).toBe(104);
+  expect(digits.getIntFromDigits([1, 0, 4, 7, 9])).toBe(10479);
+});
+
+test('gets the count of digits in 303 to be 3', () => {
+  expect(digits.getDigitCount(303)).toBe(3);
 });

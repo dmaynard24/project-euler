@@ -14,22 +14,20 @@ const shapes = require('../../util/shapes');
 
 function getTrianglePentagonHexagon() {
   let limit = 2000000000,
-    triangles = shapes.getTriangles(limit),
+    // no need to store triangles because all hexagons are also triangular
     pentagons = shapes.getPentagons(limit),
     hexagons = shapes.getHexagons(limit),
-    triangleKeys = Object.keys(triangles),
-    start = triangleKeys.indexOf('40755') + 1,
-    tph;
+    pentagonKeys = Object.keys(pentagons),
+    start = pentagonKeys.indexOf('40755') + 1;
 
-  for (let i = start; i < triangleKeys.length; i++) {
-    let tkey = triangleKeys[i];
-    if (pentagons[tkey] == true && hexagons[tkey] == true) {
-      tph = tkey;
-      break;
+  for (let i = start; i < pentagonKeys.length; i++) {
+    let pkey = pentagonKeys[i];
+    if (hexagons[pkey]) {
+      return pkey;
     }
   }
 
-  return tph;
+  return `unable to find the next triangle number that is also pentagonal and hexagonal under ${limit}`;
 }
 
 module.exports = getTrianglePentagonHexagon;

@@ -32,13 +32,10 @@ function getSmallestOddComposite() {
           while (prime + 2 * Math.pow(k, 2) <= composite && !proof) {
             if (prime + 2 * Math.pow(k, 2) == composite) {
               proof = true;
+              break;
             }
 
             k++;
-          }
-
-          if (proof) {
-            break;
           }
         }
       }

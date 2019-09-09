@@ -55,6 +55,14 @@ function getNthPentagon(n) {
   return (n * (3 * n - 1)) / 2;
 }
 
+function isPentagonal(num, pentagons) {
+  if (pentagons && pentagons.length && pentagons.length >= num) {
+    return pentagons[num];
+  }
+
+  return (Math.sqrt(24 * num + 1) + 1) % 6 == 0;
+}
+
 function getHexagons(limit) {
   let hexagons = [],
     n = 1,
@@ -119,6 +127,7 @@ module.exports = {
   getNthSquare,
   getPentagons,
   getNthPentagon,
+  isPentagonal,
   getHexagons,
   getNthHexagon,
   getHeptagons,

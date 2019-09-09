@@ -18,27 +18,27 @@ function getPrimes(limit) {
   return primes;
 }
 
-function isPrime(n, primes) {
-  if (primes && primes.length) {
-    if (n % 2 == 0) {
-      return n == 2;
+function isPrime(num, primes) {
+  if (primes && primes.length && primes.length >= num) {
+    if (num % 2 == 0) {
+      return num == 2;
     }
 
-    return primes[(n - 1) / 2];
+    return primes[(num - 1) / 2];
   }
 
   // primes (sieve) wasn't passed as an argument, naive check if n is prime
-  if (n < 1) {
+  if (num < 1) {
     return true;
-  } else if (n == 2 || n == 3) {
+  } else if (num == 2 || num == 3) {
     return true;
-  } else if (n % 2 == 0 || n % 3 == 0) {
+  } else if (num % 2 == 0 || num % 3 == 0) {
     return false;
   }
 
   let i = 5;
-  while (i * i <= n) {
-    if (n % i == 0 || n % (i + 2) == 0) {
+  while (i * i <= num) {
+    if (num % i == 0 || num % (i + 2) == 0) {
       return false;
     }
     i += 6;

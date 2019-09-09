@@ -27,11 +27,7 @@ function getSmallestPrime(count) {
           let combo = digitReplaceCombos[j],
             otherPrimes = [];
 
-          let minDigit = 0;
-          if (combo.indexOf(0) > -1) {
-            minDigit = 1;
-          }
-
+          let minDigit = combo.indexOf(0) > -1 ? 1 : 0;
           for (let k = minDigit; k < 10; k++) {
             let newDigits = [...originalDigits];
             combo.forEach(digit => {

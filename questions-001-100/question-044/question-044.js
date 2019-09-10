@@ -12,32 +12,24 @@
 const shapes = require('../../util/shapes');
 
 function getPentagonDifference() {
-  let limit = 9000000,
-    pentagons = shapes.getPentagons(limit),
-    upper = Math.floor(Math.sqrt((limit * 2) / 3 + 1 / 36) + 1 / 6),
-    d;
+  let smallest = Infinity;
 
-  let j = 1;
-  while (j < upper) {
-    let pj = shapes.getNthPentagon(j);
-
-    let k = upper;
-    while (k > j) {
-      let pk = shapes.getNthPentagon(k),
-        sum = pj + pk,
-        diff = pk - pj;
-
-      if (pentagons[sum] && pentagons[diff]) {
-        d = diff;
-      }
-
-      k--;
+  let n = 1;
+  while (true) {
+    let pk = shapes.getNthPentagon(n);
+    if (pk - 1 > smallest) {
+      return smallest;
     }
 
-    j++;
-  }
+    for (let i = 1; i < n; i++) {
+      let pj = shapes.getNthPentagon(i);
+      if (shapes.isPentagonal(pk + pj) && shapes.isPentagonal(pk - pj)) {
+        smallest = pk - pj;
+      }
+    }
 
-  return d;
+    n++;
+  }
 }
 
 module.exports = getPentagonDifference;

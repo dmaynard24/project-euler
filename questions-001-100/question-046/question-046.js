@@ -26,11 +26,15 @@ function getSmallestOddComposite() {
         proof = false;
 
       for (let j = 2; j < i; j++) {
+        if (proof) {
+          break;
+        }
+
         if (primal.isPrime(j, primes)) {
           let prime = j,
             k = 1;
-          while (prime + 2 * Math.pow(k, 2) <= composite && !proof) {
-            if (prime + 2 * Math.pow(k, 2) == composite) {
+          while (prime + 2 * (k * k) <= composite && !proof) {
+            if (prime + 2 * (k * k) == composite) {
               proof = true;
               break;
             }

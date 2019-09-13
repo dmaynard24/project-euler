@@ -20,26 +20,21 @@ function getSmallestOddComposite() {
   let limit = 6000,
     primes = primal.getPrimes(limit);
 
-  for (let i = 35; i < limit; i += 2) {
-    if (!primal.isPrime(i, primes)) {
-      let composite = i,
-        proof = false;
+  for (let composite = 35; composite < limit; composite += 2) {
+    if (!primal.isPrime(composite, primes)) {
+      let proof = false;
 
-      for (let j = 2; j < i; j++) {
+      for (let prime = 2; prime < composite; prime++) {
         if (proof) {
           break;
         }
 
-        if (primal.isPrime(j, primes)) {
-          let prime = j,
-            k = 1;
-          while (prime + 2 * (k * k) <= composite && !proof) {
+        if (primal.isPrime(prime, primes)) {
+          for (let k = 1; prime + 2 * (k * k) <= composite; k++) {
             if (prime + 2 * (k * k) == composite) {
               proof = true;
               break;
             }
-
-            k++;
           }
         }
       }

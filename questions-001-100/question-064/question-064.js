@@ -20,17 +20,10 @@
 // How many continued fractions for N≤10000 have an odd period?
 
 function getFractionCount(max) {
-  let count = 0;
-
-  for (let n = 2; n <= max; n++) {
-    // if sqrt of n is irrational
+  return [...Array(max + 1).keys()].slice(2).filter(n => {
     let sqrt = Math.sqrt(n);
-    if (Math.floor(sqrt) != sqrt) {
-      count += getPeriod(n).length % 2 == 0 ? 0 : 1;
-    }
-  }
-
-  return count;
+    return Math.floor(sqrt) != sqrt && getPeriod(n).length % 2 != 0;
+  }).length;
 }
 
 function getPeriod(num) {

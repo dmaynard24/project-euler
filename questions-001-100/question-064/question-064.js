@@ -1,3 +1,6 @@
+// Odd period square roots
+
+// Problem 64
 // All square roots are periodic when written as continued fractions.
 
 // It can be seen that the sequence of leading integer terms for the continued fraction representing √23 is repeating. For conciseness, we use the notation √23=[4;(1,3,1,8)], to indicate that the block (1,3,1,8) repeats indefinitely.

@@ -16,18 +16,20 @@
 
 const primal = require('../../util/primal');
 
-function getFirstInteger() {
-  let limit = 31,
-    primes = primal.getPrimes(limit),
-    targetCount = 4,
+function getFirstInteger(targetCount) {
+  let primes = primal.getPrimes(31),
     consecutives = [],
     i = 1;
 
   while (Object.keys(consecutives).length < targetCount) {
-    let count = primal.getPrimeFactors(i, primes).length;
+    if (!primal.isPrime(i)) {
+      let count = primal.getPrimeFactors(i, primes).length;
 
-    if (count == targetCount && (Object.keys(consecutives).length == 0 || consecutives[i - 1] == 1)) {
-      consecutives[i] = 1;
+      if (count == targetCount && (Object.keys(consecutives).length == 0 || consecutives[i - 1] == 1)) {
+        consecutives[i] = 1;
+      } else {
+        consecutives = [];
+      }
     } else {
       consecutives = [];
     }

@@ -31,4 +31,6 @@ function getSmallestMultiple(upper) {
   return lcm;
 }
 
+console.log(getSmallestMultiple(20));
+
 module.exports = getSmallestMultiple;

@@ -22,14 +22,10 @@ function getFirstInteger(targetCount) {
     i = 1;
 
   while (Object.keys(consecutives).length < targetCount) {
-    if (!primal.isPrime(i)) {
-      let count = primal.getPrimeFactors(i, primes).length;
+    let count = primal.getPrimeFactors(i, primes).length;
 
-      if (count == targetCount && (Object.keys(consecutives).length == 0 || consecutives[i - 1] == 1)) {
-        consecutives[i] = 1;
-      } else {
-        consecutives = [];
-      }
+    if (count == targetCount && (Object.keys(consecutives).length == 0 || consecutives[i - 1] == 1)) {
+      consecutives[i] = 1;
     } else {
       consecutives = [];
     }

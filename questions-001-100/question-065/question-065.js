@@ -23,7 +23,7 @@
 
 // Find the sum of digits in the numerator of the 100th convergent of the continued fraction for e.
 
-let bigInt = require('big-integer')
+let bigInt = require('big-integer');
 
 function getNumeratorSum(max) {
   let period = getPeriodE(max),
@@ -49,5 +49,4 @@ function getPeriodE(termLimit) {
   return ms;
 }
 
-console.log(getNumeratorSum(100));
-// 272
+module.exports = getNumeratorSum;

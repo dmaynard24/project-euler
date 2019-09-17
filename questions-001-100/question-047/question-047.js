@@ -29,6 +29,7 @@ function getFirstInteger(targetCount) {
       for (let j = 1; j < targetCount; j++) {
         if (primeFactorCounts[i + j] != targetCount) {
           isConsecutiveSet = false;
+          i += j;
           break;
         }
       }

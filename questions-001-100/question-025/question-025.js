@@ -26,9 +26,8 @@
 // involes converting log10 to ln
 function getFibonacciTerm(digitCount) {
   let sqrtFive = Math.sqrt(5),
-    e = 2.718281828459,
     phi = (1 + sqrtFive) / 2;
-  return Math.round((digitCount - 1 + Math.log10(sqrtFive)) / Math.log10(e) / Math.log(phi));
+  return Math.ceil((digitCount - 1 + Math.log10(sqrtFive)) / Math.log10(Math.E) / Math.log(phi));
 }
 
 module.exports = getFibonacciTerm;

@@ -95,4 +95,23 @@ function getPrimeFactors(num, primes) {
   return primeFactors;
 }
 
-module.exports = { getPrimes, isPrime, getPrimeFactors };
+// sieve factor counts
+function getPrimeFactorCounts(limit) {
+  let primeFactorCounts = Array(limit + 1).fill(0);
+  primeFactorCounts[1] = 1;
+
+  for (let i = 2; i < primeFactorCounts.length; i++) {
+    if (primeFactorCounts[i] != 0) {
+      continue;
+    }
+
+    let step = i;
+    for (let j = i; j < primeFactorCounts.length; j += step) {
+      primeFactorCounts[j]++;
+    }
+  }
+
+  return primeFactorCounts;
+}
+
+module.exports = { getPrimes, isPrime, getPrimeFactors, getPrimeFactorCounts };

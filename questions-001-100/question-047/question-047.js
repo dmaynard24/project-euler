@@ -17,23 +17,29 @@
 const primal = require('../../util/primal');
 
 function getFirstInteger(targetCount) {
-  let primes = primal.getPrimes(31),
-    consecutives = [],
-    i = 1;
+  let limit = 150000,
+    primeFactorCounts = primal.getPrimeFactorCounts(limit);
 
-  while (Object.keys(consecutives).length < targetCount) {
-    let count = primal.getPrimeFactors(i, primes).length;
+  for (let i = 1; i < limit; i++) {
+    let count = primeFactorCounts[i];
 
-    if (count == targetCount && (Object.keys(consecutives).length == 0 || consecutives[i - 1] == 1)) {
-      consecutives[i] = 1;
-    } else {
-      consecutives = [];
+    if (count == targetCount) {
+      let isConsecutiveSet = true;
+
+      for (let j = 1; j < targetCount; j++) {
+        if (primeFactorCounts[i + j] != targetCount) {
+          isConsecutiveSet = false;
+          break;
+        }
+      }
+
+      if (isConsecutiveSet) {
+        return i;
+      }
     }
-
-    i++;
   }
 
-  return Object.keys(consecutives)[0];
+  return `Unable to find ${targetCount} consecutive integers that have four distinct prime factors each under ${limit}`;
 }
 
 module.exports = getFirstInteger;

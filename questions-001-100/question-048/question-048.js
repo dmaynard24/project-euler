@@ -28,10 +28,10 @@ function getLastTenDigitsWithMod() {
     return sum % mod;
   }
 
-  return sum.toString();
+  return sum;
 }
 
-// a more optimal and readable solution using bigInt
+// solution using bigInt (more optimal and readable)
 function getLastTenDigits() {
   let sumString = [...Array(1000).keys()]
     .slice(1)

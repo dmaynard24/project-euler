@@ -5,7 +5,10 @@
 
 // Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
 
-function getLastTenDigits() {
+const bigInt = require('big-integer');
+
+// solution without the need for bigInt
+function getLastTenDigitsWithMod() {
   let mod = Math.pow(10, 10);
 
   let sum = [...Array(1000).keys()].slice(1).reduce((a, c) => {
@@ -25,7 +28,20 @@ function getLastTenDigits() {
     return sum % mod;
   }
 
-  return sum;
+  return sum.toString();
+}
+
+// a more optimal and readable solution using bigInt
+function getLastTenDigits() {
+  let sumString = [...Array(1000).keys()]
+    .slice(1)
+    .reduce((a, c) => {
+      a = a.add(bigInt(c).pow(c));
+      return a;
+    }, bigInt(0))
+    .toString();
+
+  return sumString.slice(sumString.length - 10);
 }
 
 module.exports = getLastTenDigits;

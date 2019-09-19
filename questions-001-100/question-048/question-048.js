@@ -7,32 +7,8 @@
 
 const bigInt = require('big-integer');
 
-// solution without the need for bigInt
-function getLastTenDigitsWithMod() {
-  let mod = Math.pow(10, 10);
-
-  let sum = [...Array(1000).keys()].slice(1).reduce((a, c) => {
-    return (
-      a +
-      [...Array(c - 1).keys()].reduce(acc => {
-        acc *= c;
-        if (acc >= mod) {
-          acc %= mod;
-        }
-        return acc;
-      }, c)
-    );
-  }, 0);
-
-  if (sum >= mod) {
-    return sum % mod;
-  }
-
-  return sum;
-}
-
-// solution using bigInt (more optimal and readable)
-function getLastTenDigits() {
+// solution using bigInt (more readable)
+function getLastTenDigitsWithBigInt() {
   let sumString = [...Array(1000).keys()]
     .slice(1)
     .reduce((a, c) => {
@@ -42,6 +18,29 @@ function getLastTenDigits() {
     .toString();
 
   return sumString.slice(sumString.length - 10);
+}
+
+// solution without the need for bigInt
+function getLastTenDigits() {
+  let mod = 10000000000;
+
+  let sum = 0;
+  for (let i = 1; i < 1000; i++) {
+    let addend = i;
+    for (let j = 1; j < i; j++) {
+      addend *= i;
+      if (addend > mod) {
+        addend %= mod;
+      }
+    }
+    sum += addend;
+  }
+
+  if (sum >= mod) {
+    return sum % mod;
+  }
+
+  return sum;
 }
 
 module.exports = getLastTenDigits;

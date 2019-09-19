@@ -8,18 +8,15 @@
 const bigInt = require('big-integer');
 
 function getLastTenDigits() {
-  let limit = 999,
-    sum = bigInt(0);
+  let sumString = [...Array(1000).keys()]
+    .slice(1)
+    .reduce((a, c) => {
+      a = a.add(bigInt(c).pow(c));
+      return a;
+    }, bigInt(0))
+    .toString();
 
-  for (let i = 1; i <= limit; i++) {
-    let string = bigInt(i)
-      .pow(i)
-      .toString();
-    sum = string.length > 10 ? sum.add(parseInt(string.slice(string.length - 10), 10)) : sum.add(parseInt(string, 10));
-  }
-
-  let sumStr = sum.toString();
-  return sumStr.length > 10 ? sumStr.slice(sumStr.length - 10) : sumStr;
+  return sumString.slice(sumString.length - 10);
 }
 
 module.exports = getLastTenDigits;

@@ -21,11 +21,26 @@
 
 // Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
-const now = require('performance-now');
+const now = require('performance-now'),
+  bigInt = require('big-integer');
 
 function getDiophantineD(max) {
   let largestX = 0,
     largestD;
+
+  let maxRoot = 5000,
+    rootSquares = [];
+  for (let i = 1; i <= maxRoot; i++) {
+    let squareStr = bigInt(i)
+      .pow(2)
+      .toString();
+    rootSquares.push({
+      root: i,
+      square: squareStr
+    });
+  }
+
+  console.log(rootSquares.pop());
 
   for (let d = 0; d <= max; d++) {
     let sqrt = Math.sqrt(d);

@@ -12,28 +12,21 @@ const primal = require('../../util/primal'),
 
 function getPrimePermutationTerms(digits) {
   let limit = Math.pow(10, digits) - 1,
-    primes = primal.getPrimes(limit),
-    terms = [];
+    primes = primal.getPrimes(limit);
 
   // 1489 is the next prime
   for (let i = 1489; i < limit; i += 2) {
     if (primal.isPrime(i, primes)) {
-      let maxAddend = Math.floor((limit - i) / 2);
-
-      for (let addend = 1; addend <= maxAddend; addend++) {
-        terms = [i];
-        for (let j = 1; j <= 2; j++) {
-          let nextTerm = i + addend * j;
-          if (primal.isPrime(nextTerm, primes) && isPermutation(i, nextTerm)) {
-            terms.push(nextTerm);
-          } else {
-            terms = [i];
-            break;
+      let termsConcat = i.toString();
+      for (let j = 1; j <= 2; j++) {
+        let nextTerm = i + 3330 * j;
+        if (primal.isPrime(nextTerm, primes) && isPermutation(i, nextTerm)) {
+          termsConcat += nextTerm.toString();
+          if (termsConcat.length == 12) {
+            return termsConcat;
           }
-        }
-
-        if (terms.length == 3) {
-          return terms.join('');
+        } else {
+          break;
         }
       }
     }

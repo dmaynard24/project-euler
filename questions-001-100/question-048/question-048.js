@@ -24,10 +24,12 @@ function getLastTenDigitsWithBigInt() {
 function getLastTenDigits() {
   let mod = 10000000000,
     sum = 0;
+
   for (let i = 1; i < 1000; i++) {
     if (i % 10 == 0) {
       continue;
     }
+
     let addend = i;
     for (let j = 1; j < i; j++) {
       addend *= i;

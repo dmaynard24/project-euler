@@ -26,50 +26,76 @@ const now = require('performance-now'),
 
 function getDiophantineD(max) {
   let largestX = 0,
+    xParts = [],
+    yParts = [],
     largestD;
 
-  let maxRoot = 5000,
-    rootSquares = [];
-  for (let i = 1; i <= maxRoot; i++) {
-    let squareStr = bigInt(i)
-      .pow(2)
-      .toString();
-    rootSquares.push({
-      root: i,
-      square: squareStr
-    });
-  }
-
-  console.log(rootSquares.pop());
-
-  for (let d = 0; d <= max; d++) {
+  for (let d = 50; d <= max; d++) {
     let sqrt = Math.sqrt(d);
     // check if it's not square
     if (Math.floor(sqrt) != sqrt) {
-      let y = 1;
-      while (true) {
-        let sum = 1 + d * y * y,
-          x = Math.sqrt(sum);
+      let x = Math.floor(Math.sqrt(d + 1));
+      // find xPart of equation
+      let xPart = getXPart(x, d);
 
-        // check if it's square
-        if (Math.floor(x) == x) {
-          if (x > largestX) {
-            largestX = x;
-            largestD = d;
+      let found = false;
+      while (!found) {
+        let y = 1;
+        // find yPart of equation
+        let yPart = getYPart(y, d);
+
+        while (xPart.greater(yPart)) {
+          if (xPart.minus(yPart).equals(1)) {
+            console.log(`x: ${x}, d: ${d}, y: ${y}`);
+            if (x > largestX) {
+              largestX = x;
+              largestD = d;
+            }
+            found = true;
+            break;
           }
-          break;
+
+          y++;
+          // update yPart of equation
+          yPart = getYPart(y, d);
         }
 
-        y++;
+        x++;
+        // update xPart of equation
+        xPart = getXPart(x, d);
       }
     }
+  }
+
+  function getXPart(x, d) {
+    // check caches
+    if (xParts[x] == undefined) {
+      xParts[x] = [];
+    }
+    if (xParts[x][d] == undefined) {
+      xParts[x][d] = bigInt(x).pow(2);
+    }
+    return xParts[x][d];
+  }
+
+  function getYPart(y, d) {
+    // check caches
+    if (yParts[y] == undefined) {
+      yParts[y] = [];
+    }
+    if (yParts[y][d] == undefined) {
+      yParts[y][d] = bigInt(y)
+        .pow(2)
+        .multiply(d);
+    }
+    return yParts[y][d];
   }
 
   return largestD;
 }
 
 const time0 = now();
-console.log(getDiophantineD(7));
+console.log(getDiophantineD(100));
 const time1 = now();
 
 console.log(`call took ${time1 - time0} milliseconds`);

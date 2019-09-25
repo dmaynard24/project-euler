@@ -1,9 +1,9 @@
 const isPermutation = require('./permutation');
 
-test('expects that 13425 is a permutation of 15243', () => {
-  expect(isPermutation(13425, 15243)).toBe(true);
+test('expects that 1342523119877 is a permutation of 7978152432311', () => {
+  expect(isPermutation(1342523119877, 7978152432311)).toBe(true);
 });
 
-test('expects that 13425 is not a permutation of 16243', () => {
-  expect(isPermutation(13425, 16243)).toBe(false);
+test('expects that 134251 is not a permutation of 162431', () => {
+  expect(isPermutation(134251, 162431)).toBe(false);
 });

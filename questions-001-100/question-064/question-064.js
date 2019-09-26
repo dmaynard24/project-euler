@@ -22,39 +22,13 @@
 
 // How many continued fractions for N≤10000 have an odd period?
 
+const getPeriod = require('../../util/period');
+
 function getFractionCount(max) {
   return [...Array(max + 1).keys()].slice(2).filter(n => {
     let sqrt = Math.sqrt(n);
     return Math.floor(sqrt) != sqrt && getPeriod(n).length % 2 != 0;
   }).length;
-}
-
-function getPeriod(num) {
-  let sqrt = Math.sqrt(num),
-    m = Math.floor(sqrt),
-    int = m,
-    n = sqrt + int,
-    d = num - int * int,
-    fraction = n / d,
-    ms = [];
-
-  while (d != 1) {
-    // get new m
-    m = Math.floor(fraction);
-    // take reciprocal, then remove sqrt from denominator and simplify
-    int -= d * m;
-    int *= -1;
-    n = sqrt + int;
-    d = (num - int * int) / d;
-    fraction = n / d;
-
-    // store m
-    ms.push(m);
-  }
-
-  ms.push(Math.floor(sqrt) * 2);
-
-  return ms;
 }
 
 module.exports = getFractionCount;

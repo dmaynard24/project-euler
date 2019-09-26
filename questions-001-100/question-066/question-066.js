@@ -21,7 +21,7 @@
 
 // Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
-const now = require('performance-now'),
+const getPeriod = require('../../util/period'),
   bigInt = require('big-integer');
 
 function getXUsingConvergents(num) {
@@ -57,34 +57,6 @@ function getXUsingConvergents(num) {
   }
 }
 
-function getPeriod(num) {
-  let sqrt = Math.sqrt(num),
-    m = Math.floor(sqrt),
-    int = m,
-    n = sqrt + int,
-    d = num - int * int,
-    fraction = n / d,
-    ms = [];
-
-  while (d != 1) {
-    // get new m
-    m = Math.floor(fraction);
-    // take reciprocal, then remove sqrt from denominator and simplify
-    int -= d * m;
-    int *= -1;
-    n = sqrt + int;
-    d = (num - int * int) / d;
-    fraction = n / d;
-
-    // store m
-    ms.push(m);
-  }
-
-  ms.push(Math.floor(sqrt) * 2);
-
-  return ms;
-}
-
 function getDiophantineD(max) {
   let largestX = bigInt(0),
     largestD;
@@ -105,8 +77,4 @@ function getDiophantineD(max) {
   return largestD;
 }
 
-const time0 = now();
-console.log(getDiophantineD(1000));
-const time1 = now();
-
-console.log(`call took ${time1 - time0} milliseconds`);
+module.exports = getDiophantineD;

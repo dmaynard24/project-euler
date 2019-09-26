@@ -36,8 +36,8 @@ function getSumOfConsecutivePrimes(limit) {
       consecutiveCount++;
       sum += primeNums[j];
 
-      if (primal.isPrime(sum, primes)) {
-        if (consecutiveCount > largestConsecutiveCount) {
+      if (consecutiveCount > largestConsecutiveCount) {
+        if (primal.isPrime(sum, primes)) {
           largestConsecutiveCount = consecutiveCount;
           largestSum = sum;
         }

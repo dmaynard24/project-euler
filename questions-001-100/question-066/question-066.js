@@ -24,78 +24,89 @@
 const now = require('performance-now'),
   bigInt = require('big-integer');
 
+function getXUsingConvergents(num) {
+  let period = getPeriod(num),
+    ns = [bigInt(1), bigInt(Math.floor(Math.sqrt(num)))],
+    ds = [bigInt(0), bigInt(1)];
+
+  let i = 2,
+    j = 2,
+    found = false;
+  while (!found) {
+    // reset j if it ever gets out of the bounds of the period
+    if (j > period.length + 1) {
+      j = 2;
+    }
+    let m = bigInt(period[j - 2]),
+      n = m.multiply(ns[i - 1]).add(ns[i - 2]),
+      d = m.multiply(ds[i - 1]).add(ds[i - 2]);
+
+    let xPart = n.pow(2),
+      yPart = d.pow(2).multiply(num);
+
+    // if it satisfies the equation, return numerator (equal to x)
+    if (xPart.subtract(yPart).equals(1)) {
+      return n;
+    }
+
+    ns.push(n);
+    ds.push(d);
+
+    i++;
+    j++;
+  }
+}
+
+function getPeriod(num) {
+  let sqrt = Math.sqrt(num),
+    m = Math.floor(sqrt),
+    int = m,
+    n = sqrt + int,
+    d = num - int * int,
+    fraction = n / d,
+    ms = [];
+
+  while (d != 1) {
+    // get new m
+    m = Math.floor(fraction);
+    // take reciprocal, then remove sqrt from denominator and simplify
+    int -= d * m;
+    int *= -1;
+    n = sqrt + int;
+    d = (num - int * int) / d;
+    fraction = n / d;
+
+    // store m
+    ms.push(m);
+  }
+
+  ms.push(Math.floor(sqrt) * 2);
+
+  return ms;
+}
+
 function getDiophantineD(max) {
-  let largestX = 0,
-    xParts = [],
-    yParts = [],
+  let largestX = bigInt(0),
     largestD;
 
-  for (let d = 50; d <= max; d++) {
+  for (let d = 2; d <= max; d++) {
     let sqrt = Math.sqrt(d);
-    // check if it's not square
+    // check if d isn't square
     if (Math.floor(sqrt) != sqrt) {
-      let x = Math.floor(Math.sqrt(d + 1));
-      // find xPart of equation
-      let xPart = getXPart(x, d);
-
-      let found = false;
-      while (!found) {
-        let y = 1;
-        // find yPart of equation
-        let yPart = getYPart(y, d);
-
-        while (xPart.greater(yPart)) {
-          if (xPart.minus(yPart).equals(1)) {
-            console.log(`x: ${x}, d: ${d}, y: ${y}`);
-            if (x > largestX) {
-              largestX = x;
-              largestD = d;
-            }
-            found = true;
-            break;
-          }
-
-          y++;
-          // update yPart of equation
-          yPart = getYPart(y, d);
-        }
-
-        x++;
-        // update xPart of equation
-        xPart = getXPart(x, d);
+      // find minimal x using convergents
+      let x = getXUsingConvergents(d);
+      if (x.greater(largestX)) {
+        largestX = x;
+        largestD = d;
       }
     }
-  }
-
-  function getXPart(x, d) {
-    // check caches
-    if (xParts[x] == undefined) {
-      xParts[x] = [];
-    }
-    if (xParts[x][d] == undefined) {
-      xParts[x][d] = bigInt(x).pow(2);
-    }
-    return xParts[x][d];
-  }
-
-  function getYPart(y, d) {
-    // check caches
-    if (yParts[y] == undefined) {
-      yParts[y] = [];
-    }
-    if (yParts[y][d] == undefined) {
-      yParts[y][d] = bigInt(y)
-        .pow(2)
-        .multiply(d);
-    }
-    return yParts[y][d];
   }
 
   return largestD;
 }
 
 const time0 = now();
-console.log(getDiophantineD(100));
+console.log(getDiophantineD(1000));
 const time1 = now();
 
 console.log(`call took ${time1 - time0} milliseconds`);

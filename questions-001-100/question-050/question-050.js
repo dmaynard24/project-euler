@@ -27,29 +27,29 @@ function getSumOfConsecutivePrimes(limit) {
     largestSum = 0;
 
   for (let i = 0; i < primeNums.length; i++) {
-    let primeNum = primeNums[i],
-      consecutiveCount = 1,
-      sum = primeNum;
+    if (primeNums.length - i < largestConsecutiveCount) {
+      return largestSum;
+    }
 
-    let j = i + 1;
-    while (sum < limit && j < primeNums.length) {
-      consecutiveCount++;
+    let consecutiveCount = 1,
+      sum = primeNums[i];
+
+    for (let j = i + 1; j < primeNums.length; j++) {
       sum += primeNums[j];
 
-      if (consecutiveCount > largestConsecutiveCount) {
-        if (primal.isPrime(sum, primes)) {
-          largestConsecutiveCount = consecutiveCount;
-          largestSum = sum;
-        }
+      if (sum > limit) {
+        break;
       }
 
-      j++;
+      consecutiveCount++;
+      if (consecutiveCount > largestConsecutiveCount && primal.isPrime(sum, primes)) {
+        largestConsecutiveCount = consecutiveCount;
+        largestSum = sum;
+      }
     }
   }
 
   return largestSum;
 }
-
-// console.log(getSumOfConsecutivePrimes(1000000));
 
 module.exports = getSumOfConsecutivePrimes;

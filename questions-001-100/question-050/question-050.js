@@ -14,35 +14,42 @@ const primal = require('../../util/primal');
 
 function getSumOfConsecutivePrimes(limit) {
   let primes = primal.getPrimes(limit),
+    primeNums = primes.reduce(
+      (a, c, i) => {
+        if (c) {
+          a.push(2 * i + 1);
+        }
+        return a;
+      },
+      [2]
+    ),
     largestConsecutiveCount = 0,
     largestSum = 0;
 
-  for (let i = 2; i < limit; i++) {
-    let consecutiveCount = 0,
-      sum = 0;
+  for (let i = 0; i < primeNums.length; i++) {
+    let primeNum = primeNums[i],
+      consecutiveCount = 1,
+      sum = primeNum;
 
-    if (primal.isPrime(i, primes)) {
+    let j = i + 1;
+    while (sum < limit && j < primeNums.length) {
       consecutiveCount++;
-      sum += i;
+      sum += primeNums[j];
 
-      let j = i + 1;
-      while (sum < limit && j < primes.length) {
-        if (primal.isPrime(j, primes)) {
-          consecutiveCount++;
-          sum += j;
-
-          if (primal.isPrime(sum, primes) && consecutiveCount > largestConsecutiveCount) {
-            largestConsecutiveCount = consecutiveCount;
-            largestSum = sum;
-          }
+      if (primal.isPrime(sum, primes)) {
+        if (consecutiveCount > largestConsecutiveCount) {
+          largestConsecutiveCount = consecutiveCount;
+          largestSum = sum;
         }
-
-        j++;
       }
+
+      j++;
     }
   }
 
   return largestSum;
 }
+
+// console.log(getSumOfConsecutivePrimes(1000000));
 
 module.exports = getSumOfConsecutivePrimes;

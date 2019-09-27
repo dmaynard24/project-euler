@@ -24,6 +24,26 @@
 const getPeriod = require('../../util/period'),
   bigInt = require('big-integer');
 
+function getDiophantineD(max) {
+  let largestX = bigInt(0),
+    largestD;
+
+  for (let d = 2; d <= max; d++) {
+    let sqrt = Math.sqrt(d);
+    // check if d isn't square
+    if (Math.floor(sqrt) != sqrt) {
+      // find minimal x using convergents
+      let x = getXUsingConvergents(d);
+      if (x.greater(largestX)) {
+        largestX = x;
+        largestD = d;
+      }
+    }
+  }
+
+  return largestD;
+}
+
 function getXUsingConvergents(num) {
   let period = getPeriod(num),
     ns = [bigInt(1), bigInt(Math.floor(Math.sqrt(num)))],
@@ -55,26 +75,6 @@ function getXUsingConvergents(num) {
     i++;
     j++;
   }
-}
-
-function getDiophantineD(max) {
-  let largestX = bigInt(0),
-    largestD;
-
-  for (let d = 2; d <= max; d++) {
-    let sqrt = Math.sqrt(d);
-    // check if d isn't square
-    if (Math.floor(sqrt) != sqrt) {
-      // find minimal x using convergents
-      let x = getXUsingConvergents(d);
-      if (x.greater(largestX)) {
-        largestX = x;
-        largestD = d;
-      }
-    }
-  }
-
-  return largestD;
 }
 
 module.exports = getDiophantineD;

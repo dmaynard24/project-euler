@@ -1,4 +1,4 @@
-let names = [
+const names = [
   'MARY',
   'PATRICIA',
   'LINDA',

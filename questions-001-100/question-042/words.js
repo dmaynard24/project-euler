@@ -1,4 +1,4 @@
-let words = [
+const words = [
   'A',
   'ABILITY',
   'ABLE',

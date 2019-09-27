@@ -77,14 +77,11 @@ function getCombos(arr, pick) {
 }
 
 function getAllCombos(length) {
-  let combos = [];
-
   let range = [...Array(length).keys()];
-  for (let j = 1; j < range.length; j++) {
-    combos = combos.concat(getCombos(range, j));
-  }
-
-  return combos;
+  return range.slice(1).reduce((a, c) => {
+    a = a.concat(getCombos(range, c));
+    return a;
+  }, []);
 }
 
 module.exports = getSmallestPrime;

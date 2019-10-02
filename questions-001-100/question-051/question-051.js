@@ -39,12 +39,7 @@ function getSmallestPrime(count) {
               otherPrimes.push(newDigits);
 
               if (otherPrimes.length == count) {
-                let concat = 0;
-                for (let l = 0; l < otherPrimes[0].length; l++) {
-                  concat *= 10;
-                  concat += otherPrimes[0][l];
-                }
-                return concat;
+                return digits.getIntFromDigits(otherPrimes[0]);
               }
             }
 
@@ -66,14 +61,14 @@ function getCombos(arr, pick) {
     return [];
   }
 
-  let x = arr[0],
-    xs = arr.slice(1);
+  let first = arr[0],
+    rest = arr.slice(1);
 
-  return getCombos(xs, pick - 1)
-    .map(function(t) {
-      return [x].concat(t);
+  return getCombos(rest, pick - 1)
+    .map(combo => {
+      return [first].concat(combo);
     })
-    .concat(getCombos(xs, pick));
+    .concat(getCombos(rest, pick));
 }
 
 function getAllCombos(length) {

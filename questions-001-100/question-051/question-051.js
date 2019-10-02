@@ -21,14 +21,22 @@ function getSmallestPrime(count) {
   for (let i = 56003; i <= limit; i += 2) {
     if (primal.isPrime(i, primes)) {
       let originalDigits = digits.getDigits(i);
+
       for (let replaceCount = 1; replaceCount < originalDigits.length; replaceCount++) {
         let digitReplaceCombos = combos[originalDigits.length];
+
         for (let j = 0; j < digitReplaceCombos.length; j++) {
           let combo = digitReplaceCombos[j],
-            otherPrimes = [];
+            otherPrimes = [],
+            isReplacingLastDigit = combo[combo.length - 1] == originalDigits.length - 1,
+            minDigit = combo.indexOf(0) > -1 || isReplacingLastDigit ? 1 : 0,
+            step = isReplacingLastDigit ? 2 : 1;
 
-          let minDigit = combo.indexOf(0) > -1 ? 1 : 0;
-          for (let k = minDigit; k < 10; k++) {
+          for (let k = minDigit; k < 10; k += step) {
+            if (isReplacingLastDigit && k == 5) {
+              continue;
+            }
+
             let newDigits = [...originalDigits];
             combo.forEach(digit => {
               newDigits.splice(digit, 1, k);

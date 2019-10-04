@@ -9,25 +9,30 @@ const isPandigital = require('../../util/pandigital'),
   isPermutation = require('../../util/permutation');
 
 function getSmallestInteger(maxMultiplier) {
-  let matches = [],
-    x = 125874;
-  while (matches.length < maxMultiplier) {
-    if (isPandigital(x)) {
-      matches = [x];
+  let limit = 1000000,
+    i = 1;
+  while (i < limit) {
+    i *= 10;
 
-      for (let multiplier = 2; multiplier <= maxMultiplier; multiplier++) {
-        if (!isPermutation(x, x * multiplier)) {
-          break;
+    let x = i;
+    while (x < (i * 10) / maxMultiplier) {
+      if (isPandigital(x)) {
+        for (let multiplier = 2; multiplier <= maxMultiplier; multiplier++) {
+          if (!isPermutation(x, x * multiplier)) {
+            break;
+          }
+
+          if (multiplier == maxMultiplier) {
+            return x;
+          }
         }
-
-        matches.push(x * multiplier);
       }
-    }
 
-    x++;
+      x++;
+    }
   }
 
-  return matches[0];
+  return `Unable to find a positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits under ${limit}`;
 }
 
 module.exports = getSmallestInteger;

@@ -45,7 +45,7 @@ function getSmallestOddComposite() {
     }
   }
 
-  return `unable to disprove Goldbach's other conjecture under ${limit}`;
+  return `Unable to disprove Goldbach's other conjecture under ${limit}`;
 }
 
 module.exports = getSmallestOddComposite;

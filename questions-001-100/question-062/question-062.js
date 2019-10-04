@@ -31,7 +31,7 @@ function getSmallestCube(count) {
     }
   }
 
-  return `couldn't find a cube with ${count} permutations that are also cubes under ${limit}`;
+  return `Unable to find a cube with ${count} permutations that are also cubes under ${limit}`;
 }
 
 module.exports = getSmallestCube;

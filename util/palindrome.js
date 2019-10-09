@@ -13,4 +13,22 @@ function isPalindrome(num) {
   return true;
 }
 
-module.exports = isPalindrome;
+function isArrayPalindrome(arr) {
+  let lIndex = 0,
+    rIndex = arr.length - 1;
+  while (rIndex - lIndex > 0) {
+    l = arr[lIndex];
+    r = arr[rIndex];
+
+    if (l != r) {
+      return false;
+    }
+
+    lIndex++;
+    rIndex--;
+  }
+
+  return true;
+}
+
+module.exports = { isPalindrome, isArrayPalindrome };

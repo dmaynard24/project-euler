@@ -14,10 +14,11 @@
 // How many, not necessarily distinct, values of nCr for 1≤n≤100, are greater than one-million?
 
 function getCombinationCounts(nLimit) {
-  let factorials = [],
+  let targetComboCount = 1000000,
+    factorials = [],
     count = 0;
 
-  // cache factorials of all digits 1 - 9
+  // cache factorials
   factorials.push(1);
   for (let i = 1; i <= nLimit; i++) {
     factorials.push(i * factorials[i - 1]);
@@ -29,7 +30,13 @@ function getCombinationCounts(nLimit) {
 
   for (let n = 23; n <= nLimit; n++) {
     for (let r = 1; r <= n; r++) {
-      if (getComboCount(n, r) > 1000000) {
+      let comboCount = getComboCount(n, r);
+
+      if (r > n / 2 && comboCount < targetComboCount) {
+        break;
+      }
+
+      if (comboCount > targetComboCount) {
         count++;
       }
     }

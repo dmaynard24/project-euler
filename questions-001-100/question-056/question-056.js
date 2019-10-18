@@ -8,16 +8,23 @@
 const bigInt = require('big-integer');
 
 function getMaximumDigitSum(limit) {
-  let lower = limit - 10,
+  let lower = 2,
     largest = 0;
 
-  for (let a = lower; a < limit; a++) {
-    for (let b = lower; b < limit; b++) {
-      let sum = [
-        ...bigInt(a)
-          .pow(b)
-          .toArray(10).value
-      ].reduce((a, c) => a + c);
+  for (let a = limit - 1; a >= lower; a--) {
+    if (a % 10 == 0) {
+      continue;
+    }
+
+    for (let b = limit - 1; b >= lower; b--) {
+      let powerArr = bigInt(a)
+        .pow(b)
+        .toArray(10).value;
+      if (powerArr.length * 9 < largest) {
+        break;
+      }
+
+      let sum = powerArr.reduce((a, c) => a + c);
       if (sum > largest) {
         largest = sum;
       }

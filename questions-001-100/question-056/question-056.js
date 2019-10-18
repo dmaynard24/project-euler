@@ -17,14 +17,14 @@ function getMaximumDigitSum(limit) {
     }
 
     for (let b = limit - 1; b >= lower; b--) {
-      let powerArr = bigInt(a)
+      let powerDigits = bigInt(a)
         .pow(b)
         .toArray(10).value;
-      if (powerArr.length * 9 < largest) {
+      if (powerDigits.length * 9 < largest) {
         break;
       }
 
-      let sum = powerArr.reduce((a, c) => a + c);
+      let sum = powerDigits.reduce((a, c) => a + c);
       if (sum > largest) {
         largest = sum;
       }

@@ -20,19 +20,18 @@ const bigInt = require('big-integer');
 
 function getFractionCount(iterationCount) {
   let count = 0,
-    ns = [1],
-    ds = [1],
-    n = bigInt(3),
-    d = bigInt(2);
+    n = bigInt(1),
+    d = bigInt(1);
 
   for (let i = 1; i <= iterationCount; i++) {
-    ns.push(n);
-    ds.push(d);
-    n = n.multiply(2).add(ns[i - 1]);
-    d = d.multiply(2).add(ds[i - 1]);
-    if (n.toArray(10).value.length > d.toArray(10).value.length) {
+    let tempD = d.add(n);
+    n = n.add(d.multiply(2));
+
+    if (n.toArray(10).value.length > tempD.toArray(10).value.length) {
       count++;
     }
+
+    d = tempD;
   }
 
   return count;

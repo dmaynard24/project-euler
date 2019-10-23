@@ -18,14 +18,14 @@
 
 const bigInt = require('big-integer');
 
-function getFractionCount(iterations) {
+function getFractionCount(iterationCount) {
   let count = 0,
     ns = [1],
     ds = [1],
     n = bigInt(3),
     d = bigInt(2);
 
-  for (let i = 1; i <= iterations; i++) {
+  for (let i = 1; i <= iterationCount; i++) {
     ns.push(n);
     ds.push(d);
     n = n.multiply(2).add(ns[i - 1]);

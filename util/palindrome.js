@@ -14,18 +14,13 @@ function isPalindrome(num) {
 }
 
 function isArrayPalindrome(arr) {
-  let leftIndex = 0,
-    rightIndex = arr.length - 1;
-  while (rightIndex - leftIndex > 0) {
-    left = arr[leftIndex];
-    right = arr[rightIndex];
+  for (let i = 0; i < arr.length / 2; i++) {
+    let l = arr[i],
+      r = arr[arr.length - 1 - i];
 
-    if (left != right) {
+    if (l != r) {
       return false;
     }
-
-    leftIndex++;
-    rightIndex--;
   }
 
   return true;

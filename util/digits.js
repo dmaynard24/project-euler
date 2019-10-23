@@ -54,7 +54,7 @@ function getIntFromDigits(digits) {
 
   return digits.reduce((a, c) => {
     a *= 10;
-    return (a += c);
+    return a + c;
   }, 0);
 }
 

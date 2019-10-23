@@ -24,14 +24,12 @@ function getFractionCount(iterationCount) {
     d = bigInt(1);
 
   for (let i = 1; i <= iterationCount; i++) {
-    let tempD = d.add(n);
     n = n.add(d.multiply(2));
+    d = n.minus(d);
 
-    if (n.toArray(10).value.length > tempD.toArray(10).value.length) {
+    if (n.toArray(10).value.length > d.toArray(10).value.length) {
       count++;
     }
-
-    d = tempD;
   }
 
   return count;

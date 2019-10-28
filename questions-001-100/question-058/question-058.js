@@ -29,6 +29,12 @@ function getSideLength(percentage) {
 
     for (let cornerNum = 1; cornerNum <= 4; cornerNum++) {
       cornerValue += length - 1;
+
+      // 4th corner is never prime (always square)
+      if (cornerNum == 4) {
+        continue;
+      }
+
       if (primal.isPrime(cornerValue)) {
         primeCount++;
       }

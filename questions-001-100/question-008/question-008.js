@@ -31,26 +31,26 @@ const series = require('./series');
 function getLargestProduct(digits) {
   let start = 0,
     end = digits,
-    digitArr = [...series.replace(/\n/g, '')].map(num => parseInt(num, 10)),
+    nums = [...series.replace(/\n/g, '')].map(num => parseInt(num, 10)),
     largest = 0,
     product = null;
 
-  while (end < digitArr.length + 1) {
-    let zeroAt = digitArr.indexOf(0, start);
+  while (end < nums.length + 1) {
+    let zeroAt = nums.indexOf(0, start);
     while (zeroAt > -1 && zeroAt - start < digits) {
       start = zeroAt + 1;
       end = start + digits;
-      zeroAt = digitArr.indexOf(0, start);
+      zeroAt = nums.indexOf(0, start);
       product = null;
     }
 
     if (product === null) {
       product = 1;
       for (let i = start; i < end; i++) {
-        product *= digitArr[i];
+        product *= nums[i];
       }
     } else {
-      product = (product / digitArr[start - 1]) * digitArr[end - 1];
+      product = (product / nums[start - 1]) * nums[end - 1];
     }
     largest = product > largest ? product : largest;
 

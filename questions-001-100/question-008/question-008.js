@@ -31,8 +31,7 @@ const series = require('./series');
 function getLargestProduct(digits) {
   let start = 0,
     end = digits,
-    stripped = series.replace(/\D/g, ''),
-    arr = [...stripped].map(num => parseInt(num)),
+    arr = [...series.replace(/\n/g, '')].map(num => parseInt(num, 10)),
     largest = 0,
     product = null;
 

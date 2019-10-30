@@ -31,51 +31,42 @@
 const grid = require('./grid');
 
 function getLargestProduct(digits) {
-  let stripped = grid
-      .replace(/\r?\n|\r/g, '')
-      .replace(/  /g, ' ')
-      .trim(),
-    arr = stripped.split(' ').map(i => parseInt(i)),
-    twoD = [];
-
-  for (let i = 0; i < 20; i++) {
-    twoD.push(arr.slice(i * 20, i * 20 + 20));
-  }
+  let gridArr = grid.split('\n').map(row => row.split(' ').map(num => parseInt(num, 10)));
 
   function getUpRight(x, y) {
-    let product = twoD[x][y];
+    let product = gridArr[x][y];
     for (let i = 1; i < digits; i++) {
       x--;
       y++;
-      product *= twoD[x][y];
+      product *= gridArr[x][y];
     }
     return product;
   }
 
   function getRight(x, y) {
-    let product = twoD[x][y];
+    let product = gridArr[x][y];
     for (let i = 1; i < digits; i++) {
       y++;
-      product *= twoD[x][y];
+      product *= gridArr[x][y];
     }
     return product;
   }
 
   function getDownRight(x, y) {
-    let product = twoD[x][y];
+    let product = gridArr[x][y];
     for (let i = 1; i < digits; i++) {
       x++;
       y++;
-      product *= twoD[x][y];
+      product *= gridArr[x][y];
     }
     return product;
   }
 
   function getDown(x, y) {
-    let product = twoD[x][y];
+    let product = gridArr[x][y];
     for (let i = 1; i < digits; i++) {
       x++;
-      product *= twoD[x][y];
+      product *= gridArr[x][y];
     }
     return product;
   }
@@ -84,7 +75,7 @@ function getLargestProduct(digits) {
   for (let x = 0; x < 20; x++) {
     for (let y = 0; y < 20; y++) {
       if (y + digits <= 19) {
-        let row = twoD[x],
+        let row = gridArr[x],
           zeroAt = row.indexOf(0, y);
         if (zeroAt - y > digits - 1 || zeroAt == -1) {
           let newLargest = getRight(x, y);

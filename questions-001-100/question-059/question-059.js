@@ -15,7 +15,7 @@ const cipher = require('./cipher');
 
 function getAsciiSum() {
   let sum = 0,
-    nums = cipher.split(',').map(num => parseInt(num)),
+    nums = cipher.split(',').map(num => parseInt(num, 10)),
     keyLength = 3;
 
   let charCodes = [...'abcdefghijklmnopqrstuvwxyz'].map(char => char.charCodeAt());

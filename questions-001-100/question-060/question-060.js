@@ -9,7 +9,7 @@ const primal = require('../../util/primal'),
   digits = require('../../util/digits');
 
 function getLowestPrimeSum(count) {
-  let nonPrimePerms = [],
+  let nonPrimePerms = new Map(),
     sumLimit = Infinity,
     initialLimit = 10000,
     primes = primal.getPrimes(initialLimit);
@@ -33,8 +33,8 @@ function getLowestPrimeSum(count) {
               prepended += digit;
             });
 
-            if (nonPrimePerms[prepended] || !primal.isPrime(prepended)) {
-              nonPrimePerms[prepended] = true;
+            if (nonPrimePerms.get(prepended) == true || !primal.isPrime(prepended)) {
+              nonPrimePerms.set(prepended, true);
               allPrime = false;
               break;
             }
@@ -45,8 +45,8 @@ function getLowestPrimeSum(count) {
               appended += digit;
             });
 
-            if (nonPrimePerms[appended] || !primal.isPrime(appended)) {
-              nonPrimePerms[appended] = true;
+            if (nonPrimePerms.get(appended) == true || !primal.isPrime(appended)) {
+              nonPrimePerms.set(appended, true);
               allPrime = false;
               break;
             }

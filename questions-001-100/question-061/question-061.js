@@ -16,8 +16,7 @@
 // This is the only set of 4-digit numbers with this property.
 // Find the sum of the only ordered set of six cyclic 4-digit numbers for which each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and octagonal, is represented by a different number in the set.
 
-const shapes = require('../../util/shapes'),
-  digits = require('../../util/digits');
+const shapes = require('../../util/shapes');
 
 function getOrderedSet() {
   const limit = 10000,
@@ -40,7 +39,7 @@ function getOrderedSet() {
         if (termSets[unmatchedKeys[j]][i]) {
           // for every set except the last
           if (prevIndex < setCount - 2) {
-            if (digits.getDigits(i).slice(2, 3) < 1) {
+            if (i % 100 < 10) {
               break;
             }
           }
@@ -70,7 +69,7 @@ function getOrderedSet() {
 
           // continue
           if (returnSet.length == 0) {
-            let newStartValue = getNewStartValue(i);
+            let newStartValue = (i % 100) * 100;
             returnSet = returnSet.concat(getNextTerm(prevIndex + 1, set, newStartValue, matchedSets));
           }
 
@@ -98,21 +97,8 @@ function getOrderedSet() {
   return onlySet.reduce((a, c) => a + c);
 }
 
-function getNewStartValue(i) {
-  let newStartDigits = [];
-  for (let j = 0; j < 2; j++) {
-    newStartDigits.push(i % 10);
-    i = Math.floor(i / 10);
-  }
-  let newStartValue = digits.getIntFromDigits(newStartDigits.reverse()) * 100;
-
-  return newStartValue;
-}
-
 function areCyclical(a, b) {
-  return (
-    digits.getIntFromDigits(digits.getDigits(a).slice(2, 4)) == digits.getIntFromDigits(digits.getDigits(b).slice(0, 2))
-  );
+  return a % 100 == Math.floor(b / 100);
 }
 
 module.exports = getOrderedSet;

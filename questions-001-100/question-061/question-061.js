@@ -36,7 +36,7 @@ function getOrderedSet() {
 
     for (let i = startValue; i < limit; i++) {
       for (let j = 0; j < unmatchedKeys.length; j++) {
-        if (termSets[unmatchedKeys[j]][i]) {
+        if (termSets[unmatchedKeys[j]].has(i)) {
           // for every set except the last
           if (prevIndex < setCount - 2) {
             if (i % 100 < 10) {

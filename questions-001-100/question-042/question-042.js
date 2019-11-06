@@ -27,7 +27,7 @@ function getTriangleWordCount() {
     }, 0);
   }
 
-  return words.filter(word => triangles[getWordValue(word)]).length;
+  return words.filter(word => triangles.has(getWordValue(word))).length;
 }
 
 module.exports = getTriangleWordCount;

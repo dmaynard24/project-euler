@@ -1,10 +1,10 @@
 function getTriangles(limit) {
-  let triangles = [],
+  let triangles = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    triangles[term] = true;
+    triangles.set(term, true);
     term = getNthTriangle(n);
 
     n++;
@@ -18,12 +18,12 @@ function getNthTriangle(n) {
 }
 
 function getSquares(limit) {
-  let squares = [],
+  let squares = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    squares[term] = true;
+    squares.set(term, true);
     term = getNthSquare(n);
 
     n++;
@@ -37,12 +37,12 @@ function getNthSquare(n) {
 }
 
 function getPentagons(limit) {
-  let pentagons = [],
+  let pentagons = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    pentagons[term] = true;
+    pentagons.set(term, true);
     term = getNthPentagon(n);
 
     n++;
@@ -64,12 +64,12 @@ function isPentagonal(num, pentagons) {
 }
 
 function getHexagons(limit) {
-  let hexagons = [],
+  let hexagons = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    hexagons[term] = true;
+    hexagons.set(term, true);
     term = getNthHexagon(n);
 
     n++;
@@ -83,12 +83,12 @@ function getNthHexagon(n) {
 }
 
 function getHeptagons(limit) {
-  let heptagons = [],
+  let heptagons = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    heptagons[term] = true;
+    heptagons.set(term, true);
     term = getNthHeptagon(n);
 
     n++;
@@ -102,12 +102,12 @@ function getNthHeptagon(n) {
 }
 
 function getOctagons(limit) {
-  let octagons = [],
+  let octagons = new Map(),
     n = 1,
     term = 1;
 
   while (term < limit) {
-    octagons[term] = true;
+    octagons.set(term, true);
     term = getNthOctagon(n);
 
     n++;

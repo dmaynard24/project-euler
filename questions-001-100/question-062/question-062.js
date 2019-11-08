@@ -14,7 +14,10 @@ function getSmallestCube(count) {
 
   for (let i = start; i < limit; i++) {
     let cube = Math.pow(i, 3),
-      sortedValue = digits.getIntFromDigits(digits.getDigits(cube).sort((a, b) => b - a));
+      sortedValue = digits
+        .getDigits(cube)
+        .sort((a, b) => b - a)
+        .join('');
 
     if (sortedCubes.has(sortedValue)) {
       sortedCubes.get(sortedValue).count++;

@@ -10,24 +10,24 @@ const digits = require('../../util/digits');
 function getSmallestCube(count) {
   let start = 10,
     limit = 10000,
-    sortedCubes = [];
+    sortedCubes = new Map();
 
   for (let i = start; i < limit; i++) {
     let cube = Math.pow(i, 3),
       sortedValue = digits.getIntFromDigits(digits.getDigits(cube).sort((a, b) => b - a));
 
-    if (sortedCubes[sortedValue]) {
-      sortedCubes[sortedValue].count++;
-      sortedCubes[sortedValue].cubes.push(cube);
+    if (sortedCubes.has(sortedValue)) {
+      sortedCubes.get(sortedValue).count++;
+      sortedCubes.get(sortedValue).cubes.push(cube);
 
-      if (sortedCubes[sortedValue].count == count) {
-        return Math.min.apply(null, sortedCubes[sortedValue].cubes);
+      if (sortedCubes.get(sortedValue).count == count) {
+        return Math.min.apply(null, sortedCubes.get(sortedValue).cubes);
       }
     } else {
-      sortedCubes[sortedValue] = {
+      sortedCubes.set(sortedValue, {
         count: 1,
         cubes: [cube]
-      };
+      });
     }
   }
 

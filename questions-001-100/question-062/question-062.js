@@ -20,11 +20,12 @@ function getSmallestCube(count) {
         .join('');
 
     if (sortedCubes.has(sortedValue)) {
-      sortedCubes.get(sortedValue).count++;
-      sortedCubes.get(sortedValue).cubes.push(cube);
+      let cachedCube = sortedCubes.get(sortedValue);
+      cachedCube.count++;
+      cachedCube.cubes.push(cube);
 
-      if (sortedCubes.get(sortedValue).count == count) {
-        return Math.min.apply(null, sortedCubes.get(sortedValue).cubes);
+      if (cachedCube.count == count) {
+        return Math.min.apply(null, cachedCube.cubes);
       }
     } else {
       sortedCubes.set(sortedValue, {

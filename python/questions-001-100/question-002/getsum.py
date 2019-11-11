@@ -14,7 +14,7 @@ def get_sum(max):
   second = 2
   while second <= max:
     sum += second
-    dblSecond = second * 2
-    first += dblSecond
-    second += first - dblSecond + first
+    double_second = second * 2
+    first += double_second
+    second += first - double_second + first
   return sum

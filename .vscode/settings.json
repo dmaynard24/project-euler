@@ -1,11 +1,9 @@
 {
-  "prettier.singleQuote": true,
   "editor.formatOnSave": true,
   "[html]": {
     "editor.formatOnSave": false
   },
   "editor.tabSize": 2,
-  "prettier.printWidth": 120,
   "python.pythonPath": "C:\\Users\\dmaynard\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,

@@ -15,7 +15,14 @@ test('expects that 24 is not prime (without sieve)', () => {
 });
 
 test('expects that the prime factors of 24 are [{ base: 2, exp: 3 }, { base: 3, exp: 1 }]', () => {
-  expect(primal.getPrimeFactors(24, primes)).toStrictEqual([{ base: 2, exp: 3 }, { base: 3, exp: 1 }]);
+  expect(primal.getPrimeFactors(24, primes)).toStrictEqual([
+    { base: 2, exp: 3 },
+    { base: 3, exp: 1 }
+  ]);
+});
+
+test('expects that the prime factors of 25 are [{ base: 5, exp: 2 }]', () => {
+  expect(primal.getPrimeFactors(25, primes)).toStrictEqual([{ base: 5, exp: 2 }]);
 });
 
 test('expects that 644 has 3 prime factors', () => {

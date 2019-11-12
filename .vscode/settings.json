@@ -6,7 +6,7 @@
   },
   "editor.tabSize": 2,
   "prettier.printWidth": 120,
-  "python.pythonPath": "C:\\Users\\dmaynard\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+  "python.pythonPath": "C:\\Users\\davem\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.formatting.provider": "yapf",

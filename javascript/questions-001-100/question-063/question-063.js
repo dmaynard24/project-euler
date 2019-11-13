@@ -8,7 +8,7 @@
 const digits = require('../../util/digits');
 
 function getPowerfulIntegerCount() {
-  let powerfulIntegers = [];
+  let count = 0;
 
   for (let exp = 1; exp <= 21; exp++) {
     let base = 1,
@@ -18,14 +18,14 @@ function getPowerfulIntegerCount() {
 
       digitCount = digits.getDigitCount(powerful);
       if (digitCount == exp) {
-        powerfulIntegers[powerful] = true;
+        count++;
       }
 
       base++;
     }
   }
 
-  return Object.keys(powerfulIntegers).length;
+  return count;
 }
 
 module.exports = getPowerfulIntegerCount;

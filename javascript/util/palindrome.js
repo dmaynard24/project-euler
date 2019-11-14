@@ -1,13 +1,18 @@
 const digits = require('./digits');
 
 function isPalindrome(num) {
-  let numDigits = digits.getDigitsReversed(num),
-    reverse = [...numDigits].reverse();
+  let digitsReversed = digits.getDigitsReversed(num);
 
-  for (let i = 0; i < numDigits.length; i++) {
-    if (numDigits[i] != reverse[i]) {
+  let i = 0,
+    len = digitsReversed.length;
+  // leftIndex = i
+  // rightIndex = len - 1 - i
+  while (len - 1 - i - i > 0) {
+    if (digitsReversed[i] != digitsReversed[len - 1 - i]) {
       return false;
     }
+
+    i++;
   }
 
   return true;

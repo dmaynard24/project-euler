@@ -1,20 +1,3 @@
-// each of these functions take an int argument, return an array of ints
-
-function getDigits(num) {
-  if (num < 10) {
-    return [num];
-  }
-
-  let digits = [];
-
-  while (num > 0) {
-    digits.push(num % 10);
-    num = Math.floor(num / 10);
-  }
-
-  return digits.reverse();
-}
-
 function getDigitsReversed(num) {
   if (num < 10) {
     return [num];
@@ -30,16 +13,20 @@ function getDigitsReversed(num) {
   return digits;
 }
 
+function getDigits(num) {
+  return getDigitsReversed(num).reverse();
+}
+
 function getDigitsRotations(num) {
   let rotations = [],
     numDigits = getDigits(num);
 
   let length = numDigits.length;
-  for (let j = 1; j < length; j++) {
+  for (let i = 1; i < length; i++) {
     let rotation = 0;
-    for (let k = 0; k < length; k++) {
+    for (let j = 0; j < length; j++) {
       rotation *= 10;
-      rotation += numDigits[(j + k) % length];
+      rotation += numDigits[(i + j) % length];
     }
     rotations.push(rotation);
   }
@@ -62,4 +49,10 @@ function getDigitCount(num) {
   return Math.floor(Math.log10(num)) + 1;
 }
 
-module.exports = { getDigits, getDigitsReversed, getDigitsRotations, getIntFromDigits, getDigitCount };
+module.exports = {
+  getDigits,
+  getDigitsReversed,
+  getDigitsRotations,
+  getIntFromDigits,
+  getDigitCount
+};

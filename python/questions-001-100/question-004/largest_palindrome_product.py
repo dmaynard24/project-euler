@@ -12,7 +12,7 @@ sys.path.append(root_dir)
 from python.util import palindrome
 
 
-def largest_palindrome_product(digits):
+def get_largest_palindrome_product(digits):
   upper = 10**digits - 1
   lower = 10**(digits - 1)
   m = upper
@@ -28,6 +28,3 @@ def largest_palindrome_product(digits):
       m -= 1
     n -= 1
   return largest
-
-
-print(largest_palindrome_product(3))

@@ -2,7 +2,7 @@ import unittest, sum
 
 
 class TestGetSum(unittest.TestCase):
-  def test_getsum(self):
+  def test_get_sum(self):
     self.assertEqual(sum.get_sum(1000), 233168)
 
 

@@ -50,8 +50,8 @@ function getDigitCount(num) {
 }
 
 module.exports = {
-  getDigits,
   getDigitsReversed,
+  getDigits,
   getDigitsRotations,
   getIntFromDigits,
   getDigitCount

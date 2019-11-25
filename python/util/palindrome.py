@@ -11,5 +11,4 @@ def is_array_palindrome(arr):
 
 
 def is_palindrome(num):
-  digits_reversed = digits.get_digits_reversed(num)
-  return is_array_palindrome(digits_reversed)
+  return is_array_palindrome(digits.get_digits_reversed(num))

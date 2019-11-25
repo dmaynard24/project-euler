@@ -9,13 +9,26 @@ import sys, os
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
 sys.path.append(root_dir)
 
-from python.util import digits
+from python.util import palindrome
 
 
 def largest_palindrome_product(digits):
   upper = 10**digits - 1
   lower = 10**(digits - 1)
-  return lower
+  m = upper
+  n = upper
+  largest = 0
+  while n >= lower:
+    m = upper
+    while m >= lower:
+      product = m * n
+      if product > largest:
+        if palindrome.is_palindrome(product):
+          largest = product
+          lower = min(m, n)
+      m -= 1
+    n -= 1
+    return largest
 
 
 print(largest_palindrome_product(3))

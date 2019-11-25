@@ -8,17 +8,19 @@ def get_digits_reversed(num):
   while num > 0:
     digits.append(num % 10)
     num = int(num / 10)
-  return digits.reverse()
+  return digits
 
 
 def get_digits(num):
-  return get_digits_reversed(num).reverse()
+  digits = get_digits_reversed(num)
+  digits.reverse()
+  return digits
 
 
 def get_digits_rotations(num):
   rotations = []
   num_digits = get_digits(num)
-  length = num_digits.length
+  length = len(num_digits)
   for i in range(1, length):
     rotation = 0
     for j in range(0, length):
@@ -29,7 +31,7 @@ def get_digits_rotations(num):
 
 
 def get_int_from_digits(digits):
-  if digits.length == 1:
+  if len(digits) == 1:
     return digits[0]
   sum = 0
   for num in digits:

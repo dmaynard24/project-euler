@@ -19,11 +19,9 @@ function getLargestPalindromeProduct(digits) {
     m = upper;
     while (m >= lower) {
       let product = m * n;
-      if (product > largest) {
-        if (palindrome.isPalindrome(product)) {
-          largest = product;
-          lower = Math.min(m, n);
-        }
+      if (product > largest && palindrome.isPalindrome(product)) {
+        largest = product;
+        lower = Math.min(m, n);
       }
       m--;
     }

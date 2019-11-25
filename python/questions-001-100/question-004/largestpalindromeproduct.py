@@ -22,13 +22,12 @@ def largest_palindrome_product(digits):
     m = upper
     while m >= lower:
       product = m * n
-      if product > largest:
-        if palindrome.is_palindrome(product):
-          largest = product
-          lower = min(m, n)
+      if product > largest and palindrome.is_palindrome(product):
+        largest = product
+        lower = min(m, n)
       m -= 1
     n -= 1
-    return largest
+  return largest
 
 
 print(largest_palindrome_product(3))

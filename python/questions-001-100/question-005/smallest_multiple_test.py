@@ -1,13 +1,13 @@
 import unittest, smallest_multiple
 
 
-class TestGetSmallestMultipleTen(unittest.TestCase):
-  def test_get_smallest_multiple_ten(self):
+class TestGetSmallestMultipleOne(unittest.TestCase):
+  def test_get_smallest_multiple_one(self):
     self.assertEqual(smallest_multiple.get_smallest_multiple(10), 2520)
 
 
-class TestGetSmallestMultipleTwenty(unittest.TestCase):
-  def test_get_smallest_multiple_twenty(self):
+class TestGetSmallestMultipleTwo(unittest.TestCase):
+  def test_get_smallest_multiple_two(self):
     self.assertEqual(smallest_multiple.get_smallest_multiple(20), 232792560)
 
 

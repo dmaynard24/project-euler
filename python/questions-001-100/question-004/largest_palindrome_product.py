@@ -18,6 +18,7 @@ def get_largest_palindrome_product(digits):
   m = upper
   n = upper
   largest = 0
+
   while n >= lower:
     m = upper
     while m >= lower:
@@ -27,4 +28,5 @@ def get_largest_palindrome_product(digits):
         lower = min(m, n)
       m -= 1
     n -= 1
+
   return largest

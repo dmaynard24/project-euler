@@ -12,9 +12,11 @@ def get_sum(max):
   sum = 0
   first = 1
   second = 2
+
   while second <= max:
     sum += second
     double_second = second * 2
     first += double_second
     second += first - double_second + first
+
   return sum

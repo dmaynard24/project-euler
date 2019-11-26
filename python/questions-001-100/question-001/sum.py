@@ -7,10 +7,7 @@
 
 
 def fizzbuzz(num):
-  if num % 3 == 0 or num % 5 == 0:
-    return True
-  else:
-    return False
+  return num % 3 == 0 or num % 5 == 0
 
 
 def get_sum(max):

@@ -16,6 +16,7 @@ def get_smallest_multiple(upper):
   nums = range(1, upper + 1)
   prime_factor_counts = [0] * (upper + 1)
   primes = primal.get_primes(16000)
+
   for num in nums:
     if primal.is_prime(num, primes):
       prime_factor_counts[num] = 1
@@ -27,6 +28,7 @@ def get_smallest_multiple(upper):
               prime_factor_counts[pf['base']], pf['exp'])
         else:
           prime_factor_counts[pf['base']] = pf['exp']
+
   lcm = 1
   for i, pfc in enumerate(prime_factor_counts):
     lcm *= i**pfc

@@ -7,6 +7,7 @@ def is_array_palindrome(arr):
     # right_index = len(arr) - 1 - i
     if (arr[i] != arr[len(arr) - 1 - i]):
       return False
+
   return True
 
 

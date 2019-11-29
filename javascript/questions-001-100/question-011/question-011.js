@@ -79,20 +79,20 @@ function getLargestProduct(digits) {
           zeroAt = row.indexOf(0, y);
         if (zeroAt - y > digits - 1 || zeroAt == -1) {
           let newLargest = getRight(x, y);
-          largest = newLargest > largest ? newLargest : largest;
+          largest = Math.max(newLargest, largest);
         }
         if (x - digits >= 0) {
           let newLargest = getUpRight(x, y);
-          largest = newLargest > largest ? newLargest : largest;
+          largest = Math.max(newLargest, largest);
         }
         if (x + digits <= 19) {
           let newLargest = getDownRight(x, y);
-          largest = newLargest > largest ? newLargest : largest;
+          largest = Math.max(newLargest, largest);
         }
       }
       if (x + digits <= 19) {
         let newLargest = getDown(x, y);
-        largest = newLargest > largest ? newLargest : largest;
+        largest = Math.max(newLargest, largest);
       }
     }
   }

@@ -13,7 +13,7 @@ function isArrayPalindrome(arr) {
 }
 
 function isPalindrome(num) {
-  return isArrayPalindrome(digits.getDigitsReversed(num))
+  return isArrayPalindrome(digits.getDigitsReversed(num));
 }
 
 module.exports = {

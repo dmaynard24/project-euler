@@ -30,6 +30,3 @@ def get_triplet_product(sum):
 
       m += 1
     n += 1
-
-
-print(get_triplet_product(1000))

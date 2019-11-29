@@ -56,7 +56,7 @@ def get_largest_product(digits):
 
   def get_up_right(x, y):
     product = grid_arr[x][y]
-    for i in range(1, digits):
+    for _ in range(digits - 1):
       x -= 1
       y += 1
       product *= grid_arr[x][y]
@@ -64,14 +64,14 @@ def get_largest_product(digits):
 
   def get_right(x, y):
     product = grid_arr[x][y]
-    for i in range(1, digits):
+    for _ in range(digits - 1):
       y += 1
       product *= grid_arr[x][y]
     return product
 
   def get_down_right(x, y):
     product = grid_arr[x][y]
-    for i in range(1, digits):
+    for _ in range(digits - 1):
       x += 1
       y += 1
       product *= grid_arr[x][y]
@@ -79,7 +79,7 @@ def get_largest_product(digits):
 
   def get_down(x, y):
     product = grid_arr[x][y]
-    for i in range(1, digits):
+    for _ in range(digits - 1):
       x += 1
       product *= grid_arr[x][y]
     return product

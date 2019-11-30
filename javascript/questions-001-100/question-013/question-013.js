@@ -107,15 +107,13 @@
 const numbers = require('./numbers');
 
 function getFirstDigitsOfSum(digits) {
-  let num = numbers
+  return numbers
     .split('\n')
     .map(num => parseInt(num, 10))
     .reduce((acc, curr) => acc + curr)
     .toString()
     .replace('.', '')
     .substring(0, digits);
-
-  return num;
 }
 
 module.exports = getFirstDigitsOfSum;

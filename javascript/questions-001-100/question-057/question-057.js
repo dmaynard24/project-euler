@@ -25,7 +25,7 @@ function getFractionCount(iterationCount) {
 
   for (let i = 1; i <= iterationCount; i++) {
     n = n.add(d.multiply(2));
-    d = n.minus(d);
+    d = n.subtract(d);
 
     if (n.toArray(10).value.length > d.toArray(10).value.length) {
       count++;

@@ -12,10 +12,10 @@
 import math
 
 
-def get_triplet_product(sum):
+def get_triplet_product(target_sum):
   n = 1
   m = 2
-  upper = math.sqrt(sum)
+  upper = math.sqrt(target_sum)
 
   while n < upper:
     while m < upper:
@@ -24,8 +24,8 @@ def get_triplet_product(sum):
       c = m * m + n * n
       triple_sum = a + b + c
 
-      if sum % triple_sum == 0:
-        k = sum / triple_sum
+      if target_sum % triple_sum == 0:
+        k = target_sum / triple_sum
         return a * k * b * k * c * k
 
       m += 1

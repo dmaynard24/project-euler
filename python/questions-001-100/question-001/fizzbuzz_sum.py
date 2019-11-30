@@ -10,5 +10,5 @@ def fizzbuzz(num):
   return num % 3 == 0 or num % 5 == 0
 
 
-def get_sum(max):
+def get_fizzbuzz_sum(max):
   return sum(filter(fizzbuzz, range(0, max)))

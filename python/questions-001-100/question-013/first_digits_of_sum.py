@@ -117,6 +117,3 @@ def get_first_digits_of_sum(digit_count):
   digits_to_trim = digits.get_digit_count(num_sum) - digit_count
 
   return int(num_sum / 10**digits_to_trim)
-
-
-print(get_first_digits_of_sum(10))

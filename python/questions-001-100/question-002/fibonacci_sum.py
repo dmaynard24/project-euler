@@ -8,15 +8,15 @@
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 
-def get_sum(max):
-  sum = 0
+def get_fibonacci_sum(maximum):
+  fibonacci_sum = 0
   first = 1
   second = 2
 
-  while second <= max:
-    sum += second
+  while second <= maximum:
+    fibonacci_sum += second
     double_second = second * 2
     first += double_second
     second += first - double_second + first
 
-  return sum
+  return fibonacci_sum

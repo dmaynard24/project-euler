@@ -14,8 +14,8 @@ from python.util import primal
 
 def get_prime_sum(limit):
   primes = primal.get_primes(limit)
-  sum = 2
+  prime_sum = 2
   for i in range(3, limit, 2):
     if primal.is_prime(i, primes):
-      sum += i
-  return sum
+      prime_sum += i
+  return prime_sum

@@ -38,12 +38,12 @@ def get_int_from_digits(digits):
   if len(digits) == 1:
     return digits[0]
 
-  sum = 0
+  integer = 0
   for num in digits:
-    sum *= 10
-    sum += num
+    integer *= 10
+    integer += num
 
-  return sum
+  return integer
 
 
 def get_digit_count(num):

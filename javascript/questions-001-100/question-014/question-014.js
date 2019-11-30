@@ -19,6 +19,7 @@ function getLargestCollatzSequence(limit) {
   let start = 2,
     largestSequenceStart = 2,
     largestCount = 1;
+
   while (start < limit) {
     let term = start,
       count = 1;
@@ -36,6 +37,7 @@ function getLargestCollatzSequence(limit) {
     }
     start++;
   }
+
   return largestSequenceStart;
 }
 

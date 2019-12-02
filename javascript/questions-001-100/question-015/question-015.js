@@ -5,7 +5,7 @@
 
 // How many such routes are there through a 20×20 grid?
 
-function getRoutes(width) {
+function getRouteCount(width) {
   let nodesPerSide = width + 1,
     rows = [];
 
@@ -36,4 +36,4 @@ function getRoutes(width) {
   return rows[0][0];
 }
 
-module.exports = getRoutes;
+module.exports = getRouteCount;

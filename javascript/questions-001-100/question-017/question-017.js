@@ -8,18 +8,11 @@
 // NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 
 function getNumberLetterCount(max) {
-  const arr = x => Array.from(x),
-    num = x => Number(x) || 0,
-    isEmpty = xs => xs.length === 0,
-    take = n => xs => xs.slice(0, n),
-    drop = n => xs => xs.slice(n),
-    reverse = xs => xs.slice(0).reverse(),
-    comp = f => g => x => f(g(x)),
-    not = x => !x,
-    chunk = n => xs => (isEmpty(xs) ? [] : [take(n)(xs), ...chunk(n)(drop(n)(xs))]);
+  return [...Array(max + 1).keys()].slice(1).reduce((acc, curr) => acc + getWordsFromNumber(curr).length, 0);
+}
 
-  let numToWords = n => {
-    let a = [
+function getWordsFromNumber(num) {
+  let a = [
       '',
       'one',
       'two',
@@ -40,68 +33,35 @@ function getNumberLetterCount(max) {
       'seventeen',
       'eighteen',
       'nineteen'
-    ];
+    ],
+    b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
+    words = '';
 
-    let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+  if (num == 1000) {
+    return 'onethousand';
+  }
 
-    let g = [
-      '',
-      'thousand',
-      'million',
-      'billion',
-      'trillion',
-      'quadrillion',
-      'quintillion',
-      'sextillion',
-      'septillion',
-      'octillion',
-      'nonillion'
-    ];
+  if (num >= 100) {
+    let hundreds = Math.floor(num / 100);
+    words += a[hundreds] + 'hundred';
+    num -= 100 * hundreds;
 
-    let makeGroup = ([ones, tens, huns]) => {
-      return [
-        num(huns) === 0 ? '' : a[huns] + ' hundred ',
-        num(ones) === 0 ? b[tens] : (b[tens] && b[tens] + '-') || '',
-        a[tens + ones] || a[ones]
-      ].join('');
-    };
-
-    let thousand = (group, i) => (group === '' ? group : `${group} ${g[i]}`);
-
-    let addAnd = words => {
-      let wordsArr = words.split(' '),
-        lastWord = wordsArr[wordsArr.length - 1];
-
-      if (n > 99 && lastWord != 'hundred' && g.indexOf(lastWord) == -1) {
-        wordsArr.splice(wordsArr.length - 1, 0, 'and');
-        words = wordsArr.join(' ').trim();
-      }
-
-      return words;
-    };
-
-    if (typeof n === 'number') {
-      return numToWords(String(n));
-    } else if (n === '0') {
-      return 'zero';
-    } else {
-      return addAnd(
-        comp(chunk(3))(reverse)(arr(n))
-          .map(makeGroup)
-          .map(thousand)
-          .filter(comp(not)(isEmpty))
-          .reverse()
-          .join(' ')
-          .trim()
-      );
+    if (num != 0) {
+      words += 'and';
     }
-  };
+  }
 
-  return [...Array(max).keys()]
-    .map(i => i + 1)
-    .reduce((acc, curr) => {
-      return acc + numToWords(curr).replace(/( |-)/g, '').length;
-    }, 0);
+  if (num >= 20) {
+    let tens = Math.floor(num / 10);
+    words += b[tens];
+    num -= 10 * tens;
+  }
+
+  if (num > 0) {
+    words += a[num];
+  }
+
+  return words;
 }
 
 module.exports = getNumberLetterCount;

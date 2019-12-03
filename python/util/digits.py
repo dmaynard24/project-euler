@@ -8,7 +8,7 @@ def get_digits_reversed(num):
   digits = []
   while num > 0:
     digits.append(num % 10)
-    num = int(num / 10)
+    num = num // 10
 
   return digits
 
@@ -47,4 +47,4 @@ def get_int_from_digits(digits):
 
 
 def get_digit_count(num):
-  return int(math.log10(num) + 1)
+  return math.floor(math.log10(num) + 1)

@@ -7,7 +7,7 @@ def get_primes(limit):
   primes = [True] * odds_only_limit
   primes[0] = False
 
-  for i in range(1, int(math.sqrt(limit) + 1)):
+  for i in range(1, math.floor(math.sqrt(limit) + 1)):
     n = 2 * i + 1
     if primes[i]:
       step = n
@@ -22,7 +22,7 @@ def is_prime(num, primes=None):
   if primes is not None and len(primes) >= num:
     if num % 2 == 0:
       return num == 2
-    return primes[int((num - 1) / 2)]
+    return primes[math.floor((num - 1) / 2)]
 
   # primes (sieve) wasn't passed as an argument, naive check if n is prime
   if num < 1:
@@ -53,7 +53,7 @@ def get_prime_factors(num, primes):
     prime_factors.append(base_exp)
 
   sqrt = math.sqrt(num)
-  for i in range(3, int(sqrt + 2), 2):
+  for i in range(3, math.floor(sqrt + 2), 2):
     if num < i:
       break
     if is_prime(i, primes):

@@ -41,12 +41,24 @@ def get_maximum_path_sum():
   for i in range(1, len(two_d)):
     sums.append([])
 
-    for j in range(0, len(two_d)):
-      max_sum = None
+    for j in range(0, len(two_d[i])):
+      curr = two_d[i][j]
+      try:
+        left = sums[i - 1][j - 1]
+      except:
+        left = 0
+      try:
+        right = sums[i - 1][j]
+      except:
+        right = 0
+      max_sum = max(left, right) + curr
+      sums[i].append(max_sum)
+
+  last_row = sums.pop()
+  last_row.sort()
+
+  return last_row.pop()
 
 
 def row_map(row):
   return list(map(int, row.split(' ')))
-
-
-get_maximum_path_sum()

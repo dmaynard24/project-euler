@@ -49,7 +49,7 @@ function getMaximumPathSum(triangle) {
     }
   }
 
-  return sums[sums.length - 1].sort((a, b) => b - a)[0];
+  return sums.pop().sort((a, b) => b - a)[0];
 }
 
 module.exports = getMaximumPathSum;

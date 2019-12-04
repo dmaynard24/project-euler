@@ -11,4 +11,4 @@ def fizzbuzz(num):
 
 
 def get_fizzbuzz_sum(max):
-  return sum(filter(fizzbuzz, range(0, max)))
+  return sum(filter(fizzbuzz, range(max)))

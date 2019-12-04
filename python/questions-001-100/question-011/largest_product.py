@@ -64,8 +64,8 @@ def get_largest_product(digits):
     return product
 
   largest = 0
-  for x in range(0, 20):
-    for y in range(0, 20):
+  for x in range(20):
+    for y in range(20):
       if y + digits <= 19:
         row = grid_arr[x]
         zero_at = -1

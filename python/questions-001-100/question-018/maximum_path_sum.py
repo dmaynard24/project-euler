@@ -41,7 +41,7 @@ def get_maximum_path_sum():
   for i in range(1, len(two_d)):
     sums.append([])
 
-    for j in range(0, len(two_d[i])):
+    for j in range(len(two_d[i])):
       curr = two_d[i][j]
       left = sums[i - 1][j - 1] if j - 1 >= 0 else 0
       right = sums[i - 1][j] if j < len(two_d[i - 1]) else 0

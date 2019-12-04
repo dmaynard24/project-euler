@@ -10,9 +10,9 @@ def get_route_count(width):
   nodes_per_side = width + 1
   rows = []
 
-  for i in range(0, nodes_per_side):
+  for i in range(nodes_per_side):
     row = []
-    for j in range(0, nodes_per_side):
+    for j in range(nodes_per_side):
       if i == nodes_per_side - 1:
         row.append(1)
       else:

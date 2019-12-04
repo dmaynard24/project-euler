@@ -2,7 +2,7 @@ from . import digits
 
 
 def is_array_palindrome(arr):
-  for i in range(0, len(arr) // 2):
+  for i in range(len(arr) // 2):
     # left_index = i
     # right_index = len(arr) - 1 - i
     if (arr[i] != arr[len(arr) - 1 - i]):

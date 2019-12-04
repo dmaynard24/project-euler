@@ -26,7 +26,7 @@ def get_digits_rotations(num):
 
   for i in range(1, length):
     rotation = 0
-    for j in range(0, length):
+    for j in range(length):
       rotation *= 10
       rotation += num_digits[(i + j) % length]
     rotations.append(rotation)

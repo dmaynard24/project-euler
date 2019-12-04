@@ -15,8 +15,17 @@
 
 function getSundayCount(startYear, endYear) {
   let firsts = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335],
-    leapFirsts = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336],
-    firstSunday = 7,
+    leapFirsts = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336];
+  firsts = firsts.reduce((a, c) => {
+    a.set(c, true);
+    return a;
+  }, new Map());
+  leapFirsts = leapFirsts.reduce((a, c) => {
+    a.set(c, true);
+    return a;
+  }, new Map());
+
+  let firstSunday = 7,
     sundayCount = 0;
 
   for (let currentYear = startYear; currentYear <= endYear; currentYear++) {
@@ -31,11 +40,11 @@ function getSundayCount(startYear, endYear) {
       finalSunday;
     for (let i = firstSunday; i <= totalDays; i += 7) {
       if (!isLeapYear) {
-        if (firsts.indexOf(i) > -1) {
+        if (firsts.has(i)) {
           sundayCount++;
         }
       } else {
-        if (leapFirsts.indexOf(i) > -1) {
+        if (leapFirsts.has(i)) {
           sundayCount++;
         }
       }

@@ -15,10 +15,14 @@
 
 
 def get_sunday_count(start_year, end_year):
-  firsts = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-  firsts = {num: True for num in firsts}
-  leap_firsts = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
-  leap_firsts = {num: True for num in leap_firsts}
+  firsts = {
+      num: True
+      for num in [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+  }
+  leap_firsts = {
+      num: True
+      for num in [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
+  }
   first_sunday = 7
   sunday_count = 0
 
@@ -33,10 +37,10 @@ def get_sunday_count(start_year, end_year):
     final_sunday = None
     for i in range(first_sunday, total_days + 1, 7):
       if is_leap_year == False:
-        if firsts.get(i) == True:
+        if i in firsts:
           sunday_count += 1
       else:
-        if leap_firsts.get(i) == True:
+        if i in leap_firsts:
           sunday_count += 1
 
       final_sunday = i

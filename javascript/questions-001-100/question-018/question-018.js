@@ -42,8 +42,8 @@ function getMaximumPathSum(triangle) {
 
     for (let j = 0; j < twoD[i].length; j++) {
       let curr = twoD[i][j],
-        left = sums[i - 1][j - 1] ? sums[i - 1][j - 1] : 0,
-        right = sums[i - 1][j] ? sums[i - 1][j] : 0,
+        left = j - 1 >= 0 ? sums[i - 1][j - 1] : 0,
+        right = j < sums[i - 1].length ? sums[i - 1][j] : 0,
         sum = Math.max(left, right) + curr;
       sums[i].push(sum);
     }

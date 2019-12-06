@@ -50,9 +50,8 @@ function getXUsingConvergents(num) {
     ds = [bigInt(0), bigInt(1)];
 
   let i = 2,
-    j = 2,
-    found = false;
-  while (!found) {
+    j = 2;
+  while (true) {
     // reset j if it ever gets out of the bounds of the period
     if (j > period.length + 1) {
       j = 2;

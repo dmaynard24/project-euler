@@ -9,7 +9,7 @@
 
 const names = require('./names');
 
-function getNamesScoresSum() {
+function getNameScoresSum() {
   names.sort();
   return names.reduce((a, c, i) => {
     return (
@@ -22,4 +22,4 @@ function getNamesScoresSum() {
   }, 0);
 }
 
-module.exports = getNamesScoresSum;
+module.exports = getNameScoresSum;

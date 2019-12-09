@@ -16,28 +16,25 @@ function getSum() {
     upper = 28123,
     abundants = [];
   for (let i = lower; i <= upper; i++) {
-    let properDivisors = getProperDivisors(i),
-      properDivisorsSum = properDivisors.reduce((a, c) => a + c);
+    let properDivisorsSum = getProperDivisors(i).reduce((a, c) => a + c);
     if (properDivisorsSum > i) {
       abundants.push(i);
     }
   }
 
-  let sums = [...Array(upper)],
-    j = 0;
-  while (j < abundants.length) {
-    let k = j;
-    while (k < abundants.length && abundants[j] + abundants[k] <= upper) {
-      sums[abundants[j] + abundants[k]] = true;
-      k++;
+  let abundantSums = Array(upper).fill(false);
+  for (let i = 0; i < abundants.length; i++) {
+    for (let j = i; j < abundants.length; j++) {
+      let abundantSum = abundants[i] + abundants[j];
+      if (abundantSum > upper) {
+        break;
+      }
+
+      abundantSums[abundantSum] = true;
     }
-    j++;
   }
 
-  return [...Array(upper).keys()]
-    .map(key => key + 1)
-    .filter(nonSum => sums[nonSum] != true)
-    .reduce((a, c) => a + c);
+  return abundantSums.reduce((a, c, i) => (c == false ? a + i : a + 0));
 }
 
 module.exports = getSum;

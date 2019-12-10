@@ -37,9 +37,8 @@ function getLargestConcat(gonCount) {
       return a;
     }, []);
 
-  // console.log(possibleSubsets);
-
-  let solutionSet = [];
+  let solutionSet = [],
+    cachedSets = new Map();
   for (let i = 0; i < possibleSubsets.length; i++) {
     let set = [],
       endVals = new Map();
@@ -81,19 +80,50 @@ function getLargestConcat(gonCount) {
 
         set.push(thirdSet);
 
-        // push into solution set
-        solutionSet.push(set);
+        // set.sort((a, b) => )
+        let smallestSetIndex = 0,
+          smallestSetVal = possibleValues.length + 1;
+        set.forEach((subset, i) => {
+          if (subset[0] < smallestSetVal) {
+            smallestSetIndex = i;
+            smallestSetVal = subset[0];
+          }
+        });
+
+        let rotatedSet = [];
+        if (smallestSetIndex != 0) {
+          rotatedSet = [set[smallestSetIndex]];
+          for (let i = 1; i < gonCount; i++) {
+            rotatedSet[i] = set[(smallestSetIndex + i) % gonCount];
+          }
+        } else {
+          // set was already in correct order
+          rotatedSet = set;
+        }
+
+        // don't store duplicates
+        let setKey = rotatedSet.join('');
+        if (!cachedSets.has(setKey)) {
+          // push into solution set
+          solutionSet.push([...rotatedSet]);
+
+          cachedSets.set(setKey, true);
+        }
       }
+
+      endVals.delete(set[set.length - 1][0]);
+      endVals.delete(set[set.length - 1][2]);
+      set.pop();
     }
 
-    // endVals.delete(set[set.length - 1][0]);
-    // endVals.delete(set[set.length - 1][2]);
-    // set.pop();
+    endVals.delete(set[set.length - 1][0]);
+    endVals.delete(set[set.length - 1][2]);
+    set.pop();
   }
 
-  solutionSet.forEach(ss => {
-    console.log(ss[0].join(''), ss[1].join(''), ss[2].join(''));
-  });
+  // solutionSet.forEach(ss => {
+  //   console.log(ss[0].join(''), ss[1].join(''), ss[2].join(''));
+  // });
   return solutionSet.length;
 }
 

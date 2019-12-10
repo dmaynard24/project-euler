@@ -24,72 +24,70 @@ const now = require('performance-now');
 
 function getLargestConcat(gonCount) {
   let possibleValues = [...Array(gonCount * 2 + 1).keys()].slice(1),
-    minSum = gonCount * gonCount,
-    maxSum = gonCount * (gonCount + 1),
     possibleSubsets = getAllPerms(possibleValues, 3).reduce((a, c) => {
       let setSum = c.reduce((a, c) => a + c);
-      if (setSum >= minSum && setSum <= maxSum) {
-        a.push({
-          set: c,
-          sum: setSum
-        });
-      }
+      a.push({
+        set: c,
+        sum: setSum
+      });
       return a;
-    }, []);
+    }, []),
+    cachedSubsets = new Map(),
+    solutionSet = [];
 
-  let solutionSet = [],
-    cachedSets = new Map();
-  for (let i = 0; i < possibleSubsets.length; i++) {
-    let set = [],
-      endVals = new Map();
+  function getNextSubset(prevIndex, set) {
+    for (let i = 0; i < possibleSubsets.length; i++) {
+      let currSubset = possibleSubsets[i].set;
 
-    let firstSet = possibleSubsets[i].set;
-    let setSum = possibleSubsets[i].sum;
-
-    set.push(firstSet);
-    endVals.set(firstSet[0], true);
-    endVals.set(firstSet[2], true);
-
-    for (let j = 0; j < possibleSubsets.length; j++) {
-      let secondSet = possibleSubsets[j].set;
-
-      if (
-        possibleSubsets[j].sum != setSum ||
-        secondSet[1] != firstSet[2] ||
-        endVals.has(secondSet[0]) ||
-        endVals.has(secondSet[2])
-      ) {
+      // always check for cached
+      if (cachedSubsets.has(currSubset.join(''))) {
         continue;
       }
 
-      set.push(secondSet);
-      endVals.set(secondSet[0], true);
-      endVals.set(secondSet[2], true);
-
-      for (let k = 0; k < possibleSubsets.length; k++) {
-        let thirdSet = possibleSubsets[k].set;
+      if (prevIndex == -1) {
+        // reset the edgeVals and setSum on the first set only
+        edgeVals = new Map();
+        setSum = possibleSubsets[i].sum;
+      } else {
+        // check continue cases on all except first
         if (
-          possibleSubsets[k].sum != setSum ||
-          thirdSet[1] != secondSet[2] ||
-          thirdSet[2] != firstSet[1] ||
-          endVals.has(thirdSet[0]) ||
-          endVals.has(thirdSet[2])
+          possibleSubsets[i].sum != setSum ||
+          currSubset[1] != set[prevIndex][2] ||
+          edgeVals.has(currSubset[0]) ||
+          edgeVals.has(currSubset[2]) ||
+          cachedSubsets.has(currSubset.join(''))
         ) {
           continue;
         }
+      }
 
-        set.push(thirdSet);
+      // check on only the last set
+      if (prevIndex == gonCount - 2) {
+        if (currSubset[2] != set[0][1]) {
+          continue;
+        }
+      }
 
-        // set.sort((a, b) => )
+      // store on all
+      set.push(currSubset);
+
+      // immediately after storing, check exit condition
+      if (set.length == gonCount) {
+        // look for smallest subset in order to rotate
         let smallestSetIndex = 0,
           smallestSetVal = possibleValues.length + 1;
-        set.forEach((subset, i) => {
-          if (subset[0] < smallestSetVal) {
+        for (let i = 0; i < set.length; i++) {
+          let subset = set[i];
+          if (subset[0] == 1) {
+            smallestSetIndex = i;
+            break;
+          } else if (subset[0] < smallestSetVal) {
             smallestSetIndex = i;
             smallestSetVal = subset[0];
           }
-        });
+        }
 
+        // rotate based on the index of the smallest subset
         let rotatedSet = [];
         if (smallestSetIndex != 0) {
           rotatedSet = [set[smallestSetIndex]];
@@ -101,28 +99,35 @@ function getLargestConcat(gonCount) {
           rotatedSet = set;
         }
 
-        // don't store duplicates
-        let setKey = rotatedSet.join('');
-        if (!cachedSets.has(setKey)) {
-          // push into solution set
-          solutionSet.push([...rotatedSet]);
+        // cache subsets to avoid duplicates later
+        rotatedSet.forEach(subset => {
+          cachedSubsets.set(subset.join(''), true);
+        });
 
-          cachedSets.set(setKey, true);
-        }
+        // store rotated set
+        solutionSet.push([...rotatedSet]);
       }
 
-      endVals.delete(set[set.length - 1][0]);
-      endVals.delete(set[set.length - 1][2]);
+      // cache edge vals
+      edgeVals.set(currSubset[0], true);
+      edgeVals.set(currSubset[2], true);
+
+      getNextSubset(prevIndex + 1, set);
+
+      // be sure to pop and remove cached edgeVals
+      edgeVals.delete(set[set.length - 1][0]);
+      edgeVals.delete(set[set.length - 1][2]);
       set.pop();
     }
-
-    endVals.delete(set[set.length - 1][0]);
-    endVals.delete(set[set.length - 1][2]);
-    set.pop();
   }
 
+  let edgeVals = new Map(),
+    setSum = possibleSubsets[0].sum;
+
+  getNextSubset(-1, []);
+
   // solutionSet.forEach(ss => {
-  //   console.log(ss[0].join(''), ss[1].join(''), ss[2].join(''));
+  //   console.log(ss[0].join(''), ss[1].join(''), ss[2].join(''), ss[3].join(''), ss[4].join(''));
   // });
   return solutionSet.length;
 }
@@ -173,6 +178,6 @@ function getPerms(a) {
 }
 
 const time0 = now();
-console.log(getLargestConcat(3));
+console.log(getLargestConcat(5));
 const time1 = now();
 console.log(`call took ${time1 - time0} milliseconds`);

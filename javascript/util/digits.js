@@ -39,6 +39,11 @@ function getIntFromDigits(digits) {
     return digits[0];
   }
 
+  digits = digits.reduce((a, c) => {
+    a = a.concat(c >= 10 ? getDigits(c) : c);
+    return a;
+  }, []);
+
   return digits.reduce((a, c) => {
     a *= 10;
     return a + c;

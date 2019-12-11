@@ -8,7 +8,8 @@
 // Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 
 const primal = require('../../util/primal'),
-  digits = require('../../util/digits');
+  digits = require('../../util/digits'),
+  combination = require('../../util/combination');
 
 function getSmallestPrime(count) {
   let limit = 999999,
@@ -61,28 +62,10 @@ function getSmallestPrime(count) {
   }
 }
 
-function getCombos(arr, pick) {
-  if (!pick) {
-    return [[]];
-  }
-  if (!arr.length) {
-    return [];
-  }
-
-  let first = arr[0],
-    rest = arr.slice(1);
-
-  return getCombos(rest, pick - 1)
-    .map(combo => {
-      return [first].concat(combo);
-    })
-    .concat(getCombos(rest, pick));
-}
-
 function getAllCombos(length) {
   let range = [...Array(length).keys()];
   return range.slice(1).reduce((a, c) => {
-    a = a.concat(getCombos(range, c));
+    a = a.concat(combination.getCombos(range, c));
     return a;
   }, []);
 }

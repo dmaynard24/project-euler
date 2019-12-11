@@ -6,7 +6,7 @@
 // Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 
 const isPandigital = require('../../util/pandigital'),
-  isPermutation = require('../../util/permutation');
+  permutation = require('../../util/permutation');
 
 function getSmallestInteger(maxMultiplier) {
   let limit = 1000000,
@@ -18,7 +18,7 @@ function getSmallestInteger(maxMultiplier) {
     while (x < (i * 10) / maxMultiplier) {
       if (isPandigital(x)) {
         for (let multiplier = 2; multiplier <= maxMultiplier; multiplier++) {
-          if (!isPermutation(x, x * multiplier)) {
+          if (!permutation.isPermutation(x, x * multiplier)) {
             break;
           }
 

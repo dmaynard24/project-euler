@@ -31,30 +31,21 @@
 // NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 
 function getMaximumPathSum(triangle) {
-  let twoD = triangle.split('\n').map(row =>
-      row
-        .trim()
-        .split(' ')
-        .map(num => +num)
-    ),
-    sums = [];
+  let sums = triangle.split('\n').map(row =>
+    row
+      .trim()
+      .split(' ')
+      .map(num => parseInt(num))
+  );
 
-  sums.push([]);
-  sums[0].push(twoD[0][0]);
-
-  for (let i = 1; i < twoD.length; i++) {
-    sums.push([]);
-
-    for (let j = 0; j < twoD[i].length; j++) {
-      let curr = twoD[i][j],
-        left = j - 1 >= 0 ? sums[i - 1][j - 1] : 0,
-        right = j < sums[i - 1].length ? sums[i - 1][j] : 0,
-        sum = Math.max(left, right) + curr;
-      sums[i].push(sum);
+  for (let i = sums.length - 2; i >= 0; i--) {
+    for (let j = 0; j < sums[i].length; j++) {
+      // max(left, right) + current
+      sums[i][j] = Math.max(sums[i + 1][j], sums[i + 1][j + 1]) + sums[i][j];
     }
   }
 
-  return sums.pop().sort((a, b) => b - a)[0];
+  return sums[0][0];
 }
 
 module.exports = getMaximumPathSum;

@@ -41,4 +41,4 @@ def get_maximum_path_sum():
 
 
 def row_map(row):
-  return list(map(int, row.split(' ')))
+  return list(map(int, row.strip().split(' ')))

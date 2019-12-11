@@ -18,26 +18,13 @@ import triangle
 
 
 def get_maximum_path_sum():
-  two_d = list(map(row_map, triangle.triangle.split('\n')))
-  sums = []
+  sums = list(map(row_map, triangle.triangle.split('\n')))
 
-  sums.append([])
-  sums[0].append(two_d[0][0])
+  for i in range(len(sums) - 2, -1, -1):
+    for j in range(len(sums[i])):
+      sums[i][j] = max(sums[i + 1][j], sums[i + 1][j + 1]) + sums[i][j]
 
-  for i in range(1, len(two_d)):
-    sums.append([])
-
-    for j in range(len(two_d[i])):
-      curr = two_d[i][j]
-      left = sums[i - 1][j - 1] if j - 1 >= 0 else 0
-      right = sums[i - 1][j] if j < len(two_d[i - 1]) else 0
-      max_sum = max(left, right) + curr
-      sums[i].append(max_sum)
-
-  last_row = sums.pop()
-  last_row.sort()
-
-  return last_row.pop()
+  return sums[0][0]
 
 
 def row_map(row):

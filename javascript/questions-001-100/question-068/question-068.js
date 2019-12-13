@@ -128,7 +128,7 @@ function getLargestConcat(gonCount) {
   let solutionSet = getNextSubset(-1, [], possibleSubsets[0].sum, new Map(), new Map());
 
   let solutionSetInts = solutionSet
-    .map(ss => digits.getIntFromDigits(flat(ss)))
+    .map(ss => digits.getIntFromDigits(flatten(ss)))
     .filter(int => digits.getDigitCount(int) == 16);
 
   return Math.max.apply(null, solutionSetInts);
@@ -141,8 +141,9 @@ function getAllPerms(arr, pick) {
   }, []);
 }
 
-function flat(set) {
-  return set.reduce((a, c) => a.concat(c));
+// had to write this since Array.prototype.flat() is still in draft
+function flatten(arr) {
+  return arr.reduce((a, c) => a.concat(c));
 }
 
 module.exports = getLargestConcat;

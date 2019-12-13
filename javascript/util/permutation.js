@@ -36,23 +36,23 @@ function isPermutation(num, testNum) {
 }
 
 // always picks a.length
-function getPerms(a) {
-  if (a.length < 2) {
-    return [a];
+function getPerms(arr) {
+  if (arr.length < 2) {
+    return [arr];
   }
 
-  var c,
-    d,
-    b = [];
-  for (c = 0; c < a.length; c++) {
-    var e = a.splice(c, 1),
-      f = getPerms(a);
-    for (d = 0; d < f.length; d++) {
-      b.push(e.concat(f[d]));
+  let perms = [];
+  for (let i = 0; i < arr.length; i++) {
+    let first = arr.splice(i, 1),
+      remainingPerms = getPerms(arr);
+    for (let j = 0; j < remainingPerms.length; j++) {
+      perms.push(first.concat(remainingPerms[j]));
     }
-    a.splice(c, 0, e[0]);
+
+    arr.splice(i, 0, first[0]);
   }
-  return b;
+
+  return perms;
 }
 
 module.exports = { isPermutation, getPerms };

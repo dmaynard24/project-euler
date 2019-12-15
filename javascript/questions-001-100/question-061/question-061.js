@@ -30,7 +30,7 @@ function getOrderedSet() {
     },
     setCount = Object.keys(termSets).length;
 
-  function getNextTerm(prevIndex, set, startValue, matchedSets) {
+  function getNextTerm(set, startValue, matchedSets) {
     let returnSet = [],
       unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
 
@@ -38,21 +38,21 @@ function getOrderedSet() {
       for (let j = 0; j < unmatchedKeys.length; j++) {
         if (termSets[unmatchedKeys[j]].has(i)) {
           // for every set except the last
-          if (prevIndex < setCount - 2) {
+          if (set.length < setCount - 1) {
             if (i % 100 < 10) {
               break;
             }
           }
 
           // for every set except the first
-          if (prevIndex != -1) {
-            if (!areCyclical(set[prevIndex], i)) {
+          if (set.length != 0) {
+            if (!areCyclical(set[set.length - 1], i)) {
               break;
             }
           }
 
           // for just the last set
-          if (prevIndex == setCount - 2) {
+          if (set.length == setCount - 1) {
             if (!areCyclical(i, set[0])) {
               break;
             }
@@ -70,7 +70,7 @@ function getOrderedSet() {
           // continue
           if (returnSet.length == 0) {
             let newStartValue = (i % 100) * 100;
-            returnSet = returnSet.concat(getNextTerm(prevIndex + 1, set, newStartValue, matchedSets));
+            returnSet = returnSet.concat(getNextTerm(set, newStartValue, matchedSets));
           }
 
           // pop off the value and update the matches
@@ -85,7 +85,7 @@ function getOrderedSet() {
   }
 
   // 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
-  let onlySet = getNextTerm(-1, [], 1010, {
+  let onlySet = getNextTerm([], 1010, {
     3: false,
     4: false,
     5: false,

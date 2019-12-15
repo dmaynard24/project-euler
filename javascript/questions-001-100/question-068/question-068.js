@@ -35,7 +35,7 @@ function getLargestConcat(gonCount) {
       return a;
     }, []);
 
-  function getNextSubset(prevIndex, set, setSum, edgeVals, cachedSubsets) {
+  function getNextSubset(set, setSum, edgeVals, cachedSubsets) {
     let solutionSet = [];
 
     for (let i = 0; i < possibleSubsets.length; i++) {
@@ -46,7 +46,7 @@ function getLargestConcat(gonCount) {
         continue;
       }
 
-      if (prevIndex == -1) {
+      if (set.length == 0) {
         // reset on the first set only
         edgeVals = new Map();
         setSum = possibleSubsets[i].sum;
@@ -54,7 +54,7 @@ function getLargestConcat(gonCount) {
         // check continue cases on all sets except first
         if (
           possibleSubsets[i].sum != setSum ||
-          currSubset[1] != set[prevIndex][2] ||
+          currSubset[1] != set[set.length - 1][2] ||
           edgeVals.has(currSubset[0]) ||
           edgeVals.has(currSubset[2]) ||
           cachedSubsets.has(currSubset.join(''))
@@ -64,7 +64,7 @@ function getLargestConcat(gonCount) {
       }
 
       // check on only the last set
-      if (prevIndex == gonCount - 2) {
+      if (set.length == gonCount - 1) {
         if (currSubset[2] != set[0][1]) {
           continue;
         }
@@ -73,7 +73,7 @@ function getLargestConcat(gonCount) {
       // store on all sets
       set.push(currSubset);
 
-      // immediately after storing, check exit condition
+      // exit condition
       if (set.length == gonCount) {
         // look for smallest subset in order to rotate
         let smallestSetIndex = 0,
@@ -114,7 +114,7 @@ function getLargestConcat(gonCount) {
       edgeVals.set(currSubset[0], true);
       edgeVals.set(currSubset[2], true);
 
-      solutionSet = solutionSet.concat(getNextSubset(prevIndex + 1, set, setSum, edgeVals, cachedSubsets));
+      solutionSet = solutionSet.concat(getNextSubset(set, setSum, edgeVals, cachedSubsets));
 
       // be sure to pop and remove cached edgeVals
       edgeVals.delete(set[set.length - 1][0]);
@@ -125,7 +125,7 @@ function getLargestConcat(gonCount) {
     return solutionSet;
   }
 
-  let solutionSet = getNextSubset(-1, [], possibleSubsets[0].sum, new Map(), new Map());
+  let solutionSet = getNextSubset([], possibleSubsets[0].sum, new Map(), new Map());
 
   let solutionSetInts = solutionSet
     .map(ss => digits.getIntFromDigits(flatten(ss)))

@@ -25,7 +25,7 @@ const digits = require('../../util/digits');
 
 function getNonRepeatingChainCount(limit) {
   let factorials = [],
-    factorialSums = [],
+    factorialSums = new Map(),
     targetLength = 60,
     count = 0;
 
@@ -37,26 +37,27 @@ function getNonRepeatingChainCount(limit) {
   for (let i = 1; i < limit; i++) {
     let didLoop = false,
       val = i,
-      chain = [];
+      chain = new Map();
 
-    chain[val] = 1;
+    chain.set(val, 1);
     while (!didLoop) {
-      if (!factorialSums[val]) {
-        let valDigits = digits.getDigits(val),
+      if (!factorialSums.has(val)) {
+        let valDigits = digits.getDigitsReversed(val),
           sum = valDigits.reduce((a, c) => a + factorials[c], 0);
 
-        factorialSums[val] = sum;
+        factorialSums.set(val, sum);
       }
 
-      if (chain[factorialSums[val]]) {
-        let length = Object.keys(chain).length;
+      if (chain.has(factorialSums.get(val))) {
+        let length = chain.size;
         if (length == targetLength) {
           count++;
         }
         didLoop = true;
       } else {
-        chain[factorialSums[val]] = 1;
-        val = factorialSums[val];
+        let cachedSum = factorialSums.get(val);
+        chain.set(cachedSum, 1);
+        val = cachedSum;
       }
     }
   }

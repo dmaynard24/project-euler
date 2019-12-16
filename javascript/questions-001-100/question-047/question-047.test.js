@@ -8,6 +8,6 @@ test('gets the first integer of the first four consecutive integers to have thre
   expect(getFirstInteger(3)).toBe(644);
 });
 
-test('gets the first integer of the first four consecutive integers to have four distinct prime factors each to be 134043', () => {
+test('gets the first integer of the first four consecutive integers to have four distinct prime factors each to be 134,043', () => {
   expect(getFirstInteger(4)).toBe(134043);
 });

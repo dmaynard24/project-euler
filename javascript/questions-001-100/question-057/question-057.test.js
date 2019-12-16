@@ -8,6 +8,6 @@ test('in the first 8 expansions of the square root of two, gets the count of fra
   expect(getFractionCount(8)).toBe(1);
 });
 
-test('in the first 1000 expansions of the square root of two, gets the count of fractions that contain a numerator with more digits than the denominator to be 153', () => {
+test('in the first 1,000 expansions of the square root of two, gets the count of fractions that contain a numerator with more digits than the denominator to be 153', () => {
   expect(getFractionCount(1000)).toBe(153);
 });

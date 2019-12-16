@@ -29,7 +29,7 @@ function getNumerator(max) {
       }
 
       let diff = target - quotient;
-      if (diff < smallestDiff && (primal.isPrime(d, primes) || areCoprime(n, d))) {
+      if (diff < smallestDiff && (primal.isPrime(d, primes) || primal.isPrime(n, primes) || areCoprime(n, d))) {
         smallestDiff = diff;
         leftN = n;
       }

@@ -18,6 +18,19 @@ function getPrimes(limit) {
   return primes;
 }
 
+// get prime numbers by passing in the sieve
+function getPrimeNumbers(primes) {
+  return primes.reduce(
+    (a, c, i) => {
+      if (c) {
+        a.push(2 * i + 1);
+      }
+      return a;
+    },
+    [2]
+  );
+}
+
 function isPrime(num, primes) {
   if (primes && primes.length && primes.length >= num) {
     if (num % 2 == 0) {
@@ -114,4 +127,4 @@ function getPrimeFactorCounts(limit) {
   return primeFactorCounts;
 }
 
-module.exports = { getPrimes, isPrime, getPrimeFactors, getPrimeFactorCounts };
+module.exports = { getPrimes, getPrimeNumbers, isPrime, getPrimeFactors, getPrimeFactorCounts };

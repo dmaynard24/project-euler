@@ -8,7 +8,8 @@
 // What 12-digit number do you form by concatenating the three terms in this sequence?
 
 const primal = require('../../util/primal'),
-  permutation = require('../../util/permutation');
+  permutation = require('../../util/permutation'),
+  digits = require('../../util/digits');
 
 function getPrimePermutationTerms() {
   let limit = 9999,
@@ -18,13 +19,13 @@ function getPrimePermutationTerms() {
   // 1489 is the next prime
   for (let i = 1489; i <= limit - addend * 2; i += 2) {
     if (primal.isPrime(i, primes)) {
-      let termsConcat = i.toString();
+      let termsConcat = digits.getDigits(i);
       for (let j = 1; j <= 2; j++) {
         let nextTerm = i + addend * j;
         if (primal.isPrime(nextTerm, primes) && permutation.isPermutation(i, nextTerm)) {
-          termsConcat += nextTerm.toString();
+          termsConcat = termsConcat.concat(digits.getDigits(nextTerm));
           if (termsConcat.length == 12) {
-            return termsConcat;
+            return digits.getIntFromDigits(termsConcat);
           }
         } else {
           break;

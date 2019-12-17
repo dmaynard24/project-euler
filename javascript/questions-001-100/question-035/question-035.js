@@ -12,39 +12,38 @@ const primal = require('../../util/primal'),
 
 function getCircularPrimeCount(limit) {
   let primes = primal.getPrimes(limit - 1),
-    count = 1;
+    primeNums = primal.getPrimeNumbers(primes),
+    count = 0;
 
-  for (let i = 3; i < limit; i += 2) {
-    if (primal.isPrime(i, primes)) {
-      let numDigits = digits.getDigits(i);
+  primeNums.forEach(num => {
+    let numDigits = digits.getDigits(num);
 
-      if (numDigits.length == 1) {
-        count++;
-      } else {
-        let evenDigit = numDigits.find(digit => digit % 2 == 0);
+    if (numDigits.length == 1) {
+      count++;
+    } else {
+      let evenDigit = numDigits.find(digit => digit % 2 == 0);
 
-        if (!evenDigit) {
-          let allPrime = true,
-            length = numDigits.length;
-          for (let j = 1; j < length; j++) {
-            let rotation = 0;
-            for (let k = 0; k < length; k++) {
-              rotation *= 10;
-              rotation += numDigits[(j + k) % length];
-            }
-            allPrime = primal.isPrime(rotation, primes);
-            if (!allPrime) {
-              break;
-            }
+      if (!evenDigit) {
+        let allPrime = true,
+          length = numDigits.length;
+        for (let j = 1; j < length; j++) {
+          let rotation = 0;
+          for (let k = 0; k < length; k++) {
+            rotation *= 10;
+            rotation += numDigits[(j + k) % length];
           }
-
-          if (allPrime) {
-            count++;
+          allPrime = primal.isPrime(rotation, primes);
+          if (!allPrime) {
+            break;
           }
+        }
+
+        if (allPrime) {
+          count++;
         }
       }
     }
-  }
+  });
 
   return count;
 }

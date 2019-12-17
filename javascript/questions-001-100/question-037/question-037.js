@@ -13,16 +13,13 @@ const primal = require('../../util/primal'),
 function getTruncatablePrimeSum() {
   let limit = 800000,
     primes = primal.getPrimes(limit),
-    sum = 0;
-
-  // 23 is the first truncatable prime
-  for (let i = 23; i <= limit; i += 2) {
-    if (primal.isPrime(i, primes) && isTruncatablePrime(i)) {
-      sum += i;
-    }
-  }
+    primeNums = primal.getPrimeNumbers(primes);
 
   function isTruncatablePrime(num) {
+    if (num < 10) {
+      return false;
+    }
+
     let is = true,
       numDigits = digits.getDigits(num);
 
@@ -48,7 +45,7 @@ function getTruncatablePrimeSum() {
     return true;
   }
 
-  return sum;
+  return primeNums.filter(num => isTruncatablePrime(num)).reduce((a, c) => a + c);
 }
 
 module.exports = getTruncatablePrimeSum;

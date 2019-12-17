@@ -1,6 +1,6 @@
 // primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2) + 1,
+  let oddsOnlyLimit = Math.floor(limit / 2),
     primes = Array(oddsOnlyLimit).fill(true);
 
   primes[0] = false;

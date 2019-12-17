@@ -3,7 +3,7 @@ import math
 
 # primes using Sieve of Eratosthenes (storing only odds)
 def get_primes(limit):
-  odds_only_limit = limit // 2 + 1
+  odds_only_limit = limit // 2
   primes = [True] * odds_only_limit
   primes[0] = False
 

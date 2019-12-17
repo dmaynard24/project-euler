@@ -20,32 +20,33 @@ const primal = require('../../util/primal'),
   Decimal = require('decimal.js');
 
 function getDenominator() {
-  let limit = 999,
+  let limit = 1000,
     denominator,
     largestCycleLength = 0;
 
   // set the precision and rounding of the default Decimal constructor
   Decimal.set({ precision: limit * 2, rounding: 1 });
 
-  let primes = primal.getPrimes(limit);
+  let primes = primal.getPrimes(limit - 1),
+    primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
 
-  for (let i = limit - 1; i >= 0; i--) {
-    if (largestCycleLength > i) {
+  for (let i = primeNumsReversed.length - 1; i >= 0; i--) {
+    let num = primeNumsReversed[i];
+
+    if (largestCycleLength > num) {
       break;
     }
 
-    if (primal.isPrime(i, primes)) {
-      let quotient = Decimal(1)
-          .div(i)
-          .toString(),
-        quotientDecimal = quotient.substring(quotient.indexOf('.') + 1),
-        maxCycleLength = Math.floor(quotientDecimal.length / 2),
-        cycleLength = getCycleLength(quotientDecimal, maxCycleLength);
+    let quotient = Decimal(1)
+        .div(num)
+        .toString(),
+      quotientDecimal = quotient.substring(quotient.indexOf('.') + 1),
+      maxCycleLength = Math.floor(quotientDecimal.length / 2),
+      cycleLength = getCycleLength(quotientDecimal, maxCycleLength);
 
-      if (cycleLength >= largestCycleLength) {
-        denominator = i;
-        largestCycleLength = cycleLength;
-      }
+    if (cycleLength >= largestCycleLength) {
+      denominator = num;
+      largestCycleLength = cycleLength;
     }
   }
 

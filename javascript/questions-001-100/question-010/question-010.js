@@ -9,13 +9,9 @@ const primal = require('../../util/primal');
 
 function getPrimeSum(limit) {
   let primes = primal.getPrimes(limit),
-    sum = 2;
-  for (let i = 3; i < limit; i += 2) {
-    if (primal.isPrime(i, primes)) {
-      sum += i;
-    }
-  }
-  return sum;
+    primeNums = primal.getPrimeNumbers(primes);
+
+  return primeNums.reduce((a, c) => a + c);
 }
 
 module.exports = getPrimeSum;

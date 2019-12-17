@@ -14,15 +14,7 @@ const primal = require('../../util/primal');
 
 function getSumOfConsecutivePrimes(limit) {
   let primes = primal.getPrimes(limit),
-    primeNums = primes.reduce(
-      (a, c, i) => {
-        if (c) {
-          a.push(2 * i + 1);
-        }
-        return a;
-      },
-      [2]
-    ),
+    primeNums = primal.getPrimeNumbers(primes),
     largestConsecutiveCount = 0,
     largestSum = 0;
 

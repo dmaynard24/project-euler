@@ -12,9 +12,8 @@ const primal = require('../../util/primal'),
   permutation = require('../../util/permutation'),
   phi = require('../../util/phi');
 
-function getTotientPermutation() {
-  let limit = Math.pow(10, 7),
-    primes = primal.getPrimes(limit),
+function getTotientPermutation(limit) {
+  let primes = primal.getPrimes(limit),
     minN,
     minQuotient = Infinity;
 
@@ -33,5 +32,7 @@ function getTotientPermutation() {
 
   return minN;
 }
+
+console.log(getTotientPermutation(100000));
 
 module.exports = getTotientPermutation;

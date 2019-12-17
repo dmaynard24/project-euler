@@ -15,12 +15,6 @@ from python.util import primal
 def get_nth_prime(n):
   limit = 105000
   primes = primal.get_primes(limit)
-  count = 1
+  prime_nums = primal.get_prime_numbers(primes)
 
-  for i in range(3, limit, 2):
-    if primal.is_prime(i, primes):
-      count += 1
-      if count == n:
-        return i
-
-  return count
+  return prime_nums[n - 1]

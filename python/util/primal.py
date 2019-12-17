@@ -18,6 +18,15 @@ def get_primes(limit):
   return primes
 
 
+# get prime numbers by passing in the sieve
+def get_prime_numbers(primes):
+  prime_nums = [2]
+  for i, prime_bool in enumerate(primes):
+    if prime_bool:
+      prime_nums.append(2 * i + 1)
+  return prime_nums
+
+
 def is_prime(num, primes=None):
   if primes is not None and len(primes) >= num:
     if num % 2 == 0:

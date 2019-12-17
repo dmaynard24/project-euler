@@ -15,8 +15,8 @@ function getCircularPrimeCount(limit) {
     primeNums = primal.getPrimeNumbers(primes),
     count = 0;
 
-  primeNums.forEach(num => {
-    let numDigits = digits.getDigits(num);
+  for (let i = 0; i < primeNums.length; i++) {
+    let numDigits = digits.getDigits(primeNums[i]);
 
     if (numDigits.length == 1) {
       count++;
@@ -43,7 +43,7 @@ function getCircularPrimeCount(limit) {
         }
       }
     }
-  });
+  }
 
   return count;
 }

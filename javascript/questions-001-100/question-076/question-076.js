@@ -29,10 +29,10 @@ function getSummationCount(num) {
         addend;
 
       // check cache
-      if (summationCounts.get(newRemaining)) {
-        let cached = summationCounts.get(newRemaining).get(nextTermArg);
-        if (cached) {
-          cachedAddend = cached;
+      if (summationCounts.has(newRemaining)) {
+        // check chained map
+        if (summationCounts.get(newRemaining).has(nextTermArg)) {
+          cachedAddend = summationCounts.get(newRemaining).get(nextTermArg);
         }
       } else {
         summationCounts.set(newRemaining, new Map());

@@ -20,11 +20,10 @@
 const primal = require('../../util/primal');
 
 function getTotientMaximum(maxN) {
-  let max = 30,
-    primes = primal.getPrimes(max);
-
-  let i = 2,
+  let primes = primal.getPrimes(30),
     product = 1;
+
+  let i = 2;
   while (product * i < maxN) {
     if (primal.isPrime(i, primes)) {
       product *= i;

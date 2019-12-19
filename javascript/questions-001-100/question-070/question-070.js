@@ -33,6 +33,4 @@ function getTotientPermutation(limit) {
   return minN;
 }
 
-console.log(getTotientPermutation(100000));
-
 module.exports = getTotientPermutation;

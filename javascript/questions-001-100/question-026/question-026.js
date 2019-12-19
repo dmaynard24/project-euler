@@ -19,36 +19,29 @@
 const primal = require('../../util/primal'),
   Decimal = require('decimal.js');
 
-function getDenominator() {
-  let limit = 1000,
-    denominator,
+function getDenominatorWithLongestCycle(limit) {
+  let denominator = 0,
     largestCycleLength = 0;
 
   // set the precision and rounding of the default Decimal constructor
   Decimal.set({ precision: limit * 2, rounding: 1 });
 
   let primes = primal.getPrimes(limit - 1),
-    primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
+    primeNums = primal.getPrimeNumbers(primes);
 
-  for (let i = primeNumsReversed.length - 1; i >= 0; i--) {
-    let num = primeNumsReversed[i];
-
-    if (largestCycleLength > num) {
-      break;
-    }
-
+  primeNums.forEach(primeNum => {
     let quotient = Decimal(1)
-        .div(num)
+        .div(primeNum)
         .toString(),
       quotientDecimal = quotient.substring(quotient.indexOf('.') + 1),
       maxCycleLength = Math.floor(quotientDecimal.length / 2),
       cycleLength = getCycleLength(quotientDecimal, maxCycleLength);
 
     if (cycleLength >= largestCycleLength) {
-      denominator = num;
+      denominator = primeNum;
       largestCycleLength = cycleLength;
     }
-  }
+  });
 
   return denominator;
 }
@@ -79,4 +72,4 @@ function getCycleLength(entireValue, maxCycleLength) {
   return 0;
 }
 
-module.exports = getDenominator;
+module.exports = getDenominatorWithLongestCycle;

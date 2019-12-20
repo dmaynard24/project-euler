@@ -26,7 +26,7 @@ from python.util import primal
 def get_coefficient_product():
   def get_consecutive_prime_count(a, b):
     all_prime = True
-    n = 1
+    n = 0
 
     while all_prime:
       value = n * n + a * n + b

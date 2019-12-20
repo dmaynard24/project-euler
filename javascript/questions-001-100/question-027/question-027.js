@@ -40,7 +40,7 @@ function getCoefficientProduct() {
 
   function getConsecutivePrimeCount(a, b) {
     let allPrime = true,
-      n = 1;
+      n = 0;
 
     while (allPrime) {
       let value = n * n + a * n + b;

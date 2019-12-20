@@ -19,16 +19,14 @@
 const primal = require('../../util/primal');
 
 function getCoefficientProduct() {
-  let primes = primal.getPrimes(13000),
+  let primes = primal.getPrimes(1000),
+    primeNums = primal.getPrimeNumbers(primes),
     largestCount = 0,
     largestProduct = 0;
 
   // store all primes between -1000 and 1000
-  let positives = primes.reduce((a, c, i) => {
-      return c && i * 2 + 1 < 1000 ? [...a, i * 2 + 1] : a;
-    }, []),
-    negatives = positives.map(prime => prime * -1).reverse(),
-    primesRange = negatives.concat(positives);
+  let negatives = primeNums.map(primeNum => primeNum * -1).reverse(),
+    primesRange = negatives.concat(primeNums);
 
   primesRange.forEach(a => {
     primesRange.forEach(b => {

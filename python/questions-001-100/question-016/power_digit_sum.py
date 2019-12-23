@@ -13,4 +13,4 @@ from python.util import digits
 
 
 def get_power_digit_sum(power):
-  return sum(digits.get_digits(2**power))
+	return sum(digits.get_digits(2**power))

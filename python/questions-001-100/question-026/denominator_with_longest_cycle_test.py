@@ -2,18 +2,17 @@ import unittest, denominator_with_longest_cycle
 
 
 class TestGetDenominatorWithLongestCycleOne(unittest.TestCase):
-  def test_get_denominator_with_longest_cycle(self):
-    self.assertEqual(
-        denominator_with_longest_cycle.get_denominator_with_longest_cycle(10),
-        7)
+	def test_get_denominator_with_longest_cycle(self):
+		self.assertEqual(
+			denominator_with_longest_cycle.get_denominator_with_longest_cycle(10), 7)
 
 
 class TestGetDenominatorWithLongestCycleTwo(unittest.TestCase):
-  def test_get_denominator_with_longest_cycle(self):
-    self.assertEqual(
-        denominator_with_longest_cycle.get_denominator_with_longest_cycle(
-            1000), 983)
+	def test_get_denominator_with_longest_cycle(self):
+		self.assertEqual(
+			denominator_with_longest_cycle.get_denominator_with_longest_cycle(1000),
+			983)
 
 
 if __name__ == '__main__':
-  unittest.main()
+	unittest.main()

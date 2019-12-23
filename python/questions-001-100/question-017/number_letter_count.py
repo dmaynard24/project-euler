@@ -9,40 +9,39 @@
 
 
 def get_number_letter_count(max):
-  return sum(
-      list(map(lambda num: len(get_words_from_number(num)), range(1,
-                                                                  max + 1))))
+	return sum(
+		list(map(lambda num: len(get_words_from_number(num)), range(1, max + 1))))
 
 
 def get_words_from_number(num):
-  a = [
-      '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
-      'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
-      'sixteen', 'seventeen', 'eighteen', 'nineteen'
-  ]
-  b = [
-      '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy',
-      'eighty', 'ninety'
-  ]
-  words = ''
+	a = [
+		'', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+		'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+		'seventeen', 'eighteen', 'nineteen'
+	]
+	b = [
+		'', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty',
+		'ninety'
+	]
+	words = ''
 
-  if num == 1000:
-    return 'onethousand'
+	if num == 1000:
+		return 'onethousand'
 
-  if num >= 100:
-    hundreds = num // 100
-    words += a[hundreds] + 'hundred'
-    num -= 100 * hundreds
+	if num >= 100:
+		hundreds = num // 100
+		words += a[hundreds] + 'hundred'
+		num -= 100 * hundreds
 
-    if num != 0:
-      words += 'and'
+		if num != 0:
+			words += 'and'
 
-  if num >= 20:
-    tens = num // 10
-    words += b[tens]
-    num -= 10 * tens
+	if num >= 20:
+		tens = num // 10
+		words += b[tens]
+		num -= 10 * tens
 
-  if num > 0:
-    words += a[num]
+	if num > 0:
+		words += a[num]
 
-  return words
+	return words

@@ -16,16 +16,16 @@ from python.util import factors
 
 
 def get_amicable_sum(limit):
-  amicables = []
+	amicables = []
 
-  for i in range(2, limit):
-    a = i
-    b = d(a)
-    if (a != b and d(b) == a):
-      amicables.append(i)
+	for i in range(2, limit):
+		a = i
+		b = d(a)
+		if (a != b and d(b) == a):
+			amicables.append(i)
 
-  return sum(amicables)
+	return sum(amicables)
 
 
 def d(num):
-  return sum(factors.get_proper_divisors(num))
+	return sum(factors.get_proper_divisors(num))

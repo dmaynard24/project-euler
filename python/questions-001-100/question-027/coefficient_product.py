@@ -24,30 +24,30 @@ from python.util import primal
 
 
 def get_coefficient_product():
-  def get_consecutive_prime_count(a, b):
-    all_prime = True
-    n = 0
+	def get_consecutive_prime_count(a, b):
+		all_prime = True
+		n = 0
 
-    while all_prime:
-      value = n * n + a * n + b
-      all_prime = value > -1 and primal.is_prime(value, primes)
-      n += 1
+		while all_prime:
+			value = n * n + a * n + b
+			all_prime = value > -1 and primal.is_prime(value, primes)
+			n += 1
 
-    return n
+		return n
 
-  primes = primal.get_primes(1000)
-  prime_nums = primal.get_prime_numbers(primes)
-  largest_count = 0
-  largest_product = 0
+	primes = primal.get_primes(1000)
+	prime_nums = primal.get_prime_numbers(primes)
+	largest_count = 0
+	largest_product = 0
 
-  negatives = list(map(lambda prime_num: prime_num * -1, prime_nums))
-  primes_range = negatives + prime_nums
+	negatives = list(map(lambda prime_num: prime_num * -1, prime_nums))
+	primes_range = negatives + prime_nums
 
-  for a in primes_range:
-    for b in primes_range:
-      prime_count = get_consecutive_prime_count(a, b)
-      if prime_count > largest_count:
-        largest_count = prime_count
-        largest_product = a * b
+	for a in primes_range:
+		for b in primes_range:
+			prime_count = get_consecutive_prime_count(a, b)
+			if prime_count > largest_count:
+				largest_count = prime_count
+				largest_product = a * b
 
-  return largest_product
+	return largest_product

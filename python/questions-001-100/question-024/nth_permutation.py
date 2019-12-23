@@ -11,32 +11,32 @@ import math
 
 
 def get_nth_permutation(n):
-  digits = list(range(10))
-  target = n - 1
-  perm = []
+	digits = list(range(10))
+	target = n - 1
+	perm = []
 
-  for i in range(9, -1, -1):
-    perms = factorialize(i)
-    index = math.floor(target / perms)
-    digit = digits[index]
+	for i in range(9, -1, -1):
+		perms = factorialize(i)
+		index = math.floor(target / perms)
+		digit = digits[index]
 
-    digits_index = digits.index(digit)
+		digits_index = digits.index(digit)
 
-    perm.extend(digits[digits_index:digits_index + 1])
-    del digits[digits_index:digits_index + 1]
+		perm.extend(digits[digits_index:digits_index + 1])
+		del digits[digits_index:digits_index + 1]
 
-    target %= perms
+		target %= perms
 
-  return ''.join(map(str, perm))
+	return ''.join(map(str, perm))
 
 
 def factorialize(num):
-  val = 1
-  while (num > 1):
-    val *= num
-    num -= 1
+	val = 1
+	while (num > 1):
+		val *= num
+		num -= 1
 
-  return val
+	return val
 
 
 print(get_nth_permutation(1000000))

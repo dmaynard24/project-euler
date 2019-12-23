@@ -16,8 +16,8 @@ from python.util import digits
 
 
 def get_factorial_digit_sum(num):
-  factorial = 1
-  for i in range(2, num + 1):
-    factorial *= i
+	factorial = 1
+	for i in range(2, num + 1):
+		factorial *= i
 
-  return sum(digits.get_digits_reversed(factorial))
+	return sum(digits.get_digits_reversed(factorial))

@@ -11,12 +11,12 @@ import names
 
 
 def get_name_score_sum():
-  names_list = names.names
-  names_list.sort()
+	names_list = names.names
+	names_list.sort()
 
-  name_score_sum = 0
-  for i, name in enumerate(names_list):
-    name_score_sum += sum(list(map(lambda char: ord(char) - 64,
-                                   name))) * (i + 1)
+	name_score_sum = 0
+	for i, name in enumerate(names_list):
+		name_score_sum += sum(list(map(lambda char: ord(char) - 64,
+			name))) * (i + 1)
 
-  return name_score_sum
+	return name_score_sum

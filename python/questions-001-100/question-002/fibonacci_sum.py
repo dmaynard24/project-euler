@@ -9,14 +9,14 @@
 
 
 def get_fibonacci_sum(maximum):
-  fibonacci_sum = 0
-  first = 1
-  second = 2
+	fibonacci_sum = 0
+	first = 1
+	second = 2
 
-  while second <= maximum:
-    fibonacci_sum += second
-    double_second = second * 2
-    first += double_second
-    second += first - double_second + first
+	while second <= maximum:
+		fibonacci_sum += second
+		double_second = second * 2
+		first += double_second
+		second += first - double_second + first
 
-  return fibonacci_sum
+	return fibonacci_sum

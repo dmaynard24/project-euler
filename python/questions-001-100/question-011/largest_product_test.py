@@ -2,9 +2,9 @@ import unittest, largest_product
 
 
 class TestGetLargestProduct(unittest.TestCase):
-  def test_get_largest_product(self):
-    self.assertEqual(largest_product.get_largest_product(4), 70600674)
+	def test_get_largest_product(self):
+		self.assertEqual(largest_product.get_largest_product(4), 70600674)
 
 
 if __name__ == '__main__':
-  unittest.main()
+	unittest.main()

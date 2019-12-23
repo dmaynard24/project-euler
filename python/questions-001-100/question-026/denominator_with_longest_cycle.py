@@ -26,46 +26,46 @@ import math
 
 
 def get_denominator_with_longest_cycle(limit):
-  denominator = 0
-  largest_cycle_length = 0
+	denominator = 0
+	largest_cycle_length = 0
 
-  primes = primal.get_primes(limit - 1)
-  prime_nums = primal.get_prime_numbers(primes)
+	primes = primal.get_primes(limit - 1)
+	prime_nums = primal.get_prime_numbers(primes)
 
-  getcontext().prec = limit * 2
+	getcontext().prec = limit * 2
 
-  for prime_num in prime_nums:
-    quotient = str(Decimal(1) / Decimal(prime_num))
-    quotient_decimal = quotient[quotient.index('.') + 1:]
-    max_cycle_length = math.floor(len(quotient_decimal) / 2)
-    cycle_length = get_cycle_length(quotient_decimal, max_cycle_length)
+	for prime_num in prime_nums:
+		quotient = str(Decimal(1) / Decimal(prime_num))
+		quotient_decimal = quotient[quotient.index('.') + 1:]
+		max_cycle_length = math.floor(len(quotient_decimal) / 2)
+		cycle_length = get_cycle_length(quotient_decimal, max_cycle_length)
 
-    if cycle_length >= largest_cycle_length:
-      denominator = prime_num
-      largest_cycle_length = cycle_length
+		if cycle_length >= largest_cycle_length:
+			denominator = prime_num
+			largest_cycle_length = cycle_length
 
-  return denominator
+	return denominator
 
 
 def get_cycle_length(entire_value, max_cycle_length):
-  for i in range(max_cycle_length):
-    for length in range(1, max_cycle_length + 1):
-      curr_set = entire_value[i:length]
-      try:
-        next_index = entire_value.index(curr_set, i + length)
-        curr_set = entire_value[i:next_index]
-        set_count = math.floor((len(entire_value) - i) / len(curr_set)) - 1
-        is_cycle = False
+	for i in range(max_cycle_length):
+		for length in range(1, max_cycle_length + 1):
+			curr_set = entire_value[i:length]
+			try:
+				next_index = entire_value.index(curr_set, i + length)
+				curr_set = entire_value[i:next_index]
+				set_count = math.floor((len(entire_value) - i) / len(curr_set)) - 1
+				is_cycle = False
 
-        for j in range(set_count):
-          next_set_index = next_index + j * len(curr_set)
-          next_set = entire_value[next_set_index:next_set_index +
-                                  len(curr_set)]
-          is_cycle = (curr_set == next_set)
+				for j in range(set_count):
+					next_set_index = next_index + j * len(curr_set)
+					next_set = entire_value[next_set_index:next_set_index +
+						len(curr_set)]
+					is_cycle = (curr_set == next_set)
 
-        if is_cycle:
-          return len(curr_set)
-      except:
-        continue
+				if is_cycle:
+					return len(curr_set)
+			except:
+				continue
 
-  return 0
+	return 0

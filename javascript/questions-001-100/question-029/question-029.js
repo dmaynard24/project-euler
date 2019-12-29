@@ -15,21 +15,21 @@
 
 const bigInt = require('big-integer');
 
-function getDistinctTermCount() {
-  let terms = [],
-    limit = 100;
+function getDistinctTermCount(max) {
+  let terms = new Map();
 
-  for (let base = 2; base <= limit; base++) {
-    for (let exp = 2; exp <= limit; exp++) {
-      terms[
+  for (let base = 2; base <= max; base++) {
+    for (let exp = 2; exp <= max; exp++) {
+      terms.set(
         bigInt(base)
           .pow(exp)
-          .toString()
-      ] = 1;
+          .toString(),
+        1
+      );
     }
   }
 
-  return Object.keys(terms).length;
+  return terms.size;
 }
 
 module.exports = getDistinctTermCount;

@@ -1,7 +1,7 @@
 import unittest, denominator_with_longest_cycle
 
 
-class TestGetDenominatorWithLongestCycleOne(unittest.TestCase):
+class TestGetDenominatorWithLongestCycle(unittest.TestCase):
 	def test_get_denominator_with_longest_cycle(self):
 		self.assertEqual(
 			denominator_with_longest_cycle.get_denominator_with_longest_cycle(10), 7)

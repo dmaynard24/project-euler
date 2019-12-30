@@ -35,6 +35,7 @@ def get_pandigital_sum():
 			if pandigital.is_pandigital(product, exclude_zero=True) == False:
 				continue
 
+			# tried using my get_digits utility function (from ../../util/digits), but it was slower than string conversion. weird.
 			concat = str(i) + str(j) + str(product)
 			if len(concat) > 9:
 				break

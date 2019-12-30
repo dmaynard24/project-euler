@@ -1,7 +1,7 @@
 import unittest, non_abundant_sum
 
 
-class TestGetNameScoreSum(unittest.TestCase):
+class TestGetNonAbundantSum(unittest.TestCase):
 	def test_get_non_abundant_sum(self):
 		self.assertEqual(non_abundant_sum.get_non_abundant_sum(), 4179871)
 

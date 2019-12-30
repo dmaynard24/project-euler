@@ -1,7 +1,7 @@
 import unittest, fibonacci_term
 
 
-class TestGetFibonacciTermOne(unittest.TestCase):
+class TestGetFibonacciTerm(unittest.TestCase):
 	def test_get_fibonacci_term(self):
 		self.assertEqual(fibonacci_term.get_fibonacci_term(2), 7)
 		self.assertEqual(fibonacci_term.get_fibonacci_term(3), 12)

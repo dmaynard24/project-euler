@@ -1,7 +1,7 @@
 import unittest, first_triangle_with_divisors
 
 
-class TestGetFirstTriangleWithDivisorsOne(unittest.TestCase):
+class TestGetFirstTriangleWithDivisors(unittest.TestCase):
 	def test_get_first_triangle_with_divisors(self):
 		self.assertEqual(
 			first_triangle_with_divisors.get_first_triangle_with_divisors(5), 28)

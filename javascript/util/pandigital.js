@@ -1,17 +1,14 @@
 function isPandigital(num, excludeZero) {
 	if (typeof num === 'number') {
-		let digits = [];
+		let digits = new Map();
 
 		while (num > 0) {
 			let mod = num % 10;
-			if (excludeZero && mod == 0) {
-				return false;
-			}
-			if (digits[mod] == 1) {
+			if ((excludeZero && mod == 0) || digits.has(mod)) {
 				return false;
 			}
 
-			digits[mod] = 1;
+			digits.set(mod, 1);
 			num = Math.floor(num / 10);
 		}
 

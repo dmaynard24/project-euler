@@ -8,44 +8,44 @@
 // How many circular primes are there below one million?
 
 const primal = require('../../util/primal'),
-  digits = require('../../util/digits');
+	digits = require('../../util/digits');
 
 function getCircularPrimeCount(limit) {
-  let primes = primal.getPrimes(limit - 1),
-    primeNums = primal.getPrimeNumbers(primes),
-    count = 0;
+	let primes = primal.getPrimes(limit - 1),
+		primeNums = primal.getPrimeNumbers(primes),
+		count = 0;
 
-  for (let i = 0; i < primeNums.length; i++) {
-    let numDigits = digits.getDigits(primeNums[i]);
+	for (let i = 0; i < primeNums.length; i++) {
+		let numDigits = digits.getDigits(primeNums[i]);
 
-    if (numDigits.length == 1) {
-      count++;
-    } else {
-      let evenDigit = numDigits.find(digit => digit % 2 == 0);
+		if (numDigits.length == 1) {
+			count++;
+		} else {
+			let evenDigit = numDigits.find(digit => digit % 2 == 0);
 
-      if (!evenDigit) {
-        let allPrime = true,
-          length = numDigits.length;
-        for (let j = 1; j < length; j++) {
-          let rotation = 0;
-          for (let k = 0; k < length; k++) {
-            rotation *= 10;
-            rotation += numDigits[(j + k) % length];
-          }
-          allPrime = primal.isPrime(rotation, primes);
-          if (!allPrime) {
-            break;
-          }
-        }
+			if (!evenDigit) {
+				let allPrime = true,
+					length = numDigits.length;
+				for (let j = 1; j < length; j++) {
+					let rotation = 0;
+					for (let k = 0; k < length; k++) {
+						rotation *= 10;
+						rotation += numDigits[(j + k) % length];
+					}
+					allPrime = primal.isPrime(rotation, primes);
+					if (!allPrime) {
+						break;
+					}
+				}
 
-        if (allPrime) {
-          count++;
-        }
-      }
-    }
-  }
+				if (allPrime) {
+					count++;
+				}
+			}
+		}
+	}
 
-  return count;
+	return count;
 }
 
 module.exports = getCircularPrimeCount;

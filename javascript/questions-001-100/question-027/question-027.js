@@ -19,39 +19,39 @@
 const primal = require('../../util/primal');
 
 function getCoefficientProduct() {
-  let primes = primal.getPrimes(1000),
-    primeNums = primal.getPrimeNumbers(primes),
-    largestCount = 0,
-    largestProduct = 0;
+	let primes = primal.getPrimes(1000),
+		primeNums = primal.getPrimeNumbers(primes),
+		largestCount = 0,
+		largestProduct = 0;
 
-  // store all primes between -1000 and 1000
-  let negatives = primeNums.map(primeNum => primeNum * -1).reverse(),
-    primesRange = negatives.concat(primeNums);
+	// store all primes between -1000 and 1000
+	let negatives = primeNums.map(primeNum => primeNum * -1).reverse(),
+		primesRange = negatives.concat(primeNums);
 
-  primesRange.forEach(a => {
-    primesRange.forEach(b => {
-      let primeCount = getConsecutivePrimeCount(a, b);
-      if (primeCount > largestCount) {
-        largestCount = primeCount;
-        largestProduct = a * b;
-      }
-    });
-  });
+	primesRange.forEach(a => {
+		primesRange.forEach(b => {
+			let primeCount = getConsecutivePrimeCount(a, b);
+			if (primeCount > largestCount) {
+				largestCount = primeCount;
+				largestProduct = a * b;
+			}
+		});
+	});
 
-  function getConsecutivePrimeCount(a, b) {
-    let allPrime = true,
-      n = 0;
+	function getConsecutivePrimeCount(a, b) {
+		let allPrime = true,
+			n = 0;
 
-    while (allPrime) {
-      let value = n * n + a * n + b;
-      allPrime = value > -1 && primal.isPrime(value, primes);
-      n++;
-    }
+		while (allPrime) {
+			let value = n * n + a * n + b;
+			allPrime = value > -1 && primal.isPrime(value, primes);
+			n++;
+		}
 
-    return n;
-  }
+		return n;
+	}
 
-  return largestProduct;
+	return largestProduct;
 }
 
 module.exports = getCoefficientProduct;

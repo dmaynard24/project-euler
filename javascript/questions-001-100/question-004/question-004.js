@@ -8,27 +8,27 @@
 const palindrome = require('../../util/palindrome');
 
 function getLargestPalindromeProduct(digits) {
-  let upper = Math.pow(10, digits) - 1,
-    lower = Math.pow(10, digits - 1);
+	let upper = Math.pow(10, digits) - 1,
+		lower = Math.pow(10, digits - 1);
 
-  let m = upper,
-    n = upper,
-    largest = 0;
+	let m = upper,
+		n = upper,
+		largest = 0;
 
-  while (n >= lower) {
-    m = upper;
-    while (m >= lower) {
-      let product = m * n;
-      if (product > largest && palindrome.isPalindrome(product)) {
-        largest = product;
-        lower = Math.min(m, n);
-      }
-      m--;
-    }
-    n--;
-  }
+	while (n >= lower) {
+		m = upper;
+		while (m >= lower) {
+			let product = m * n;
+			if (product > largest && palindrome.isPalindrome(product)) {
+				largest = product;
+				lower = Math.min(m, n);
+			}
+			m--;
+		}
+		n--;
+	}
 
-  return largest;
+	return largest;
 }
 
 module.exports = getLargestPalindromeProduct;

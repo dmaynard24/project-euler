@@ -14,28 +14,28 @@
 const cipher = require('./cipher');
 
 function getAsciiSum() {
-  let sum = 0,
-    nums = cipher.split(',').map(num => parseInt(num, 10)),
-    keyLength = 3;
+	let sum = 0,
+		nums = cipher.split(',').map(num => parseInt(num, 10)),
+		keyLength = 3;
 
-  let charCodes = [...'abcdefghijklmnopqrstuvwxyz'].map(char => char.charCodeAt());
+	let charCodes = [...'abcdefghijklmnopqrstuvwxyz'].map(char => char.charCodeAt());
 
-  for (let i = 0; i < charCodes.length; i++) {
-    for (let j = 0; j < charCodes.length; j++) {
-      for (let k = 0; k < charCodes.length; k++) {
-        let key = [charCodes[i], charCodes[j], charCodes[k]],
-          decryptedAscii = nums.map((num, index) => num ^ key[index % keyLength]),
-          decrypted = decryptedAscii.map(num => String.fromCharCode(num)).join(''),
-          decryptedLower = decrypted.toLowerCase();
+	for (let i = 0; i < charCodes.length; i++) {
+		for (let j = 0; j < charCodes.length; j++) {
+			for (let k = 0; k < charCodes.length; k++) {
+				let key = [charCodes[i], charCodes[j], charCodes[k]],
+					decryptedAscii = nums.map((num, index) => num ^ key[index % keyLength]),
+					decrypted = decryptedAscii.map(num => String.fromCharCode(num)).join(''),
+					decryptedLower = decrypted.toLowerCase();
 
-        if (decryptedLower.includes(' the ')) {
-          return decryptedAscii.reduce((a, c) => a + c);
-        }
-      }
-    }
-  }
+				if (decryptedLower.includes(' the ')) {
+					return decryptedAscii.reduce((a, c) => a + c);
+				}
+			}
+		}
+	}
 
-  return sum;
+	return sum;
 }
 
 module.exports = getAsciiSum;

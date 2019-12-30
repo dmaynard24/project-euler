@@ -8,23 +8,23 @@
 // (Please note that the palindromic number, in either base, may not include leading zeros.)
 
 function getPalindromicSum(limit) {
-  let sum = 0;
+	let sum = 0;
 
-  for (let i = 1; i < limit; i += 2) {
-    if (isPalindrome(i)) {
-      let binary = i.toString(2);
-      if (isPalindrome(binary)) {
-        sum += i;
-      }
-    }
-  }
+	for (let i = 1; i < limit; i += 2) {
+		if (isPalindrome(i)) {
+			let binary = i.toString(2);
+			if (isPalindrome(binary)) {
+				sum += i;
+			}
+		}
+	}
 
-  return sum;
+	return sum;
 }
 
 function isPalindrome(val) {
-  let str = val.toString();
-  return str == [...str].reverse().join('');
+	let str = val.toString();
+	return str == [...str].reverse().join('');
 }
 
 module.exports = getPalindromicSum;

@@ -8,24 +8,24 @@
 const digits = require('../../util/digits');
 
 function getPowerfulIntegerCount() {
-  let count = 0;
+	let count = 0;
 
-  for (let exp = 1; exp <= 21; exp++) {
-    let base = 1,
-      digitCount = 1;
-    while (digitCount <= exp) {
-      let powerful = Math.pow(base, exp);
+	for (let exp = 1; exp <= 21; exp++) {
+		let base = 1,
+			digitCount = 1;
+		while (digitCount <= exp) {
+			let powerful = Math.pow(base, exp);
 
-      digitCount = digits.getDigitCount(powerful);
-      if (digitCount == exp) {
-        count++;
-      }
+			digitCount = digits.getDigitCount(powerful);
+			if (digitCount == exp) {
+				count++;
+			}
 
-      base++;
-    }
-  }
+			base++;
+		}
+	}
 
-  return count;
+	return count;
 }
 
 module.exports = getPowerfulIntegerCount;

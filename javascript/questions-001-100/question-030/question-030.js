@@ -13,19 +13,19 @@
 // Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
 function getDigitFifthPowerSum() {
-  let fifthPowers = [...Array(10).keys()].map(key => Math.pow(key, 5)),
-    sum = 0;
+	let fifthPowers = [...Array(10).keys()].map(key => Math.pow(key, 5)),
+		sum = 0;
 
-  for (let i = 2; i <= 200000; i++) {
-    // tried using my getDigits utility function (from ../../util/digits), but it was slower than string conversion. weird.
-    let digits = i.toString().split('');
+	for (let i = 2; i <= 200000; i++) {
+		// tried using my getDigits utility function (from ../../util/digits), but it was slower than string conversion. weird.
+		let digits = i.toString().split('');
 
-    if (i == digits.map(digit => fifthPowers[digit]).reduce((a, c) => a + c)) {
-      sum += i;
-    }
-  }
+		if (i == digits.map(digit => fifthPowers[digit]).reduce((a, c) => a + c)) {
+			sum += i;
+		}
+	}
 
-  return sum;
+	return sum;
 }
 
 module.exports = getDigitFifthPowerSum;

@@ -8,60 +8,60 @@
 // NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 
 function getNumberLetterCount(max) {
-  return [...Array(max + 1).keys()].slice(1).reduce((acc, curr) => acc + getWordsFromNumber(curr).length, 0);
+	return [...Array(max + 1).keys()].slice(1).reduce((acc, curr) => acc + getWordsFromNumber(curr).length, 0);
 }
 
 function getWordsFromNumber(num) {
-  let a = [
-      '',
-      'one',
-      'two',
-      'three',
-      'four',
-      'five',
-      'six',
-      'seven',
-      'eight',
-      'nine',
-      'ten',
-      'eleven',
-      'twelve',
-      'thirteen',
-      'fourteen',
-      'fifteen',
-      'sixteen',
-      'seventeen',
-      'eighteen',
-      'nineteen'
-    ],
-    b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
-    words = '';
+	let a = [
+			'',
+			'one',
+			'two',
+			'three',
+			'four',
+			'five',
+			'six',
+			'seven',
+			'eight',
+			'nine',
+			'ten',
+			'eleven',
+			'twelve',
+			'thirteen',
+			'fourteen',
+			'fifteen',
+			'sixteen',
+			'seventeen',
+			'eighteen',
+			'nineteen'
+		],
+		b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
+		words = '';
 
-  if (num == 1000) {
-    return 'onethousand';
-  }
+	if (num == 1000) {
+		return 'onethousand';
+	}
 
-  if (num >= 100) {
-    let hundreds = Math.floor(num / 100);
-    words += a[hundreds] + 'hundred';
-    num -= 100 * hundreds;
+	if (num >= 100) {
+		let hundreds = Math.floor(num / 100);
+		words += a[hundreds] + 'hundred';
+		num -= 100 * hundreds;
 
-    if (num != 0) {
-      words += 'and';
-    }
-  }
+		if (num != 0) {
+			words += 'and';
+		}
+	}
 
-  if (num >= 20) {
-    let tens = Math.floor(num / 10);
-    words += b[tens];
-    num -= 10 * tens;
-  }
+	if (num >= 20) {
+		let tens = Math.floor(num / 10);
+		words += b[tens];
+		num -= 10 * tens;
+	}
 
-  if (num > 0) {
-    words += a[num];
-  }
+	if (num > 0) {
+		words += a[num];
+	}
 
-  return words;
+	return words;
 }
 
 module.exports = getNumberLetterCount;

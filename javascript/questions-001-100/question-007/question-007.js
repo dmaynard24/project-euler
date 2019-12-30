@@ -8,11 +8,11 @@
 const primal = require('../../util/primal');
 
 function getNthPrime(n) {
-  let limit = 105000,
-    primes = primal.getPrimes(limit),
-    primeNums = primal.getPrimeNumbers(primes);
+	let limit = 105000,
+		primes = primal.getPrimes(limit),
+		primeNums = primal.getPrimeNumbers(primes);
 
-  return primeNums[n - 1];
+	return primeNums[n - 1];
 }
 
 module.exports = getNthPrime;

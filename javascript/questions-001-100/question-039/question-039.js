@@ -10,26 +10,26 @@
 const getPrimitiveTriples = require('../../util/pythagorean-triples');
 
 function getMostCommonPerimeter(pMax) {
-  let primitives = getPrimitiveTriples(pMax),
-    perimeterCounts = [],
-    mostCommon = 120,
-    mostCommonCount = 3;
+	let primitives = getPrimitiveTriples(pMax),
+		perimeterCounts = [],
+		mostCommon = 120,
+		mostCommonCount = 3;
 
-  primitives.forEach(primitive => {
-    let p = primitive.p;
-    while (p <= pMax) {
-      perimeterCounts[p] = perimeterCounts[p] ? perimeterCounts[p] + 1 : 1;
+	primitives.forEach(primitive => {
+		let p = primitive.p;
+		while (p <= pMax) {
+			perimeterCounts[p] = perimeterCounts[p] ? perimeterCounts[p] + 1 : 1;
 
-      if (perimeterCounts[p] > mostCommonCount) {
-        mostCommonCount = perimeterCounts[p];
-        mostCommon = p;
-      }
+			if (perimeterCounts[p] > mostCommonCount) {
+				mostCommonCount = perimeterCounts[p];
+				mostCommon = p;
+			}
 
-      p += primitive.p;
-    }
-  });
+			p += primitive.p;
+		}
+	});
 
-  return mostCommon;
+	return mostCommon;
 }
 
 module.exports = getMostCommonPerimeter;

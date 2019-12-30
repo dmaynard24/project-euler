@@ -18,51 +18,51 @@
 // How many Lychrel numbers are there below ten-thousand?
 
 const palindrome = require('../../util/palindrome'),
-  bigInt = require('big-integer');
+	bigInt = require('big-integer');
 
 function getLychrelCount(limit) {
-  let count = 0,
-    reverseSumsArrs = new Map(),
-    palindromeSums = new Map();
+	let count = 0,
+		reverseSumsArrs = new Map(),
+		palindromeSums = new Map();
 
-  for (let i = 1; i < limit; i++) {
-    let sum = bigInt(i),
-      isLychrel = true;
+	for (let i = 1; i < limit; i++) {
+		let sum = bigInt(i),
+			isLychrel = true;
 
-    for (let j = 0; j < 50; j++) {
-      let sumStr = sum.toString();
+		for (let j = 0; j < 50; j++) {
+			let sumStr = sum.toString();
 
-      // cache reverse sums
-      if (reverseSumsArrs.get(sumStr) == undefined) {
-        reverseSumsArrs.set(sumStr, sum.toArray(10).value.reverse());
-      }
+			// cache reverse sums
+			if (reverseSumsArrs.get(sumStr) == undefined) {
+				reverseSumsArrs.set(sumStr, sum.toArray(10).value.reverse());
+			}
 
-      // calculate reverse sum with cached value
-      let reverseSum = bigInt(0),
-        reverseSumArr = reverseSumsArrs.get(sumStr);
-      for (let i = 0; i < reverseSumArr.length; i++) {
-        reverseSum = reverseSum.multiply(10).add(reverseSumArr[i]);
-      }
-      sum = sum.add(reverseSum);
+			// calculate reverse sum with cached value
+			let reverseSum = bigInt(0),
+				reverseSumArr = reverseSumsArrs.get(sumStr);
+			for (let i = 0; i < reverseSumArr.length; i++) {
+				reverseSum = reverseSum.multiply(10).add(reverseSumArr[i]);
+			}
+			sum = sum.add(reverseSum);
 
-      // cache palindrome sums
-      if (palindromeSums.get(sumStr) == undefined) {
-        palindromeSums.set(sumStr, palindrome.isArrayPalindrome(sum.toArray(10).value));
-      }
+			// cache palindrome sums
+			if (palindromeSums.get(sumStr) == undefined) {
+				palindromeSums.set(sumStr, palindrome.isArrayPalindrome(sum.toArray(10).value));
+			}
 
-      // check if palindrome with cached value
-      if (palindromeSums.get(sumStr) == true) {
-        isLychrel = false;
-        break;
-      }
-    }
+			// check if palindrome with cached value
+			if (palindromeSums.get(sumStr) == true) {
+				isLychrel = false;
+				break;
+			}
+		}
 
-    if (isLychrel) {
-      count++;
-    }
-  }
+		if (isLychrel) {
+			count++;
+		}
+	}
 
-  return count;
+	return count;
 }
 
 module.exports = getLychrelCount;

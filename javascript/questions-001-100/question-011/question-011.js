@@ -31,73 +31,73 @@
 const grid = require('./grid');
 
 function getLargestProduct(digits) {
-  let gridArr = grid.split('\n').map(row => row.split(' ').map(num => parseInt(num, 10)));
+	let gridArr = grid.split('\n').map(row => row.split(' ').map(num => parseInt(num, 10)));
 
-  function getUpRight(x, y) {
-    let product = gridArr[x][y];
-    for (let i = 1; i < digits; i++) {
-      x--;
-      y++;
-      product *= gridArr[x][y];
-    }
-    return product;
-  }
+	function getUpRight(x, y) {
+		let product = gridArr[x][y];
+		for (let i = 1; i < digits; i++) {
+			x--;
+			y++;
+			product *= gridArr[x][y];
+		}
+		return product;
+	}
 
-  function getRight(x, y) {
-    let product = gridArr[x][y];
-    for (let i = 1; i < digits; i++) {
-      y++;
-      product *= gridArr[x][y];
-    }
-    return product;
-  }
+	function getRight(x, y) {
+		let product = gridArr[x][y];
+		for (let i = 1; i < digits; i++) {
+			y++;
+			product *= gridArr[x][y];
+		}
+		return product;
+	}
 
-  function getDownRight(x, y) {
-    let product = gridArr[x][y];
-    for (let i = 1; i < digits; i++) {
-      x++;
-      y++;
-      product *= gridArr[x][y];
-    }
-    return product;
-  }
+	function getDownRight(x, y) {
+		let product = gridArr[x][y];
+		for (let i = 1; i < digits; i++) {
+			x++;
+			y++;
+			product *= gridArr[x][y];
+		}
+		return product;
+	}
 
-  function getDown(x, y) {
-    let product = gridArr[x][y];
-    for (let i = 1; i < digits; i++) {
-      x++;
-      product *= gridArr[x][y];
-    }
-    return product;
-  }
+	function getDown(x, y) {
+		let product = gridArr[x][y];
+		for (let i = 1; i < digits; i++) {
+			x++;
+			product *= gridArr[x][y];
+		}
+		return product;
+	}
 
-  let largest = 0;
-  for (let x = 0; x < 20; x++) {
-    for (let y = 0; y < 20; y++) {
-      if (y + digits <= 19) {
-        let row = gridArr[x],
-          zeroAt = row.indexOf(0, y);
-        if (zeroAt - y > digits - 1 || zeroAt == -1) {
-          let newLargest = getRight(x, y);
-          largest = Math.max(newLargest, largest);
-        }
-        if (x - digits >= 0) {
-          let newLargest = getUpRight(x, y);
-          largest = Math.max(newLargest, largest);
-        }
-        if (x + digits <= 19) {
-          let newLargest = getDownRight(x, y);
-          largest = Math.max(newLargest, largest);
-        }
-      }
-      if (x + digits <= 19) {
-        let newLargest = getDown(x, y);
-        largest = Math.max(newLargest, largest);
-      }
-    }
-  }
+	let largest = 0;
+	for (let x = 0; x < 20; x++) {
+		for (let y = 0; y < 20; y++) {
+			if (y + digits <= 19) {
+				let row = gridArr[x],
+					zeroAt = row.indexOf(0, y);
+				if (zeroAt - y > digits - 1 || zeroAt == -1) {
+					let newLargest = getRight(x, y);
+					largest = Math.max(newLargest, largest);
+				}
+				if (x - digits >= 0) {
+					let newLargest = getUpRight(x, y);
+					largest = Math.max(newLargest, largest);
+				}
+				if (x + digits <= 19) {
+					let newLargest = getDownRight(x, y);
+					largest = Math.max(newLargest, largest);
+				}
+			}
+			if (x + digits <= 19) {
+				let newLargest = getDown(x, y);
+				largest = Math.max(newLargest, largest);
+			}
+		}
+	}
 
-  return largest;
+	return largest;
 }
 
 module.exports = getLargestProduct;

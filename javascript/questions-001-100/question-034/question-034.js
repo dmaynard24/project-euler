@@ -10,25 +10,25 @@
 const digits = require('../../util/digits');
 
 function getDigitFactorialSum() {
-  let factorials = [],
-    sum = 0;
+	let factorials = [],
+		sum = 0;
 
-  // cache factorials of all digits 1 - 9
-  factorials.push(1);
-  for (let i = 1; i <= 9; i++) {
-    factorials.push(i * factorials[i - 1]);
-  }
+	// cache factorials of all digits 1 - 9
+	factorials.push(1);
+	for (let i = 1; i <= 9; i++) {
+		factorials.push(i * factorials[i - 1]);
+	}
 
-  for (let i = 3; i <= 41000; i++) {
-    let numDigits = digits.getDigits(i),
-      digitsFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
+	for (let i = 3; i <= 41000; i++) {
+		let numDigits = digits.getDigits(i),
+			digitsFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
 
-    if (i == digitsFactorialSum) {
-      sum += i;
-    }
-  }
+		if (i == digitsFactorialSum) {
+			sum += i;
+		}
+	}
 
-  return sum;
+	return sum;
 }
 
 module.exports = getDigitFactorialSum;

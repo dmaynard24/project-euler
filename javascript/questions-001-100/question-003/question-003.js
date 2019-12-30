@@ -8,8 +8,8 @@
 const primal = require('../../util/primal');
 
 function getLargestPrimeFactor(num) {
-  let primes = primal.getPrimes(10000);
-  return primal.getPrimeFactors(num, primes).pop().base;
+	let primes = primal.getPrimes(10000);
+	return primal.getPrimeFactors(num, primes).pop().base;
 }
 
 module.exports = getLargestPrimeFactor;

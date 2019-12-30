@@ -17,35 +17,35 @@
 const primal = require('../../util/primal');
 
 function getSmallestOddComposite() {
-  let limit = 6000,
-    primes = primal.getPrimes(limit);
+	let limit = 6000,
+		primes = primal.getPrimes(limit);
 
-  for (let composite = 35; composite < limit; composite += 2) {
-    if (!primal.isPrime(composite, primes)) {
-      let proof = false;
+	for (let composite = 35; composite < limit; composite += 2) {
+		if (!primal.isPrime(composite, primes)) {
+			let proof = false;
 
-      for (let prime = 2; prime < composite; prime++) {
-        if (proof) {
-          break;
-        }
+			for (let prime = 2; prime < composite; prime++) {
+				if (proof) {
+					break;
+				}
 
-        if (primal.isPrime(prime, primes)) {
-          for (let k = 1; prime + 2 * (k * k) <= composite; k++) {
-            if (prime + 2 * (k * k) == composite) {
-              proof = true;
-              break;
-            }
-          }
-        }
-      }
+				if (primal.isPrime(prime, primes)) {
+					for (let k = 1; prime + 2 * (k * k) <= composite; k++) {
+						if (prime + 2 * (k * k) == composite) {
+							proof = true;
+							break;
+						}
+					}
+				}
+			}
 
-      if (!proof) {
-        return composite;
-      }
-    }
-  }
+			if (!proof) {
+				return composite;
+			}
+		}
+	}
 
-  return `Unable to disprove Goldbach's other conjecture under ${limit}`;
+	return `Unable to disprove Goldbach's other conjecture under ${limit}`;
 }
 
 module.exports = getSmallestOddComposite;

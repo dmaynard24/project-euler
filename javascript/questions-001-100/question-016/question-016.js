@@ -8,10 +8,10 @@
 const bigInt = require('big-integer');
 
 function getPowerDigitSum(power) {
-  return bigInt(2)
-    .pow(power)
-    .toArray(10)
-    .value.reduce((a, c) => a + c);
+	return bigInt(2)
+		.pow(power)
+		.toArray(10)
+		.value.reduce((a, c) => a + c);
 }
 
 module.exports = getPowerDigitSum;

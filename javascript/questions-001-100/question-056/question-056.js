@@ -8,30 +8,30 @@
 const bigInt = require('big-integer');
 
 function getMaximumDigitSum(limit) {
-  let lower = 2,
-    largest = 0;
+	let lower = 2,
+		largest = 0;
 
-  for (let a = limit - 1; a >= lower; a--) {
-    if (a % 10 == 0) {
-      continue;
-    }
+	for (let a = limit - 1; a >= lower; a--) {
+		if (a % 10 == 0) {
+			continue;
+		}
 
-    for (let b = limit - 1; b >= lower; b--) {
-      let powerDigits = bigInt(a)
-        .pow(b)
-        .toArray(10).value;
-      if (powerDigits.length * 9 < largest) {
-        break;
-      }
+		for (let b = limit - 1; b >= lower; b--) {
+			let powerDigits = bigInt(a)
+				.pow(b)
+				.toArray(10).value;
+			if (powerDigits.length * 9 < largest) {
+				break;
+			}
 
-      let sum = powerDigits.reduce((a, c) => a + c);
-      if (sum > largest) {
-        largest = sum;
-      }
-    }
-  }
+			let sum = powerDigits.reduce((a, c) => a + c);
+			if (sum > largest) {
+				largest = sum;
+			}
+		}
+	}
 
-  return largest;
+	return largest;
 }
 
 module.exports = getMaximumDigitSum;

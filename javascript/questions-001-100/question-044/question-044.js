@@ -12,24 +12,24 @@
 const shapes = require('../../util/shapes');
 
 function getPentagonDifference() {
-  let smallest = Infinity;
+	let smallest = Infinity;
 
-  let n = 1;
-  while (true) {
-    let pk = shapes.getNthPentagon(n);
-    if (pk - 1 > smallest) {
-      return smallest;
-    }
+	let n = 1;
+	while (true) {
+		let pk = shapes.getNthPentagon(n);
+		if (pk - 1 > smallest) {
+			return smallest;
+		}
 
-    for (let i = 1; i < n; i++) {
-      let pj = shapes.getNthPentagon(i);
-      if (shapes.isPentagonal(pk + pj) && shapes.isPentagonal(pk - pj)) {
-        smallest = pk - pj;
-      }
-    }
+		for (let i = 1; i < n; i++) {
+			let pj = shapes.getNthPentagon(i);
+			if (shapes.isPentagonal(pk + pj) && shapes.isPentagonal(pk - pj)) {
+				smallest = pk - pj;
+			}
+		}
 
-    n++;
-  }
+		n++;
+	}
 }
 
 module.exports = getPentagonDifference;

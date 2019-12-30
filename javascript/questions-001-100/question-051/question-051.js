@@ -8,66 +8,66 @@
 // Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 
 const primal = require('../../util/primal'),
-  digits = require('../../util/digits'),
-  combination = require('../../util/combination');
+	digits = require('../../util/digits'),
+	combination = require('../../util/combination');
 
 function getSmallestPrime(count) {
-  let limit = 999999,
-    primes = primal.getPrimes(limit),
-    combos = {
-      5: getAllCombos(5),
-      6: getAllCombos(6)
-    };
+	let limit = 999999,
+		primes = primal.getPrimes(limit),
+		combos = {
+			5: getAllCombos(5),
+			6: getAllCombos(6)
+		};
 
-  for (let i = 56003; i <= limit; i += 2) {
-    if (primal.isPrime(i, primes)) {
-      let originalDigits = digits.getDigits(i);
+	for (let i = 56003; i <= limit; i += 2) {
+		if (primal.isPrime(i, primes)) {
+			let originalDigits = digits.getDigits(i);
 
-      for (let replaceCount = 1; replaceCount < originalDigits.length; replaceCount++) {
-        let digitReplaceCombos = combos[originalDigits.length];
+			for (let replaceCount = 1; replaceCount < originalDigits.length; replaceCount++) {
+				let digitReplaceCombos = combos[originalDigits.length];
 
-        for (let j = 0; j < digitReplaceCombos.length; j++) {
-          let combo = digitReplaceCombos[j],
-            otherPrimes = [],
-            isReplacingLastDigit = combo[combo.length - 1] == originalDigits.length - 1,
-            minDigit = combo[0] == 0 || isReplacingLastDigit ? 1 : 0,
-            step = isReplacingLastDigit ? 2 : 1;
+				for (let j = 0; j < digitReplaceCombos.length; j++) {
+					let combo = digitReplaceCombos[j],
+						otherPrimes = [],
+						isReplacingLastDigit = combo[combo.length - 1] == originalDigits.length - 1,
+						minDigit = combo[0] == 0 || isReplacingLastDigit ? 1 : 0,
+						step = isReplacingLastDigit ? 2 : 1;
 
-          for (let k = minDigit; k < 10; k += step) {
-            if (isReplacingLastDigit && k == 5) {
-              continue;
-            }
+					for (let k = minDigit; k < 10; k += step) {
+						if (isReplacingLastDigit && k == 5) {
+							continue;
+						}
 
-            let newDigits = [...originalDigits];
-            combo.forEach(digit => {
-              newDigits.splice(digit, 1, k);
-            });
+						let newDigits = [...originalDigits];
+						combo.forEach(digit => {
+							newDigits.splice(digit, 1, k);
+						});
 
-            let newDigitsInt = digits.getIntFromDigits(newDigits);
-            if (primal.isPrime(newDigitsInt, primes)) {
-              otherPrimes.push(newDigits);
+						let newDigitsInt = digits.getIntFromDigits(newDigits);
+						if (primal.isPrime(newDigitsInt, primes)) {
+							otherPrimes.push(newDigits);
 
-              if (otherPrimes.length == count) {
-                return digits.getIntFromDigits(otherPrimes[0]);
-              }
-            }
+							if (otherPrimes.length == count) {
+								return digits.getIntFromDigits(otherPrimes[0]);
+							}
+						}
 
-            if (10 - k < count - otherPrimes.length) {
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
+						if (10 - k < count - otherPrimes.length) {
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 function getAllCombos(length) {
-  let range = [...Array(length).keys()];
-  return range.slice(1).reduce((a, c) => {
-    a = a.concat(combination.getCombos(range, c));
-    return a;
-  }, []);
+	let range = [...Array(length).keys()];
+	return range.slice(1).reduce((a, c) => {
+		a = a.concat(combination.getCombos(range, c));
+		return a;
+	}, []);
 }
 
 module.exports = getSmallestPrime;

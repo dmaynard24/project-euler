@@ -19,86 +19,86 @@
 const shapes = require('../../util/shapes');
 
 function getOrderedSet() {
-  const limit = 10000,
-    termSets = {
-      3: shapes.getTriangles(limit),
-      4: shapes.getSquares(limit),
-      5: shapes.getPentagons(limit),
-      6: shapes.getHexagons(limit),
-      7: shapes.getHeptagons(limit),
-      8: shapes.getOctagons(limit)
-    },
-    setCount = Object.keys(termSets).length;
+	const limit = 10000,
+		termSets = {
+			3: shapes.getTriangles(limit),
+			4: shapes.getSquares(limit),
+			5: shapes.getPentagons(limit),
+			6: shapes.getHexagons(limit),
+			7: shapes.getHeptagons(limit),
+			8: shapes.getOctagons(limit)
+		},
+		setCount = Object.keys(termSets).length;
 
-  function getNextTerm(set, startValue, matchedSets) {
-    let returnSet = [],
-      unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
+	function getNextTerm(set, startValue, matchedSets) {
+		let returnSet = [],
+			unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
 
-    for (let i = startValue; i < limit; i++) {
-      for (let j = 0; j < unmatchedKeys.length; j++) {
-        if (termSets[unmatchedKeys[j]].has(i)) {
-          // for every set except the last
-          if (set.length < setCount - 1) {
-            if (i % 100 < 10) {
-              break;
-            }
-          }
+		for (let i = startValue; i < limit; i++) {
+			for (let j = 0; j < unmatchedKeys.length; j++) {
+				if (termSets[unmatchedKeys[j]].has(i)) {
+					// for every set except the last
+					if (set.length < setCount - 1) {
+						if (i % 100 < 10) {
+							break;
+						}
+					}
 
-          // for every set except the first
-          if (set.length != 0) {
-            if (!areCyclical(set[set.length - 1], i)) {
-              break;
-            }
-          }
+					// for every set except the first
+					if (set.length != 0) {
+						if (!areCyclical(set[set.length - 1], i)) {
+							break;
+						}
+					}
 
-          // for just the last set
-          if (set.length == setCount - 1) {
-            if (!areCyclical(i, set[0])) {
-              break;
-            }
-          }
+					// for just the last set
+					if (set.length == setCount - 1) {
+						if (!areCyclical(i, set[0])) {
+							break;
+						}
+					}
 
-          // store matches
-          matchedSets[unmatchedKeys[j]] = true;
-          set.push(i);
+					// store matches
+					matchedSets[unmatchedKeys[j]] = true;
+					set.push(i);
 
-          // immediately after pushing a new term, check exit condition
-          if (set.length == setCount) {
-            return set;
-          }
+					// immediately after pushing a new term, check exit condition
+					if (set.length == setCount) {
+						return set;
+					}
 
-          // continue
-          if (returnSet.length == 0) {
-            let newStartValue = (i % 100) * 100;
-            returnSet = returnSet.concat(getNextTerm(set, newStartValue, matchedSets));
-          }
+					// continue
+					if (returnSet.length == 0) {
+						let newStartValue = (i % 100) * 100;
+						returnSet = returnSet.concat(getNextTerm(set, newStartValue, matchedSets));
+					}
 
-          // pop off the value and update the matches
-          matchedSets[unmatchedKeys[j]] = false;
-          unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
-          set.pop();
-        }
-      }
-    }
+					// pop off the value and update the matches
+					matchedSets[unmatchedKeys[j]] = false;
+					unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
+					set.pop();
+				}
+			}
+		}
 
-    return returnSet;
-  }
+		return returnSet;
+	}
 
-  // 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
-  let onlySet = getNextTerm([], 1010, {
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false
-  });
+	// 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
+	let onlySet = getNextTerm([], 1010, {
+		3: false,
+		4: false,
+		5: false,
+		6: false,
+		7: false,
+		8: false
+	});
 
-  return onlySet.reduce((a, c) => a + c);
+	return onlySet.reduce((a, c) => a + c);
 }
 
 function areCyclical(a, b) {
-  return a % 100 == Math.floor(b / 100);
+	return a % 100 == Math.floor(b / 100);
 }
 
 module.exports = getOrderedSet;

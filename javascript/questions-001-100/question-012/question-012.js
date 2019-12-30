@@ -21,23 +21,23 @@
 const primal = require('../../util/primal');
 
 function getFirstTriangleWithDivisors(divisors) {
-  let i = 1,
-    triangle = 1,
-    primes = primal.getPrimes(25);
+	let i = 1,
+		triangle = 1,
+		primes = primal.getPrimes(25);
 
-  while (getDivisorCount(triangle) < divisors) {
-    i++;
-    triangle += i;
-  }
+	while (getDivisorCount(triangle) < divisors) {
+		i++;
+		triangle += i;
+	}
 
-  function getDivisorCount(num) {
-    let primeFactors = primal.getPrimeFactors(num, primes),
-      divisorCount = primeFactors.reduce((a, c) => (a *= c.exp + 1), 1);
+	function getDivisorCount(num) {
+		let primeFactors = primal.getPrimeFactors(num, primes),
+			divisorCount = primeFactors.reduce((a, c) => (a *= c.exp + 1), 1);
 
-    return divisorCount;
-  }
+		return divisorCount;
+	}
 
-  return triangle;
+	return triangle;
 }
 
 module.exports = getFirstTriangleWithDivisors;

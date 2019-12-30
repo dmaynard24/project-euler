@@ -11,12 +11,12 @@
 const bigInt = require('big-integer');
 
 function getFactorialDigitSum(num) {
-  let factorial = bigInt(1);
-  for (let i = 2; i <= num; i++) {
-    factorial = factorial.multiply(i);
-  }
+	let factorial = bigInt(1);
+	for (let i = 2; i <= num; i++) {
+		factorial = factorial.multiply(i);
+	}
 
-  return factorial.toArray(10).value.reduce((acc, curr) => acc + curr);
+	return factorial.toArray(10).value.reduce((acc, curr) => acc + curr);
 }
 
 module.exports = getFactorialDigitSum;

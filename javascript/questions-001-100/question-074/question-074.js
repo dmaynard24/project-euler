@@ -24,45 +24,45 @@
 const digits = require('../../util/digits');
 
 function getNonRepeatingChainCount(limit) {
-  let factorials = [],
-    factorialSums = new Map(),
-    targetLength = 60,
-    count = 0;
+	let factorials = [],
+		factorialSums = new Map(),
+		targetLength = 60,
+		count = 0;
 
-  factorials.push(1);
-  for (let i = 1; i <= 9; i++) {
-    factorials.push(i * factorials[i - 1]);
-  }
+	factorials.push(1);
+	for (let i = 1; i <= 9; i++) {
+		factorials.push(i * factorials[i - 1]);
+	}
 
-  for (let i = 1; i < limit; i++) {
-    let didLoop = false,
-      val = i,
-      chain = new Map();
+	for (let i = 1; i < limit; i++) {
+		let didLoop = false,
+			val = i,
+			chain = new Map();
 
-    chain.set(val, 1);
-    while (!didLoop) {
-      if (!factorialSums.has(val)) {
-        let valDigits = digits.getDigitsReversed(val),
-          sum = valDigits.reduce((a, c) => a + factorials[c], 0);
+		chain.set(val, 1);
+		while (!didLoop) {
+			if (!factorialSums.has(val)) {
+				let valDigits = digits.getDigitsReversed(val),
+					sum = valDigits.reduce((a, c) => a + factorials[c], 0);
 
-        factorialSums.set(val, sum);
-      }
+				factorialSums.set(val, sum);
+			}
 
-      if (chain.has(factorialSums.get(val))) {
-        let length = chain.size;
-        if (length == targetLength) {
-          count++;
-        }
-        didLoop = true;
-      } else {
-        let cachedSum = factorialSums.get(val);
-        chain.set(cachedSum, 1);
-        val = cachedSum;
-      }
-    }
-  }
+			if (chain.has(factorialSums.get(val))) {
+				let length = chain.size;
+				if (length == targetLength) {
+					count++;
+				}
+				didLoop = true;
+			} else {
+				let cachedSum = factorialSums.get(val);
+				chain.set(cachedSum, 1);
+				val = cachedSum;
+			}
+		}
+	}
 
-  return count;
+	return count;
 }
 
 module.exports = getNonRepeatingChainCount;

@@ -14,42 +14,42 @@
 const primal = require('../../util/primal');
 
 function getPrimeSummationCount(comboCount) {
-  let primes = primal.getPrimes(100),
-    primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
+	let primes = primal.getPrimes(100),
+		primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
 
-  function getCount(remaining, index) {
-    if (remaining == 0) {
-      return 1;
-    }
+	function getCount(remaining, index) {
+		if (remaining == 0) {
+			return 1;
+		}
 
-    let count = 0;
-    for (let i = index; i < primeNumsReversed.length; i++) {
-      let nextTerm = primeNumsReversed[i],
-        newRemaining = remaining - nextTerm,
-        nextIndex = newRemaining >= nextTerm ? i : i + 1;
-      count += getCount(newRemaining, nextIndex);
-    }
+		let count = 0;
+		for (let i = index; i < primeNumsReversed.length; i++) {
+			let nextTerm = primeNumsReversed[i],
+				newRemaining = remaining - nextTerm,
+				nextIndex = newRemaining >= nextTerm ? i : i + 1;
+			count += getCount(newRemaining, nextIndex);
+		}
 
-    return count;
-  }
+		return count;
+	}
 
-  let sum = 10,
-    count = 5,
-    firstIndex;
-  while (count < comboCount) {
-    sum++;
+	let sum = 10,
+		count = 5,
+		firstIndex;
+	while (count < comboCount) {
+		sum++;
 
-    for (let i = primeNumsReversed.length - 1; i >= 0; i--) {
-      if (primeNumsReversed[i] >= sum) {
-        firstIndex = i + 1;
-        break;
-      }
-    }
+		for (let i = primeNumsReversed.length - 1; i >= 0; i--) {
+			if (primeNumsReversed[i] >= sum) {
+				firstIndex = i + 1;
+				break;
+			}
+		}
 
-    count = getCount(sum, firstIndex);
-  }
+		count = getCount(sum, firstIndex);
+	}
 
-  return sum;
+	return sum;
 }
 
 module.exports = getPrimeSummationCount;

@@ -18,33 +18,33 @@
 const primal = require('../../util/primal');
 
 function getSideLength(percentage) {
-  let cornerValue = 1,
-    length = 1,
-    primeCount = 0,
-    cornerCount = 1,
-    ratio = 1;
+	let cornerValue = 1,
+		length = 1,
+		primeCount = 0,
+		cornerCount = 1,
+		ratio = 1;
 
-  while (ratio > percentage / 100) {
-    length += 2;
+	while (ratio > percentage / 100) {
+		length += 2;
 
-    for (let cornerNum = 1; cornerNum <= 4; cornerNum++) {
-      cornerValue += length - 1;
+		for (let cornerNum = 1; cornerNum <= 4; cornerNum++) {
+			cornerValue += length - 1;
 
-      // 4th corner is never prime (always square)
-      if (cornerNum == 4) {
-        continue;
-      }
+			// 4th corner is never prime (always square)
+			if (cornerNum == 4) {
+				continue;
+			}
 
-      if (primal.isPrime(cornerValue)) {
-        primeCount++;
-      }
-    }
+			if (primal.isPrime(cornerValue)) {
+				primeCount++;
+			}
+		}
 
-    cornerCount += 4;
-    ratio = primeCount / cornerCount;
-  }
+		cornerCount += 4;
+		ratio = primeCount / cornerCount;
+	}
 
-  return length;
+	return length;
 }
 
 module.exports = getSideLength;

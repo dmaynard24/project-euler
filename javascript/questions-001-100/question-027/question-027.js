@@ -39,12 +39,12 @@ function getCoefficientProduct() {
 	});
 
 	function getConsecutivePrimeCount(a, b) {
-		let allPrime = true,
+		let areAllPrime = true,
 			n = 0;
 
-		while (allPrime) {
+		while (areAllPrime) {
 			let value = n * n + a * n + b;
-			allPrime = value > -1 && primal.isPrime(value, primes);
+			areAllPrime = value > -1 && primal.isPrime(value, primes);
 			n++;
 		}
 

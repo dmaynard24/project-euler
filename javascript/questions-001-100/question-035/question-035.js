@@ -21,10 +21,10 @@ function getCircularPrimeCount(limit) {
 		if (numDigits.length == 1) {
 			count++;
 		} else {
-			let evenDigit = numDigits.find(digit => digit % 2 == 0);
+			let hasEvenDigit = numDigits.find(digit => digit % 2 == 0);
 
-			if (!evenDigit) {
-				let allPrime = true,
+			if (!hasEvenDigit) {
+				let areAllPrime = true,
 					length = numDigits.length;
 				for (let j = 1; j < length; j++) {
 					let rotation = 0;
@@ -32,13 +32,13 @@ function getCircularPrimeCount(limit) {
 						rotation *= 10;
 						rotation += numDigits[(j + k) % length];
 					}
-					allPrime = primal.isPrime(rotation, primes);
-					if (!allPrime) {
+					areAllPrime = primal.isPrime(rotation, primes);
+					if (!areAllPrime) {
 						break;
 					}
 				}
 
-				if (allPrime) {
+				if (areAllPrime) {
 					count++;
 				}
 			}

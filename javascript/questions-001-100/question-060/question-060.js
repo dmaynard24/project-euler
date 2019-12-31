@@ -24,7 +24,7 @@ function getLowestPrimeSum(count) {
 				if (primal.isPrime(i, primes)) {
 					// only evaluate new permutations
 					let newTermDigits = digits.getDigits(i),
-						allPrime = true;
+						areAllPrime = true;
 					for (let j = 0; j < set.length; j++) {
 						let termDigits = digits.getDigits(set[j]),
 							prepended = i;
@@ -35,7 +35,7 @@ function getLowestPrimeSum(count) {
 
 						if (nonPrimePerms.get(prepended) == true || !primal.isPrime(prepended)) {
 							nonPrimePerms.set(prepended, true);
-							allPrime = false;
+							areAllPrime = false;
 							break;
 						}
 
@@ -47,12 +47,12 @@ function getLowestPrimeSum(count) {
 
 						if (nonPrimePerms.get(appended) == true || !primal.isPrime(appended)) {
 							nonPrimePerms.set(appended, true);
-							allPrime = false;
+							areAllPrime = false;
 							break;
 						}
 					}
 
-					if (allPrime) {
+					if (areAllPrime) {
 						let newSet = set.concat(i);
 
 						if (newSet.length < count) {

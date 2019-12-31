@@ -21,9 +21,9 @@ function getDigitFactorialSum() {
 
 	for (let i = 3; i <= 41000; i++) {
 		let numDigits = digits.getDigits(i),
-			digitsFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
+			digitFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
 
-		if (i == digitsFactorialSum) {
+		if (i == digitFactorialSum) {
 			sum += i;
 		}
 	}

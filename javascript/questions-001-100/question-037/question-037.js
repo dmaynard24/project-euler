@@ -20,7 +20,7 @@ function getTruncatablePrimeSum() {
 			return false;
 		}
 
-		let is = true,
+		let isTruncatable = true,
 			numDigits = digits.getDigits(num);
 
 		for (let i = 1; i < numDigits.length; i++) {
@@ -36,8 +36,8 @@ function getTruncatablePrimeSum() {
 				}
 			}
 
-			is = primal.isPrime(ltr, primes) && primal.isPrime(rtl, primes);
-			if (!is) {
+			isTruncatable = primal.isPrime(ltr, primes) && primal.isPrime(rtl, primes);
+			if (!isTruncatable) {
 				return false;
 			}
 		}

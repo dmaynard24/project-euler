@@ -22,7 +22,6 @@ function getTruncatablePrimeSum() {
 
 		let isTruncatable = true,
 			numDigits = digits.getDigits(num);
-
 		for (let i = 1; i < numDigits.length; i++) {
 			let ltr = 0,
 				rtl = 0;

@@ -3,7 +3,7 @@ const areCoprime = require('./coprime');
 function getPrimitiveTriples(pMax) {
 	let triples = [];
 
-	// by looking at the values of b and c below, I'm able to limit the range of m based on the pLimit
+	// by looking at the values of b and c below, I'm able to limit the range of m based on the pMax
 	for (let m = 2; m * m + 2 * m < pMax; m++) {
 		let start = (m % 2) + 1;
 		for (let n = start; n < m; n += 2) {

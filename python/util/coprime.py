@@ -1,4 +1,4 @@
-import gcd
+from . import gcd
 
 
 def are_coprime(a, b):

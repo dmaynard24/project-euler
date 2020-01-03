@@ -1,4 +1,4 @@
-import coprime
+from . import coprime
 
 
 def get_primitive_triples(p_max):

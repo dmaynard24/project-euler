@@ -22,14 +22,14 @@ def get_non_abundant_sum():
 	abundants = []
 	for i in range(lower, upper + 1):
 		proper_divisors_sum = sum(factors.get_proper_divisors(i))
-		if (proper_divisors_sum > i):
+		if proper_divisors_sum > i:
 			abundants.append(i)
 
 	abundant_sums = [None] * (upper + 1)
 	for i in range(0, len(abundants)):
 		for j in range(i, len(abundants)):
 			abundant_sum = abundants[i] + abundants[j]
-			if (abundant_sum > upper):
+			if abundant_sum > upper:
 				break
 
 			abundant_sums[abundant_sum] = True

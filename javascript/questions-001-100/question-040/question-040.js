@@ -16,7 +16,7 @@ const digits = require('../../util/digits');
 function getConstantProduct() {
 	const targets = [1, 10, 100, 1000, 10000, 100000],
 		limit = targets[targets.length - 1],
-		digitCounts = [];
+		digitCountObjs = [];
 
 	let length = 0,
 		digitLength = 1,
@@ -26,7 +26,7 @@ function getConstantProduct() {
 		let firstNum = targets[digitLength - 1],
 			digitCount = targets[digitLength] - firstNum;
 
-		digitCounts.push({
+		digitCountObjs.push({
 			length: digitLength,
 			prevLengthSum: length,
 			firstNum: firstNum
@@ -39,10 +39,10 @@ function getConstantProduct() {
 	let prevI = 0;
 	// we can remove 1 and 10 because they both equal 1
 	targets.slice(2).forEach(target => {
-		let dc = digitCounts[digitCounts.length - 1];
-		for (let i = prevI; i < digitCounts.length; i++) {
-			if (digitCounts[i].prevLengthSum > target) {
-				dc = digitCounts[i - 1];
+		let dc = digitCountObjs[digitCountObjs.length - 1];
+		for (let i = prevI; i < digitCountObjs.length; i++) {
+			if (digitCountObjs[i].prevLengthSum > target) {
+				dc = digitCountObjs[i - 1];
 				prevI = i;
 				break;
 			}
@@ -58,13 +58,7 @@ function getConstantProduct() {
 		}
 
 		let diff = lengthSum - target;
-		product *=
-			diff > 0
-				? digits
-						.getDigits(num)
-						.reverse()
-						.slice(diff, diff + 1)
-				: digits.getDigits(num).slice(0, 1);
+		product *= diff > 0 ? digits.getDigitsReversed(num)[diff] : digits.getDigits(num)[0];
 	});
 
 	return product;

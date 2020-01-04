@@ -32,11 +32,8 @@ def get_nth_permutation(n):
 
 def factorialize(num):
 	val = 1
-	while (num > 1):
+	while num > 1:
 		val *= num
 		num -= 1
 
 	return val
-
-
-print(get_nth_permutation(1000000))

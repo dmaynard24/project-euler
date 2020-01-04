@@ -38,7 +38,7 @@ def get_first_triangle_with_divisors(divisors):
 	triangle = 1
 	primes = primal.get_primes(25)
 
-	while (get_divisor_count(triangle) < divisors):
+	while get_divisor_count(triangle) < divisors:
 		i += 1
 		triangle += i
 

@@ -54,7 +54,7 @@ def get_prime_factors(num, primes):
 		return []
 
 	prime_factors = []
-	if (num % 2 == 0):
+	if num % 2 == 0:
 		base_exp = {'base': int(2), 'exp': int(0)}
 		while num % 2 == 0:
 			base_exp['exp'] += 1

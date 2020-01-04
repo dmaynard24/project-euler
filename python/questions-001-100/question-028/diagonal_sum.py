@@ -24,6 +24,3 @@ def get_diagonal_sum(width):
 		diagonal_sum += (square_width * (square_width - 1) - (i - 1)) * 4
 
 	return diagonal_sum
-
-
-print(get_diagonal_sum(5))

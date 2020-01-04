@@ -21,7 +21,7 @@ def get_amicable_sum(limit):
 	for i in range(2, limit):
 		a = i
 		b = d(a)
-		if (a != b and d(b) == a):
+		if a != b and d(b) == a:
 			amicables.append(i)
 
 	return sum(amicables)

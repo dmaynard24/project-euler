@@ -14,7 +14,7 @@ def get_primitive_triples(p_max):
 			c = m * m + n * n
 			p = a + b + c
 
-			if (p > p_max):
+			if p > p_max:
 				break
 
 			if coprime.are_coprime(a, b):

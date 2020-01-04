@@ -15,12 +15,12 @@
 
 
 def get_diagonal_sum(width):
-	square_count = width / 2 - 0.5
-	diagonal_sum = 1
+  square_count = width / 2 - 0.5
+  diagonal_sum = 1
 
-	for i in range(1, int(square_count) + 1):
-		square_width = i * 2 + 1
-		# get the average corner value based on the width, multiply by 4 to get the sum of corner values.
-		diagonal_sum += (square_width * (square_width - 1) - (i - 1)) * 4
+  for i in range(1, int(square_count) + 1):
+    square_width = i * 2 + 1
+    # get the average corner value based on the width, multiply by 4 to get the sum of corner values.
+    diagonal_sum += (square_width * (square_width - 1) - (i - 1)) * 4
 
-	return diagonal_sum
+  return diagonal_sum

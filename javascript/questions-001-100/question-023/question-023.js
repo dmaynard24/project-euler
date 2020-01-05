@@ -12,29 +12,29 @@
 const getProperDivisors = require('../../util/factors');
 
 function getSum() {
-	let lower = 12,
-		upper = 28123,
-		abundants = [];
-	for (let i = lower; i <= upper; i++) {
-		let properDivisorsSum = getProperDivisors(i).reduce((a, c) => a + c);
-		if (properDivisorsSum > i) {
-			abundants.push(i);
-		}
-	}
+  let lower = 12,
+    upper = 28123,
+    abundants = [];
+  for (let i = lower; i <= upper; i++) {
+    let properDivisorsSum = getProperDivisors(i).reduce((a, c) => a + c);
+    if (properDivisorsSum > i) {
+      abundants.push(i);
+    }
+  }
 
-	let abundantSums = Array(upper).fill(false);
-	for (let i = 0; i < abundants.length; i++) {
-		for (let j = i; j < abundants.length; j++) {
-			let abundantSum = abundants[i] + abundants[j];
-			if (abundantSum > upper) {
-				break;
-			}
+  let abundantSums = Array(upper).fill(false);
+  for (let i = 0; i < abundants.length; i++) {
+    for (let j = i; j < abundants.length; j++) {
+      let abundantSum = abundants[i] + abundants[j];
+      if (abundantSum > upper) {
+        break;
+      }
 
-			abundantSums[abundantSum] = true;
-		}
-	}
+      abundantSums[abundantSum] = true;
+    }
+  }
 
-	return abundantSums.reduce((a, c, i) => (c == false ? a + i : a + 0));
+  return abundantSums.reduce((a, c, i) => (c == false ? a + i : a + 0));
 }
 
 module.exports = getSum;

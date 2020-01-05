@@ -32,27 +32,27 @@
 const bigInt = require('big-integer');
 
 function getNumeratorSum(max) {
-	let period = getPeriodE(max),
-		ns = [bigInt(1), bigInt(Math.floor(Math.E))];
+  let period = getPeriodE(max),
+    ns = [bigInt(1), bigInt(Math.floor(Math.E))];
 
-	for (let i = 2; i < max + 1; i++) {
-		let m = bigInt(period[i - 2]),
-			n = m.multiply(ns[i - 1]).add(ns[i - 2]);
+  for (let i = 2; i < max + 1; i++) {
+    let m = bigInt(period[i - 2]),
+      n = m.multiply(ns[i - 1]).add(ns[i - 2]);
 
-		ns.push(n);
-	}
+    ns.push(n);
+  }
 
-	return ns[max].toArray(10).value.reduce((a, c) => a + c);
+  return ns[max].toArray(10).value.reduce((a, c) => a + c);
 }
 
 function getPeriodE(termLimit) {
-	ms = Array(termLimit - 1).fill(1);
+  ms = Array(termLimit - 1).fill(1);
 
-	for (let i = 1; i < termLimit; i += 3) {
-		ms[i] = ((i + 2) / 3) * 2;
-	}
+  for (let i = 1; i < termLimit; i += 3) {
+    ms[i] = ((i + 2) / 3) * 2;
+  }
 
-	return ms;
+  return ms;
 }
 
 module.exports = getNumeratorSum;

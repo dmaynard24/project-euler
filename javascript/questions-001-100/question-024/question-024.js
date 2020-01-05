@@ -8,31 +8,31 @@
 // What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
 function getNthPermutation(n) {
-	let digits = [...Array(10).keys()],
-		target = n - 1,
-		perm = [];
+  let digits = [...Array(10).keys()],
+    target = n - 1,
+    perm = [];
 
-	for (let i = 9; i >= 0; i--) {
-		let perms = factorialize(i),
-			index = Math.floor(target / perms),
-			digit = digits[index];
+  for (let i = 9; i >= 0; i--) {
+    let perms = factorialize(i),
+      index = Math.floor(target / perms),
+      digit = digits[index];
 
-		perm.push(digits.splice(digits.indexOf(digit), 1));
+    perm.push(digits.splice(digits.indexOf(digit), 1));
 
-		target %= perms;
-	}
+    target %= perms;
+  }
 
-	return perm.join('');
+  return perm.join('');
 }
 
 function factorialize(num) {
-	let val = 1;
-	while (num > 1) {
-		val *= num;
-		num--;
-	}
+  let val = 1;
+  while (num > 1) {
+    val *= num;
+    num--;
+  }
 
-	return val;
+  return val;
 }
 
 module.exports = getNthPermutation;

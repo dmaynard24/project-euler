@@ -14,16 +14,16 @@
 // What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
 function getDiagonalSum(width) {
-	let squareCount = width / 2 - 0.5,
-		sum = 1;
+  let squareCount = width / 2 - 0.5,
+    sum = 1;
 
-	for (let i = 1; i <= squareCount; i++) {
-		let squareWidth = i * 2 + 1;
-		// get the average corner value based on the width, multiply by 4 to get the sum of corner values.
-		sum += (squareWidth * (squareWidth - 1) - (i - 1)) * 4;
-	}
+  for (let i = 1; i <= squareCount; i++) {
+    let squareWidth = i * 2 + 1;
+    // get the average corner value based on the width, multiply by 4 to get the sum of corner values.
+    sum += (squareWidth * (squareWidth - 1) - (i - 1)) * 4;
+  }
 
-	return sum;
+  return sum;
 }
 
 module.exports = getDiagonalSum;

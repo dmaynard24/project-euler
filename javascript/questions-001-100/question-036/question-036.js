@@ -10,18 +10,18 @@
 const palindrome = require('../../util/palindrome');
 
 function getPalindromicSum(limit) {
-	let sum = 0;
+  let sum = 0;
 
-	for (let i = 1; i < limit; i += 2) {
-		if (palindrome.isArrayPalindrome([...i.toString()])) {
-			let binary = i.toString(2);
-			if (palindrome.isArrayPalindrome([...binary])) {
-				sum += i;
-			}
-		}
-	}
+  for (let i = 1; i < limit; i += 2) {
+    if (palindrome.isArrayPalindrome([...i.toString()])) {
+      let binary = i.toString(2);
+      if (palindrome.isArrayPalindrome([...binary])) {
+        sum += i;
+      }
+    }
+  }
 
-	return sum;
+  return sum;
 }
 
 module.exports = getPalindromicSum;

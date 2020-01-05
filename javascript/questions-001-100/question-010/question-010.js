@@ -8,10 +8,10 @@
 const primal = require('../../util/primal');
 
 function getPrimeSum(limit) {
-	let primes = primal.getPrimes(limit),
-		primeNums = primal.getPrimeNumbers(primes);
+  let primes = primal.getPrimes(limit),
+    primeNums = primal.getPrimeNumbers(primes);
 
-	return primeNums.reduce((a, c) => a + c);
+  return primeNums.reduce((a, c) => a + c);
 }
 
 module.exports = getPrimeSum;

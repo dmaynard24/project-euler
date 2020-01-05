@@ -13,13 +13,13 @@
 const shapes = require('../../util/shapes');
 
 function getTrianglePentagonHexagon() {
-	let n = 144;
+  let n = 144;
 
-	while (!shapes.isPentagonal(shapes.getNthHexagon(n))) {
-		n++;
-	}
+  while (!shapes.isPentagonal(shapes.getNthHexagon(n))) {
+    n++;
+  }
 
-	return shapes.getNthHexagon(n);
+  return shapes.getNthHexagon(n);
 }
 
 module.exports = getTrianglePentagonHexagon;

@@ -16,20 +16,20 @@
 const bigInt = require('big-integer');
 
 function getDistinctTermCount(max) {
-	let terms = new Map();
+  let terms = new Map();
 
-	for (let base = 2; base <= max; base++) {
-		for (let exp = 2; exp <= max; exp++) {
-			terms.set(
-				bigInt(base)
-					.pow(exp)
-					.toString(),
-				1
-			);
-		}
-	}
+  for (let base = 2; base <= max; base++) {
+    for (let exp = 2; exp <= max; exp++) {
+      terms.set(
+        bigInt(base)
+          .pow(exp)
+          .toString(),
+        1
+      );
+    }
+  }
 
-	return terms.size;
+  return terms.size;
 }
 
 module.exports = getDistinctTermCount;

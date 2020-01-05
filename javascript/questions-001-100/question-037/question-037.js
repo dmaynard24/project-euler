@@ -8,43 +8,43 @@
 // NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 const primal = require('../../util/primal'),
-	digits = require('../../util/digits');
+  digits = require('../../util/digits');
 
 function getTruncatablePrimeSum() {
-	let limit = 800000,
-		primes = primal.getPrimes(limit),
-		primeNums = primal.getPrimeNumbers(primes);
+  let limit = 800000,
+    primes = primal.getPrimes(limit),
+    primeNums = primal.getPrimeNumbers(primes);
 
-	function isTruncatablePrime(num) {
-		if (num < 10) {
-			return false;
-		}
+  function isTruncatablePrime(num) {
+    if (num < 10) {
+      return false;
+    }
 
-		let isTruncatable = true,
-			numDigits = digits.getDigits(num);
-		for (let i = 1; i < numDigits.length; i++) {
-			let ltr = 0,
-				rtl = 0;
-			for (let j = 0; j < numDigits.length; j++) {
-				if (j >= i) {
-					ltr *= 10;
-					ltr += numDigits[j];
-				} else {
-					rtl *= 10;
-					rtl += numDigits[j];
-				}
-			}
+    let isTruncatable = true,
+      numDigits = digits.getDigits(num);
+    for (let i = 1; i < numDigits.length; i++) {
+      let ltr = 0,
+        rtl = 0;
+      for (let j = 0; j < numDigits.length; j++) {
+        if (j >= i) {
+          ltr *= 10;
+          ltr += numDigits[j];
+        } else {
+          rtl *= 10;
+          rtl += numDigits[j];
+        }
+      }
 
-			isTruncatable = primal.isPrime(ltr, primes) && primal.isPrime(rtl, primes);
-			if (!isTruncatable) {
-				return false;
-			}
-		}
+      isTruncatable = primal.isPrime(ltr, primes) && primal.isPrime(rtl, primes);
+      if (!isTruncatable) {
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	return primeNums.filter(num => isTruncatablePrime(num)).reduce((a, c) => a + c);
+  return primeNums.filter(num => isTruncatablePrime(num)).reduce((a, c) => a + c);
 }
 
 module.exports = getTruncatablePrimeSum;

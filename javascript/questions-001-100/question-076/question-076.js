@@ -13,46 +13,46 @@
 // How many different ways can one hundred be written as a sum of at least two positive integers?
 
 function getSummationCount(num) {
-	// keep a cache of counts to avoid redundant recursion
-	let summationCounts = new Map();
+  // keep a cache of counts to avoid redundant recursion
+  let summationCounts = new Map();
 
-	function getCount(remaining, term) {
-		if (remaining == 0) {
-			return 1;
-		}
+  function getCount(remaining, term) {
+    if (remaining == 0) {
+      return 1;
+    }
 
-		let count = 0;
-		for (let nextTerm = term; nextTerm > 0; nextTerm--) {
-			let newRemaining = remaining - nextTerm,
-				nextTermArg = Math.min(newRemaining, nextTerm),
-				cachedAddend,
-				addend;
+    let count = 0;
+    for (let nextTerm = term; nextTerm > 0; nextTerm--) {
+      let newRemaining = remaining - nextTerm,
+        nextTermArg = Math.min(newRemaining, nextTerm),
+        cachedAddend,
+        addend;
 
-			// check cache
-			if (summationCounts.has(newRemaining)) {
-				// check chained map
-				if (summationCounts.get(newRemaining).has(nextTermArg)) {
-					cachedAddend = summationCounts.get(newRemaining).get(nextTermArg);
-				}
-			} else {
-				summationCounts.set(newRemaining, new Map());
-			}
+      // check cache
+      if (summationCounts.has(newRemaining)) {
+        // check chained map
+        if (summationCounts.get(newRemaining).has(nextTermArg)) {
+          cachedAddend = summationCounts.get(newRemaining).get(nextTermArg);
+        }
+      } else {
+        summationCounts.set(newRemaining, new Map());
+      }
 
-			// wasn't cached, calculate addend and cache it
-			if (!cachedAddend) {
-				addend = getCount(newRemaining, nextTermArg);
-				summationCounts.get(newRemaining).set(nextTermArg, addend);
-			} else {
-				addend = cachedAddend;
-			}
+      // wasn't cached, calculate addend and cache it
+      if (!cachedAddend) {
+        addend = getCount(newRemaining, nextTermArg);
+        summationCounts.get(newRemaining).set(nextTermArg, addend);
+      } else {
+        addend = cachedAddend;
+      }
 
-			count += addend;
-		}
+      count += addend;
+    }
 
-		return count;
-	}
+    return count;
+  }
 
-	return getCount(num, num - 1);
+  return getCount(num, num - 1);
 }
 
 module.exports = getSummationCount;

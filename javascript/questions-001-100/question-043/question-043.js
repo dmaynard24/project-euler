@@ -17,81 +17,81 @@
 const isPandigital = require('../../util/pandigital');
 
 function getSubstringPandigitalSum() {
-	let possibles = {
-		1: getPossibleMultiples(2),
-		2: getPossibleMultiples(3),
-		3: getPossibleMultiples(5),
-		4: getPossibleMultiples(7),
-		5: getPossibleMultiples(11),
-		6: getPossibleMultiples(13),
-		7: getPossibleMultiples(17)
-	};
+  let possibles = {
+    1: getPossibleMultiples(2),
+    2: getPossibleMultiples(3),
+    3: getPossibleMultiples(5),
+    4: getPossibleMultiples(7),
+    5: getPossibleMultiples(11),
+    6: getPossibleMultiples(13),
+    7: getPossibleMultiples(17)
+  };
 
-	function getSetAtIndex(index, set, concat) {
-		let pandigitals = [];
+  function getSetAtIndex(index, set, concat) {
+    let pandigitals = [];
 
-		for (let i = 0; i < set.length; i++) {
-			let newConcat = index == 7 ? set[i] : set[i].substring(0, 1) + concat;
+    for (let i = 0; i < set.length; i++) {
+      let newConcat = index == 7 ? set[i] : set[i].substring(0, 1) + concat;
 
-			if (isPandigital(newConcat)) {
-				if (index - 1 > 0) {
-					let sub = newConcat.substring(0, 2),
-						newSet = possibles[index - 1].filter(match => {
-							return match.substring(1, 3) == sub;
-						});
+      if (isPandigital(newConcat)) {
+        if (index - 1 > 0) {
+          let sub = newConcat.substring(0, 2),
+            newSet = possibles[index - 1].filter(match => {
+              return match.substring(1, 3) == sub;
+            });
 
-					pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
-				} else {
-					pandigitals.push(newConcat);
-				}
-			}
-		}
+          pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
+        } else {
+          pandigitals.push(newConcat);
+        }
+      }
+    }
 
-		return pandigitals;
-	}
+    return pandigitals;
+  }
 
-	// recursively create concatenated strings beginning with an empty string
-	let pandigitals = getSetAtIndex(7, possibles[7], '');
+  // recursively create concatenated strings beginning with an empty string
+  let pandigitals = getSetAtIndex(7, possibles[7], '');
 
-	// get remaining first digit of each pandigital, add them all up
-	let sum = 0;
-	pandigitals.forEach(p => {
-		sum += parseInt(getRemainingDigit(p) + p, 10);
-	});
+  // get remaining first digit of each pandigital, add them all up
+  let sum = 0;
+  pandigitals.forEach(p => {
+    sum += parseInt(getRemainingDigit(p) + p, 10);
+  });
 
-	return sum;
+  return sum;
 }
 
 // returns an array of strings since substring is used later
 function getPossibleMultiples(multiplicand) {
-	let multiples = [],
-		multiplier = 1,
-		product = 0;
+  let multiples = [],
+    multiplier = 1,
+    product = 0;
 
-	while (product < 1000 - multiplicand) {
-		product = multiplicand * multiplier;
-		// 12 is the first 3-digit pandigital with a leading zero
-		if (product >= 12) {
-			if (product < 100) {
-				// prepend leading zero
-				product = '0' + product;
-			}
-			multiples.push(product + '');
-		}
+  while (product < 1000 - multiplicand) {
+    product = multiplicand * multiplier;
+    // 12 is the first 3-digit pandigital with a leading zero
+    if (product >= 12) {
+      if (product < 100) {
+        // prepend leading zero
+        product = '0' + product;
+      }
+      multiples.push(product + '');
+    }
 
-		multiplier++;
-	}
+    multiplier++;
+  }
 
-	return multiples;
+  return multiples;
 }
 
 function getRemainingDigit(str) {
-	let digits = str.split('').map(d => parseInt(d, 10));
-	for (let i = 0; i < 10; i++) {
-		if (digits.indexOf(i) < 0) {
-			return i;
-		}
-	}
+  let digits = str.split('').map(d => parseInt(d, 10));
+  for (let i = 0; i < 10; i++) {
+    if (digits.indexOf(i) < 0) {
+      return i;
+    }
+  }
 }
 
 module.exports = getSubstringPandigitalSum;

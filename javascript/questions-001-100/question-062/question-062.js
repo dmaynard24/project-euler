@@ -8,34 +8,34 @@
 const digits = require('../../util/digits');
 
 function getSmallestCube(count) {
-	let start = 10,
-		limit = 10000,
-		sortedCubes = new Map();
+  let start = 10,
+    limit = 10000,
+    sortedCubes = new Map();
 
-	for (let i = start; i < limit; i++) {
-		let cube = Math.pow(i, 3),
-			sortedValue = digits
-				.getDigits(cube)
-				.sort((a, b) => b - a)
-				.join('');
+  for (let i = start; i < limit; i++) {
+    let cube = Math.pow(i, 3),
+      sortedValue = digits
+        .getDigits(cube)
+        .sort((a, b) => b - a)
+        .join('');
 
-		if (sortedCubes.has(sortedValue)) {
-			let cachedCube = sortedCubes.get(sortedValue);
-			cachedCube.count++;
-			cachedCube.cubes.push(cube);
+    if (sortedCubes.has(sortedValue)) {
+      let cachedCube = sortedCubes.get(sortedValue);
+      cachedCube.count++;
+      cachedCube.cubes.push(cube);
 
-			if (cachedCube.count == count) {
-				return Math.min.apply(null, cachedCube.cubes);
-			}
-		} else {
-			sortedCubes.set(sortedValue, {
-				count: 1,
-				cubes: [cube]
-			});
-		}
-	}
+      if (cachedCube.count == count) {
+        return Math.min.apply(null, cachedCube.cubes);
+      }
+    } else {
+      sortedCubes.set(sortedValue, {
+        count: 1,
+        cubes: [cube]
+      });
+    }
+  }
 
-	return `Unable to find a cube with ${count} permutations that are also cubes under ${limit}`;
+  return `Unable to find a cube with ${count} permutations that are also cubes under ${limit}`;
 }
 
 module.exports = getSmallestCube;

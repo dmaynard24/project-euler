@@ -12,41 +12,41 @@
 const isPandigital = require('../../util/pandigital');
 
 function getPandigitalSum() {
-	let products = [],
-		sum = 0;
+  let products = [],
+    sum = 0;
 
-	for (let i = 2; i <= 100; i++) {
-		let limit = Math.ceil(9876 / i);
+  for (let i = 2; i <= 100; i++) {
+    let limit = Math.ceil(9876 / i);
 
-		if (!isPandigital(i, { excludeZero: true })) {
-			continue;
-		}
+    if (!isPandigital(i, { excludeZero: true })) {
+      continue;
+    }
 
-		for (let j = 1; j <= limit; j++) {
-			if (!isPandigital(j, { excludeZero: true })) {
-				continue;
-			}
+    for (let j = 1; j <= limit; j++) {
+      if (!isPandigital(j, { excludeZero: true })) {
+        continue;
+      }
 
-			let product = i * j;
-			if (!isPandigital(product, { excludeZero: true })) {
-				continue;
-			}
+      let product = i * j;
+      if (!isPandigital(product, { excludeZero: true })) {
+        continue;
+      }
 
-			let concat = i.toString() + j.toString() + product.toString();
-			if (concat.length > 9) {
-				break;
-			}
+      let concat = i.toString() + j.toString() + product.toString();
+      if (concat.length > 9) {
+        break;
+      }
 
-			if (concat.length == 9 && isPandigital(parseInt(concat, 10), { excludeZero: true })) {
-				if (!products[product]) {
-					products[product] = true;
-					sum += product;
-				}
-			}
-		}
-	}
+      if (concat.length == 9 && isPandigital(parseInt(concat, 10), { excludeZero: true })) {
+        if (!products[product]) {
+          products[product] = true;
+          sum += product;
+        }
+      }
+    }
+  }
 
-	return sum;
+  return sum;
 }
 
 module.exports = getPandigitalSum;

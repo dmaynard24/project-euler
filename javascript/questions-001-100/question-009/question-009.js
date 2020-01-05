@@ -10,26 +10,26 @@
 // Find the product abc.
 
 function getTripletProduct(sum) {
-	let n = 1,
-		m = 2,
-		upper = Math.sqrt(sum);
+  let n = 1,
+    m = 2,
+    upper = Math.sqrt(sum);
 
-	while (n < upper) {
-		while (m < upper) {
-			let a = m * m - n * n,
-				b = 2 * m * n,
-				c = m * m + n * n,
-				tripleSum = a + b + c;
+  while (n < upper) {
+    while (m < upper) {
+      let a = m * m - n * n,
+        b = 2 * m * n,
+        c = m * m + n * n,
+        tripleSum = a + b + c;
 
-			if (sum % tripleSum == 0) {
-				let k = sum / tripleSum;
-				return a * k * b * k * c * k;
-			}
+      if (sum % tripleSum == 0) {
+        let k = sum / tripleSum;
+        return a * k * b * k * c * k;
+      }
 
-			m++;
-		}
-		n++;
-	}
+      m++;
+    }
+    n++;
+  }
 }
 
 module.exports = getTripletProduct;

@@ -17,59 +17,59 @@
 // Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 
 const primal = require('../../util/primal'),
-	Decimal = require('decimal.js');
+  Decimal = require('decimal.js');
 
 function getDenominatorWithLongestCycle(limit) {
-	let denominator = 0,
-		largestCycleLength = 0;
+  let denominator = 0,
+    largestCycleLength = 0;
 
-	// set the precision and rounding of the default Decimal constructor
-	Decimal.set({ precision: limit * 2, rounding: 1 });
+  // set the precision and rounding of the default Decimal constructor
+  Decimal.set({ precision: limit * 2, rounding: 1 });
 
-	let primes = primal.getPrimes(limit - 1),
-		primeNums = primal.getPrimeNumbers(primes);
+  let primes = primal.getPrimes(limit - 1),
+    primeNums = primal.getPrimeNumbers(primes);
 
-	primeNums.forEach(primeNum => {
-		let quotient = Decimal(1)
-				.div(primeNum)
-				.toString(),
-			quotientDecimal = quotient.substring(quotient.indexOf('.') + 1),
-			maxCycleLength = Math.floor(quotientDecimal.length / 2),
-			cycleLength = getCycleLength(quotientDecimal, maxCycleLength);
+  primeNums.forEach(primeNum => {
+    let quotient = Decimal(1)
+        .div(primeNum)
+        .toString(),
+      quotientDecimal = quotient.substring(quotient.indexOf('.') + 1),
+      maxCycleLength = Math.floor(quotientDecimal.length / 2),
+      cycleLength = getCycleLength(quotientDecimal, maxCycleLength);
 
-		if (cycleLength >= largestCycleLength) {
-			denominator = primeNum;
-			largestCycleLength = cycleLength;
-		}
-	});
+    if (cycleLength >= largestCycleLength) {
+      denominator = primeNum;
+      largestCycleLength = cycleLength;
+    }
+  });
 
-	return denominator;
+  return denominator;
 }
 
 function getCycleLength(entireValue, maxCycleLength) {
-	for (let i = 0; i <= maxCycleLength; i++) {
-		for (let length = 1; length <= maxCycleLength; length++) {
-			let set = entireValue.substring(i, length),
-				nextIndex = entireValue.indexOf(set, i + length);
-			if (nextIndex > -1) {
-				let set = entireValue.substring(i, nextIndex),
-					setCount = Math.floor((entireValue.length - i) / set.length) - 1,
-					isCycle = false;
+  for (let i = 0; i <= maxCycleLength; i++) {
+    for (let length = 1; length <= maxCycleLength; length++) {
+      let set = entireValue.substring(i, length),
+        nextIndex = entireValue.indexOf(set, i + length);
+      if (nextIndex > -1) {
+        let set = entireValue.substring(i, nextIndex),
+          setCount = Math.floor((entireValue.length - i) / set.length) - 1,
+          isCycle = false;
 
-				for (let j = 0; j < setCount; j++) {
-					let nextSetIndex = nextIndex + j * set.length,
-						nextSet = entireValue.substring(nextSetIndex, nextSetIndex + set.length);
-					isCycle = set == nextSet;
-				}
+        for (let j = 0; j < setCount; j++) {
+          let nextSetIndex = nextIndex + j * set.length,
+            nextSet = entireValue.substring(nextSetIndex, nextSetIndex + set.length);
+          isCycle = set == nextSet;
+        }
 
-				if (isCycle) {
-					return set.length;
-				}
-			}
-		}
-	}
+        if (isCycle) {
+          return set.length;
+        }
+      }
+    }
+  }
 
-	return 0;
+  return 0;
 }
 
 module.exports = getDenominatorWithLongestCycle;

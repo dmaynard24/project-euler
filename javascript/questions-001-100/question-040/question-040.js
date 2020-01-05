@@ -14,54 +14,54 @@
 const digits = require('../../util/digits');
 
 function getConstantProduct() {
-	const targets = [1, 10, 100, 1000, 10000, 100000],
-		limit = targets[targets.length - 1],
-		digitCountObjs = [];
+  const targets = [1, 10, 100, 1000, 10000, 100000],
+    limit = targets[targets.length - 1],
+    digitCountObjs = [];
 
-	let length = 0,
-		digitLength = 1,
-		product = 1;
+  let length = 0,
+    digitLength = 1,
+    product = 1;
 
-	while (length < limit) {
-		let firstNum = targets[digitLength - 1],
-			digitCount = targets[digitLength] - firstNum;
+  while (length < limit) {
+    let firstNum = targets[digitLength - 1],
+      digitCount = targets[digitLength] - firstNum;
 
-		digitCountObjs.push({
-			length: digitLength,
-			prevLengthSum: length,
-			firstNum: firstNum
-		});
+    digitCountObjs.push({
+      length: digitLength,
+      prevLengthSum: length,
+      firstNum: firstNum
+    });
 
-		length += digitLength * digitCount;
-		digitLength++;
-	}
+    length += digitLength * digitCount;
+    digitLength++;
+  }
 
-	let prevI = 0;
-	// we can remove 1 and 10 because they both equal 1
-	targets.slice(2).forEach(target => {
-		let dc = digitCountObjs[digitCountObjs.length - 1];
-		for (let i = prevI; i < digitCountObjs.length; i++) {
-			if (digitCountObjs[i].prevLengthSum > target) {
-				dc = digitCountObjs[i - 1];
-				prevI = i;
-				break;
-			}
-		}
+  let prevI = 0;
+  // we can remove 1 and 10 because they both equal 1
+  targets.slice(2).forEach(target => {
+    let dc = digitCountObjs[digitCountObjs.length - 1];
+    for (let i = prevI; i < digitCountObjs.length; i++) {
+      if (digitCountObjs[i].prevLengthSum > target) {
+        dc = digitCountObjs[i - 1];
+        prevI = i;
+        break;
+      }
+    }
 
-		let lengthSum = dc.prevLengthSum,
-			num = dc.firstNum;
-		if (num < target) {
-			while (lengthSum < target) {
-				lengthSum += dc.length;
-				num++;
-			}
-		}
+    let lengthSum = dc.prevLengthSum,
+      num = dc.firstNum;
+    if (num < target) {
+      while (lengthSum < target) {
+        lengthSum += dc.length;
+        num++;
+      }
+    }
 
-		let diff = lengthSum - target;
-		product *= diff > 0 ? digits.getDigitsReversed(num)[diff] : digits.getDigits(num)[0];
-	});
+    let diff = lengthSum - target;
+    product *= diff > 0 ? digits.getDigitsReversed(num)[diff] : digits.getDigits(num)[0];
+  });
 
-	return product;
+  return product;
 }
 
 module.exports = getConstantProduct;

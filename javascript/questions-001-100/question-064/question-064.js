@@ -25,9 +25,9 @@
 const getPeriod = require('../../util/period');
 
 function getFractionCount(max) {
-	return [...Array(max + 1).keys()].slice(2).filter(n => {
-		return getPeriod(n).length % 2 != 0;
-	}).length;
+  return [...Array(max + 1).keys()].slice(2).filter(n => {
+    return getPeriod(n).length % 2 != 0;
+  }).length;
 }
 
 module.exports = getFractionCount;

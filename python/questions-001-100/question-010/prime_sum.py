@@ -13,6 +13,6 @@ from python.util import primal
 
 
 def get_prime_sum(limit):
-	primes = primal.get_primes(limit)
-	prime_nums = primal.get_prime_numbers(primes)
-	return sum(prime_nums)
+  primes = primal.get_primes(limit)
+  prime_nums = primal.get_prime_numbers(primes)
+  return sum(prime_nums)

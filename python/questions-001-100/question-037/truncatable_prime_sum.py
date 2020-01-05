@@ -15,32 +15,32 @@ from python.util import primal, digits
 
 
 def get_truncatable_prime_sum():
-	limit = 800000
-	primes = primal.get_primes(limit)
-	prime_nums = primal.get_prime_numbers(primes)
+  limit = 800000
+  primes = primal.get_primes(limit)
+  prime_nums = primal.get_prime_numbers(primes)
 
-	def is_truncatable_prime(num):
-		if num < 10:
-			return False
+  def is_truncatable_prime(num):
+    if num < 10:
+      return False
 
-		is_truncatable = True
-		num_digits = digits.get_digits(num)
-		for i in range(1, len(num_digits)):
-			ltr = 0
-			rtl = 0
-			for j in range(len(num_digits)):
-				if j >= i:
-					ltr *= 10
-					ltr += num_digits[j]
-				else:
-					rtl *= 10
-					rtl += num_digits[j]
+    is_truncatable = True
+    num_digits = digits.get_digits(num)
+    for i in range(1, len(num_digits)):
+      ltr = 0
+      rtl = 0
+      for j in range(len(num_digits)):
+        if j >= i:
+          ltr *= 10
+          ltr += num_digits[j]
+        else:
+          rtl *= 10
+          rtl += num_digits[j]
 
-			is_truncatable = primal.is_prime(ltr, primes) and primal.is_prime(
-				rtl, primes)
-			if is_truncatable == False:
-				return False
+      is_truncatable = primal.is_prime(ltr, primes) and primal.is_prime(
+          rtl, primes)
+      if is_truncatable == False:
+        return False
 
-		return True
+    return True
 
-	return sum(filter(is_truncatable_prime, prime_nums))
+  return sum(filter(is_truncatable_prime, prime_nums))

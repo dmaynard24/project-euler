@@ -15,36 +15,36 @@
 
 
 def get_sunday_count(start_year, end_year):
-	firsts = {
-		num: True
-		for num in [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-	}
-	leap_firsts = {
-		num: True
-		for num in [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
-	}
-	first_sunday = 7
-	sunday_count = 0
+  firsts = {
+      num: True
+      for num in [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+  }
+  leap_firsts = {
+      num: True
+      for num in [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
+  }
+  first_sunday = 7
+  sunday_count = 0
 
-	for current_year in range(start_year, end_year + 1):
-		is_leap_year = False
-		if current_year % 100 == 0:
-			is_leap_year = current_year % 400 == 0
-		else:
-			is_leap_year = current_year % 4 == 0
+  for current_year in range(start_year, end_year + 1):
+    is_leap_year = False
+    if current_year % 100 == 0:
+      is_leap_year = current_year % 400 == 0
+    else:
+      is_leap_year = current_year % 4 == 0
 
-		total_days = 366 if is_leap_year else 365
-		final_sunday = None
-		for i in range(first_sunday, total_days + 1, 7):
-			if is_leap_year == False:
-				if i in firsts:
-					sunday_count += 1
-			else:
-				if i in leap_firsts:
-					sunday_count += 1
+    total_days = 366 if is_leap_year else 365
+    final_sunday = None
+    for i in range(first_sunday, total_days + 1, 7):
+      if is_leap_year == False:
+        if i in firsts:
+          sunday_count += 1
+      else:
+        if i in leap_firsts:
+          sunday_count += 1
 
-			final_sunday = i
+      final_sunday = i
 
-		first_sunday = 6 - (total_days - final_sunday)
+    first_sunday = 6 - (total_days - final_sunday)
 
-	return sunday_count
+  return sunday_count

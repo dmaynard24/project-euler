@@ -15,23 +15,23 @@ from python.util import pythagorean_triples
 
 
 def get_most_common_perimeter(p_max):
-	primitives = pythagorean_triples.get_primitive_triples(p_max)
-	perimeter_counts = {}
-	most_common = 120
-	most_common_count = 3
+  primitives = pythagorean_triples.get_primitive_triples(p_max)
+  perimeter_counts = {}
+  most_common = 120
+  most_common_count = 3
 
-	for primitive in primitives:
-		p = primitive['p']
-		while p <= p_max:
-			if p in perimeter_counts:
-				perimeter_counts[p] = perimeter_counts[p] + 1
-			else:
-				perimeter_counts[p] = 1
+  for primitive in primitives:
+    p = primitive['p']
+    while p <= p_max:
+      if p in perimeter_counts:
+        perimeter_counts[p] = perimeter_counts[p] + 1
+      else:
+        perimeter_counts[p] = 1
 
-			if perimeter_counts[p] > most_common_count:
-				most_common_count = perimeter_counts[p]
-				most_common = p
+      if perimeter_counts[p] > most_common_count:
+        most_common_count = perimeter_counts[p]
+        most_common = p
 
-			p += primitive['p']
+      p += primitive['p']
 
-	return most_common
+  return most_common

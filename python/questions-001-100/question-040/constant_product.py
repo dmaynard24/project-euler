@@ -19,44 +19,44 @@ from python.util import digits
 
 
 def get_constant_product():
-	targets = [1, 10, 100, 1000, 10000, 100000]
-	limit = targets[len(targets) - 1]
-	digit_count_objs = []
-	length = 0
-	digit_length = 1
-	product = 1
+  targets = [1, 10, 100, 1000, 10000, 100000]
+  limit = targets[len(targets) - 1]
+  digit_count_objs = []
+  length = 0
+  digit_length = 1
+  product = 1
 
-	while length < limit:
-		first_num = targets[digit_length - 1]
-		digit_count = targets[digit_length] - first_num
+  while length < limit:
+    first_num = targets[digit_length - 1]
+    digit_count = targets[digit_length] - first_num
 
-		digit_count_obj = {}
-		digit_count_obj['length'] = digit_length
-		digit_count_obj['prev_length_sum'] = length
-		digit_count_obj['first_num'] = first_num
-		digit_count_objs.append(digit_count_obj)
+    digit_count_obj = {}
+    digit_count_obj['length'] = digit_length
+    digit_count_obj['prev_length_sum'] = length
+    digit_count_obj['first_num'] = first_num
+    digit_count_objs.append(digit_count_obj)
 
-		length += digit_length * digit_count
-		digit_length += 1
+    length += digit_length * digit_count
+    digit_length += 1
 
-	prev_i = 0
-	for target in targets[2:]:
-		dc = digit_count_objs[len(digit_count_objs) - 1]
-		for i in range(prev_i, len(digit_count_objs)):
-			if digit_count_objs[i]['prev_length_sum'] > target:
-				dc = digit_count_objs[i - 1]
-				prev_i = i
-				break
+  prev_i = 0
+  for target in targets[2:]:
+    dc = digit_count_objs[len(digit_count_objs) - 1]
+    for i in range(prev_i, len(digit_count_objs)):
+      if digit_count_objs[i]['prev_length_sum'] > target:
+        dc = digit_count_objs[i - 1]
+        prev_i = i
+        break
 
-		length_sum = dc['prev_length_sum']
-		num = dc['first_num']
-		if num < target:
-			while length_sum < target:
-				length_sum += dc['length']
-				num += 1
+    length_sum = dc['prev_length_sum']
+    num = dc['first_num']
+    if num < target:
+      while length_sum < target:
+        length_sum += dc['length']
+        num += 1
 
-		diff = length_sum - target
-		product *= digits.get_digits_reversed(
-			num)[diff] if diff > 0 else digits.get_digits(num)[0]
+    diff = length_sum - target
+    product *= digits.get_digits_reversed(
+        num)[diff] if diff > 0 else digits.get_digits(num)[0]
 
-	return product
+  return product

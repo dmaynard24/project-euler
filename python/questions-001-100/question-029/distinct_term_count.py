@@ -15,10 +15,10 @@
 
 
 def get_distinct_term_count(max):
-	terms = {}
+  terms = {}
 
-	for base in range(2, max + 1):
-		for exp in range(2, max + 1):
-			terms[base**exp] = 1
+  for base in range(2, max + 1):
+    for exp in range(2, max + 1):
+      terms[base**exp] = 1
 
-	return len(terms)
+  return len(terms)

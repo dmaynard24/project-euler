@@ -15,35 +15,35 @@ from python.util import primal, digits
 
 
 def get_circular_prime_count(limit):
-	primes = primal.get_primes(limit - 1)
-	prime_nums = primal.get_prime_numbers(primes)
-	count = 0
+  primes = primal.get_primes(limit - 1)
+  prime_nums = primal.get_prime_numbers(primes)
+  count = 0
 
-	for i in range(len(prime_nums)):
-		num_digits = digits.get_digits(prime_nums[i])
+  for i in range(len(prime_nums)):
+    num_digits = digits.get_digits(prime_nums[i])
 
-		if len(num_digits) == 1:
-			count += 1
-		else:
-			has_even_digit = False
-			for digit in num_digits:
-				if digit % 2 == 0:
-					has_even_digit = True
-					break
+    if len(num_digits) == 1:
+      count += 1
+    else:
+      has_even_digit = False
+      for digit in num_digits:
+        if digit % 2 == 0:
+          has_even_digit = True
+          break
 
-			if has_even_digit == False:
-				are_all_prime = True
-				length = len(num_digits)
-				for j in range(1, length):
-					rotation = 0
-					for k in range(length):
-						rotation *= 10
-						rotation += num_digits[(j + k) % length]
-					are_all_prime = primal.is_prime(rotation, primes)
-					if are_all_prime == False:
-						break
+      if has_even_digit == False:
+        are_all_prime = True
+        length = len(num_digits)
+        for j in range(1, length):
+          rotation = 0
+          for k in range(length):
+            rotation *= 10
+            rotation += num_digits[(j + k) % length]
+          are_all_prime = primal.is_prime(rotation, primes)
+          if are_all_prime == False:
+            break
 
-				if are_all_prime == True:
-					count += 1
+        if are_all_prime == True:
+          count += 1
 
-	return count
+  return count

@@ -26,20 +26,20 @@ from python.util import primal
 
 
 def get_first_triangle_with_divisors(divisors):
-	def get_divisor_count(num):
-		prime_factors = primal.get_prime_factors(num, primes)
-		divisor_count = 1
-		for pf in prime_factors:
-			divisor_count *= pf['exp'] + 1
+  def get_divisor_count(num):
+    prime_factors = primal.get_prime_factors(num, primes)
+    divisor_count = 1
+    for pf in prime_factors:
+      divisor_count *= pf['exp'] + 1
 
-		return divisor_count
+    return divisor_count
 
-	i = 1
-	triangle = 1
-	primes = primal.get_primes(25)
+  i = 1
+  triangle = 1
+  primes = primal.get_primes(25)
 
-	while get_divisor_count(triangle) < divisors:
-		i += 1
-		triangle += i
+  while get_divisor_count(triangle) < divisors:
+    i += 1
+    triangle += i
 
-	return triangle
+  return triangle

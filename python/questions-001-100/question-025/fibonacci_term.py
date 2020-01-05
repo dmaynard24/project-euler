@@ -26,7 +26,7 @@ import math
 
 
 def get_fibonacci_term(digit_count):
-	sqrt_five = math.sqrt(5)
-	phi = (1 + sqrt_five) / 2
-	return math.ceil((digit_count - 1 + math.log10(sqrt_five)) /
-		math.log10(math.e) / math.log(phi))
+  sqrt_five = math.sqrt(5)
+  phi = (1 + sqrt_five) / 2
+  return math.ceil((digit_count - 1 + math.log10(sqrt_five)) /
+                   math.log10(math.e) / math.log(phi))

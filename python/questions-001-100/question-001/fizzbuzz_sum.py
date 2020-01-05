@@ -7,8 +7,8 @@
 
 
 def fizzbuzz(num):
-	return num % 3 == 0 or num % 5 == 0
+  return num % 3 == 0 or num % 5 == 0
 
 
 def get_fizzbuzz_sum(max):
-	return sum(filter(fizzbuzz, range(max)))
+  return sum(filter(fizzbuzz, range(max)))

@@ -15,20 +15,20 @@ from python.util import digits
 
 
 def get_digit_factorial_sum():
-	factorials = []
-	factorial_sum = 0
+  factorials = []
+  factorial_sum = 0
 
-	factorials.append(1)
-	for i in range(1, 10):
-		factorials.append(i * factorials[i - 1])
+  factorials.append(1)
+  for i in range(1, 10):
+    factorials.append(i * factorials[i - 1])
 
-	for j in range(3, 41000):
-		num_digits = digits.get_digits(j)
-		digit_factorial_sum = 0
-		for digit in num_digits:
-			digit_factorial_sum += factorials[digit]
+  for j in range(3, 41000):
+    num_digits = digits.get_digits(j)
+    digit_factorial_sum = 0
+    for digit in num_digits:
+      digit_factorial_sum += factorials[digit]
 
-		if j == digit_factorial_sum:
-			factorial_sum += j
+    if j == digit_factorial_sum:
+      factorial_sum += j
 
-	return factorial_sum
+  return factorial_sum

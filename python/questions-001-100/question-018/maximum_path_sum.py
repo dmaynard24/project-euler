@@ -18,14 +18,14 @@ import triangle
 
 
 def get_maximum_path_sum():
-	sums = list(map(row_map, triangle.triangle.split('\n')))
+  sums = list(map(row_map, triangle.triangle.split('\n')))
 
-	for i in range(len(sums) - 2, -1, -1):
-		for j in range(len(sums[i])):
-			sums[i][j] = max(sums[i + 1][j], sums[i + 1][j + 1]) + sums[i][j]
+  for i in range(len(sums) - 2, -1, -1):
+    for j in range(len(sums[i])):
+      sums[i][j] = max(sums[i + 1][j], sums[i + 1][j + 1]) + sums[i][j]
 
-	return sums[0][0]
+  return sums[0][0]
 
 
 def row_map(row):
-	return list(map(int, row.strip().split(' ')))
+  return list(map(int, row.strip().split(' ')))

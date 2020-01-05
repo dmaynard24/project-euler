@@ -17,21 +17,21 @@ from python.util import digits, gcd
 
 
 def get_fraction_product_denominator():
-	n_product = 1
-	d_product = 1
+  n_product = 1
+  d_product = 1
 
-	for n in range(10, 99):
-		for d in range(n + 1, 100):
-			decimal = n / d
-			n_digits = digits.get_digits(n)
-			d_digits = digits.get_digits(d)
-			remaining_n = n_digits[0]
-			cancelled_n = n_digits[1]
-			remaining_d = d_digits[1]
-			cancelled_d = d_digits[0]
+  for n in range(10, 99):
+    for d in range(n + 1, 100):
+      decimal = n / d
+      n_digits = digits.get_digits(n)
+      d_digits = digits.get_digits(d)
+      remaining_n = n_digits[0]
+      cancelled_n = n_digits[1]
+      remaining_d = d_digits[1]
+      cancelled_d = d_digits[0]
 
-			if cancelled_n == cancelled_d and remaining_d != 0 and decimal == remaining_n / remaining_d:
-				n_product *= n
-				d_product *= d
+      if cancelled_n == cancelled_d and remaining_d != 0 and decimal == remaining_n / remaining_d:
+        n_product *= n
+        d_product *= d
 
-	return d_product / gcd.get_gcd(n_product, d_product)
+  return d_product / gcd.get_gcd(n_product, d_product)

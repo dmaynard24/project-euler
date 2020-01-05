@@ -13,8 +13,8 @@ from python.util import primal
 
 
 def get_nth_prime(n):
-	limit = 105000
-	primes = primal.get_primes(limit)
-	prime_nums = primal.get_prime_numbers(primes)
+  limit = 105000
+  primes = primal.get_primes(limit)
+  prime_nums = primal.get_prime_numbers(primes)
 
-	return prime_nums[n - 1]
+  return prime_nums[n - 1]

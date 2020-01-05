@@ -13,20 +13,20 @@ import math
 
 
 def get_triplet_product(target_sum):
-	n = 1
-	m = 2
-	upper = math.sqrt(target_sum)
+  n = 1
+  m = 2
+  upper = math.sqrt(target_sum)
 
-	while n < upper:
-		while m < upper:
-			a = m * m - n * n
-			b = 2 * m * n
-			c = m * m + n * n
-			triple_sum = a + b + c
+  while n < upper:
+    while m < upper:
+      a = m * m - n * n
+      b = 2 * m * n
+      c = m * m + n * n
+      triple_sum = a + b + c
 
-			if target_sum % triple_sum == 0:
-				k = target_sum / triple_sum
-				return a * k * b * k * c * k
+      if target_sum % triple_sum == 0:
+        k = target_sum / triple_sum
+        return a * k * b * k * c * k
 
-			m += 1
-		n += 1
+      m += 1
+    n += 1

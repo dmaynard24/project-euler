@@ -20,13 +20,13 @@ from python.util import digits
 
 
 def get_digit_fifth_power_sum():
-	fifth_powers = list(map(lambda digit: digit**5, range(10)))
-	power_sum = 0
+  fifth_powers = list(map(lambda digit: digit**5, range(10)))
+  power_sum = 0
 
-	for i in range(2, 200000):
-		i_digits_reversed = digits.get_digits_reversed(i)
+  for i in range(2, 200000):
+    i_digits_reversed = digits.get_digits_reversed(i)
 
-		if i == sum(map(lambda digit: fifth_powers[digit], i_digits_reversed)):
-			power_sum += i
+    if i == sum(map(lambda digit: fifth_powers[digit], i_digits_reversed)):
+      power_sum += i
 
-	return power_sum
+  return power_sum

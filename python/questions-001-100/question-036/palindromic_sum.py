@@ -15,12 +15,12 @@ from python.util import palindrome
 
 
 def get_palindromic_sum(limit):
-	palindromic_sum = 0
+  palindromic_sum = 0
 
-	for i in range(1, limit, 2):
-		if palindrome.is_array_palindrome(list(str(i))):
-			binary = bin(i)[2:]
-			if palindrome.is_array_palindrome(list(binary)):
-				palindromic_sum += i
+  for i in range(1, limit, 2):
+    if palindrome.is_array_palindrome(list(str(i))):
+      binary = bin(i)[2:]
+      if palindrome.is_array_palindrome(list(binary)):
+        palindromic_sum += i
 
-	return palindromic_sum
+  return palindromic_sum

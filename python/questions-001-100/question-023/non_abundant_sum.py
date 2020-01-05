@@ -17,25 +17,25 @@ from python.util import factors
 
 
 def get_non_abundant_sum():
-	lower = 12
-	upper = 28213
-	abundants = []
-	for i in range(lower, upper + 1):
-		proper_divisors_sum = sum(factors.get_proper_divisors(i))
-		if proper_divisors_sum > i:
-			abundants.append(i)
+  lower = 12
+  upper = 28213
+  abundants = []
+  for i in range(lower, upper + 1):
+    proper_divisors_sum = sum(factors.get_proper_divisors(i))
+    if proper_divisors_sum > i:
+      abundants.append(i)
 
-	abundant_sums = [None] * (upper + 1)
-	for i in range(0, len(abundants)):
-		for j in range(i, len(abundants)):
-			abundant_sum = abundants[i] + abundants[j]
-			if abundant_sum > upper:
-				break
+  abundant_sums = [None] * (upper + 1)
+  for i in range(0, len(abundants)):
+    for j in range(i, len(abundants)):
+      abundant_sum = abundants[i] + abundants[j]
+      if abundant_sum > upper:
+        break
 
-			abundant_sums[abundant_sum] = True
+      abundant_sums[abundant_sum] = True
 
-	non_abundant_sum = 0
-	for i, val in enumerate(abundant_sums):
-		non_abundant_sum += i if val == None else 0
+  non_abundant_sum = 0
+  for i, val in enumerate(abundant_sums):
+    non_abundant_sum += i if val == None else 0
 
-	return non_abundant_sum
+  return non_abundant_sum

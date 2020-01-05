@@ -17,22 +17,22 @@
 
 
 def get_largest_collatz_sequence(limit):
-	start = 2
-	largest_sequence_start = 2
-	largest_count = 1
+  start = 2
+  largest_sequence_start = 2
+  largest_count = 1
 
-	while start < limit:
-		term = start
-		count = 1
-		while term != 1:
-			if term % 2 == 0:
-				term /= 2
-			else:
-				term = 3 * term + 1
-			count += 1
-		if count > largest_count:
-			largest_count = count
-			largest_sequence_start = start
-		start += 1
+  while start < limit:
+    term = start
+    count = 1
+    while term != 1:
+      if term % 2 == 0:
+        term /= 2
+      else:
+        term = 3 * term + 1
+      count += 1
+    if count > largest_count:
+      largest_count = count
+      largest_sequence_start = start
+    start += 1
 
-	return largest_sequence_start
+  return largest_sequence_start

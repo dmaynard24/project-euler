@@ -1,35 +1,36 @@
 {
-	"name": "project-euler",
-	"version": "1.0.0",
-	"description": "JavaScript solutions for the https://projecteuler.net/archives questions.",
-	"main": "index.js",
-	"devDependencies": {
-		"big-integer": "^1.6.44",
-		"decimal.js": "^10.2.0",
-		"jest": "^24.8.0",
-		"performance-now": "^2.1.0"
-	},
-	"scripts": {
-		"test": "jest"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/dmaynard24/project-euler.git"
-	},
-	"keywords": [
-		"javascript",
-		"euler",
-		"project",
-		"algorithms",
-		"math",
-		"primes",
-		"prime",
-		"numbers"
-	],
-	"author": "Dave Maynard",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/dmaynard24/project-euler/issues"
-	},
-	"homepage": "https://github.com/dmaynard24/project-euler#readme"
+  "name": "project-euler",
+  "version": "1.0.0",
+  "description": "JavaScript solutions for the https://projecteuler.net/archives questions.",
+  "main": "index.js",
+  "devDependencies": {
+    "big-integer": "^1.6.44",
+    "decimal.js": "^10.2.0",
+    "jest": "^24.8.0",
+    "performance-now": "^2.1.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "yapf": "yapf -ir --style=\"{indent_width: 2}\" files ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmaynard24/project-euler.git"
+  },
+  "keywords": [
+    "javascript",
+    "euler",
+    "project",
+    "algorithms",
+    "math",
+    "primes",
+    "prime",
+    "numbers"
+  ],
+  "author": "Dave Maynard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmaynard24/project-euler/issues"
+  },
+  "homepage": "https://github.com/dmaynard24/project-euler#readme"
 }

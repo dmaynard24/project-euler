@@ -4,13 +4,13 @@
     "editor.formatOnSave": false
   },
   "editor.tabSize": 2,
-  "python.pythonPath": "C:\\Users\\davem\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+  "python.pythonPath": "C:\\Users\\dmaynard\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.formatting.provider": "yapf",
   "python.formatting.yapfArgs": ["--style", "{indent_width: 2}"],
   "vscode_custom_css.imports": [
-    "file:///c:/Users/davem/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.9/synthwave-x-fluoromachine.css",
+    "file:///c:/Users/dmaynard/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.9/synthwave-x-fluoromachine.css",
     "file:///c:/repos/project-euler/.vscode/theme-overrides.css"
   ]
 }

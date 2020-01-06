@@ -13,8 +13,8 @@ const words = require('./words'),
   shapes = require('../../util/shapes');
 
 function getTriangleWordCount() {
-  let values = [...Array(27).keys()].slice(1),
-    letterValues = values.reduce((a, c) => {
+  let range = [...Array(27).keys()].slice(1),
+    letterValues = range.reduce((a, c) => {
       a[String.fromCharCode(c + 64)] = c;
       return a;
     }, []),

@@ -56,6 +56,7 @@ function getSubstringPandigitalSum() {
   // get remaining first digit of each pandigital, add them all up
   let sum = 0;
   pandigitals.forEach(p => {
+    console.log(getRemainingDigit(p) + p);
     sum += parseInt(getRemainingDigit(p) + p, 10);
   });
 
@@ -93,5 +94,7 @@ function getRemainingDigit(str) {
     }
   }
 }
+
+console.log(getSubstringPandigitalSum());
 
 module.exports = getSubstringPandigitalSum;

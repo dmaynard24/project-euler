@@ -6,12 +6,13 @@
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
 import series
+series = series.series
 
 
 def get_largest_product(digits):
   start = 0
   end = digits
-  nums = list(map(int, series.series.replace('\n', '')))
+  nums = list(map(int, series.replace('\n', '')))
   largest = 0
   product = None
 

@@ -8,14 +8,14 @@
 # What is the total of all the name scores in the set?
 
 import names
+names = names.names
 
 
 def get_name_score_sum():
-  names_list = names.names
-  names_list.sort()
+  names.sort()
 
   name_score_sum = 0
-  for i, name in enumerate(names_list):
+  for i, name in enumerate(names):
     name_score_sum += sum(list(map(lambda char: ord(char) - 64,
                                    name))) * (i + 1)
 

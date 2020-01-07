@@ -10,7 +10,14 @@
 # Using the array of words containing nearly two-thousand common English words, how many are triangle words?
 
 import words
+# essentially a named import
 words = words.words
+
+import sys, os
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+sys.path.append(root_dir)
+
+from python.util import shapes
 
 
 def get_triangle_word_count():
@@ -22,7 +29,8 @@ def get_triangle_word_count():
   words_sorted = sorted(words, key=lambda word: len(word))
   words_sorted.reverse()
 
-  limit = len(words_sorted[0])
+  limit = len(words_sorted[0]) * 26
+  triangles = shapes.get_triangles(limit)
 
   def get_word_value(word):
     word_value = 0
@@ -30,5 +38,7 @@ def get_triangle_word_count():
       word_value += letter_values[char]
     return word_value
 
+  def is_triangle_word(word):
+    return triangles.get(get_word_value(word)) == True
 
-print(get_triangle_word_count())
+  return len(list(filter(is_triangle_word, words)))

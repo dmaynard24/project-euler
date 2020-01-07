@@ -21,6 +21,7 @@ function getTriangleWordCount() {
     limit = words.sort((a, b) => b.length - a.length)[0].length * 26,
     triangles = shapes.getTriangles(limit);
 
+  console.log(limit);
   function getWordValue(word) {
     return [...word].reduce((a, c) => {
       return a + letterValues[c];

@@ -35,5 +35,3 @@ get_pentagons = lambda limit: get_shapes(limit, get_nth_pentagon)
 get_hexagons = lambda limit: get_shapes(limit, get_nth_hexagon)
 get_heptagons = lambda limit: get_shapes(limit, get_nth_heptagon)
 get_octagons = lambda limit: get_shapes(limit, get_nth_octagon)
-
-print(get_nth_square(5))

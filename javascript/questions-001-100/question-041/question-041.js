@@ -26,7 +26,6 @@ function getLargestPandigitalPrime() {
   }
 
   for (let i = 0; i < validRanges.length; i++) {
-    console.log(validRanges[i].start, validRanges[i].end);
     for (j = validRanges[i].end; j >= validRanges[i].start; j -= 2) {
       if (isPandigital(j) && primal.isPrime(j)) {
         return j;

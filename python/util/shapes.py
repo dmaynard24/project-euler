@@ -2,8 +2,8 @@ import math
 
 
 def is_pentagonal(num, pentagons):
-  if pentagons is not None and num in pentagons:
-    return pentagons[num]
+  if pentagons is not None and int(pentagons.keys()[-1]) >= num:
+    return pentagons[num] == True
 
   return (math.sqrt(24 * num + 1) + 1) % 6 == 0
 

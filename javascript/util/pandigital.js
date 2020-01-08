@@ -1,6 +1,9 @@
 function isPandigital(num, excludeZero) {
+  let digits;
+
   if (typeof num === 'number') {
-    let digits = new Map();
+    // if a number was passed as the argument
+    digits = new Map();
 
     while (num > 0) {
       let mod = num % 10;
@@ -13,17 +16,23 @@ function isPandigital(num, excludeZero) {
     }
 
     return true;
+  } else if (typeof num === 'string') {
+    // if a string was passed as the argument
+    digits = num.split('');
+  } else if (Array.isArray(num)) {
+    // if an array was passed as the argument
+    digits = num;
   }
 
-  // if a string was passed as the argument
-  let digits = num.split('').sort();
+  // sort ("clone" the array in case an array was passed by reference)
+  let digitsSorted = [...digits].sort();
 
-  if (excludeZero && digits[0] == '0') {
+  if (excludeZero && digitsSorted[0] == '0') {
     return false;
   }
 
-  for (let i = 1; i < digits.length; i++) {
-    if (digits[i] == digits[i - 1]) {
+  for (let i = 1; i < digitsSorted.length; i++) {
+    if (digitsSorted[i] == digitsSorted[i - 1]) {
       return false;
     }
   }

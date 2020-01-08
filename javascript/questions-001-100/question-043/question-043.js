@@ -14,7 +14,8 @@
 // d8d9d10=289 is divisible by 17
 // Find the sum of all 0 to 9 pandigital numbers with this property.
 
-const isPandigital = require('../../util/pandigital');
+const isPandigital = require('../../util/pandigital'),
+  digits = require('../../util/digits');
 
 function getSubstringPandigitalSum() {
   let possibles = {
@@ -31,14 +32,13 @@ function getSubstringPandigitalSum() {
     let pandigitals = [];
 
     for (let i = 0; i < set.length; i++) {
-      let newConcat = index == 7 ? set[i] : set[i].substring(0, 1) + concat;
+      let newConcat = index == 7 ? set[i] : [set[i][0], ...concat];
 
       if (isPandigital(newConcat)) {
         if (index - 1 > 0) {
-          let sub = newConcat.substring(0, 2),
-            newSet = possibles[index - 1].filter(match => {
-              return match.substring(1, 3) == sub;
-            });
+          let newSet = possibles[index - 1].filter(match => {
+            return match[1] == newConcat[0] && match[2] == newConcat[1];
+          });
 
           pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
         } else {
@@ -50,19 +50,19 @@ function getSubstringPandigitalSum() {
     return pandigitals;
   }
 
-  // recursively create concatenated strings beginning with an empty string
-  let pandigitals = getSetAtIndex(7, possibles[7], '');
+  // recursively create concatenated arrays beginning with an empty array
+  let pandigitals = getSetAtIndex(7, possibles[7], []);
 
   // get remaining first digit of each pandigital, add them all up
   let sum = 0;
   pandigitals.forEach(p => {
-    sum += parseInt(getRemainingDigit(p) + p, 10);
+    sum += digits.getIntFromDigits([getRemainingDigit(p), ...p]);
   });
 
   return sum;
 }
 
-// returns an array of strings since substring is used later
+// returns an array of multiples stored as 3-digit arrays
 function getPossibleMultiples(multiplicand) {
   let multiples = [],
     multiplier = 1,
@@ -70,13 +70,11 @@ function getPossibleMultiples(multiplicand) {
 
   while (product < 1000 - multiplicand) {
     product = multiplicand * multiplier;
-    // 12 is the first 3-digit pandigital with a leading zero
+    // 12 is the first 3-digit pandigital (with a leading zero)
     if (product >= 12) {
-      if (product < 100) {
-        // prepend leading zero
-        product = '0' + product;
-      }
-      multiples.push(product + '');
+      let productDigits = digits.getDigits(product);
+      // prepend leading zero
+      multiples.push(product < 100 ? [0, ...productDigits] : productDigits);
     }
 
     multiplier++;
@@ -85,10 +83,10 @@ function getPossibleMultiples(multiplicand) {
   return multiples;
 }
 
-function getRemainingDigit(str) {
-  let digits = str.split('').map(d => parseInt(d, 10));
+function getRemainingDigit(digits) {
+  let digitsSorted = [...digits].sort();
   for (let i = 0; i < 10; i++) {
-    if (digits.indexOf(i) < 0) {
+    if (i != digitsSorted[i]) {
       return i;
     }
   }

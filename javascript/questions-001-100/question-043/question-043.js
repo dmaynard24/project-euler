@@ -36,8 +36,8 @@ function getSubstringPandigitalSum() {
 
       if (isPandigital(newConcat)) {
         if (index - 1 > 0) {
-          let newSet = possibles[index - 1].filter(match => {
-            return match[1] == newConcat[0] && match[2] == newConcat[1];
+          let newSet = possibles[index - 1].filter(possible => {
+            return possible[1] == newConcat[0] && possible[2] == newConcat[1];
           });
 
           pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
@@ -55,8 +55,8 @@ function getSubstringPandigitalSum() {
 
   // get remaining first digit of each pandigital, add them all up
   let sum = 0;
-  pandigitals.forEach(p => {
-    sum += digits.getIntFromDigits([getRemainingDigit(p), ...p]);
+  pandigitals.forEach(pandigital => {
+    sum += digits.getIntFromDigits([getRemainingDigit(pandigital), ...pandigital]);
   });
 
   return sum;

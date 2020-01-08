@@ -18,19 +18,18 @@ import sys, os
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
 sys.path.append(root_dir)
 
-from python.util import pandigital
-import math
+from python.util import digits, pandigital
 
 
-def get_remaining_digit(pandigital_str):
-  digits = list(pandigital_str)
+def get_remaining_digit(digits):
+  digits_sorted = digits[:]
+  digits_sorted.sort()
   for i in range(10):
-    i_str = str(i)
-    if i_str not in digits:
-      return i_str
+    if i != digits_sorted[i]:
+      return i
 
 
-# returns an array of strings since substring is used later
+# returns an array of multiples stored as 3-digit arrays
 def get_possible_multiples(multiplicand):
   multiples = []
   multiplier = 1
@@ -38,9 +37,12 @@ def get_possible_multiples(multiplicand):
 
   while (product < 1000 - multiplicand):
     product = multiplicand * multiplier
-    # 12 is the first 3-digit pandigital with a leading zero
+    # 12 is the first 3-digit pandigital (with a leading zero)
     if product >= 12:
-      multiples.append('0' + str(product) if product < 100 else str(product))
+      product_digits = digits.get_digits(product)
+      # prepend leading zero
+      multiples.append([0] +
+                       product_digits if product < 100 else product_digits)
 
     multiplier += 1
 
@@ -61,14 +63,13 @@ def get_substring_pandigital_sum():
     pandigitals = []
 
     for i in range(len(set)):
-      new_concat = set[i] if index == 7 else set[i][0] + concat
+      new_concat = set[i] if index == 7 else [set[i][0]] + concat
 
       if pandigital.is_pandigital(new_concat, exclude_zero=False):
         if index - 1 > 0:
-          sub = new_concat[0:2]
           new_set = []
           for possible in possibles[str(index - 1)]:
-            if possible[1:3] == sub:
+            if possible[1] == new_concat[0] and possible[2] == new_concat[1]:
               new_set.append(possible)
 
           pandigitals = pandigitals + get_set_at_index(index - 1, new_set,
@@ -78,12 +79,13 @@ def get_substring_pandigital_sum():
 
     return pandigitals
 
-  # recursively create concatenated strings beginning with an empty string
-  pandigitals = get_set_at_index(7, possibles['7'], '')
+  # recursively create concatenated arrays beginning with an empty array
+  pandigitals = get_set_at_index(7, possibles['7'], [])
 
   # get remaining first digit of each pandigital, add them all up
   substring_pandigital_sum = 0
   for p in pandigitals:
-    substring_pandigital_sum += int(get_remaining_digit(p) + p)
+    substring_pandigital_sum += digits.get_int_from_digits(
+        [get_remaining_digit(p)] + p)
 
   return substring_pandigital_sum

@@ -21,11 +21,11 @@ function getLastTenDigitsWithBigInt() {
 }
 
 // solution without the need for bigInt
-function getLastTenDigits() {
+function getLastTenDigits(max) {
   let mod = 10000000000,
     sum = 0;
 
-  for (let i = 1; i < 1000; i++) {
+  for (let i = 1; i < max; i++) {
     if (i % 10 == 0) {
       continue;
     }

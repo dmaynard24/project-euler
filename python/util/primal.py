@@ -77,3 +77,19 @@ def get_prime_factors(num, primes):
     prime_factors.append({'base': int(num), 'exp': int(1)})
 
   return prime_factors
+
+
+# sieve factor counts
+def get_prime_factor_counts(limit):
+  prime_factor_counts = [0] * (limit + 1)
+  prime_factor_counts[1] = 1
+
+  for i in range(2, len(prime_factor_counts)):
+    if prime_factor_counts[i] != 0:
+      continue
+
+    step = i
+    for j in range(i, len(prime_factor_counts), step):
+      prime_factor_counts[j] += 1
+
+  return prime_factor_counts

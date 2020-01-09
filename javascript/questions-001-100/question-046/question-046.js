@@ -30,11 +30,16 @@ function getSmallestOddComposite() {
         }
 
         if (primal.isPrime(prime, primes)) {
-          for (let k = 1; prime + 2 * (k * k) <= composite; k++) {
-            if (prime + 2 * (k * k) == composite) {
-              proof = true;
+          let root = 1;
+
+          while (!proof) {
+            let expressionValue = prime + 2 * (root * root);
+            if (expressionValue > composite) {
               break;
             }
+            proof = expressionValue == composite;
+
+            root++;
           }
         }
       }

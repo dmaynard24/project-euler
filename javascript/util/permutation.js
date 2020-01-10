@@ -35,7 +35,7 @@ function isPermutation(num, testNum) {
   return true;
 }
 
-// always picks a.length
+// always picks arr.length
 function getPerms(arr) {
   if (arr.length < 2) {
     return [arr];

@@ -2,6 +2,7 @@ function getCombos(arr, pick) {
   if (!pick) {
     return [[]];
   }
+
   if (!arr.length) {
     return [];
   }

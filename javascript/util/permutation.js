@@ -9,24 +9,24 @@ function isPermutation(num, testNum) {
   }
 
   // create hashmap of digit counts in first array
-  let digitCounts = [];
+  let digitCounts = new Map();
   for (let i = 0; i < numDigits.length; i++) {
     let digit = numDigits[i];
-    if (digitCounts[digit] == undefined) {
-      digitCounts[digit] = 1;
+    if (!digitCounts.has(digit)) {
+      digitCounts.set(digit, 1);
     } else {
-      digitCounts[digit]++;
+      digitCounts.set(digit, digitCounts.get(digit) + 1);
     }
   }
 
   // check digit counts in the second array to make sure they match
   for (let i = 0; i < testNumDigits.length; i++) {
     let digit = testNumDigits[i];
-    if (digitCounts[digit] == undefined) {
+    if (!digitCounts.has(digit)) {
       return false;
     } else {
-      digitCounts[digit]--;
-      if (digitCounts[digit] < 0) {
+      digitCounts.set(digit, digitCounts.get(digit) - 1);
+      if (digitCounts.get(digit) < 0) {
         return false;
       }
     }

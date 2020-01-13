@@ -11,6 +11,7 @@ const isPandigital = require('../../util/pandigital'),
 function getSmallestInteger(maxMultiplier) {
   let limit = 1000000,
     i = 1;
+
   while (i < limit) {
     i *= 10;
 

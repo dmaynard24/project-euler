@@ -7,7 +7,7 @@ class TestGetFirstTriangleWithDivisors(unittest.TestCase):
         first_triangle_with_divisors.get_first_triangle_with_divisors(5), 28)
     self.assertEqual(
         first_triangle_with_divisors.get_first_triangle_with_divisors(500),
-        76576500)
+        76_576_500)
 
 
 if __name__ == '__main__':

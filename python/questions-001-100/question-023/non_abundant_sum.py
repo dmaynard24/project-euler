@@ -18,7 +18,7 @@ from python.util import factors
 
 def get_non_abundant_sum():
   lower = 12
-  upper = 28213
+  upper = 28_213
   abundants = []
   for i in range(lower, upper + 1):
     proper_divisors_sum = sum(factors.get_proper_divisors(i))

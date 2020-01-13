@@ -13,5 +13,5 @@ from python.util import primal
 
 
 def get_largest_prime_factor(num):
-  primes = primal.get_primes(10000)
+  primes = primal.get_primes(10_000)
   return primal.get_prime_factors(num, primes).pop()['base']

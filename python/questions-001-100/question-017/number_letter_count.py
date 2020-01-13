@@ -26,7 +26,7 @@ def get_words_from_number(num):
   ]
   words = ''
 
-  if num == 1000:
+  if num == 1_000:
     return 'onethousand'
 
   if num >= 100:

@@ -15,7 +15,7 @@ from python.util import primal
 def get_smallest_multiple(upper):
   nums = range(1, upper + 1)
   prime_factor_counts = [0] * (upper + 1)
-  primes = primal.get_primes(16000)
+  primes = primal.get_primes(16_000)
 
   for num in nums:
     if primal.is_prime(num, primes):

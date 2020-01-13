@@ -10,7 +10,6 @@
 # Using the array of words containing nearly two-thousand common English words, how many are triangle words?
 
 import words
-# essentially a named import
 words = words.words
 
 import sys, os

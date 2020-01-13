@@ -22,7 +22,7 @@ from python.util import primal
 
 
 def get_first_integer(target_count):
-  limit = 150000
+  limit = 150_000
   prime_factor_counts = primal.get_prime_factor_counts(limit)
 
   for i in range(1, limit):

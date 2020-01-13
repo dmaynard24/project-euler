@@ -22,7 +22,7 @@ def get_digit_factorial_sum():
   for i in range(1, 10):
     factorials.append(i * factorials[i - 1])
 
-  for j in range(3, 41000):
+  for j in range(3, 41_000):
     num_digits = digits.get_digits(j)
     digit_factorial_sum = 0
     for digit in num_digits:

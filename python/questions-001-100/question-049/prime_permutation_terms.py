@@ -15,12 +15,12 @@ from python.util import primal, permutation, digits
 
 
 def get_prime_permutation_terms():
-  limit = 9999
-  addend = 3330
+  limit = 9_999
+  addend = 3_330
   primes = primal.get_primes(limit)
 
   # 1489 is the next prime
-  for i in range(1489, limit - addend * 2 + 1, 2):
+  for i in range(1_489, limit - addend * 2 + 1, 2):
     if primal.is_prime(i, primes):
       terms_concat = digits.get_digits(i)
       for j in range(1, 3):

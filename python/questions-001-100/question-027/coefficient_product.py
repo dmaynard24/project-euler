@@ -35,7 +35,7 @@ def get_coefficient_product():
 
     return n
 
-  primes = primal.get_primes(1000)
+  primes = primal.get_primes(1_000)
   prime_nums = primal.get_prime_numbers(primes)
   largest_count = 0
   largest_product = 0

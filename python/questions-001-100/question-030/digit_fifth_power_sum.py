@@ -23,7 +23,7 @@ def get_digit_fifth_power_sum():
   fifth_powers = list(map(lambda digit: digit**5, range(10)))
   power_sum = 0
 
-  for i in range(2, 200000):
+  for i in range(2, 200_000):
     i_digits_reversed = digits.get_digits_reversed(i)
 
     if i == sum(map(lambda digit: fifth_powers[digit], i_digits_reversed)):

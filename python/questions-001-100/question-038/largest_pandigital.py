@@ -28,10 +28,10 @@ def get_largest_pandigital():
   #   * every 2 digit number between 90 and 98 will always concat to either a 5, 8, or 11 digit number (we need a 9 digit output value)
   #   * every 3 digit number between 901 and 987 will always concat to either be a 7, or 11 digit number (we need a 9 digit output value)
   #   * every 4 digit number between 9123 and 9876 will always concat to a 9 digit output value. BINGO.
-  for num in range(9876, 9182, -1):
-    concat = num * 100002
+  for num in range(9_876, 9_182, -1):
+    concat = num * 100_002
 
     if pandigital.is_pandigital(concat, exclude_zero=True):
       return concat
 
-  return 918273645
+  return 918_273_645

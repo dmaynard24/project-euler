@@ -13,7 +13,7 @@ from python.util import pandigital, permutation
 
 
 def get_smallest_integer(max_multiplier):
-  limit = 1000000
+  limit = 1_000_000
   i = 1
 
   while i < limit:

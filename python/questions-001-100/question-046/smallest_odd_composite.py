@@ -22,7 +22,7 @@ from python.util import primal
 
 
 def get_smallest_odd_composite():
-  limit = 6000
+  limit = 6_000
   primes = primal.get_primes(limit)
 
   for composite in range(35, limit, 2):

@@ -19,7 +19,7 @@ from python.util import digits
 
 
 def get_constant_product():
-  targets = [1, 10, 100, 1000, 10000, 100000]
+  targets = [1, 10, 100, 1_000, 10_000, 100_000]
   limit = targets[len(targets) - 1]
   digit_count_objs = []
   length = 0

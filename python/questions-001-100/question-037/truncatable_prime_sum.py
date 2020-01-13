@@ -15,7 +15,7 @@ from python.util import primal, digits
 
 
 def get_truncatable_prime_sum():
-  limit = 800000
+  limit = 800_000
   primes = primal.get_primes(limit)
   prime_nums = primal.get_prime_numbers(primes)
 

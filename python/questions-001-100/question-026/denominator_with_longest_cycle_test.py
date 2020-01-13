@@ -8,7 +8,7 @@ class TestGetDenominatorWithLongestCycle(unittest.TestCase):
         7)
     self.assertEqual(
         denominator_with_longest_cycle.get_denominator_with_longest_cycle(
-            1000), 983)
+            1_000), 983)
 
 
 if __name__ == '__main__':

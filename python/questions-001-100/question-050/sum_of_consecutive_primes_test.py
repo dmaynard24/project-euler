@@ -6,10 +6,10 @@ class TestGetSumOfConsecutivePrimes(unittest.TestCase):
     self.assertEqual(
         sum_of_consecutive_primes.get_sum_of_consecutive_primes(100), 41)
     self.assertEqual(
-        sum_of_consecutive_primes.get_sum_of_consecutive_primes(1000), 953)
+        sum_of_consecutive_primes.get_sum_of_consecutive_primes(1_000), 953)
     self.assertEqual(
-        sum_of_consecutive_primes.get_sum_of_consecutive_primes(1000000),
-        997651)
+        sum_of_consecutive_primes.get_sum_of_consecutive_primes(1_000_000),
+        997_651)
 
 
 if __name__ == '__main__':

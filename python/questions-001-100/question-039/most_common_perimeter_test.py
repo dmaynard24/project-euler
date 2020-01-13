@@ -3,7 +3,7 @@ import unittest, most_common_perimeter
 
 class TestGetMostCommonPerimeter(unittest.TestCase):
   def test_get_most_common_perimeter(self):
-    self.assertEqual(most_common_perimeter.get_most_common_perimeter(1000),
+    self.assertEqual(most_common_perimeter.get_most_common_perimeter(1_000),
                      840)
 
 

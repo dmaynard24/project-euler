@@ -35,7 +35,7 @@ def get_possible_multiples(multiplicand):
   multiplier = 1
   product = 0
 
-  while (product < 1000 - multiplicand):
+  while (product < 1_000 - multiplicand):
     product = multiplicand * multiplier
     # 12 is the first 3-digit pandigital (with a leading zero)
     if product >= 12:

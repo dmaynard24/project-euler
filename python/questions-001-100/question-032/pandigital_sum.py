@@ -22,7 +22,7 @@ def get_pandigital_sum():
   pandigital_sum = 0
 
   for i in range(2, 101):
-    limit = math.ceil(9876 / i)
+    limit = math.ceil(9_876 / i)
 
     if pandigital.is_pandigital(i, exclude_zero=True) == False:
       continue

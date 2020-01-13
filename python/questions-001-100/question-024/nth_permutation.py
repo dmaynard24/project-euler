@@ -7,27 +7,32 @@
 
 # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
+import sys, os
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+sys.path.append(root_dir)
+
+from python.util import digits
 import math
 
 
 def get_nth_permutation(n):
-  digits = list(range(10))
+  all_digits = list(range(10))
   target = n - 1
   perm = []
 
   for i in range(9, -1, -1):
     perms = factorialize(i)
     index = math.floor(target / perms)
-    digit = digits[index]
+    digit = all_digits[index]
 
-    digits_index = digits.index(digit)
+    digits_index = all_digits.index(digit)
 
-    perm.extend(digits[digits_index:digits_index + 1])
-    del digits[digits_index:digits_index + 1]
+    perm.extend(all_digits[digits_index:digits_index + 1])
+    del all_digits[digits_index:digits_index + 1]
 
     target %= perms
 
-  return ''.join(map(str, perm))
+  return digits.get_int_from_digits(perm)
 
 
 def factorialize(num):

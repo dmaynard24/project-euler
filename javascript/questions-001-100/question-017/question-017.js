@@ -8,7 +8,13 @@
 // NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 
 function getNumberLetterCount(max) {
-  return [...Array(max + 1).keys()].slice(1).reduce((acc, curr) => acc + getWordsFromNumber(curr).length, 0);
+  let count = 0;
+
+  for (let i = 1; i <= max; i++) {
+    count += getWordsFromNumber(i).length;
+  }
+
+  return count;
 }
 
 function getWordsFromNumber(num) {

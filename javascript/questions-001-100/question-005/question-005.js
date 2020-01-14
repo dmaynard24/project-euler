@@ -8,7 +8,7 @@
 const primal = require('../../util/primal');
 
 function getSmallestMultiple(upper) {
-  let nums = [...Array(upper + 1).keys()].splice(1),
+  let nums = [...Array(upper + 1).keys()].slice(1),
     primeFactorCounts = [],
     primes = primal.getPrimes(16000);
 

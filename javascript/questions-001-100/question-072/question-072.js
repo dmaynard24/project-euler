@@ -15,8 +15,14 @@ const primal = require('../../util/primal'),
   phi = require('../../util/phi');
 
 function getFractionCount(max) {
-  let primes = primal.getPrimes(max);
-  return [...Array(max - 1).keys()].reduce((a, c) => a + phi(c + 2, primes), 0);
+  let primes = primal.getPrimes(max),
+    fractionCount = 0;
+
+  for (let d = 2; d <= max; d++) {
+    fractionCount += phi(d, primes);
+  }
+
+  return fractionCount;
 }
 
 module.exports = getFractionCount;

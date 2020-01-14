@@ -18,11 +18,7 @@ def get_primitive_triples(p_max):
         break
 
       if coprime.are_coprime(a, b):
-        triple = {}
-        triple['a'] = a
-        triple['b'] = b
-        triple['c'] = c
-        triple['p'] = p
+        triple = {'a': a, 'b': b, 'c': c, 'p': p}
         triples.append(triple)
 
     m += 1

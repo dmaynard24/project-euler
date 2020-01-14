@@ -24,9 +24,7 @@ def get_all_combos(length):
 def get_smallest_prime(count):
   limit = 999_999
   primes = primal.get_primes(limit)
-  combos = {}
-  combos['5'] = get_all_combos(5)
-  combos['6'] = get_all_combos(6)
+  combos = {'5': get_all_combos(5), '6': get_all_combos(6)}
 
   for i in range(56003, limit + 1, 2):
     if primal.is_prime(i, primes):

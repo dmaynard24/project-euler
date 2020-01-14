@@ -65,11 +65,65 @@ def is_flush(suits):
 
 
 def get_card_rank(card):
-  return 0
+  ranks = {
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+      '8': 8,
+      '9': 9,
+      'T': 10,
+      'J': 11,
+      'Q': 12,
+      'K': 13,
+      'A': 14
+  }
+
+  card_num = card[:][0]
+  return ranks[card_num]
 
 
 def get_hand_rank(hand):
-  return 0
+  card_ranks = list(map(lambda card: get_card_rank(card), hand))
+  card_ranks.sort()
+  card_suits = list(map(lambda card: card[:][1]))
+  card_suits.sort()
+
+  hand_is_straight = is_straight(card_ranks)
+  hand_is_flush = is_flush(card_suits)
+
+  if hand_is_straight:
+    if hand_is_flush:
+      if ranks[0] == 10:
+        # Royal Flush
+        return {'rank': 10, 'high_card': card_ranks[-1], 'kicker': None}
+
+
+def get_consecutive_counts_and_kicker(ranks):
+  consecutive_counts = []
+  rank_and_count = {'rank': ranks[0], 'count': 1}
+
+  kicker = None
+  for i in range(1, len(ranks)):
+    if ranks[i - 1] == ranks[i]:
+      rank_and_count['rank'] = ranks[i]
+      rank_and_count['count'] += 1
+    else:
+      if rank_and_count['count'] > 1:
+        consecutive_counts.append(rank_and_count)
+      else:
+        kicker = ranks[i - 1]
+    # reset
+    rank_and_count = {'rank': ranks[i], 'count': 1}
+
+  if rank_and_count['count'] > 1:
+    consecutive_counts.append(rank_and_count)
+  else:
+    kicker = ranks[-1]
+
+  return {'counts': consecutive_counts, 'kicker': kicker}
 
 
 def get_hands_player_won(player):

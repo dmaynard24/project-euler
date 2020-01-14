@@ -20,7 +20,7 @@ from python.util import digits
 
 def get_constant_product():
   targets = [1, 10, 100, 1_000, 10_000, 100_000]
-  limit = targets[len(targets) - 1]
+  limit = targets[-1]
   digit_count_objs = []
   length = 0
   digit_length = 1
@@ -30,10 +30,11 @@ def get_constant_product():
     first_num = targets[digit_length - 1]
     digit_count = targets[digit_length] - first_num
 
-    digit_count_obj = {}
-    digit_count_obj['length'] = digit_length
-    digit_count_obj['prev_length_sum'] = length
-    digit_count_obj['first_num'] = first_num
+    digit_count_obj = {
+        'length': digit_length,
+        'prev_length_sum': length,
+        'first_num': first_num
+    }
     digit_count_objs.append(digit_count_obj)
 
     length += digit_length * digit_count
@@ -41,7 +42,7 @@ def get_constant_product():
 
   prev_i = 0
   for target in targets[2:]:
-    dc = digit_count_objs[len(digit_count_objs) - 1]
+    dc = digit_count_objs[-1]
     for i in range(prev_i, len(digit_count_objs)):
       if digit_count_objs[i]['prev_length_sum'] > target:
         dc = digit_count_objs[i - 1]

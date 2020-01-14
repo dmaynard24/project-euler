@@ -116,7 +116,7 @@ function getHandRank(hand) {
 
   if (handIsStraight) {
     if (handIsFlush) {
-      if (ranks[0] == 10) {
+      if (cardRanks[0] == 10) {
         // Royal Flush
         return {
           rank: 10,

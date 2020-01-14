@@ -50,14 +50,15 @@ def get_possible_multiples(multiplicand):
 
 
 def get_substring_pandigital_sum():
-  possibles = {}
-  possibles['1'] = get_possible_multiples(2)
-  possibles['2'] = get_possible_multiples(3)
-  possibles['3'] = get_possible_multiples(5)
-  possibles['4'] = get_possible_multiples(7)
-  possibles['5'] = get_possible_multiples(11)
-  possibles['6'] = get_possible_multiples(13)
-  possibles['7'] = get_possible_multiples(17)
+  possibles = {
+      '1': get_possible_multiples(2),
+      '2': get_possible_multiples(3),
+      '3': get_possible_multiples(5),
+      '4': get_possible_multiples(7),
+      '5': get_possible_multiples(11),
+      '6': get_possible_multiples(13),
+      '7': get_possible_multiples(17)
+  }
 
   def get_set_at_index(index, set, concat):
     pandigitals = []

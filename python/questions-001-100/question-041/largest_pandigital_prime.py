@@ -39,10 +39,11 @@ def get_largest_pandigital_prime():
 
     # a number is divisible by 3 if the sum of its digits is divisible by 3, making it non-prime
     if digits_sum % 3 != 0:
-      valid_range = {}
-      valid_range['start'] = digits.get_int_from_digits(all_digits)
-      # reverse all_digits (not in-place)
-      valid_range['end'] = digits.get_int_from_digits(all_digits[::-1])
+      valid_range = {
+          'start': digits.get_int_from_digits(all_digits),
+          # reverse all_digits (not in-place)
+          'end': digits.get_int_from_digits(all_digits[::-1])
+      }
       valid_ranges.append(valid_range)
 
   for j in range(len(valid_ranges)):

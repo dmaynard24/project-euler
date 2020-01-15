@@ -87,7 +87,7 @@ def get_card_rank(card):
 
 def get_hand_rank(hand):
   card_ranks = list(map(lambda card: get_card_rank(card), hand))
-  card_ranks.sort()
+  card_ranks.sort()  # bug?
   card_suits = list(map(lambda card: card[:][1]))
   card_suits.sort()
 
@@ -96,9 +96,17 @@ def get_hand_rank(hand):
 
   if hand_is_straight:
     if hand_is_flush:
-      if ranks[0] == 10:
+      if card_ranks[0] == 10:
         # Royal Flush
         return {'rank': 10, 'high_card': card_ranks[-1], 'kicker': None}
+      # Straight Flush
+      return {'rank': 9, 'high_card': card_ranks[-1], 'kicker': None}
+    # Straight
+    return {'rank': 5, 'high_card': card_ranks[-1], 'kicker': None}
+
+  if hand_is_flush:
+    # Flush
+    return {'rank': 6, 'high_card': card_ranks[-1], 'kicker': None}
 
 
 def get_consecutive_counts_and_kicker(ranks):

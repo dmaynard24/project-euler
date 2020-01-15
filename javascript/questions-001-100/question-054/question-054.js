@@ -148,9 +148,7 @@ function getHandRank(hand) {
     };
   }
 
-  let consecutiveCountsAndKicker = getConsecutiveCountsAndKicker(cardRanks),
-    counts = consecutiveCountsAndKicker.counts,
-    kicker = consecutiveCountsAndKicker.kicker;
+  let { counts, kicker } = getConsecutiveCountsAndKicker(cardRanks);
 
   if (counts.length) {
     if (counts.length == 2) {

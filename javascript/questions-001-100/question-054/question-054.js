@@ -54,17 +54,12 @@ function getHandsPlayerWon(player) {
       return [tenCards.slice(0, 5), tenCards.slice(5)];
     });
 
-  hands = hands.slice(0, 2);
-
   // start checking hands
   let winCount = 0,
     pushCount = 0;
   hands.forEach(hand => {
     let rankOne = getHandRank(hand[0]),
       rankTwo = getHandRank(hand[1]);
-
-    console.log(hand[0], rankOne);
-    console.log(hand[1], rankTwo);
 
     // first compare ranks
     if (rankOne.rank > rankTwo.rank) {
@@ -277,7 +272,5 @@ function getConsecutiveCountsAndKicker(ranks) {
     kicker: kicker
   };
 }
-
-console.log(getHandsPlayerWon(1));
 
 module.exports = getHandsPlayerWon;

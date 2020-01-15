@@ -87,36 +87,28 @@ def get_card_rank(card):
 
 def get_hand_rank(hand):
   card_ranks = list(map(lambda card: get_card_rank(card), hand))
-  card_ranks.sort(reverse=True)
+  card_ranks.sort()
   card_suits = list(map(lambda card: card[:][1], hand))
   card_suits.sort()
 
   hand_is_straight = is_straight(card_ranks)
   hand_is_flush = is_flush(card_suits)
 
-  hand_rank = {'high_card': card_ranks[-1], 'kicker': None}
-
   if hand_is_straight:
     if hand_is_flush:
       if card_ranks[0] == 10:
         # Royal Flush
-        hand_rank['rank'] = 10
-        return hand_rank
+        return {'rank': 10, 'high_card': card_ranks[-1], 'kicker': None}
       # Straight Flush
-      hand_rank['rank'] = 9
-      return hand_rank
+      return {'rank': 9, 'high_card': card_ranks[-1], 'kicker': None}
     # Straight
-    hand_rank['rank'] = 5
-    return hand_rank
+    return {'rank': 5, 'high_card': card_ranks[-1], 'kicker': None}
 
   if hand_is_flush:
     # Flush
-    hand_rank['rank'] = 6
-    return hand_rank
+    return {'rank': 6, 'high_card': card_ranks[-1], 'kicker': None}
 
   counts, kicker = get_consecutive_counts_and_kicker(card_ranks).values()
-  print(card_ranks, counts, kicker)
-  hand_rank['kicker'] = kicker
 
   if len(counts) > 0:
     if len(counts) == 2:
@@ -126,36 +118,28 @@ def get_hand_rank(hand):
         for count in counts[1:]:
           if count['count'] > high_card['count']:
             high_card = count
-        hand_rank['rank'] = 7
-        hand_rank['high_card'] = high_card['rank']
-        return hand_rank
+        return {'rank': 7, 'high_card': high_card['rank'], 'kicker': kicker}
       else:
         # Two Pairs
         high_card = 0
         for count in counts[1:]:
           if count['rank'] > high_card:
             high_card = count['rank']
-        hand_rank['rank'] = 3
-        hand_rank['high_card'] = high_card
-        return hand_rank
+        return {'rank': 3, 'high_card': high_card, 'kicker': kicker}
     else:
-      hand_rank['high_card'] = counts[0]['rank']
+      high_card = counts[0]['rank']
       if counts[0]['count'] == 4:
         # Four of a Kind
-        hand_rank['rank'] = 8
-        return hand_rank
+        return {'rank': 8, 'high_card': high_card, 'kicker': kicker}
       elif counts[0]['count'] == 3:
         # Three of a Kind
-        hand_rank['rank'] = 4
-        return hand_rank
+        return {'rank': 4, 'high_card': high_card, 'kicker': kicker}
       elif counts[0]['count'] == 2:
         # One Pair
-        hand_rank['rank'] = 2
-        return hand_rank
+        return {'rank': 2, 'high_card': high_card, 'kicker': kicker}
 
   # High Card
-  hand_rank['rank'] = 1
-  return hand_rank
+  return {'rank': 1, 'high_card': card_ranks[-1], 'kicker': kicker}
 
 
 def get_consecutive_counts_and_kicker(ranks):
@@ -188,8 +172,6 @@ def get_hands_player_won(player):
       map(lambda ten_cards: [ten_cards[:5], ten_cards[5:]],
           map(lambda both_hands: both_hands.split(' '), poker.split('\n'))))
 
-  hands = hands[:1]
-
   # start checking hands
   win_count = 0
   push_count = 0
@@ -197,27 +179,21 @@ def get_hands_player_won(player):
     rank_one = get_hand_rank(hand[0])
     rank_two = get_hand_rank(hand[1])
 
-    print(hand[0], rank_one)
-    print(hand[1], rank_two)
-
     # first compare ranks
-    # if rank_one['rank'] > rank_two['rank']:
-    #   win_count += 1
-    # elif rank_one['rank'] == rank_two['rank']:
-    #   # then compare high cards
-    #   if rank_one['high_card'] > rank_two['high_card']:
-    #     win_count += 1
-    #   elif rank_one['high_card'] == rank_two['high_card']:
-    #     # then compare kickers
-    #     if rank_one['kicker'] is not None and rank_two['kicker'] is not None:
-    #       if rank_one['kicker'] > rank_two['kicker']:
-    #         win_count += 1
-    #       elif rank_one['kicker'] == rank_two['kicker']:
-    #         push_count += 1
-    #     else:
-    #       push_count += 1
+    if rank_one['rank'] > rank_two['rank']:
+      win_count += 1
+    elif rank_one['rank'] == rank_two['rank']:
+      # then compare high cards
+      if rank_one['high_card'] > rank_two['high_card']:
+        win_count += 1
+      elif rank_one['high_card'] == rank_two['high_card']:
+        # then compare kickers
+        if rank_one['kicker'] is not None and rank_two['kicker'] is not None:
+          if rank_one['kicker'] > rank_two['kicker']:
+            win_count += 1
+          elif rank_one['kicker'] == rank_two['kicker']:
+            push_count += 1
+        else:
+          push_count += 1
 
-  return len(hands) - win_count - push_count if player == 1 else win_count
-
-
-print(get_hands_player_won(2))
+  return win_count if player == 1 else len(hands) - win_count - push_count

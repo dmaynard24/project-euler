@@ -1,7 +1,7 @@
 // primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let oddsOnlyLimit = Math.floor(limit / 2),
-    primes = Array(oddsOnlyLimit).fill(true);
+  let oddsLimit = Math.floor(limit / 2),
+    primes = Array(oddsLimit).fill(true);
 
   primes[0] = false;
 
@@ -9,7 +9,7 @@ function getPrimes(limit) {
     let n = 2 * i + 1;
     if (primes[i]) {
       let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsOnlyLimit; j += step) {
+      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsLimit; j += step) {
         primes[j] = false;
       }
     }

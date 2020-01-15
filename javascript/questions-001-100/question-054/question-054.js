@@ -54,6 +54,8 @@ function getHandsPlayerWon(player) {
       return [tenCards.slice(0, 5), tenCards.slice(5)];
     });
 
+  hands = hands.slice(0, 1);
+
   // start checking hands
   let winCount = 0,
     pushCount = 0;
@@ -61,26 +63,29 @@ function getHandsPlayerWon(player) {
     let rankOne = getHandRank(hand[0]),
       rankTwo = getHandRank(hand[1]);
 
+    console.log(hand[0], rankOne);
+    console.log(hand[1], rankTwo);
+
     // first compare ranks
-    if (rankOne.rank > rankTwo.rank) {
-      winCount++;
-    } else if (rankOne.rank == rankTwo.rank) {
-      // then compare high cards
-      if (rankOne.highCard > rankTwo.highCard) {
-        winCount++;
-      } else if (rankOne.highCard == rankTwo.highCard) {
-        // then compare kickers
-        if (rankOne.kicker && rankTwo.kicker) {
-          if (rankOne.kicker > rankTwo.kicker) {
-            winCount++;
-          } else if (rankOne.kicker == rankTwo.kicker) {
-            pushCount++;
-          }
-        } else {
-          pushCount++;
-        }
-      }
-    }
+    // if (rankOne.rank > rankTwo.rank) {
+    //   winCount++;
+    // } else if (rankOne.rank == rankTwo.rank) {
+    //   // then compare high cards
+    //   if (rankOne.highCard > rankTwo.highCard) {
+    //     winCount++;
+    //   } else if (rankOne.highCard == rankTwo.highCard) {
+    //     // then compare kickers
+    //     if (rankOne.kicker && rankTwo.kicker) {
+    //       if (rankOne.kicker > rankTwo.kicker) {
+    //         winCount++;
+    //       } else if (rankOne.kicker == rankTwo.kicker) {
+    //         pushCount++;
+    //       }
+    //     } else {
+    //       pushCount++;
+    //     }
+    //   }
+    // }
   });
 
   return player == 1 ? winCount : hands.length - winCount - pushCount;
@@ -149,6 +154,7 @@ function getHandRank(hand) {
   }
 
   let { counts, kicker } = getConsecutiveCountsAndKicker(cardRanks);
+  console.log(cardRanks, counts, kicker);
 
   if (counts.length) {
     if (counts.length == 2) {
@@ -185,7 +191,7 @@ function getHandRank(hand) {
         case 4:
           // Four of a Kind
           return {
-            rank: 2,
+            rank: 8,
             highCard: highCard,
             kicker: kicker
           };
@@ -203,13 +209,6 @@ function getHandRank(hand) {
             highCard: highCard,
             kicker: kicker
           };
-        default:
-          // One Pair
-          return {
-            rank: 2,
-            highCard: highCard,
-            kicker: kicker
-          };
       }
     }
   }
@@ -218,7 +217,7 @@ function getHandRank(hand) {
   return {
     rank: 1,
     highCard: cardRanks[cardRanks.length - 1],
-    kicker: null
+    kicker: kicker
   };
 }
 
@@ -279,5 +278,7 @@ function getConsecutiveCountsAndKicker(ranks) {
     kicker: kicker
   };
 }
+
+console.log(getHandsPlayerWon(1));
 
 module.exports = getHandsPlayerWon;

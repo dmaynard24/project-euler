@@ -40,8 +40,8 @@ function getLychrelCount(limit) {
       // calculate reverse sum with cached value
       let reverseSum = bigInt(0),
         reverseSumArr = reverseSumsArrs.get(sumStr);
-      for (let i = 0; i < reverseSumArr.length; i++) {
-        reverseSum = reverseSum.multiply(10).add(reverseSumArr[i]);
+      for (let k = 0; k < reverseSumArr.length; k++) {
+        reverseSum = reverseSum.multiply(10).add(reverseSumArr[k]);
       }
       sum = sum.add(reverseSum);
 

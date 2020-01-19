@@ -14,10 +14,10 @@
 const cipher = require('./cipher');
 
 function getAsciiSum() {
-  let sum = 0,
-    nums = cipher.split(',').map(num => parseInt(num, 10)),
+  let nums = cipher.split(',').map(num => parseInt(num, 10)),
     keyLength = 3;
 
+  // range of numbers [97, 98, ..., 122]
   let charCodes = [...'abcdefghijklmnopqrstuvwxyz'].map(char => char.charCodeAt());
 
   for (let i = 0; i < charCodes.length; i++) {
@@ -35,7 +35,7 @@ function getAsciiSum() {
     }
   }
 
-  return sum;
+  return 'Unable to decrypt the message.';
 }
 
 module.exports = getAsciiSum;

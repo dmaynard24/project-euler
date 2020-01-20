@@ -86,7 +86,7 @@ function getLowestPrimeSum(count) {
     return smallest;
   }
 
-  return 0;
+  return `Unable to find a set of ${count} primes for which any two primes concatenate to produce another prime.`;
 }
 
 module.exports = getLowestPrimeSum;

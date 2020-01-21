@@ -75,7 +75,6 @@ function getOrderedSet() {
 
           // pop off the value and update the matches
           matchedSets[unmatchedKeys[j]] = false;
-          unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
           set.pop();
         }
       }

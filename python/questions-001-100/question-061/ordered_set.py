@@ -29,7 +29,7 @@ def are_cyclical(a, b):
 
 
 def get_ordered_set():
-  limit = 10000
+  limit = 10_000
   term_sets = {
       '3': shapes.get_triangles(limit),
       '4': shapes.get_squares(limit),
@@ -85,7 +85,7 @@ def get_ordered_set():
     return return_set
 
   # 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
-  only_set = get_next_term([], 1010, {
+  only_set = get_next_term([], 1_010, {
       '3': False,
       '4': False,
       '5': False,

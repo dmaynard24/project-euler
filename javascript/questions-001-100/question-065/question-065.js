@@ -55,4 +55,7 @@ function getPeriodE(termLimit) {
   return ms;
 }
 
+// console.log(getNumeratorSum(10));
+console.log(getNumeratorSum(100));
+
 module.exports = getNumeratorSum;

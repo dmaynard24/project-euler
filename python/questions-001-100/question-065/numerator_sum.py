@@ -47,7 +47,6 @@ def get_numerator_sum(max):
 
     ns.append(n)
 
-  print(digits.get_digits(ns[max]))
   return sum(digits.get_digits(ns[max]))
 
 
@@ -55,10 +54,6 @@ def get_period_e(term_limit):
   ms = [1] * (term_limit - 1)
 
   for i in range(1, term_limit, 3):
-    ms[i] = ((i + 2) / 3) * 2
+    ms[i] = math.floor(((i + 2) / 3) * 2)
 
   return ms
-
-
-# print(get_numerator_sum(10))
-print(get_numerator_sum(100))

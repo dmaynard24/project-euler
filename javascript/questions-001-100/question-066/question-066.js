@@ -24,7 +24,7 @@
 const getPeriod = require('../../util/period'),
   bigInt = require('big-integer');
 
-function getDiophantineD(max) {
+function getDiophantineDenominator(max) {
   let largestX = bigInt(0),
     largestD;
 
@@ -76,4 +76,4 @@ function getXUsingConvergents(num) {
   }
 }
 
-module.exports = getDiophantineD;
+module.exports = getDiophantineDenominator;

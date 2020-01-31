@@ -24,8 +24,9 @@ const digits = require('../../util/digits'),
   combination = require('../../util/combination'),
   permutation = require('../../util/permutation');
 
-function getLargestConcat(gonCount) {
-  let possibleValues = [...Array(gonCount * 2 + 1).keys()].slice(1),
+function getLargestConcat() {
+  let gonCount = 5,
+    possibleValues = [...Array(gonCount * 2 + 1).keys()].slice(1),
     possibleSubsets = getAllPerms(possibleValues, 3).reduce((a, c) => {
       let setSum = c.reduce((a, c) => a + c);
       a.push({
@@ -52,13 +53,7 @@ function getLargestConcat(gonCount) {
         setSum = possibleSubsets[i].sum;
       } else {
         // check continue cases on all sets except first
-        if (
-          possibleSubsets[i].sum != setSum ||
-          currSubset[1] != set[set.length - 1][2] ||
-          edgeVals.has(currSubset[0]) ||
-          edgeVals.has(currSubset[2]) ||
-          cachedSubsets.has(currSubset.join(''))
-        ) {
+        if (possibleSubsets[i].sum != setSum || currSubset[1] != set[set.length - 1][2] || edgeVals.has(currSubset[0]) || edgeVals.has(currSubset[2])) {
           continue;
         }
       }
@@ -116,7 +111,7 @@ function getLargestConcat(gonCount) {
 
       solutionSet = solutionSet.concat(getNextSubset(set, setSum, edgeVals, cachedSubsets));
 
-      // be sure to pop and remove cached edgeVals
+      // pop and remove cached edgeVals
       edgeVals.delete(set[set.length - 1][0]);
       edgeVals.delete(set[set.length - 1][2]);
       set.pop();
@@ -127,6 +122,7 @@ function getLargestConcat(gonCount) {
 
   let solutionSet = getNextSubset([], possibleSubsets[0].sum, new Map(), new Map());
 
+  // flatten the solution sets, then filter down to only the 16-digit values
   let solutionSetInts = solutionSet.map(ss => digits.getIntFromDigits(flatten(ss))).filter(int => digits.getDigitCount(int) == 16);
 
   return Math.max.apply(null, solutionSetInts);

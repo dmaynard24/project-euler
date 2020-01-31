@@ -38,8 +38,15 @@ def get_int_from_digits(digits):
   if len(digits) == 1:
     return digits[0]
 
+  new_digits = []
+  for digit in digits:
+    if digit >= 10:
+      new_digits.extend(get_digits(digit))
+    else:
+      new_digits.append(digit)
+
   integer = 0
-  for num in digits:
+  for num in new_digits:
     integer *= 10
     integer += num
 

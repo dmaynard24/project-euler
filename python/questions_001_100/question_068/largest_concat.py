@@ -42,17 +42,18 @@ def flatten(arr):
     if type(val) == list:
       flat.extend(val)
     else:
-      flat.extend([val])
+      flat.append(val)
   return flat
 
 
-def get_largest_concat(gon_count):
+def get_largest_concat():
+  gon_count = 5
   possible_values = range(1, gon_count * 2 + 1)
   all_perms = get_all_perms(possible_values, 3)
   possible_subsets = []
   for perm in all_perms:
     set_sum = sum(perm)
-    possible_subsets.append({'set': c, 'sum': set_sum})
+    possible_subsets.append({'set': perm, 'sum': set_sum})
 
   def get_next_subset(curr_set, set_sum, edge_vals, cached_subsets):
     solution_set = []
@@ -61,7 +62,7 @@ def get_largest_concat(gon_count):
       curr_subset = possible_subsets[i]['set']
 
       # always check for cached
-      if cached_subsets.get(''.join(curr_subset)) is not None:
+      if cached_subsets.get(''.join(map(str, curr_subset))) is not None:
         continue
 
       if len(curr_set) == 0:
@@ -72,9 +73,8 @@ def get_largest_concat(gon_count):
         # check continue cases on all sets except first
         if (possible_subsets[i]['sum'] != set_sum
             or curr_subset[1] != curr_set[-1][2]
-            or edge_vals.get(curr_subset[0]) is not None
-            or edge_vals.get(curr_subset[2]) is not None
-            or cached_subsets.get(''.join(curr_subset)) is not None):
+            or edge_vals.get(str(curr_subset[0])) is not None
+            or edge_vals.get(str(curr_subset[2])) is not None):
           continue
 
       # check on only the last set
@@ -100,9 +100,9 @@ def get_largest_concat(gon_count):
             smallest_set_val = subset[0]
 
         # rotate based on the index of the smallest subset
-        rotated_set = []
+        rotated_set = [None] * gon_count
         if smallest_set_index != 0:
-          rotated_set = [curr_set[smallest_set_index]]
+          rotated_set[0] = curr_set[smallest_set_index]
           for i in range(1, gon_count):
             rotated_set[i] = curr_set[(smallest_set_index + i) % gon_count]
         else:
@@ -111,4 +111,34 @@ def get_largest_concat(gon_count):
 
         # cache subsets to avoid duplicates later
         for subset in rotated_set:
-          cached_subsets[''.join(subset)] = True
+          cached_subsets[''.join(map(str, subset))] = True
+
+        # store rotated set
+        solution_set.append(rotated_set[:])
+
+      # cache edge vals
+      edge_vals[str(curr_subset[0])] = True
+      edge_vals[str(curr_subset[2])] = True
+
+      solution_set.extend(
+          get_next_subset(curr_set, set_sum, edge_vals, cached_subsets))
+
+      # pop and remove cached edge_vals
+      left_key = str(curr_set[-1][0])
+      right_key = str(curr_set[-1][2])
+      if edge_vals.get(left_key) is not None:
+        edge_vals.pop(left_key)
+      if edge_vals.get(right_key) is not None:
+        edge_vals.pop(right_key)
+      curr_set.pop()
+
+    return solution_set
+
+  solution_set = get_next_subset([], possible_subsets[0]['sum'], {}, {})
+
+  # flatten the solution sets, then filter down to only the 16-digit values
+  solution_set_ints = filter(
+      lambda int_val: digits.get_digit_count(int_val) == 16,
+      map(lambda ss: digits.get_int_from_digits(flatten(ss)), solution_set))
+
+  return max(solution_set_ints)

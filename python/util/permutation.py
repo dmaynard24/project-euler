@@ -26,3 +26,20 @@ def is_permutation(num, test_num):
         return False
 
   return True
+
+
+# always picks len(arr)
+def get_perms(arr):
+  if len(arr) < 2:
+    return [arr]
+
+  perms = []
+  for i in range(len(arr)):
+    first = arr.pop(i)
+    remaining_perms = get_perms(arr)
+    for j in range(len(remaining_perms)):
+      perms.append([first] + remaining_perms[j])
+
+    arr.insert(i, first)
+
+  return perms

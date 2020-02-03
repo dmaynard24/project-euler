@@ -13,3 +13,20 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
 sys.path.append(root_dir)
 
 from python.util import primal, permutation, phi
+
+
+def get_totient_permutation(limit):
+  primes = primal.get_primes(limit)
+  min_n = None
+  min_quotient = sys.maxsize
+
+  for n in range(limit, 1, -1):
+    if primal.is_prime(n, primes) == False:
+      phi_n = phi.get_phi(n, primes)
+      if permutation.is_permutation(n, phi_n):
+        quotient = n / phi_n
+        if quotient < min_quotient:
+          min_quotient = quotient
+          min_n = n
+
+  return min_n

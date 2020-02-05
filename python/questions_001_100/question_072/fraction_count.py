@@ -26,6 +26,3 @@ def get_fraction_count(max_d):
     fraction_count += phi.get_phi(d, primes)
 
   return fraction_count
-
-
-print(get_fraction_count(1_000_000))

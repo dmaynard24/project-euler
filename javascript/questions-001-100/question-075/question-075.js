@@ -20,19 +20,19 @@ const getPrimitiveTriples = require('../../util/pythagorean-triples');
 
 function getUniquePerimeters(pMax) {
   let primitives = getPrimitiveTriples(pMax),
-    perimeterCounts = [],
+    perimeterCounts = new Map(),
     uniqueCounts = 0;
 
   primitives.forEach(primitive => {
     let p = primitive.p;
     while (p <= pMax) {
-      if (perimeterCounts[p]) {
-        perimeterCounts[p] += 1;
-        if (perimeterCounts[p] == 2) {
+      if (perimeterCounts.has(p)) {
+        perimeterCounts.set(p, perimeterCounts.get(p) + 1);
+        if (perimeterCounts.get(p) == 2) {
           uniqueCounts--;
         }
       } else {
-        perimeterCounts[p] = 1;
+        perimeterCounts.set(p, 1);
         uniqueCounts++;
       }
 

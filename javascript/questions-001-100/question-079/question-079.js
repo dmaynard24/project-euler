@@ -35,7 +35,7 @@ function getShortestPasscode() {
           nextIndex = passcodeArr.indexOf(nextDigit);
         if (nextIndex < currentIndex) {
           passcodeArr.splice(nextIndex, 1);
-          passcodeArr = [...passcodeArr.slice(0, currentIndex), nextDigit, ...passcodeArr.slice(currentIndex)];
+          passcodeArr.splice(currentIndex, 0, nextDigit);
         }
       }
     }

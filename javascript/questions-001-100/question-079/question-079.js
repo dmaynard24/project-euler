@@ -12,10 +12,14 @@ const keylog = require('./keylog'),
 
 function getShortestPasscode() {
   let logins = [...new Set(keylog.split('\n'))],
+    loginsDigits = [],
     passcodeArr = [
       ...new Set(
         logins.reduce((a, c) => {
-          a = [...a, ...digits.getDigits(c)];
+          // side effect for getting digits later
+          let loginDigits = digits.getDigits(c);
+          loginsDigits.push(loginDigits);
+          a = [...a, ...loginDigits];
           return a;
         }, [])
       )
@@ -23,19 +27,18 @@ function getShortestPasscode() {
 
   // twice for good measure
   for (let i = 0; i < 2; i++) {
-    logins.forEach(login => {
-      let loginDigits = digits.getDigits(login);
-
-      for (let j = 0; j < loginDigits.length - 1; j++) {
-        let currentIndex = passcodeArr.indexOf(loginDigits[j]),
-          nextDigit = loginDigits[j + 1],
+    for (let j = 0; j < logins.length; j++) {
+      let loginDigits = loginsDigits[j];
+      for (let k = 0; k < loginDigits.length - 1; k++) {
+        let currentIndex = passcodeArr.indexOf(loginDigits[k]),
+          nextDigit = loginDigits[k + 1],
           nextIndex = passcodeArr.indexOf(nextDigit);
         if (nextIndex < currentIndex) {
           passcodeArr.splice(nextIndex, 1);
           passcodeArr = [...passcodeArr.slice(0, currentIndex), nextDigit, ...passcodeArr.slice(currentIndex)];
         }
       }
-    });
+    }
   }
 
   return digits.getIntFromDigits(passcodeArr);

@@ -19,7 +19,7 @@ function getShortestPasscode() {
           // side effect for getting digits later
           let loginDigits = digits.getDigits(c);
           loginsDigits.push(loginDigits);
-          a = [...a, ...loginDigits];
+          a = a.concat(loginDigits);
           return a;
         }, [])
       )

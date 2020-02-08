@@ -19,10 +19,24 @@ keylog = keylog.keylog
 
 def get_shortest_passcode():
   logins = set(map(int, keylog.split('\n')))
+  logins_digits = []
   all_logins = []
   for login in logins:
-    all_logins.extend(digits.get_digits(login))
+    login_digits = digits.get_digits(login)
+    logins_digits.append(login_digits)
+    all_logins.extend(login_digits)
   passcode_arr = list(set(all_logins))
 
+  # twice for good measure
+  for _ in range(2):
+    for i in range(len(logins)):
+      login_digits = logins_digits[i]
+      for j in range(len(login_digits) - 1):
+        current_index = passcode_arr.index(login_digits[j])
+        next_digit = login_digits[j + 1]
+        next_index = passcode_arr.index(next_digit)
+        if next_index < current_index:
+          passcode_arr.pop(next_index)
+          passcode_arr.insert(current_index, next_digit)
 
-get_shortest_passcode()
+  return digits.get_int_from_digits(passcode_arr)

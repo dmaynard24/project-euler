@@ -16,17 +16,15 @@ from decimal import *
 
 
 def get_square_root_digital_sum(max_num):
-  return_sum = 0
+  precision = 102
+  getcontext().prec = precision
 
-  getcontext().prec = 100
+  square_root_digital_sum = 0
 
   for num in range(1, max_num + 1):
     sqrt_tuple = Decimal(num).sqrt().as_tuple().digits
 
-    if len(sqrt_tuple) == 100:
-      return_sum += sum(sqrt_tuple[1:])
+    if len(sqrt_tuple) == precision:
+      square_root_digital_sum += sum(sqrt_tuple[:100])
 
-  return return_sum
-
-
-print(get_square_root_digital_sum(100))
+  return square_root_digital_sum

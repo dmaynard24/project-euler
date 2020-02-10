@@ -17,21 +17,20 @@ function getMinimalPathSum() {
   let grid = matrix.split('\n').map(row => row.split(',').map(num => +num)),
     sums = [];
 
-  sums[0] = [];
-  sums[0][0] = grid[0][0];
+  sums.push([]);
+  sums[0].push(grid[0][0]);
 
   // first row only (start at [0, 1])
-  let i = 0;
-  for (let j = 1; j < grid[i].length; j++) {
-    let curr = grid[i][j],
-      left = sums[i][j - 1],
+  for (let j = 1; j < grid[0].length; j++) {
+    let curr = grid[0][j],
+      left = sums[0][j - 1],
       sum = left + curr;
-    sums[i].push(sum);
+    sums[0].push(sum);
   }
 
   // every other row
   for (let i = 1; i < grid.length; i++) {
-    sums[i] = [];
+    sums.push([]);
 
     for (let j = 0; j < grid[i].length; j++) {
       let curr = grid[i][j],

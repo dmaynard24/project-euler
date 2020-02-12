@@ -26,7 +26,7 @@ def get_non_abundant_sum():
       abundants.append(i)
 
   abundant_sums = [None] * (upper + 1)
-  for i in range(0, len(abundants)):
+  for i in range(len(abundants)):
     for j in range(i, len(abundants)):
       abundant_sum = abundants[i] + abundants[j]
       if abundant_sum > upper:

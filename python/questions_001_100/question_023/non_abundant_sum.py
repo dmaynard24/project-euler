@@ -36,6 +36,6 @@ def get_non_abundant_sum():
 
   non_abundant_sum = 0
   for i, val in enumerate(abundant_sums):
-    non_abundant_sum += i if val == None else 0
+    non_abundant_sum += i if val is None else 0
 
   return non_abundant_sum

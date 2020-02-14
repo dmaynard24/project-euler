@@ -14,7 +14,7 @@ function getPowerfulIntegerCount() {
     let base = 1;
     let digitCount = 1;
     while (digitCount <= exp) {
-      const powerful = Math.pow(base, exp);
+      const powerful = base ** exp;
 
       digitCount = digits.getDigitCount(powerful);
       if (digitCount === exp) {

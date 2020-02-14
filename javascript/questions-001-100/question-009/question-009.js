@@ -30,6 +30,8 @@ function getTripletProduct(sum) {
     }
     n++;
   }
+
+  return 0;
 }
 
 module.exports = getTripletProduct;

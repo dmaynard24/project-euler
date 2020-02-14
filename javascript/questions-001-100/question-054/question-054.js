@@ -21,22 +21,22 @@
 
 // Consider the following five hands dealt to two players:
 
-//  Hand	 	Player 1	 	       Player 2	 	        Winner
+//  Hand     Player 1          Player 2           Winner
 
-//  1	 	    5H 5C 6S 7S KD     2C 3S 8S 8D TD     Player 2
+//  1       5H 5C 6S 7S KD     2C 3S 8S 8D TD     Player 2
 //          Pair of Fives      Pair of Eights
 
-//  2	 	    5D 8C 9S JS AC     2C 5C 7D 8S QH     Player 1
+//  2       5D 8C 9S JS AC     2C 5C 7D 8S QH     Player 1
 //          Highest card Ace   Highest card Queen
 
-//  3	 	    2D 9C AS AH AC     3D 6D 7D TD QD     Player 2
+//  3       2D 9C AS AH AC     3D 6D 7D TD QD     Player 2
 //          Three Aces         Flush with Diamonds
 
-//  4	 	    4D 6S 9H QH QC     3D 6D 7H QD QS     Player 1
+//  4       4D 6S 9H QH QC     3D 6D 7H QD QS     Player 1
 //          Pair of Queens     Pair of Queens
 //          Highest card Nine  Highest card Seven
 
-//  5	 	    2H 2D 4C 4D 4S     3C 3D 3S 9S 9D     Player 1
+//  5       2H 2D 4C 4D 4S     3C 3D 3S 9S 9D     Player 1
 //          Full House         Full House
 //          with Three Fours   with Three Threes
 
@@ -46,42 +46,62 @@
 
 const poker = require(`./poker`);
 
-function getHandsPlayerWon(player) {
-  const hands = poker
-    .split(`\n`)
-    .map((bothHands) => bothHands.split(` `))
-    .map((tenCards) => [tenCards.slice(0, 5), tenCards.slice(5)]);
-
-  // start checking hands
-  let winCount = 0;
-  let pushCount = 0;
-  hands.forEach((hand) => {
-    const rankOne = getHandRank(hand[0]);
-    const rankTwo = getHandRank(hand[1]);
-
-    // first compare ranks
-    if (rankOne.rank > rankTwo.rank) {
-      winCount++;
-    } else if (rankOne.rank === rankTwo.rank) {
-      // then compare high cards
-      if (rankOne.highCard > rankTwo.highCard) {
-        winCount++;
-      } else if (rankOne.highCard === rankTwo.highCard) {
-        // then compare kickers
-        if (rankOne.kicker && rankTwo.kicker) {
-          if (rankOne.kicker > rankTwo.kicker) {
-            winCount++;
-          } else if (rankOne.kicker === rankTwo.kicker) {
-            pushCount++;
-          }
-        } else {
-          pushCount++;
-        }
-      }
+function isStraight(ranks) {
+  for (let i = 1; i < ranks.length; i++) {
+    if (ranks[i - 1] !== ranks[i] - 1) {
+      return false;
     }
-  });
+  }
 
-  return player === 1 ? winCount : hands.length - winCount - pushCount;
+  return true;
+}
+
+function isFlush(suits) {
+  for (let i = 1; i < suits.length; i++) {
+    if (suits[i - 1] !== suits[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function getConsecutiveCountsAndKicker(ranks) {
+  const consecutiveCounts = [];
+  let rankAndCount = {
+    rank: ranks[0],
+    count: 1,
+  };
+
+  let kicker = null;
+  for (let i = 1; i < ranks.length; i++) {
+    if (ranks[i - 1] === ranks[i]) {
+      rankAndCount.rank = ranks[i];
+      rankAndCount.count++;
+    } else {
+      if (rankAndCount.count > 1) {
+        consecutiveCounts.push(rankAndCount);
+      } else {
+        kicker = ranks[i - 1];
+      }
+      // reset
+      rankAndCount = {
+        rank: ranks[i],
+        count: 1,
+      };
+    }
+  }
+
+  if (rankAndCount.count > 1) {
+    consecutiveCounts.push(rankAndCount);
+  } else {
+    kicker = ranks[ranks.length - 1];
+  }
+
+  return {
+    counts: consecutiveCounts,
+    kicker,
+  };
 }
 
 function getCardRank(card) {
@@ -198,6 +218,13 @@ function getHandRank(hand) {
           highCard,
           kicker,
         };
+      default:
+        // One Pair
+        return {
+          rank: 2,
+          highCard,
+          kicker,
+        };
     }
   }
 
@@ -209,62 +236,42 @@ function getHandRank(hand) {
   };
 }
 
-function isStraight(ranks) {
-  for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i - 1] !== ranks[i] - 1) {
-      return false;
-    }
-  }
+function getHandsPlayerWon(player) {
+  const hands = poker
+    .split(`\n`)
+    .map((bothHands) => bothHands.split(` `))
+    .map((tenCards) => [tenCards.slice(0, 5), tenCards.slice(5)]);
 
-  return true;
-}
+  // start checking hands
+  let winCount = 0;
+  let pushCount = 0;
+  hands.forEach((hand) => {
+    const rankOne = getHandRank(hand[0]);
+    const rankTwo = getHandRank(hand[1]);
 
-function isFlush(suits) {
-  for (let i = 1; i < suits.length; i++) {
-    if (suits[i - 1] !== suits[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function getConsecutiveCountsAndKicker(ranks) {
-  const consecutiveCounts = [];
-  let rankAndCount = {
-    rank: ranks[0],
-    count: 1,
-  };
-
-  let kicker = null;
-  for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i - 1] === ranks[i]) {
-      rankAndCount.rank = ranks[i];
-      rankAndCount.count++;
-    } else {
-      if (rankAndCount.count > 1) {
-        consecutiveCounts.push(rankAndCount);
-      } else {
-        kicker = ranks[i - 1];
+    // first compare ranks
+    if (rankOne.rank > rankTwo.rank) {
+      winCount++;
+    } else if (rankOne.rank === rankTwo.rank) {
+      // then compare high cards
+      if (rankOne.highCard > rankTwo.highCard) {
+        winCount++;
+      } else if (rankOne.highCard === rankTwo.highCard) {
+        // then compare kickers
+        if (rankOne.kicker && rankTwo.kicker) {
+          if (rankOne.kicker > rankTwo.kicker) {
+            winCount++;
+          } else if (rankOne.kicker === rankTwo.kicker) {
+            pushCount++;
+          }
+        } else {
+          pushCount++;
+        }
       }
-      // reset
-      rankAndCount = {
-        rank: ranks[i],
-        count: 1,
-      };
     }
-  }
+  });
 
-  if (rankAndCount.count > 1) {
-    consecutiveCounts.push(rankAndCount);
-  } else {
-    kicker = ranks[ranks.length - 1];
-  }
-
-  return {
-    counts: consecutiveCounts,
-    kicker,
-  };
+  return player === 1 ? winCount : hands.length - winCount - pushCount;
 }
 
 module.exports = getHandsPlayerWon;

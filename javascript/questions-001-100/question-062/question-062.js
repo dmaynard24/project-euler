@@ -13,7 +13,7 @@ function getSmallestCube(count) {
   const sortedCubes = new Map();
 
   for (let i = start; i < limit; i++) {
-    const cube = Math.pow(i, 3);
+    const cube = i ** 3;
     const sortedValue = digits
       .getDigits(cube)
       .sort((a, b) => b - a)

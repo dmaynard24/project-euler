@@ -13,7 +13,7 @@
 // Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
 function getDigitFifthPowerSum() {
-  const fifthPowers = [...Array(10).keys()].map((key) => Math.pow(key, 5));
+  const fifthPowers = [...Array(10).keys()].map((key) => key ** 5);
   let sum = 0;
 
   for (let i = 2; i <= 200000; i++) {

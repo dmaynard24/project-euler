@@ -25,16 +25,19 @@ function getFirstTriangleWithDivisors(divisors) {
   let triangle = 1;
   const primes = primal.getPrimes(25);
 
+  function getDivisorCount(num) {
+    const primeFactors = primal.getPrimeFactors(num, primes);
+    const divisorCount = primeFactors.reduce((a, c) => {
+      a *= c.exp + 1;
+      return a;
+    }, 1);
+
+    return divisorCount;
+  }
+
   while (getDivisorCount(triangle) < divisors) {
     i++;
     triangle += i;
-  }
-
-  function getDivisorCount(num) {
-    const primeFactors = primal.getPrimeFactors(num, primes);
-    const divisorCount = primeFactors.reduce((a, c) => (a *= c.exp + 1), 1);
-
-    return divisorCount;
   }
 
   return triangle;

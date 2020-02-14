@@ -114,7 +114,7 @@ function getFirstDigitsOfSum(digitCount) {
     .reduce((acc, curr) => acc + curr);
   const digitsToTrim = digits.getDigitCount(sum) - digitCount;
 
-  return Math.floor(sum / Math.pow(10, digitsToTrim));
+  return Math.floor(sum / 10 ** digitsToTrim);
 }
 
 module.exports = getFirstDigitsOfSum;

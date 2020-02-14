@@ -17,6 +17,37 @@
 const isPandigital = require(`../../util/pandigital`);
 const digits = require(`../../util/digits`);
 
+// returns an array of multiples stored as 3-digit arrays
+function getPossibleMultiples(multiplicand) {
+  const multiples = [];
+  let multiplier = 1;
+  let product = 0;
+
+  while (product < 1000 - multiplicand) {
+    product = multiplicand * multiplier;
+    // 12 is the first 3-digit pandigital (with a leading zero)
+    if (product >= 12) {
+      const productDigits = digits.getDigits(product);
+      // prepend leading zero
+      multiples.push(product < 100 ? [0, ...productDigits] : productDigits);
+    }
+
+    multiplier++;
+  }
+
+  return multiples;
+}
+
+function getRemainingDigit(digitsArr) {
+  const digitsSorted = [...digitsArr].sort();
+  for (let i = 0; i < 10; i++) {
+    if (i !== digitsSorted[i]) {
+      return i;
+    }
+  }
+  return 0;
+}
+
 function getSubstringPandigitalSum() {
   const possibles = {
     1: getPossibleMultiples(2),
@@ -58,36 +89,6 @@ function getSubstringPandigitalSum() {
   });
 
   return sum;
-}
-
-// returns an array of multiples stored as 3-digit arrays
-function getPossibleMultiples(multiplicand) {
-  const multiples = [];
-  let multiplier = 1;
-  let product = 0;
-
-  while (product < 1000 - multiplicand) {
-    product = multiplicand * multiplier;
-    // 12 is the first 3-digit pandigital (with a leading zero)
-    if (product >= 12) {
-      const productDigits = digits.getDigits(product);
-      // prepend leading zero
-      multiples.push(product < 100 ? [0, ...productDigits] : productDigits);
-    }
-
-    multiplier++;
-  }
-
-  return multiples;
-}
-
-function getRemainingDigit(digits) {
-  const digitsSorted = [...digits].sort();
-  for (let i = 0; i < 10; i++) {
-    if (i !== digitsSorted[i]) {
-      return i;
-    }
-  }
 }
 
 module.exports = getSubstringPandigitalSum;

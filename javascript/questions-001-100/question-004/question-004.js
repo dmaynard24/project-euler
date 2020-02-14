@@ -8,8 +8,8 @@
 const palindrome = require(`../../util/palindrome`);
 
 function getLargestPalindromeProduct(digits) {
-  const upper = Math.pow(10, digits) - 1;
-  let lower = Math.pow(10, digits - 1);
+  const upper = 10 ** digits - 1;
+  let lower = 10 ** (digits - 1);
 
   let m = upper;
   let n = upper;

@@ -24,7 +24,7 @@ function getSmallestMultiple(upper) {
   });
 
   const lcm = Object.keys(primeFactorCounts).reduce((acc, curr) => {
-    acc *= Math.pow(curr, primeFactorCounts[curr]);
+    acc *= curr ** primeFactorCounts[curr];
     return acc;
   }, 1);
 

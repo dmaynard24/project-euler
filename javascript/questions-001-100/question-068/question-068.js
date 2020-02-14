@@ -24,11 +24,23 @@ const digits = require(`../../util/digits`);
 const combination = require(`../../util/combination`);
 const permutation = require(`../../util/permutation`);
 
+function getAllPerms(arr, pick) {
+  return combination.getCombos(arr, pick).reduce((a, c) => {
+    a = a.concat(permutation.getPerms(c));
+    return a;
+  }, []);
+}
+
+// had to write this since Array.prototype.flat() is still in draft
+function flatten(arr) {
+  return arr.reduce((a, c) => a.concat(c));
+}
+
 function getLargestConcat() {
   const gonCount = 5;
   const possibleValues = [...Array(gonCount * 2 + 1).keys()].slice(1);
   const possibleSubsets = getAllPerms(possibleValues, 3).reduce((a, c) => {
-    const setSum = c.reduce((a, c) => a + c);
+    const setSum = c.reduce((acc, curr) => acc + curr);
     a.push({
       set: c,
       sum: setSum,
@@ -51,11 +63,9 @@ function getLargestConcat() {
         // reset on the first set only
         edgeVals = new Map();
         setSum = possibleSubsets[i].sum;
-      } else {
+      } else if (possibleSubsets[i].sum !== setSum || currSubset[1] !== set[set.length - 1][2] || edgeVals.has(currSubset[0]) || edgeVals.has(currSubset[2])) {
         // check continue cases on all sets except first
-        if (possibleSubsets[i].sum !== setSum || currSubset[1] !== set[set.length - 1][2] || edgeVals.has(currSubset[0]) || edgeVals.has(currSubset[2])) {
-          continue;
-        }
+        continue;
       }
 
       // check on only the last set
@@ -73,14 +83,14 @@ function getLargestConcat() {
         // look for smallest subset in order to rotate
         let smallestSetIndex = 0;
         let smallestSetVal = possibleValues.length + 1;
-        for (let i = 0; i < set.length; i++) {
-          const subset = set[i];
+        for (let j = 0; j < set.length; j++) {
+          const subset = set[j];
           if (subset[0] === 1) {
-            smallestSetIndex = i;
+            smallestSetIndex = j;
             break;
           } else if (subset[0] < smallestSetVal) {
-            smallestSetIndex = i;
-            smallestSetVal = subset[0];
+            smallestSetIndex = j;
+            [smallestSetVal] = subset;
           }
         }
 
@@ -88,8 +98,8 @@ function getLargestConcat() {
         let rotatedSet = [];
         if (smallestSetIndex !== 0) {
           rotatedSet = [set[smallestSetIndex]];
-          for (let i = 1; i < gonCount; i++) {
-            rotatedSet[i] = set[(smallestSetIndex + i) % gonCount];
+          for (let j = 1; j < gonCount; j++) {
+            rotatedSet[j] = set[(smallestSetIndex + j) % gonCount];
           }
         } else {
           // set was already in correct order
@@ -126,18 +136,6 @@ function getLargestConcat() {
   const solutionSetInts = solutionSet.map((ss) => digits.getIntFromDigits(flatten(ss))).filter((int) => digits.getDigitCount(int) === 16);
 
   return Math.max.apply(null, solutionSetInts);
-}
-
-function getAllPerms(arr, pick) {
-  return combination.getCombos(arr, pick).reduce((a, c) => {
-    a = a.concat(permutation.getPerms(c));
-    return a;
-  }, []);
-}
-
-// had to write this since Array.prototype.flat() is still in draft
-function flatten(arr) {
-  return arr.reduce((a, c) => a.concat(c));
 }
 
 module.exports = getLargestConcat;

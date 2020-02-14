@@ -24,26 +24,6 @@
 const getPeriod = require(`../../util/period`);
 const bigInt = require(`big-integer`);
 
-function getDiophantineDenominator(max) {
-  let largestX = bigInt(0);
-  let largestD;
-
-  for (let d = 2; d <= max; d++) {
-    const sqrt = Math.sqrt(d);
-    // check if d isn't square
-    if (Math.floor(sqrt) !== sqrt) {
-      // find minimal x using convergents
-      const x = getXUsingConvergents(d);
-      if (x.greater(largestX)) {
-        largestX = x;
-        largestD = d;
-      }
-    }
-  }
-
-  return largestD;
-}
-
 function getXUsingConvergents(num) {
   const period = getPeriod(num);
   const ns = [bigInt(1), bigInt(Math.floor(Math.sqrt(num)))];
@@ -51,7 +31,7 @@ function getXUsingConvergents(num) {
 
   let i = 2;
   let j = 2;
-  while (true) {
+  while (i < Infinity) {
     // reset j if it ever gets out of the bounds of the period
     if (j > period.length + 1) {
       j = 2;
@@ -74,6 +54,26 @@ function getXUsingConvergents(num) {
     i++;
     j++;
   }
+}
+
+function getDiophantineDenominator(max) {
+  let largestX = bigInt(0);
+  let largestD;
+
+  for (let d = 2; d <= max; d++) {
+    const sqrt = Math.sqrt(d);
+    // check if d isn't square
+    if (Math.floor(sqrt) !== sqrt) {
+      // find minimal x using convergents
+      const x = getXUsingConvergents(d);
+      if (x.greater(largestX)) {
+        largestX = x;
+        largestD = d;
+      }
+    }
+  }
+
+  return largestD;
 }
 
 module.exports = getDiophantineDenominator;

@@ -8,6 +8,24 @@
 const digits = require(`../../util/digits`);
 const primal = require(`../../util/primal`);
 
+// instead of using my isPandigital utility function (../../util/pandigital),
+// I wrote a new one because this question requires all numbers 1 through n are used exactly once
+function isPandigital(num) {
+  const numDigits = digits.getDigits(num).sort();
+
+  if (numDigits[0] === 0) {
+    return false;
+  }
+
+  for (let i = 0; i < numDigits.length; i++) {
+    if (numDigits[i] !== i + 1) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function getLargestPandigitalPrime() {
   const largest = 2143;
   const validRanges = [];
@@ -34,24 +52,6 @@ function getLargestPandigitalPrime() {
   }
 
   return largest;
-}
-
-// instead of using my isPandigital utility function (../../util/pandigital),
-// I wrote a new one because this question requires all numbers 1 through n are used exactly once
-function isPandigital(num) {
-  const numDigits = digits.getDigits(num).sort();
-
-  if (numDigits[0] === 0) {
-    return false;
-  }
-
-  for (let i = 0; i < numDigits.length; i++) {
-    if (numDigits[i] !== i + 1) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 module.exports = getLargestPandigitalPrime;

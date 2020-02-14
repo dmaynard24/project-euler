@@ -9,6 +9,16 @@
 
 const digits = require(`../../util/digits`);
 
+function factorialize(num) {
+  let val = 1;
+  while (num > 1) {
+    val *= num;
+    num--;
+  }
+
+  return val;
+}
+
 function getNthPermutation(n) {
   const allDigits = [...Array(10).keys()];
   let target = n - 1;
@@ -25,16 +35,6 @@ function getNthPermutation(n) {
   }
 
   return digits.getIntFromDigits(perm);
-}
-
-function factorialize(num) {
-  let val = 1;
-  while (num > 1) {
-    val *= num;
-    num--;
-  }
-
-  return val;
 }
 
 module.exports = getNthPermutation;

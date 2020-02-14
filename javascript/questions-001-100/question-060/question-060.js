@@ -60,9 +60,9 @@ function getLowestPrimeSum(count) {
             } else {
               sets.push(newSet);
 
-              const setSum = newSet.reduce((a, c) => a + c);
-              if (setSum < sumLimit) {
-                sumLimit = setSum;
+              const newSetSum = newSet.reduce((a, c) => a + c);
+              if (newSetSum < sumLimit) {
+                sumLimit = newSetSum;
               }
             }
           }

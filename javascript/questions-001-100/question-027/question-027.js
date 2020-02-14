@@ -28,16 +28,6 @@ function getCoefficientProduct() {
   const negatives = primeNums.map((primeNum) => primeNum * -1).reverse();
   const primesRange = negatives.concat(primeNums);
 
-  primesRange.forEach((a) => {
-    primesRange.forEach((b) => {
-      const primeCount = getConsecutivePrimeCount(a, b);
-      if (primeCount > largestCount) {
-        largestCount = primeCount;
-        largestProduct = a * b;
-      }
-    });
-  });
-
   function getConsecutivePrimeCount(a, b) {
     let areAllPrime = true;
     let n = 0;
@@ -50,6 +40,16 @@ function getCoefficientProduct() {
 
     return n;
   }
+
+  primesRange.forEach((a) => {
+    primesRange.forEach((b) => {
+      const primeCount = getConsecutivePrimeCount(a, b);
+      if (primeCount > largestCount) {
+        largestCount = primeCount;
+        largestProduct = a * b;
+      }
+    });
+  });
 
   return largestProduct;
 }

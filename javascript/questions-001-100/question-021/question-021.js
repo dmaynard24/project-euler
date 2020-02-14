@@ -10,6 +10,10 @@
 
 const getProperDivisors = require(`../../util/factors`);
 
+function d(num) {
+  return getProperDivisors(num).reduce((a, c) => a + c);
+}
+
 function getAmicableSum(limit) {
   const amicables = [];
 
@@ -22,10 +26,6 @@ function getAmicableSum(limit) {
   }
 
   return amicables.reduce((a, c) => a + c);
-}
-
-function d(num) {
-  return getProperDivisors(num).reduce((a, c) => a + c);
 }
 
 module.exports = getAmicableSum;

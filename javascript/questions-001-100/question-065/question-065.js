@@ -31,6 +31,16 @@
 
 const bigInt = require(`big-integer`);
 
+function getPeriodE(termLimit) {
+  ms = Array(termLimit - 1).fill(1);
+
+  for (let i = 1; i < termLimit; i += 3) {
+    ms[i] = ((i + 2) / 3) * 2;
+  }
+
+  return ms;
+}
+
 function getNumeratorSum(max) {
   const period = getPeriodE(max);
   const ns = [bigInt(1), bigInt(Math.floor(Math.E))];
@@ -43,16 +53,6 @@ function getNumeratorSum(max) {
   }
 
   return ns[max].toArray(10).value.reduce((a, c) => a + c);
-}
-
-function getPeriodE(termLimit) {
-  ms = Array(termLimit - 1).fill(1);
-
-  for (let i = 1; i < termLimit; i += 3) {
-    ms[i] = ((i + 2) / 3) * 2;
-  }
-
-  return ms;
 }
 
 module.exports = getNumeratorSum;

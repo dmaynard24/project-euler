@@ -9,8 +9,15 @@
 
 const primal = require(`../../util/primal`);
 const digits = require(`../../util/digits`);
-
 const combination = require(`../../util/combination`);
+
+function getAllCombos(length) {
+  const range = [...Array(length).keys()];
+  return range.slice(1).reduce((a, c) => {
+    a = a.concat(combination.getCombos(range, c));
+    return a;
+  }, []);
+}
 
 function getSmallestPrime(count) {
   const limit = 999999;
@@ -61,14 +68,8 @@ function getSmallestPrime(count) {
       }
     }
   }
-}
 
-function getAllCombos(length) {
-  const range = [...Array(length).keys()];
-  return range.slice(1).reduce((a, c) => {
-    a = a.concat(combination.getCombos(range, c));
-    return a;
-  }, []);
+  return 0;
 }
 
 module.exports = getSmallestPrime;

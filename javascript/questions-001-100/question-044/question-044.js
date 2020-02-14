@@ -15,7 +15,7 @@ function getPentagonDifference() {
   let smallest = Infinity;
 
   let n = 1;
-  while (true) {
+  while (n < Infinity) {
     const pk = shapes.getNthPentagon(n);
     if (pk - 1 > smallest) {
       return smallest;

@@ -24,7 +24,7 @@ function getMaximumDigitSum(limit) {
         break;
       }
 
-      const sum = powerDigits.reduce((a, c) => a + c);
+      const sum = powerDigits.reduce((acc, curr) => acc + curr);
       if (sum > largest) {
         largest = sum;
       }

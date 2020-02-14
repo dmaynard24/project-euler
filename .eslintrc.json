@@ -24,6 +24,7 @@
     "space-before-function-paren": "off",
     "no-plusplus": "off",
     "implicit-arrow-linebreak": "off",
-    "no-continue": "off"
+    "no-continue": "off",
+    "no-bitwise": "off"
   }
 }

@@ -54,6 +54,8 @@ function getXUsingConvergents(num) {
     i++;
     j++;
   }
+
+  return 0;
 }
 
 function getDiophantineDenominator(max) {

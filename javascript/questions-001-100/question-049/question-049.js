@@ -9,7 +9,6 @@
 
 const primal = require(`../../util/primal`);
 const permutation = require(`../../util/permutation`);
-
 const digits = require(`../../util/digits`);
 
 function getPrimePermutationTerms() {
@@ -34,6 +33,8 @@ function getPrimePermutationTerms() {
       }
     }
   }
+
+  return 0;
 }
 
 module.exports = getPrimePermutationTerms;

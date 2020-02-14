@@ -5,26 +5,26 @@
 
 // Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?
 
-const bigInt = require('big-integer');
+const bigInt = require(`big-integer`);
 
 function getMaximumDigitSum(limit) {
-  let lower = 2,
-    largest = 0;
+  const lower = 2;
+  let largest = 0;
 
   for (let a = limit - 1; a >= lower; a--) {
-    if (a % 10 == 0) {
+    if (a % 10 === 0) {
       continue;
     }
 
     for (let b = limit - 1; b >= lower; b--) {
-      let powerDigits = bigInt(a)
+      const powerDigits = bigInt(a)
         .pow(b)
         .toArray(10).value;
       if (powerDigits.length * 9 < largest) {
         break;
       }
 
-      let sum = powerDigits.reduce((a, c) => a + c);
+      const sum = powerDigits.reduce((a, c) => a + c);
       if (sum > largest) {
         largest = sum;
       }

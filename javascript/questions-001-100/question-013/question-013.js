@@ -104,15 +104,15 @@
 // 20849603980134001723930671666823555245252804609722
 // 53503534226472524250874054075591789781264330331690
 
-const numbers = require('./numbers'),
-  digits = require('../../util/digits');
+const numbers = require(`./numbers`);
+const digits = require(`../../util/digits`);
 
 function getFirstDigitsOfSum(digitCount) {
-  let sum = numbers
-      .split('\n')
-      .map(num => parseInt(num.substring(0, digitCount + 1), 10))
-      .reduce((acc, curr) => acc + curr),
-    digitsToTrim = digits.getDigitCount(sum) - digitCount;
+  const sum = numbers
+    .split(`\n`)
+    .map((num) => parseInt(num.substring(0, digitCount + 1), 10))
+    .reduce((acc, curr) => acc + curr);
+  const digitsToTrim = digits.getDigitCount(sum) - digitCount;
 
   return Math.floor(sum / Math.pow(10, digitsToTrim));
 }

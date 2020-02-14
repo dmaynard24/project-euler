@@ -14,22 +14,22 @@
 
 function getLeastN(divisor) {
   // use mod later to prevent big ints
-  let mod = divisor * 10;
+  const mod = divisor * 10;
 
   // keep a cache of counts to avoid redundant recursion
-  let partitionCounts = new Map();
+  const partitionCounts = new Map();
 
   function getPartitionCount(remaining, term) {
-    if (remaining == 0) {
+    if (remaining === 0) {
       return 1;
     }
 
     let count = 0;
     for (let nextTerm = term; nextTerm > 0; nextTerm--) {
-      let newRemaining = remaining - nextTerm,
-        nextTermArg = Math.min(newRemaining, nextTerm),
-        cachedAddend,
-        addend = 0;
+      const newRemaining = remaining - nextTerm;
+      const nextTermArg = Math.min(newRemaining, nextTerm);
+      let cachedAddend;
+      let addend = 0;
 
       // check cache
       if (partitionCounts.has(newRemaining)) {
@@ -57,12 +57,12 @@ function getLeastN(divisor) {
     return count;
   }
 
-  let i = 1,
-    limit = 20000;
+  let i = 1;
+  const limit = 20000;
   while (i < limit) {
-    let partitionCount = getPartitionCount(i, i);
-    if (partitionCount % divisor == 0) {
-      console.log(i, partitionCount, divisor);
+    const partitionCount = getPartitionCount(i, i);
+    if (partitionCount % divisor === 0) {
+      // console.log(i, partitionCount, divisor);
       return i;
     }
     i++;
@@ -71,7 +71,7 @@ function getLeastN(divisor) {
   return `couldn't find a solution for n in p(n) where n is less than ${limit}`;
 }
 
-console.log(getLeastN(10000));
+// console.log(getLeastN(10000));
 // 100000 - 11224
 // 10000 - 599
 // 1000 - 449

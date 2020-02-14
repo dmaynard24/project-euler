@@ -21,13 +21,13 @@
 
 // How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 
-const digits = require('../../util/digits');
+const digits = require(`../../util/digits`);
 
 function getNonRepeatingChainCount(limit) {
-  let factorials = [],
-    factorialSums = new Map(),
-    targetLength = 60,
-    count = 0;
+  const factorials = [];
+  const factorialSums = new Map();
+  const targetLength = 60;
+  let count = 0;
 
   factorials.push(1);
   for (let i = 1; i <= 9; i++) {
@@ -35,27 +35,27 @@ function getNonRepeatingChainCount(limit) {
   }
 
   for (let i = 1; i < limit; i++) {
-    let didLoop = false,
-      val = i,
-      chain = new Map();
+    let didLoop = false;
+    let val = i;
+    const chain = new Map();
 
     chain.set(val, 1);
     while (!didLoop) {
       if (!factorialSums.has(val)) {
-        let valDigits = digits.getDigitsReversed(val),
-          sum = valDigits.reduce((a, c) => a + factorials[c], 0);
+        const valDigits = digits.getDigitsReversed(val);
+        const sum = valDigits.reduce((a, c) => a + factorials[c], 0);
 
         factorialSums.set(val, sum);
       }
 
       if (chain.has(factorialSums.get(val))) {
-        let length = chain.size;
-        if (length == targetLength) {
+        const length = chain.size;
+        if (length === targetLength) {
           count++;
         }
         didLoop = true;
       } else {
-        let cachedSum = factorialSums.get(val);
+        const cachedSum = factorialSums.get(val);
         chain.set(cachedSum, 1);
         val = cachedSum;
       }

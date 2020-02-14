@@ -18,12 +18,12 @@
 
 // What is the value of the first triangle number to have over five hundred divisors?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getFirstTriangleWithDivisors(divisors) {
-  let i = 1,
-    triangle = 1,
-    primes = primal.getPrimes(25);
+  let i = 1;
+  let triangle = 1;
+  const primes = primal.getPrimes(25);
 
   while (getDivisorCount(triangle) < divisors) {
     i++;
@@ -31,8 +31,8 @@ function getFirstTriangleWithDivisors(divisors) {
   }
 
   function getDivisorCount(num) {
-    let primeFactors = primal.getPrimeFactors(num, primes),
-      divisorCount = primeFactors.reduce((a, c) => (a *= c.exp + 1), 1);
+    const primeFactors = primal.getPrimeFactors(num, primes);
+    const divisorCount = primeFactors.reduce((a, c) => (a *= c.exp + 1), 1);
 
     return divisorCount;
   }

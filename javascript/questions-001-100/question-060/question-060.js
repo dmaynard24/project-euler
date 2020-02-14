@@ -5,47 +5,47 @@
 
 // Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 
-const primal = require('../../util/primal'),
-  digits = require('../../util/digits');
+const primal = require(`../../util/primal`);
+const digits = require(`../../util/digits`);
 
 function getLowestPrimeSum(count) {
-  let nonPrimePerms = new Map(),
-    sumLimit = Infinity,
-    initialLimit = 10000,
-    primes = primal.getPrimes(initialLimit);
+  const nonPrimePerms = new Map();
+  let sumLimit = Infinity;
+  const initialLimit = 10000;
+  const primes = primal.getPrimes(initialLimit);
 
   function getSets(set) {
     let sets = [];
 
-    let setSum = set.length ? set.reduce((a, c) => a + c) : 0;
+    const setSum = set.length ? set.reduce((a, c) => a + c) : 0;
     if (setSum < sumLimit) {
-      let termLimit = sumLimit != Infinity ? sumLimit - set[set.length - 1] * (count - set.length) : initialLimit;
+      const termLimit = sumLimit !== Infinity ? sumLimit - set[set.length - 1] * (count - set.length) : initialLimit;
       for (let i = set.length ? set[set.length - 1] + 1 : 2; i < termLimit; i++) {
         if (primal.isPrime(i, primes)) {
           // only evaluate new permutations
-          let newTermDigits = digits.getDigits(i),
-            areAllPrime = true;
+          const newTermDigits = digits.getDigits(i);
+          let areAllPrime = true;
           for (let j = 0; j < set.length; j++) {
-            let termDigits = digits.getDigits(set[j]),
-              prepended = i;
-            termDigits.forEach(digit => {
+            const termDigits = digits.getDigits(set[j]);
+            let prepended = i;
+            termDigits.forEach((digit) => {
               prepended *= 10;
               prepended += digit;
             });
 
-            if (nonPrimePerms.get(prepended) == true || !primal.isPrime(prepended)) {
+            if (nonPrimePerms.get(prepended) === true || !primal.isPrime(prepended)) {
               nonPrimePerms.set(prepended, true);
               areAllPrime = false;
               break;
             }
 
             let appended = set[j];
-            newTermDigits.forEach(digit => {
+            newTermDigits.forEach((digit) => {
               appended *= 10;
               appended += digit;
             });
 
-            if (nonPrimePerms.get(appended) == true || !primal.isPrime(appended)) {
+            if (nonPrimePerms.get(appended) === true || !primal.isPrime(appended)) {
               nonPrimePerms.set(appended, true);
               areAllPrime = false;
               break;
@@ -53,14 +53,14 @@ function getLowestPrimeSum(count) {
           }
 
           if (areAllPrime) {
-            let newSet = set.concat(i);
+            const newSet = set.concat(i);
 
             if (newSet.length < count) {
               sets = sets.concat(getSets(newSet));
             } else {
               sets.push(newSet);
 
-              let setSum = newSet.reduce((a, c) => a + c);
+              const setSum = newSet.reduce((a, c) => a + c);
               if (setSum < sumLimit) {
                 sumLimit = setSum;
               }
@@ -73,12 +73,12 @@ function getLowestPrimeSum(count) {
     return sets;
   }
 
-  let sets = getSets([]);
+  const sets = getSets([]);
 
   if (sets.length) {
     let smallest = sets[0].reduce((a, c) => a + c);
     for (let i = 1; i < sets.length; i++) {
-      let sum = sets[i].reduce((a, c) => a + c);
+      const sum = sets[i].reduce((a, c) => a + c);
       if (sum < smallest) {
         smallest = sum;
       }

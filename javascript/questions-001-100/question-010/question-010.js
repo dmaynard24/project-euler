@@ -5,11 +5,11 @@
 
 // Find the sum of all the primes below two million.
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getPrimeSum(limit) {
-  let primes = primal.getPrimes(limit),
-    primeNums = primal.getPrimeNumbers(primes);
+  const primes = primal.getPrimes(limit);
+  const primeNums = primal.getPrimeNumbers(primes);
 
   return primeNums.reduce((a, c) => a + c);
 }

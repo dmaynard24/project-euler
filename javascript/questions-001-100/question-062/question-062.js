@@ -5,32 +5,32 @@
 
 // Find the smallest cube for which exactly five permutations of its digits are cube.
 
-const digits = require('../../util/digits');
+const digits = require(`../../util/digits`);
 
 function getSmallestCube(count) {
-  let start = 10,
-    limit = 10000,
-    sortedCubes = new Map();
+  const start = 10;
+  const limit = 10000;
+  const sortedCubes = new Map();
 
   for (let i = start; i < limit; i++) {
-    let cube = Math.pow(i, 3),
-      sortedValue = digits
-        .getDigits(cube)
-        .sort((a, b) => b - a)
-        .join('');
+    const cube = Math.pow(i, 3);
+    const sortedValue = digits
+      .getDigits(cube)
+      .sort((a, b) => b - a)
+      .join(``);
 
     if (sortedCubes.has(sortedValue)) {
-      let cachedCube = sortedCubes.get(sortedValue);
+      const cachedCube = sortedCubes.get(sortedValue);
       cachedCube.count++;
       cachedCube.cubes.push(cube);
 
-      if (cachedCube.count == count) {
+      if (cachedCube.count === count) {
         return Math.min.apply(null, cachedCube.cubes);
       }
     } else {
       sortedCubes.set(sortedValue, {
         count: 1,
-        cubes: [cube]
+        cubes: [cube],
       });
     }
   }

@@ -17,41 +17,41 @@
 
 // How many Lychrel numbers are there below ten-thousand?
 
-const palindrome = require('../../util/palindrome'),
-  bigInt = require('big-integer');
+const palindrome = require(`../../util/palindrome`);
+const bigInt = require(`big-integer`);
 
 function getLychrelCount(limit) {
-  let count = 0,
-    reverseSumsArrs = new Map(),
-    palindromeSums = new Map();
+  let count = 0;
+  const reverseSumsArrs = new Map();
+  const palindromeSums = new Map();
 
   for (let i = 1; i < limit; i++) {
-    let sum = bigInt(i),
-      isLychrel = true;
+    let sum = bigInt(i);
+    let isLychrel = true;
 
     for (let j = 0; j < 50; j++) {
-      let sumStr = sum.toString();
+      const sumStr = sum.toString();
 
       // cache reverse sums
-      if (reverseSumsArrs.get(sumStr) == undefined) {
+      if (reverseSumsArrs.get(sumStr) === undefined) {
         reverseSumsArrs.set(sumStr, sum.toArray(10).value.reverse());
       }
 
       // calculate reverse sum with cached value
-      let reverseSum = bigInt(0),
-        reverseSumArr = reverseSumsArrs.get(sumStr);
+      let reverseSum = bigInt(0);
+      const reverseSumArr = reverseSumsArrs.get(sumStr);
       for (let k = 0; k < reverseSumArr.length; k++) {
         reverseSum = reverseSum.multiply(10).add(reverseSumArr[k]);
       }
       sum = sum.add(reverseSum);
 
       // cache palindrome sums
-      if (palindromeSums.get(sumStr) == undefined) {
+      if (palindromeSums.get(sumStr) === undefined) {
         palindromeSums.set(sumStr, palindrome.isArrayPalindrome(sum.toArray(10).value));
       }
 
       // check if palindrome with cached value
-      if (palindromeSums.get(sumStr) == true) {
+      if (palindromeSums.get(sumStr) === true) {
         isLychrel = false;
         break;
       }

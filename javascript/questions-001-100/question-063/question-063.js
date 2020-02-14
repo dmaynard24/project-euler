@@ -5,19 +5,19 @@
 
 // How many n-digit positive integers exist which are also an nth power?
 
-const digits = require('../../util/digits');
+const digits = require(`../../util/digits`);
 
 function getPowerfulIntegerCount() {
   let count = 0;
 
   for (let exp = 1; exp <= 21; exp++) {
-    let base = 1,
-      digitCount = 1;
+    let base = 1;
+    let digitCount = 1;
     while (digitCount <= exp) {
-      let powerful = Math.pow(base, exp);
+      const powerful = Math.pow(base, exp);
 
       digitCount = digits.getDigitCount(powerful);
-      if (digitCount == exp) {
+      if (digitCount === exp) {
         count++;
       }
 

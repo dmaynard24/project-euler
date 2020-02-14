@@ -18,47 +18,47 @@ function getNumberLetterCount(max) {
 }
 
 function getWordsFromNumber(num) {
-  let a = [
-      '',
-      'one',
-      'two',
-      'three',
-      'four',
-      'five',
-      'six',
-      'seven',
-      'eight',
-      'nine',
-      'ten',
-      'eleven',
-      'twelve',
-      'thirteen',
-      'fourteen',
-      'fifteen',
-      'sixteen',
-      'seventeen',
-      'eighteen',
-      'nineteen'
-    ],
-    b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
-    words = '';
+  const a = [
+    ``,
+    `one`,
+    `two`,
+    `three`,
+    `four`,
+    `five`,
+    `six`,
+    `seven`,
+    `eight`,
+    `nine`,
+    `ten`,
+    `eleven`,
+    `twelve`,
+    `thirteen`,
+    `fourteen`,
+    `fifteen`,
+    `sixteen`,
+    `seventeen`,
+    `eighteen`,
+    `nineteen`,
+  ];
+  const b = [``, ``, `twenty`, `thirty`, `forty`, `fifty`, `sixty`, `seventy`, `eighty`, `ninety`];
+  let words = ``;
 
-  if (num == 1000) {
-    return 'onethousand';
+  if (num === 1000) {
+    return `onethousand`;
   }
 
   if (num >= 100) {
-    let hundreds = Math.floor(num / 100);
-    words += a[hundreds] + 'hundred';
+    const hundreds = Math.floor(num / 100);
+    words += `${a[hundreds]}hundred`;
     num -= 100 * hundreds;
 
-    if (num != 0) {
-      words += 'and';
+    if (num !== 0) {
+      words += `and`;
     }
   }
 
   if (num >= 20) {
-    let tens = Math.floor(num / 10);
+    const tens = Math.floor(num / 10);
     words += b[tens];
     num -= 10 * tens;
   }

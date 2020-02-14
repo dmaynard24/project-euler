@@ -21,19 +21,19 @@
 
 // Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
-const getPeriod = require('../../util/period'),
-  bigInt = require('big-integer');
+const getPeriod = require(`../../util/period`);
+const bigInt = require(`big-integer`);
 
 function getDiophantineDenominator(max) {
-  let largestX = bigInt(0),
-    largestD;
+  let largestX = bigInt(0);
+  let largestD;
 
   for (let d = 2; d <= max; d++) {
-    let sqrt = Math.sqrt(d);
+    const sqrt = Math.sqrt(d);
     // check if d isn't square
-    if (Math.floor(sqrt) != sqrt) {
+    if (Math.floor(sqrt) !== sqrt) {
       // find minimal x using convergents
-      let x = getXUsingConvergents(d);
+      const x = getXUsingConvergents(d);
       if (x.greater(largestX)) {
         largestX = x;
         largestD = d;
@@ -45,23 +45,23 @@ function getDiophantineDenominator(max) {
 }
 
 function getXUsingConvergents(num) {
-  let period = getPeriod(num),
-    ns = [bigInt(1), bigInt(Math.floor(Math.sqrt(num)))],
-    ds = [bigInt(0), bigInt(1)];
+  const period = getPeriod(num);
+  const ns = [bigInt(1), bigInt(Math.floor(Math.sqrt(num)))];
+  const ds = [bigInt(0), bigInt(1)];
 
-  let i = 2,
-    j = 2;
+  let i = 2;
+  let j = 2;
   while (true) {
     // reset j if it ever gets out of the bounds of the period
     if (j > period.length + 1) {
       j = 2;
     }
-    let m = bigInt(period[j - 2]),
-      n = m.multiply(ns[i - 1]).add(ns[i - 2]),
-      d = m.multiply(ds[i - 1]).add(ds[i - 2]);
+    const m = bigInt(period[j - 2]);
+    const n = m.multiply(ns[i - 1]).add(ns[i - 2]);
+    const d = m.multiply(ds[i - 1]).add(ds[i - 2]);
 
-    let xPart = n.pow(2),
-      yPart = d.pow(2).multiply(num);
+    const xPart = n.pow(2);
+    const yPart = d.pow(2).multiply(num);
 
     // if it satisfies the equation, return numerator (equal to x)
     if (xPart.subtract(yPart).equals(1)) {

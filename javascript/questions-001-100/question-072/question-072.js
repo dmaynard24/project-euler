@@ -11,12 +11,12 @@
 
 // How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
 
-const primal = require('../../util/primal'),
-  phi = require('../../util/phi');
+const primal = require(`../../util/primal`);
+const phi = require(`../../util/phi`);
 
 function getFractionCount(max) {
-  let primes = primal.getPrimes(max),
-    fractionCount = 0;
+  const primes = primal.getPrimes(max);
+  let fractionCount = 0;
 
   for (let d = 2; d <= max; d++) {
     fractionCount += phi(d, primes);

@@ -7,13 +7,11 @@ function getCombos(arr, pick) {
     return [];
   }
 
-  let first = arr[0],
-    rest = arr.slice(1);
+  const first = arr[0];
+  const rest = arr.slice(1);
 
   return getCombos(rest, pick - 1)
-    .map(combo => {
-      return [first].concat(combo);
-    })
+    .map((combo) => [first].concat(combo))
     .concat(getCombos(rest, pick));
 }
 

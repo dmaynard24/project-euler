@@ -5,10 +5,10 @@
 
 // What is the largest prime factor of the number 600851475143 ?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getLargestPrimeFactor(num) {
-  let primes = primal.getPrimes(10000);
+  const primes = primal.getPrimes(10000);
   return primal.getPrimeFactors(num, primes).pop().base;
 }
 

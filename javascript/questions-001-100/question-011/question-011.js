@@ -28,10 +28,10 @@
 
 // What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
-const grid = require('./grid');
+const grid = require(`./grid`);
 
 function getLargestProduct(digits) {
-  let gridArr = grid.split('\n').map(row => row.split(' ').map(num => parseInt(num, 10)));
+  const gridArr = grid.split(`\n`).map((row) => row.split(` `).map((num) => parseInt(num, 10)));
 
   function getUpRight(x, y) {
     let product = gridArr[x][y];
@@ -75,23 +75,23 @@ function getLargestProduct(digits) {
   for (let x = 0; x < 20; x++) {
     for (let y = 0; y < 20; y++) {
       if (y + digits <= 19) {
-        let row = gridArr[x],
-          zeroAt = row.indexOf(0, y);
-        if (zeroAt - y > digits - 1 || zeroAt == -1) {
-          let newLargest = getRight(x, y);
+        const row = gridArr[x];
+        const zeroAt = row.indexOf(0, y);
+        if (zeroAt - y > digits - 1 || zeroAt === -1) {
+          const newLargest = getRight(x, y);
           largest = Math.max(newLargest, largest);
         }
         if (x - digits >= 0) {
-          let newLargest = getUpRight(x, y);
+          const newLargest = getUpRight(x, y);
           largest = Math.max(newLargest, largest);
         }
         if (x + digits <= 19) {
-          let newLargest = getDownRight(x, y);
+          const newLargest = getDownRight(x, y);
           largest = Math.max(newLargest, largest);
         }
       }
       if (x + digits <= 19) {
-        let newLargest = getDown(x, y);
+        const newLargest = getDown(x, y);
         largest = Math.max(newLargest, largest);
       }
     }

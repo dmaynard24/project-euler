@@ -5,12 +5,12 @@
 
 // What is the 10 001st prime number?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getNthPrime(n) {
-  let limit = 105000,
-    primes = primal.getPrimes(limit),
-    primeNums = primal.getPrimeNumbers(primes);
+  const limit = 105000;
+  const primes = primal.getPrimes(limit);
+  const primeNums = primal.getPrimeNumbers(primes);
 
   return primeNums[n - 1];
 }

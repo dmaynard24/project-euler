@@ -9,24 +9,24 @@
 
 // If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 
-const digits = require('../../util/digits'),
-  getGcd = require('../../util/gcd');
+const digits = require(`../../util/digits`);
+const getGcd = require(`../../util/gcd`);
 
 function getFractionProductDenominator() {
-  let nProduct = 1,
-    dProduct = 1;
+  let nProduct = 1;
+  let dProduct = 1;
 
   for (let n = 10; n <= 98; n++) {
     for (let d = n + 1; d <= 99; d++) {
-      let decimal = n / d,
-        nDigits = digits.getDigits(n),
-        dDigits = digits.getDigits(d),
-        remainingN = nDigits[0],
-        cancelledN = nDigits[1],
-        remainingD = dDigits[1],
-        cancelledD = dDigits[0];
+      const decimal = n / d;
+      const nDigits = digits.getDigits(n);
+      const dDigits = digits.getDigits(d);
+      const remainingN = nDigits[0];
+      const cancelledN = nDigits[1];
+      const remainingD = dDigits[1];
+      const cancelledD = dDigits[0];
 
-      if (cancelledN == cancelledD && decimal == remainingN / remainingD) {
+      if (cancelledN === cancelledD && decimal === remainingN / remainingD) {
         nProduct *= n;
         dProduct *= d;
       }

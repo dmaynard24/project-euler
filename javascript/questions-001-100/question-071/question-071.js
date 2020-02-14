@@ -11,24 +11,24 @@
 
 // By listing the set of reduced proper fractions for d ≤ 1,000,000 in ascending order of size, find the numerator of the fraction immediately to the left of 3/7.
 
-const primal = require('../../util/primal'),
-  areCoprime = require('../../util/coprime');
+const primal = require(`../../util/primal`);
+const areCoprime = require(`../../util/coprime`);
 
 function getNumerator(max) {
-  let primes = primal.getPrimes(max),
-    target = 3 / 7,
-    minD = max > 10 ? max - 10 : max - 5,
-    smallestDiff = Infinity,
-    leftN;
+  const primes = primal.getPrimes(max);
+  const target = 3 / 7;
+  const minD = max > 10 ? max - 10 : max - 5;
+  let smallestDiff = Infinity;
+  let leftN;
 
   for (let d = max; d >= minD; d--) {
     for (let n = 1; n < d; n++) {
-      let quotient = n / d;
+      const quotient = n / d;
       if (quotient >= target) {
         break;
       }
 
-      let diff = target - quotient;
+      const diff = target - quotient;
       if (diff < smallestDiff && (primal.isPrime(d, primes) || primal.isPrime(n, primes) || areCoprime(n, d))) {
         smallestDiff = diff;
         leftN = n;

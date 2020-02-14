@@ -11,31 +11,31 @@
 
 // What is the first value which can be written as the sum of primes in over five thousand different ways?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getPrimeSummationCount(comboCount) {
-  let primes = primal.getPrimes(100),
-    primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
+  const primes = primal.getPrimes(100);
+  const primeNumsReversed = primal.getPrimeNumbers(primes).reverse();
 
   function getCount(remaining, index) {
-    if (remaining == 0) {
+    if (remaining === 0) {
       return 1;
     }
 
     let count = 0;
     for (let i = index; i < primeNumsReversed.length; i++) {
-      let nextTerm = primeNumsReversed[i],
-        newRemaining = remaining - nextTerm,
-        nextIndex = newRemaining >= nextTerm ? i : i + 1;
+      const nextTerm = primeNumsReversed[i];
+      const newRemaining = remaining - nextTerm;
+      const nextIndex = newRemaining >= nextTerm ? i : i + 1;
       count += getCount(newRemaining, nextIndex);
     }
 
     return count;
   }
 
-  let sum = 10,
-    count = 5,
-    firstIndex;
+  let sum = 10;
+  let count = 5;
+  let firstIndex;
   while (count < comboCount) {
     sum++;
 

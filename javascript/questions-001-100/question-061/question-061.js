@@ -16,23 +16,23 @@
 // This is the only set of 4-digit numbers with this property.
 // Find the sum of the only ordered set of six cyclic 4-digit numbers for which each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and octagonal, is represented by a different number in the set.
 
-const shapes = require('../../util/shapes');
+const shapes = require(`../../util/shapes`);
 
 function getOrderedSet() {
-  const limit = 10000,
-    termSets = {
-      3: shapes.getTriangles(limit),
-      4: shapes.getSquares(limit),
-      5: shapes.getPentagons(limit),
-      6: shapes.getHexagons(limit),
-      7: shapes.getHeptagons(limit),
-      8: shapes.getOctagons(limit)
-    },
-    setCount = Object.keys(termSets).length;
+  const limit = 10000;
+  const termSets = {
+    3: shapes.getTriangles(limit),
+    4: shapes.getSquares(limit),
+    5: shapes.getPentagons(limit),
+    6: shapes.getHexagons(limit),
+    7: shapes.getHeptagons(limit),
+    8: shapes.getOctagons(limit),
+  };
+  const setCount = Object.keys(termSets).length;
 
   function getNextTerm(set, startValue, matchedSets) {
-    let returnSet = [],
-      unmatchedKeys = Object.keys(matchedSets).filter(key => matchedSets[key] == false);
+    let returnSet = [];
+    const unmatchedKeys = Object.keys(matchedSets).filter((key) => matchedSets[key] === false);
 
     for (let i = startValue; i < limit; i++) {
       for (let j = 0; j < unmatchedKeys.length; j++) {
@@ -45,14 +45,14 @@ function getOrderedSet() {
           }
 
           // for every set except the first
-          if (set.length != 0) {
+          if (set.length !== 0) {
             if (!areCyclical(set[set.length - 1], i)) {
               break;
             }
           }
 
           // for just the last set
-          if (set.length == setCount - 1) {
+          if (set.length === setCount - 1) {
             if (!areCyclical(i, set[0])) {
               break;
             }
@@ -63,13 +63,13 @@ function getOrderedSet() {
           set.push(i);
 
           // immediately after pushing a new term, check exit condition
-          if (set.length == setCount) {
+          if (set.length === setCount) {
             return set;
           }
 
           // continue
-          if (returnSet.length == 0) {
-            let newStartValue = (i % 100) * 100;
+          if (returnSet.length === 0) {
+            const newStartValue = (i % 100) * 100;
             returnSet = returnSet.concat(getNextTerm(set, newStartValue, matchedSets));
           }
 
@@ -84,20 +84,20 @@ function getOrderedSet() {
   }
 
   // 1010 is the initial start value because it's the first 4-digit number that can possibly be cyclical with another 4-digit number
-  let onlySet = getNextTerm([], 1010, {
+  const onlySet = getNextTerm([], 1010, {
     3: false,
     4: false,
     5: false,
     6: false,
     7: false,
-    8: false
+    8: false,
   });
 
   return onlySet.reduce((a, c) => a + c);
 }
 
 function areCyclical(a, b) {
-  return a % 100 == Math.floor(b / 100);
+  return a % 100 === Math.floor(b / 100);
 }
 
 module.exports = getOrderedSet;

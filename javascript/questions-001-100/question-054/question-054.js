@@ -44,36 +44,34 @@
 
 // How many hands does Player 1 win?
 
-const poker = require('./poker');
+const poker = require(`./poker`);
 
 function getHandsPlayerWon(player) {
-  let hands = poker
-    .split('\n')
-    .map(bothHands => bothHands.split(' '))
-    .map(tenCards => {
-      return [tenCards.slice(0, 5), tenCards.slice(5)];
-    });
+  const hands = poker
+    .split(`\n`)
+    .map((bothHands) => bothHands.split(` `))
+    .map((tenCards) => [tenCards.slice(0, 5), tenCards.slice(5)]);
 
   // start checking hands
-  let winCount = 0,
-    pushCount = 0;
-  hands.forEach(hand => {
-    let rankOne = getHandRank(hand[0]),
-      rankTwo = getHandRank(hand[1]);
+  let winCount = 0;
+  let pushCount = 0;
+  hands.forEach((hand) => {
+    const rankOne = getHandRank(hand[0]);
+    const rankTwo = getHandRank(hand[1]);
 
     // first compare ranks
     if (rankOne.rank > rankTwo.rank) {
       winCount++;
-    } else if (rankOne.rank == rankTwo.rank) {
+    } else if (rankOne.rank === rankTwo.rank) {
       // then compare high cards
       if (rankOne.highCard > rankTwo.highCard) {
         winCount++;
-      } else if (rankOne.highCard == rankTwo.highCard) {
+      } else if (rankOne.highCard === rankTwo.highCard) {
         // then compare kickers
         if (rankOne.kicker && rankTwo.kicker) {
           if (rankOne.kicker > rankTwo.kicker) {
             winCount++;
-          } else if (rankOne.kicker == rankTwo.kicker) {
+          } else if (rankOne.kicker === rankTwo.kicker) {
             pushCount++;
           }
         } else {
@@ -83,59 +81,59 @@ function getHandsPlayerWon(player) {
     }
   });
 
-  return player == 1 ? winCount : hands.length - winCount - pushCount;
+  return player === 1 ? winCount : hands.length - winCount - pushCount;
 }
 
 function getCardRank(card) {
-  let ranks = {
-    '2': 2,
-    '3': 3,
-    '4': 4,
-    '5': 5,
-    '6': 6,
-    '7': 7,
-    '8': 8,
-    '9': 9,
+  const ranks = {
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
     T: 10,
     J: 11,
     Q: 12,
     K: 13,
-    A: 14
+    A: 14,
   };
 
-  let cardNum = [...card][0];
+  const cardNum = [...card][0];
   return ranks[cardNum];
 }
 
 function getHandRank(hand) {
-  let cardRanks = hand.map(card => getCardRank(card)).sort((a, b) => a - b),
-    cardSuits = hand.map(card => [...card][1]).sort();
+  const cardRanks = hand.map((card) => getCardRank(card)).sort((a, b) => a - b);
+  const cardSuits = hand.map((card) => [...card][1]).sort();
 
-  let handIsStraight = isStraight(cardRanks),
-    handIsFlush = isFlush(cardSuits);
+  const handIsStraight = isStraight(cardRanks);
+  const handIsFlush = isFlush(cardSuits);
 
   if (handIsStraight) {
     if (handIsFlush) {
-      if (cardRanks[0] == 10) {
+      if (cardRanks[0] === 10) {
         // Royal Flush
         return {
           rank: 10,
           highCard: cardRanks[cardRanks.length - 1],
-          kicker: null
+          kicker: null,
         };
       }
       // Straight Flush
       return {
         rank: 9,
         highCard: cardRanks[cardRanks.length - 1],
-        kicker: null
+        kicker: null,
       };
     }
     // Straight
     return {
       rank: 5,
       highCard: cardRanks[cardRanks.length - 1],
-      kicker: null
+      kicker: null,
     };
   }
 
@@ -144,66 +142,62 @@ function getHandRank(hand) {
     return {
       rank: 6,
       highCard: cardRanks[cardRanks.length - 1],
-      kicker: null
+      kicker: null,
     };
   }
 
-  let { counts, kicker } = getConsecutiveCountsAndKicker(cardRanks);
+  const { counts, kicker } = getConsecutiveCountsAndKicker(cardRanks);
 
   if (counts.length) {
-    if (counts.length == 2) {
-      if (counts[0].count == 3 || counts[1].count == 3) {
+    if (counts.length === 2) {
+      if (counts[0].count === 3 || counts[1].count === 3) {
         // Full House
         return {
           rank: 7,
           highCard: counts.reduce((a, c) => {
             if (!a.count) {
               return c;
-            } else {
-              return c.count > a.count ? c : a;
             }
+            return c.count > a.count ? c : a;
           }, {}).rank,
-          kicker: kicker
+          kicker,
         };
-      } else {
-        // Two Pairs
+      }
+      // Two Pairs
+      return {
+        rank: 3,
+        highCard: counts.reduce((a, c) => {
+          if (!a) {
+            return c.rank;
+          }
+          return c.rank > a ? c.rank : a;
+        }, 0),
+        kicker,
+      };
+    }
+    const highCard = counts[0].rank;
+    switch (counts[0].count) {
+      case 4:
+        // Four of a Kind
         return {
-          rank: 3,
-          highCard: counts.reduce((a, c) => {
-            if (!a) {
-              return c.rank;
-            } else {
-              return c.rank > a ? c.rank : a;
-            }
-          }, 0),
-          kicker: kicker
+          rank: 8,
+          highCard,
+          kicker,
         };
-      }
-    } else {
-      let highCard = counts[0].rank;
-      switch (counts[0].count) {
-        case 4:
-          // Four of a Kind
-          return {
-            rank: 8,
-            highCard: highCard,
-            kicker: kicker
-          };
-        case 3:
-          // Three of a Kind
-          return {
-            rank: 4,
-            highCard: highCard,
-            kicker: kicker
-          };
-        case 2:
-          // One Pair
-          return {
-            rank: 2,
-            highCard: highCard,
-            kicker: kicker
-          };
-      }
+      case 3:
+        // Three of a Kind
+        return {
+          rank: 4,
+          highCard,
+          kicker,
+        };
+      case 2:
+        // One Pair
+        return {
+          rank: 2,
+          highCard,
+          kicker,
+        };
     }
   }
 
@@ -211,13 +205,13 @@ function getHandRank(hand) {
   return {
     rank: 1,
     highCard: cardRanks[cardRanks.length - 1],
-    kicker: kicker
+    kicker,
   };
 }
 
 function isStraight(ranks) {
   for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i - 1] != ranks[i] - 1) {
+    if (ranks[i - 1] !== ranks[i] - 1) {
       return false;
     }
   }
@@ -227,7 +221,7 @@ function isStraight(ranks) {
 
 function isFlush(suits) {
   for (let i = 1; i < suits.length; i++) {
-    if (suits[i - 1] != suits[i]) {
+    if (suits[i - 1] !== suits[i]) {
       return false;
     }
   }
@@ -236,15 +230,15 @@ function isFlush(suits) {
 }
 
 function getConsecutiveCountsAndKicker(ranks) {
-  let consecutiveCounts = [],
-    rankAndCount = {
-      rank: ranks[0],
-      count: 1
-    };
+  const consecutiveCounts = [];
+  let rankAndCount = {
+    rank: ranks[0],
+    count: 1,
+  };
 
   let kicker = null;
   for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i - 1] == ranks[i]) {
+    if (ranks[i - 1] === ranks[i]) {
       rankAndCount.rank = ranks[i];
       rankAndCount.count++;
     } else {
@@ -256,7 +250,7 @@ function getConsecutiveCountsAndKicker(ranks) {
       // reset
       rankAndCount = {
         rank: ranks[i],
-        count: 1
+        count: 1,
       };
     }
   }
@@ -269,7 +263,7 @@ function getConsecutiveCountsAndKicker(ranks) {
 
   return {
     counts: consecutiveCounts,
-    kicker: kicker
+    kicker,
   };
 }
 

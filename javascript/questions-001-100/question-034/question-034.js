@@ -7,11 +7,11 @@
 
 // Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-const digits = require('../../util/digits');
+const digits = require(`../../util/digits`);
 
 function getDigitFactorialSum() {
-  let factorials = [],
-    sum = 0;
+  const factorials = [];
+  let sum = 0;
 
   // cache factorials of all digits 1 - 9
   factorials.push(1);
@@ -20,10 +20,10 @@ function getDigitFactorialSum() {
   }
 
   for (let i = 3; i <= 41000; i++) {
-    let numDigits = digits.getDigits(i),
-      digitFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
+    const numDigits = digits.getDigits(i);
+    const digitFactorialSum = numDigits.reduce((a, c) => a + factorials[c], 0);
 
-    if (i == digitFactorialSum) {
+    if (i === digitFactorialSum) {
       sum += i;
     }
   }

@@ -8,15 +8,15 @@
 
 // Evaluate the sum of all the amicable numbers under 10000.
 
-const getProperDivisors = require('../../util/factors');
+const getProperDivisors = require(`../../util/factors`);
 
 function getAmicableSum(limit) {
-  let amicables = [];
+  const amicables = [];
 
   for (let i = 2; i < limit; i++) {
-    let a = i,
-      b = d(a);
-    if (a != b && d(b) == a) {
+    const a = i;
+    const b = d(a);
+    if (a !== b && d(b) === a) {
       amicables.push(i);
     }
   }

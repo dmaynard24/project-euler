@@ -14,31 +14,29 @@
 // d8d9d10=289 is divisible by 17
 // Find the sum of all 0 to 9 pandigital numbers with this property.
 
-const isPandigital = require('../../util/pandigital'),
-  digits = require('../../util/digits');
+const isPandigital = require(`../../util/pandigital`);
+const digits = require(`../../util/digits`);
 
 function getSubstringPandigitalSum() {
-  let possibles = {
+  const possibles = {
     1: getPossibleMultiples(2),
     2: getPossibleMultiples(3),
     3: getPossibleMultiples(5),
     4: getPossibleMultiples(7),
     5: getPossibleMultiples(11),
     6: getPossibleMultiples(13),
-    7: getPossibleMultiples(17)
+    7: getPossibleMultiples(17),
   };
 
   function getSetAtIndex(index, set, concat) {
     let pandigitals = [];
 
     for (let i = 0; i < set.length; i++) {
-      let newConcat = index == 7 ? set[i] : [set[i][0], ...concat];
+      const newConcat = index === 7 ? set[i] : [set[i][0], ...concat];
 
       if (isPandigital(newConcat)) {
         if (index - 1 > 0) {
-          let newSet = possibles[index - 1].filter(possible => {
-            return possible[1] == newConcat[0] && possible[2] == newConcat[1];
-          });
+          const newSet = possibles[index - 1].filter((possible) => possible[1] === newConcat[0] && possible[2] === newConcat[1]);
 
           pandigitals = pandigitals.concat(getSetAtIndex(index - 1, newSet, newConcat));
         } else {
@@ -51,11 +49,11 @@ function getSubstringPandigitalSum() {
   }
 
   // recursively create concatenated arrays beginning with an empty array
-  let pandigitals = getSetAtIndex(7, possibles[7], []);
+  const pandigitals = getSetAtIndex(7, possibles[7], []);
 
   // get remaining first digit of each pandigital, add them all up
   let sum = 0;
-  pandigitals.forEach(pandigital => {
+  pandigitals.forEach((pandigital) => {
     sum += digits.getIntFromDigits([getRemainingDigit(pandigital), ...pandigital]);
   });
 
@@ -64,15 +62,15 @@ function getSubstringPandigitalSum() {
 
 // returns an array of multiples stored as 3-digit arrays
 function getPossibleMultiples(multiplicand) {
-  let multiples = [],
-    multiplier = 1,
-    product = 0;
+  const multiples = [];
+  let multiplier = 1;
+  let product = 0;
 
   while (product < 1000 - multiplicand) {
     product = multiplicand * multiplier;
     // 12 is the first 3-digit pandigital (with a leading zero)
     if (product >= 12) {
-      let productDigits = digits.getDigits(product);
+      const productDigits = digits.getDigits(product);
       // prepend leading zero
       multiples.push(product < 100 ? [0, ...productDigits] : productDigits);
     }
@@ -84,9 +82,9 @@ function getPossibleMultiples(multiplicand) {
 }
 
 function getRemainingDigit(digits) {
-  let digitsSorted = [...digits].sort();
+  const digitsSorted = [...digits].sort();
   for (let i = 0; i < 10; i++) {
-    if (i != digitsSorted[i]) {
+    if (i !== digitsSorted[i]) {
       return i;
     }
   }

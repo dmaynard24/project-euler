@@ -11,20 +11,20 @@
 
 // Find the minimal path sum in the matrix string containing a 80 by 80 matrix, from the top left to the bottom right by only moving right and down.
 
-const matrix = require('./matrix');
+const matrix = require(`./matrix`);
 
 function getMinimalPathSum() {
-  let grid = matrix.split('\n').map(row => row.split(',').map(num => +num)),
-    sums = [];
+  const grid = matrix.split(`\n`).map((row) => row.split(`,`).map((num) => +num));
+  const sums = [];
 
   sums.push([]);
   sums[0].push(grid[0][0]);
 
   // first row only (start at [0, 1])
   for (let j = 1; j < grid[0].length; j++) {
-    let curr = grid[0][j],
-      left = sums[0][j - 1],
-      sum = left + curr;
+    const curr = grid[0][j];
+    const left = sums[0][j - 1];
+    const sum = left + curr;
     sums[0].push(sum);
   }
 
@@ -33,15 +33,15 @@ function getMinimalPathSum() {
     sums.push([]);
 
     for (let j = 0; j < grid[i].length; j++) {
-      let curr = grid[i][j],
-        left = j > 0 ? sums[i][j - 1] : Infinity,
-        up = sums[i - 1][j],
-        sum = Math.min(left, up) + curr;
+      const curr = grid[i][j];
+      const left = j > 0 ? sums[i][j - 1] : Infinity;
+      const up = sums[i - 1][j];
+      const sum = Math.min(left, up) + curr;
       sums[i].push(sum);
     }
   }
 
-  let len = sums.length;
+  const len = sums.length;
   return sums[len - 1][sums[len - 1].length - 1];
 }
 

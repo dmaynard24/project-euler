@@ -9,25 +9,23 @@
 
 // Using the array of words containing nearly two-thousand common English words, how many are triangle words?
 
-const words = require('./words'),
-  shapes = require('../../util/shapes');
+const words = require(`./words`);
+const shapes = require(`../../util/shapes`);
 
 function getTriangleWordCount() {
-  let range = [...Array(27).keys()].slice(1),
-    letterValues = range.reduce((a, c) => {
-      a[String.fromCharCode(c + 64)] = c;
-      return a;
-    }, []),
-    limit = words.sort((a, b) => b.length - a.length)[0].length * 26,
-    triangles = shapes.getTriangles(limit);
+  const range = [...Array(27).keys()].slice(1);
+  const letterValues = range.reduce((a, c) => {
+    a[String.fromCharCode(c + 64)] = c;
+    return a;
+  }, []);
+  const limit = words.sort((a, b) => b.length - a.length)[0].length * 26;
+  const triangles = shapes.getTriangles(limit);
 
   function getWordValue(word) {
-    return [...word].reduce((a, c) => {
-      return a + letterValues[c];
-    }, 0);
+    return [...word].reduce((a, c) => a + letterValues[c], 0);
   }
 
-  return words.filter(word => triangles.has(getWordValue(word))).length;
+  return words.filter((word) => triangles.has(getWordValue(word))).length;
 }
 
 module.exports = getTriangleWordCount;

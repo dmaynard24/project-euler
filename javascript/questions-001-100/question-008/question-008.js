@@ -26,14 +26,14 @@
 
 // Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
-const series = require('./series');
+const series = require(`./series`);
 
 function getLargestProduct(digits) {
-  let start = 0,
-    end = digits,
-    nums = [...series.replace(/\n/g, '')].map(num => parseInt(num, 10)),
-    largest = 0,
-    product = null;
+  let start = 0;
+  let end = digits;
+  const nums = [...series.replace(/\n/g, ``)].map((num) => parseInt(num, 10));
+  let largest = 0;
+  let product = null;
 
   while (end < nums.length + 1) {
     let zeroAt = nums.indexOf(0, start);

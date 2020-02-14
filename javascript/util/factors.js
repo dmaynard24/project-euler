@@ -1,10 +1,10 @@
 function getProperDivisors(num) {
-  let divisors = [1];
+  const divisors = [1];
 
   for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i == 0) {
+    if (num % i === 0) {
       divisors.push(i);
-      if (num / i != i) {
+      if (num / i !== i) {
         divisors.push(num / i);
       }
     }

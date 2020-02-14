@@ -10,19 +10,19 @@
 // Find the product abc.
 
 function getTripletProduct(sum) {
-  let n = 1,
-    m = 2,
-    upper = Math.sqrt(sum);
+  let n = 1;
+  let m = 2;
+  const upper = Math.sqrt(sum);
 
   while (n < upper) {
     while (m < upper) {
-      let a = m * m - n * n,
-        b = 2 * m * n,
-        c = m * m + n * n,
-        tripleSum = a + b + c;
+      const a = m * m - n * n;
+      const b = 2 * m * n;
+      const c = m * m + n * n;
+      const tripleSum = a + b + c;
 
-      if (sum % tripleSum == 0) {
-        let k = sum / tripleSum;
+      if (sum % tripleSum === 0) {
+        const k = sum / tripleSum;
         return a * k * b * k * c * k;
       }
 

@@ -6,20 +6,18 @@
 // How many such routes are there through a 20×20 grid?
 
 function getRouteCount(width) {
-  let nodesPerSide = width + 1,
-    rows = [];
+  const nodesPerSide = width + 1;
+  const rows = [];
 
   for (let i = 0; i < nodesPerSide; i++) {
-    let row = [];
+    const row = [];
     for (let j = 0; j < nodesPerSide; j++) {
-      if (i == nodesPerSide - 1) {
+      if (i === nodesPerSide - 1) {
+        row.push(1);
+      } else if (j === nodesPerSide - 1) {
         row.push(1);
       } else {
-        if (j == nodesPerSide - 1) {
-          row.push(1);
-        } else {
-          row.push(0);
-        }
+        row.push(0);
       }
     }
     rows.push(row);
@@ -27,7 +25,7 @@ function getRouteCount(width) {
 
   for (let y = width - 1; y > -1; y--) {
     for (let x = y; x > -1; x--) {
-      let nodeValue = rows[y][x + 1] + rows[y + 1][x];
+      const nodeValue = rows[y][x + 1] + rows[y + 1][x];
       rows[y][x] = nodeValue;
       rows[x][y] = nodeValue;
     }

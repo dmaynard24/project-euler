@@ -16,15 +16,15 @@
 // NOTE: Once the chain starts the terms are allowed to go above one million.
 
 function getLargestCollatzSequence(limit) {
-  let start = 2,
-    largestSequenceStart = 2,
-    largestCount = 1;
+  let start = 2;
+  let largestSequenceStart = 2;
+  let largestCount = 1;
 
   while (start < limit) {
-    let term = start,
-      count = 1;
-    while (term != 1) {
-      if (term % 2 == 0) {
+    let term = start;
+    let count = 1;
+    while (term !== 1) {
+      if (term % 2 === 0) {
         term /= 2;
       } else {
         term = 3 * term + 1;

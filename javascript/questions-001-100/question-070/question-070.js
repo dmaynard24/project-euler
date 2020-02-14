@@ -8,20 +8,21 @@
 
 // Find the value of n, 1 < n < 10^7, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
 
-const primal = require('../../util/primal'),
-  permutation = require('../../util/permutation'),
-  phi = require('../../util/phi');
+const primal = require(`../../util/primal`);
+const permutation = require(`../../util/permutation`);
+
+const phi = require(`../../util/phi`);
 
 function getTotientPermutation(limit) {
-  let primes = primal.getPrimes(limit),
-    minN,
-    minQuotient = Infinity;
+  const primes = primal.getPrimes(limit);
+  let minN;
+  let minQuotient = Infinity;
 
   for (let n = limit; n > 1; n--) {
     if (!primal.isPrime(n, primes)) {
-      let phiN = phi(n, primes);
+      const phiN = phi(n, primes);
       if (permutation.isPermutation(n, phiN)) {
-        let quotient = n / phiN;
+        const quotient = n / phiN;
         if (quotient < minQuotient) {
           minQuotient = quotient;
           minN = n;

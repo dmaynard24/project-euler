@@ -18,7 +18,11 @@ function getLeastN(divisor) {
   // use mod later to prevent big ints
   const mod = divisor * 10;
 
-  return `couldn't find a solution for n in p(n) where n is less than ${limit}`;
+  // set count of partitions for zero to 1 for the sake of the generator
+  const partitionCounts = [1];
+  // partitionCounts[i] = partitionCounts[i - getNthPentagon(1)] + partitionCounts[i - getNthPentagon(-1)]
+  //                    - partitionCounts[i - getNthPentagon(2)] - partitionCounts[i - getNthPentagon(-2)]
+  //                    + partitionCounts[i - getNthPentagon(3)] + partitionCounts[i - getNthPentagon(-3)]
 }
 
 console.log(getLeastN(1000));

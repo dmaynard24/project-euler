@@ -7,14 +7,14 @@
 
 // (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-const palindrome = require('../../util/palindrome');
+const palindrome = require(`../../util/palindrome`);
 
 function getPalindromicSum(limit) {
   let sum = 0;
 
   for (let i = 1; i < limit; i += 2) {
     if (palindrome.isArrayPalindrome([...i.toString()])) {
-      let binary = i.toString(2);
+      const binary = i.toString(2);
       if (palindrome.isArrayPalindrome([...binary])) {
         sum += i;
       }

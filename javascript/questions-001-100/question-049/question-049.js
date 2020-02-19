@@ -7,24 +7,24 @@
 
 // What 12-digit number do you form by concatenating the three terms in this sequence?
 
-const primal = require('../../util/primal'),
-  permutation = require('../../util/permutation'),
-  digits = require('../../util/digits');
+const primal = require(`../../util/primal`);
+const permutation = require(`../../util/permutation`);
+const digits = require(`../../util/digits`);
 
 function getPrimePermutationTerms() {
-  let limit = 9999,
-    addend = 3330,
-    primes = primal.getPrimes(limit);
+  const limit = 9999;
+  const addend = 3330;
+  const primes = primal.getPrimes(limit);
 
   // 1489 is the next prime
   for (let i = 1489; i <= limit - addend * 2; i += 2) {
     if (primal.isPrime(i, primes)) {
       let termsConcat = digits.getDigits(i);
       for (let j = 1; j <= 2; j++) {
-        let nextTerm = i + addend * j;
+        const nextTerm = i + addend * j;
         if (primal.isPrime(nextTerm, primes) && permutation.isPermutation(i, nextTerm)) {
           termsConcat = termsConcat.concat(digits.getDigits(nextTerm));
-          if (termsConcat.length == 12) {
+          if (termsConcat.length === 12) {
             return digits.getIntFromDigits(termsConcat);
           }
         } else {
@@ -33,6 +33,8 @@ function getPrimePermutationTerms() {
       }
     }
   }
+
+  return 0;
 }
 
 module.exports = getPrimePermutationTerms;

@@ -15,14 +15,14 @@
 
 // If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed. If this process is continued, what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getSideLength(percentage) {
-  let cornerValue = 1,
-    length = 1,
-    primeCount = 0,
-    cornerCount = 1,
-    ratio = 1;
+  let cornerValue = 1;
+  let length = 1;
+  let primeCount = 0;
+  let cornerCount = 1;
+  let ratio = 1;
 
   while (ratio > percentage / 100) {
     length += 2;
@@ -31,7 +31,7 @@ function getSideLength(percentage) {
       cornerValue += length - 1;
 
       // 4th corner is never prime (always square)
-      if (cornerNum == 4) {
+      if (cornerNum === 4) {
         continue;
       }
 

@@ -14,20 +14,20 @@
 
 // Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getFirstInteger(targetCount) {
-  let limit = 150000,
-    primeFactorCounts = primal.getPrimeFactorCounts(limit);
+  const limit = 150000;
+  const primeFactorCounts = primal.getPrimeFactorCounts(limit);
 
   for (let i = 1; i < limit; i++) {
-    let count = primeFactorCounts[i];
+    const count = primeFactorCounts[i];
 
-    if (count == targetCount) {
+    if (count === targetCount) {
       let isConsecutiveSet = true;
 
       for (let j = 1; j < targetCount; j++) {
-        if (primeFactorCounts[i + j] != targetCount) {
+        if (primeFactorCounts[i + j] !== targetCount) {
           isConsecutiveSet = false;
           i += j;
           break;

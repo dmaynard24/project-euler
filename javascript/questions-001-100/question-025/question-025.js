@@ -25,8 +25,8 @@
 // solving for n in Binet's formula for finding the nth term
 // involes converting log10 to ln
 function getFibonacciTerm(digitCount) {
-  let sqrtFive = Math.sqrt(5),
-    phi = (1 + sqrtFive) / 2;
+  const sqrtFive = Math.sqrt(5);
+  const phi = (1 + sqrtFive) / 2;
   return Math.ceil((digitCount - 1 + Math.log10(sqrtFive)) / Math.log10(Math.E) / Math.log(phi));
 }
 

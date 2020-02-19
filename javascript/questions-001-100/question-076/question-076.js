@@ -14,19 +14,19 @@
 
 function getSummationCount(num) {
   // keep a cache of counts to avoid redundant recursion
-  let summationCounts = new Map();
+  const summationCounts = new Map();
 
   function getCount(remaining, term) {
-    if (remaining == 0) {
+    if (remaining === 0) {
       return 1;
     }
 
     let count = 0;
     for (let nextTerm = term; nextTerm > 0; nextTerm--) {
-      let newRemaining = remaining - nextTerm,
-        nextTermArg = Math.min(newRemaining, nextTerm),
-        cachedAddend,
-        addend;
+      const newRemaining = remaining - nextTerm;
+      const nextTermArg = Math.min(newRemaining, nextTerm);
+      let cachedAddend;
+      let addend;
 
       // check cache
       if (summationCounts.has(newRemaining)) {

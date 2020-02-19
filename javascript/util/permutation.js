@@ -1,17 +1,17 @@
-const digits = require('./digits');
+const digits = require(`./digits`);
 
 function isPermutation(num, testNum) {
-  let numDigits = digits.getDigitsReversed(num),
-    testNumDigits = digits.getDigitsReversed(testNum);
+  const numDigits = digits.getDigitsReversed(num);
+  const testNumDigits = digits.getDigitsReversed(testNum);
 
-  if (numDigits.length != testNumDigits.length) {
+  if (numDigits.length !== testNumDigits.length) {
     return false;
   }
 
   // create hashmap of digit counts in first array
-  let digitCounts = new Map();
+  const digitCounts = new Map();
   for (let i = 0; i < numDigits.length; i++) {
-    let digit = numDigits[i];
+    const digit = numDigits[i];
     if (!digitCounts.has(digit)) {
       digitCounts.set(digit, 1);
     } else {
@@ -21,14 +21,13 @@ function isPermutation(num, testNum) {
 
   // check digit counts in the second array to make sure they match
   for (let i = 0; i < testNumDigits.length; i++) {
-    let digit = testNumDigits[i];
+    const digit = testNumDigits[i];
     if (!digitCounts.has(digit)) {
       return false;
-    } else {
-      digitCounts.set(digit, digitCounts.get(digit) - 1);
-      if (digitCounts.get(digit) < 0) {
-        return false;
-      }
+    }
+    digitCounts.set(digit, digitCounts.get(digit) - 1);
+    if (digitCounts.get(digit) < 0) {
+      return false;
     }
   }
 
@@ -41,10 +40,10 @@ function getPerms(arr) {
     return [arr];
   }
 
-  let perms = [];
+  const perms = [];
   for (let i = 0; i < arr.length; i++) {
-    let first = arr.splice(i, 1),
-      remainingPerms = getPerms(arr);
+    const first = arr.splice(i, 1);
+    const remainingPerms = getPerms(arr);
     for (let j = 0; j < remainingPerms.length; j++) {
       perms.push(first.concat(remainingPerms[j]));
     }

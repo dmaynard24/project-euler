@@ -8,13 +8,13 @@
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 function getSum(max) {
-  let sum = 0,
-    first = 1,
-    second = 2;
+  let sum = 0;
+  let first = 1;
+  let second = 2;
   while (second <= max) {
     sum += second;
 
-    let dblSecond = second * 2;
+    const dblSecond = second * 2;
     first += dblSecond;
     second += first - dblSecond + first;
   }

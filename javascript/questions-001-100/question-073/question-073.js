@@ -11,19 +11,19 @@
 
 // How many fractions lie between 1/3 and 1/2 in the sorted set of reduced proper fractions for d ≤ 12,000?
 
-const primal = require('../../util/primal'),
-  areCoprime = require('../../util/coprime');
+const primal = require(`../../util/primal`);
+const areCoprime = require(`../../util/coprime`);
 
 function getFractionCount(max) {
-  let primes = primal.getPrimes(max),
-    minTarget = 1 / 3,
-    maxTarget = 1 / 2,
-    minD = 2,
-    count = 0;
+  const primes = primal.getPrimes(max);
+  const minTarget = 1 / 3;
+  const maxTarget = 1 / 2;
+  const minD = 2;
+  let count = 0;
 
   for (let d = max; d >= minD; d--) {
     for (let n = 1; n < d; n++) {
-      let quotient = n / d;
+      const quotient = n / d;
 
       if (quotient <= minTarget) {
         continue;

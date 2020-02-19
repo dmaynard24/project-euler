@@ -31,12 +31,14 @@
 // NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 
 function getMaximumPathSum(triangle) {
-  let sums = triangle.split('\n').map(row =>
-    row
+  function getRowArr(row) {
+    return row
       .trim()
-      .split(' ')
-      .map(num => parseInt(num))
-  );
+      .split(` `)
+      .map((num) => parseInt(num, 10));
+  }
+
+  const sums = triangle.split(`\n`).map((row) => getRowArr(row));
 
   for (let i = sums.length - 2; i >= 0; i--) {
     for (let j = 0; j < sums[i].length; j++) {

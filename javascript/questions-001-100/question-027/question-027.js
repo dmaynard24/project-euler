@@ -16,40 +16,40 @@
 // e.g. |11| = 11 and |−4| = 4
 // Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getCoefficientProduct() {
-  let primes = primal.getPrimes(1000),
-    primeNums = primal.getPrimeNumbers(primes),
-    largestCount = 0,
-    largestProduct = 0;
+  const primes = primal.getPrimes(1000);
+  const primeNums = primal.getPrimeNumbers(primes);
+  let largestCount = 0;
+  let largestProduct = 0;
 
   // store all primes between -1000 and 1000
-  let negatives = primeNums.map(primeNum => primeNum * -1).reverse(),
-    primesRange = negatives.concat(primeNums);
-
-  primesRange.forEach(a => {
-    primesRange.forEach(b => {
-      let primeCount = getConsecutivePrimeCount(a, b);
-      if (primeCount > largestCount) {
-        largestCount = primeCount;
-        largestProduct = a * b;
-      }
-    });
-  });
+  const negatives = primeNums.map((primeNum) => primeNum * -1).reverse();
+  const primesRange = negatives.concat(primeNums);
 
   function getConsecutivePrimeCount(a, b) {
-    let areAllPrime = true,
-      n = 0;
+    let areAllPrime = true;
+    let n = 0;
 
     while (areAllPrime) {
-      let value = n * n + a * n + b;
+      const value = n * n + a * n + b;
       areAllPrime = value > -1 && primal.isPrime(value, primes);
       n++;
     }
 
     return n;
   }
+
+  primesRange.forEach((a) => {
+    primesRange.forEach((b) => {
+      const primeCount = getConsecutivePrimeCount(a, b);
+      if (primeCount > largestCount) {
+        largestCount = primeCount;
+        largestProduct = a * b;
+      }
+    });
+  });
 
   return largestProduct;
 }

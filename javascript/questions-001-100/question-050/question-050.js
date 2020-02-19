@@ -10,21 +10,21 @@
 
 // Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getSumOfConsecutivePrimes(limit) {
-  let primes = primal.getPrimes(limit),
-    primeNums = primal.getPrimeNumbers(primes),
-    largestConsecutiveCount = 0,
-    largestSum = 0;
+  const primes = primal.getPrimes(limit);
+  const primeNums = primal.getPrimeNumbers(primes);
+  let largestConsecutiveCount = 0;
+  let largestSum = 0;
 
   for (let i = 0; i < primeNums.length; i++) {
     if (primeNums.length - i < largestConsecutiveCount) {
       return largestSum;
     }
 
-    let consecutiveCount = 1,
-      sum = primeNums[i];
+    let consecutiveCount = 1;
+    let sum = primeNums[i];
 
     for (let j = i + 1; j < primeNums.length; j++) {
       sum += primeNums[j];

@@ -16,12 +16,12 @@
 
 // In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
 
-const bigInt = require('big-integer');
+const bigInt = require(`big-integer`);
 
 function getFractionCount(iterationCount) {
-  let count = 0,
-    n = bigInt(1),
-    d = bigInt(1);
+  let count = 0;
+  let n = bigInt(1);
+  let d = bigInt(1);
 
   for (let i = 1; i <= iterationCount; i++) {
     n = n.add(d.multiply(2));

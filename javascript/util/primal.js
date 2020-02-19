@@ -1,15 +1,15 @@
 // primes using Sieve of Eratosthenes (storing only odds)
 function getPrimes(limit) {
-  let oddsLimit = Math.floor(limit / 2),
-    primes = Array(oddsLimit).fill(true);
+  const oddsLimit = Math.floor(limit / 2);
+  const primes = Array(oddsLimit).fill(true);
 
   primes[0] = false;
 
   for (let i = 1; i <= Math.sqrt(limit); i++) {
-    let n = 2 * i + 1;
+    const n = 2 * i + 1;
     if (primes[i]) {
-      let step = n;
-      for (let j = step == 3 ? i + step : i + step * 2; j <= oddsLimit; j += step) {
+      const step = n;
+      for (let j = step === 3 ? i + step : i + step * 2; j <= oddsLimit; j += step) {
         primes[j] = false;
       }
     }
@@ -27,14 +27,14 @@ function getPrimeNumbers(primes) {
       }
       return a;
     },
-    [2]
+    [2],
   );
 }
 
 function isPrime(num, primes) {
   if (primes && primes.length && primes.length >= num) {
-    if (num % 2 == 0) {
-      return num == 2;
+    if (num % 2 === 0) {
+      return num === 2;
     }
 
     return primes[(num - 1) / 2];
@@ -43,15 +43,17 @@ function isPrime(num, primes) {
   // primes (sieve) wasn't passed as an argument, naive check if n is prime
   if (num < 1) {
     return true;
-  } else if (num == 2 || num == 3) {
+  }
+  if (num === 2 || num === 3) {
     return true;
-  } else if (num % 2 == 0 || num % 3 == 0) {
+  }
+  if (num % 2 === 0 || num % 3 === 0) {
     return false;
   }
 
   let i = 5;
   while (i * i <= num) {
-    if (num % i == 0 || num % (i + 2) == 0) {
+    if (num % i === 0 || num % (i + 2) === 0) {
       return false;
     }
     i += 6;
@@ -65,31 +67,31 @@ function getPrimeFactors(num, primes) {
     return [];
   }
 
-  let primeFactors = [];
-  if (num % 2 == 0) {
-    let baseExp = {
+  const primeFactors = [];
+  if (num % 2 === 0) {
+    const baseExp = {
       base: 2,
-      exp: 0
+      exp: 0,
     };
-    while (num % 2 == 0) {
+    while (num % 2 === 0) {
       baseExp.exp++;
       num /= 2;
     }
     primeFactors.push(baseExp);
   }
 
-  let sqrt = Math.sqrt(num);
+  const sqrt = Math.sqrt(num);
   for (let i = 3; i <= sqrt; i += 2) {
     if (num < i) {
       break;
     }
     if (isPrime(i, primes)) {
-      if (num % i == 0) {
-        let baseExp = {
+      if (num % i === 0) {
+        const baseExp = {
           base: i,
-          exp: 0
+          exp: 0,
         };
-        while (num % i == 0) {
+        while (num % i === 0) {
           baseExp.exp++;
           num /= i;
         }
@@ -101,7 +103,7 @@ function getPrimeFactors(num, primes) {
   if (num > 2) {
     primeFactors.push({
       base: num,
-      exp: 1
+      exp: 1,
     });
   }
 
@@ -110,15 +112,15 @@ function getPrimeFactors(num, primes) {
 
 // sieve factor counts
 function getPrimeFactorCounts(limit) {
-  let primeFactorCounts = Array(limit + 1).fill(0);
+  const primeFactorCounts = Array(limit + 1).fill(0);
   primeFactorCounts[1] = 1;
 
   for (let i = 2; i < primeFactorCounts.length; i++) {
-    if (primeFactorCounts[i] != 0) {
+    if (primeFactorCounts[i] !== 0) {
       continue;
     }
 
-    let step = i;
+    const step = i;
     for (let j = i; j < primeFactorCounts.length; j += step) {
       primeFactorCounts[j]++;
     }
@@ -127,4 +129,10 @@ function getPrimeFactorCounts(limit) {
   return primeFactorCounts;
 }
 
-module.exports = { getPrimes, getPrimeNumbers, isPrime, getPrimeFactors, getPrimeFactorCounts };
+module.exports = {
+  getPrimes,
+  getPrimeNumbers,
+  isPrime,
+  getPrimeFactors,
+  getPrimeFactorCounts,
+};

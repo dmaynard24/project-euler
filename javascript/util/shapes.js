@@ -3,13 +3,13 @@ function isPentagonal(num, pentagons) {
     return pentagons[num];
   }
 
-  return (Math.sqrt(24 * num + 1) + 1) % 6 == 0;
+  return (Math.sqrt(24 * num + 1) + 1) % 6 === 0;
 }
 
 function getShapes(limit, getNthShapeFn) {
-  let shapes = new Map(),
-    n = 1,
-    term = 1;
+  const shapes = new Map();
+  let n = 1;
+  let term = 1;
 
   while (term < limit) {
     shapes.set(term, true);
@@ -21,19 +21,19 @@ function getShapes(limit, getNthShapeFn) {
   return shapes;
 }
 
-const getNthTriangle = n => (n / 2) * (n + 1),
-  getNthSquare = n => n * n,
-  getNthPentagon = n => (n * (3 * n - 1)) / 2,
-  getNthHexagon = n => n * (2 * n - 1),
-  getNthHeptagon = n => (n * (5 * n - 3)) / 2,
-  getNthOctagon = n => n * (3 * n - 2);
+const getNthTriangle = (n) => (n / 2) * (n + 1);
+const getNthSquare = (n) => n * n;
+const getNthPentagon = (n) => (n * (3 * n - 1)) / 2;
+const getNthHexagon = (n) => n * (2 * n - 1);
+const getNthHeptagon = (n) => (n * (5 * n - 3)) / 2;
+const getNthOctagon = (n) => n * (3 * n - 2);
 
-const getTriangles = limit => getShapes(limit, getNthTriangle),
-  getSquares = limit => getShapes(limit, getNthSquare),
-  getPentagons = limit => getShapes(limit, getNthPentagon),
-  getHexagons = limit => getShapes(limit, getNthHexagon),
-  getHeptagons = limit => getShapes(limit, getNthHeptagon),
-  getOctagons = limit => getShapes(limit, getNthOctagon);
+const getTriangles = (limit) => getShapes(limit, getNthTriangle);
+const getSquares = (limit) => getShapes(limit, getNthSquare);
+const getPentagons = (limit) => getShapes(limit, getNthPentagon);
+const getHexagons = (limit) => getShapes(limit, getNthHexagon);
+const getHeptagons = (limit) => getShapes(limit, getNthHeptagon);
+const getOctagons = (limit) => getShapes(limit, getNthOctagon);
 
 module.exports = {
   isPentagonal,
@@ -48,5 +48,5 @@ module.exports = {
   getPentagons,
   getHexagons,
   getHeptagons,
-  getOctagons
+  getOctagons,
 };

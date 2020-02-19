@@ -3,7 +3,7 @@ function getDigitsReversed(num) {
     return [num];
   }
 
-  let digits = [];
+  const digits = [];
 
   while (num > 0) {
     digits.push(num % 10);
@@ -18,10 +18,10 @@ function getDigits(num) {
 }
 
 function getDigitsRotations(num) {
-  let rotations = [],
-    numDigits = getDigits(num);
+  const rotations = [];
+  const numDigits = getDigits(num);
 
-  let length = numDigits.length;
+  const { length } = numDigits;
   for (let i = 1; i < length; i++) {
     let rotation = 0;
     for (let j = 0; j < length; j++) {
@@ -35,7 +35,7 @@ function getDigitsRotations(num) {
 }
 
 function getIntFromDigits(digits) {
-  if (digits.length == 1) {
+  if (digits.length === 1) {
     return digits[0];
   }
 
@@ -59,5 +59,5 @@ module.exports = {
   getDigits,
   getDigitsRotations,
   getIntFromDigits,
-  getDigitCount
+  getDigitCount,
 };

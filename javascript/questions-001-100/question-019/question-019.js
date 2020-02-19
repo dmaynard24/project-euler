@@ -14,8 +14,8 @@
 // How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
 function getSundayCount(startYear, endYear) {
-  let firsts = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335],
-    leapFirsts = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336];
+  let firsts = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+  let leapFirsts = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336];
   firsts = firsts.reduce((a, c) => {
     a.set(c, true);
     return a;
@@ -25,28 +25,26 @@ function getSundayCount(startYear, endYear) {
     return a;
   }, new Map());
 
-  let firstSunday = 7,
-    sundayCount = 0;
+  let firstSunday = 7;
+  let sundayCount = 0;
 
   for (let currentYear = startYear; currentYear <= endYear; currentYear++) {
     let isLeapYear;
-    if (currentYear % 100 == 0) {
-      isLeapYear = currentYear % 400 == 0;
+    if (currentYear % 100 === 0) {
+      isLeapYear = currentYear % 400 === 0;
     } else {
-      isLeapYear = currentYear % 4 == 0;
+      isLeapYear = currentYear % 4 === 0;
     }
 
-    let totalDays = isLeapYear ? 366 : 365,
-      finalSunday;
+    const totalDays = isLeapYear ? 366 : 365;
+    let finalSunday;
     for (let i = firstSunday; i <= totalDays; i += 7) {
       if (!isLeapYear) {
         if (firsts.has(i)) {
           sundayCount++;
         }
-      } else {
-        if (leapFirsts.has(i)) {
-          sundayCount++;
-        }
+      } else if (leapFirsts.has(i)) {
+        sundayCount++;
       }
 
       finalSunday = i;

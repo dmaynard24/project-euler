@@ -9,23 +9,23 @@
 
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-const getProperDivisors = require('../../util/factors');
+const getProperDivisors = require(`../../util/factors`);
 
 function getSum() {
-  let lower = 12,
-    upper = 28123,
-    abundants = [];
+  const lower = 12;
+  const upper = 28123;
+  const abundants = [];
   for (let i = lower; i <= upper; i++) {
-    let properDivisorsSum = getProperDivisors(i).reduce((a, c) => a + c);
+    const properDivisorsSum = getProperDivisors(i).reduce((a, c) => a + c);
     if (properDivisorsSum > i) {
       abundants.push(i);
     }
   }
 
-  let abundantSums = Array(upper).fill(false);
+  const abundantSums = Array(upper).fill(false);
   for (let i = 0; i < abundants.length; i++) {
     for (let j = i; j < abundants.length; j++) {
-      let abundantSum = abundants[i] + abundants[j];
+      const abundantSum = abundants[i] + abundants[j];
       if (abundantSum > upper) {
         break;
       }
@@ -34,7 +34,7 @@ function getSum() {
     }
   }
 
-  return abundantSums.reduce((a, c, i) => (c == false ? a + i : a + 0));
+  return abundantSums.reduce((a, c, i) => (c === false ? a + i : a + 0));
 }
 
 module.exports = getSum;

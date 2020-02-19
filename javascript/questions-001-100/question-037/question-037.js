@@ -7,24 +7,24 @@
 
 // NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-const primal = require('../../util/primal'),
-  digits = require('../../util/digits');
+const primal = require(`../../util/primal`);
+const digits = require(`../../util/digits`);
 
 function getTruncatablePrimeSum() {
-  let limit = 800000,
-    primes = primal.getPrimes(limit),
-    primeNums = primal.getPrimeNumbers(primes);
+  const limit = 800000;
+  const primes = primal.getPrimes(limit);
+  const primeNums = primal.getPrimeNumbers(primes);
 
   function isTruncatablePrime(num) {
     if (num < 10) {
       return false;
     }
 
-    let isTruncatable = true,
-      numDigits = digits.getDigits(num);
+    let isTruncatable = true;
+    const numDigits = digits.getDigits(num);
     for (let i = 1; i < numDigits.length; i++) {
-      let ltr = 0,
-        rtl = 0;
+      let ltr = 0;
+      let rtl = 0;
       for (let j = 0; j < numDigits.length; j++) {
         if (j >= i) {
           ltr *= 10;
@@ -44,7 +44,7 @@ function getTruncatablePrimeSum() {
     return true;
   }
 
-  return primeNums.filter(num => isTruncatablePrime(num)).reduce((a, c) => a + c);
+  return primeNums.filter((num) => isTruncatablePrime(num)).reduce((a, c) => a + c);
 }
 
 module.exports = getTruncatablePrimeSum;

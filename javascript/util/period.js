@@ -1,18 +1,18 @@
 function getPeriod(num) {
-  let sqrt = Math.sqrt(num),
-    m = Math.floor(sqrt);
+  const sqrt = Math.sqrt(num);
+  let m = Math.floor(sqrt);
 
-  if (sqrt == m) {
+  if (sqrt === m) {
     return [];
   }
 
-  let int = m,
-    n = sqrt + int,
-    d = num - int * int,
-    fraction = n / d,
-    ms = [];
+  let int = m;
+  let n = sqrt + int;
+  let d = num - int * int;
+  let fraction = n / d;
+  const ms = [];
 
-  while (d != 1) {
+  while (d !== 1) {
     // get new m
     m = Math.floor(fraction);
     // take reciprocal, then remove sqrt from denominator and simplify

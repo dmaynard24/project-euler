@@ -22,13 +22,13 @@
 
 // How many continued fractions for N≤10000 have an odd period?
 
-const getPeriod = require('../../util/period');
+const getPeriod = require(`../../util/period`);
 
 function getFractionCount(max) {
   let count = 0;
 
   for (let n = 2; n <= max; n++) {
-    if (getPeriod(n).length % 2 != 0) {
+    if (getPeriod(n).length % 2 !== 0) {
       count++;
     }
   }

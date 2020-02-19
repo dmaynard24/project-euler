@@ -9,14 +9,14 @@
 
 // HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
-const isPandigital = require('../../util/pandigital');
+const isPandigital = require(`../../util/pandigital`);
 
 function getPandigitalSum() {
-  let products = [],
-    sum = 0;
+  const products = [];
+  let sum = 0;
 
   for (let i = 2; i <= 100; i++) {
-    let limit = Math.ceil(9876 / i);
+    const limit = Math.ceil(9876 / i);
 
     if (!isPandigital(i, { excludeZero: true })) {
       continue;
@@ -27,17 +27,17 @@ function getPandigitalSum() {
         continue;
       }
 
-      let product = i * j;
+      const product = i * j;
       if (!isPandigital(product, { excludeZero: true })) {
         continue;
       }
 
-      let concat = i.toString() + j.toString() + product.toString();
+      const concat = i.toString() + j.toString() + product.toString();
       if (concat.length > 9) {
         break;
       }
 
-      if (concat.length == 9 && isPandigital(parseInt(concat, 10), { excludeZero: true })) {
+      if (concat.length === 9 && isPandigital(parseInt(concat, 10), { excludeZero: true })) {
         if (!products[product]) {
           products[product] = true;
           sum += product;

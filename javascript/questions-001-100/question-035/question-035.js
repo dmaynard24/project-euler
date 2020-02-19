@@ -7,25 +7,25 @@
 
 // How many circular primes are there below one million?
 
-const primal = require('../../util/primal'),
-  digits = require('../../util/digits');
+const primal = require(`../../util/primal`);
+const digits = require(`../../util/digits`);
 
 function getCircularPrimeCount(limit) {
-  let primes = primal.getPrimes(limit - 1),
-    primeNums = primal.getPrimeNumbers(primes),
-    count = 0;
+  const primes = primal.getPrimes(limit - 1);
+  const primeNums = primal.getPrimeNumbers(primes);
+  let count = 0;
 
   for (let i = 0; i < primeNums.length; i++) {
-    let numDigits = digits.getDigits(primeNums[i]);
+    const numDigits = digits.getDigits(primeNums[i]);
 
-    if (numDigits.length == 1) {
+    if (numDigits.length === 1) {
       count++;
     } else {
-      let hasEvenDigit = numDigits.find(digit => digit % 2 == 0);
+      const hasEvenDigit = numDigits.find((digit) => digit % 2 === 0);
 
       if (!hasEvenDigit) {
-        let areAllPrime = true,
-          length = numDigits.length;
+        let areAllPrime = true;
+        const { length } = numDigits;
         for (let j = 1; j < length; j++) {
           let rotation = 0;
           for (let k = 0; k < length; k++) {

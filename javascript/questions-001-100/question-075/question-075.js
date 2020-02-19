@@ -16,19 +16,19 @@
 
 // Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
 
-const getPrimitiveTriples = require('../../util/pythagorean-triples');
+const getPrimitiveTriples = require(`../../util/pythagorean-triples`);
 
 function getUniquePerimeters(pMax) {
-  let primitives = getPrimitiveTriples(pMax),
-    perimeterCounts = new Map(),
-    uniqueCounts = 0;
+  const primitives = getPrimitiveTriples(pMax);
+  const perimeterCounts = new Map();
+  let uniqueCounts = 0;
 
-  primitives.forEach(primitive => {
-    let p = primitive.p;
+  primitives.forEach((primitive) => {
+    let { p } = primitive;
     while (p <= pMax) {
       if (perimeterCounts.has(p)) {
         perimeterCounts.set(p, perimeterCounts.get(p) + 1);
-        if (perimeterCounts.get(p) == 2) {
+        if (perimeterCounts.get(p) === 2) {
           uniqueCounts--;
         }
       } else {

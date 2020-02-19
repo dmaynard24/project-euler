@@ -7,16 +7,16 @@
 
 // For which value of p ≤ 1000, is the number of solutions maximised?
 
-const getPrimitiveTriples = require('../../util/pythagorean-triples');
+const getPrimitiveTriples = require(`../../util/pythagorean-triples`);
 
 function getMostCommonPerimeter(pMax) {
-  let primitives = getPrimitiveTriples(pMax),
-    perimeterCounts = new Map(),
-    mostCommon = 120,
-    mostCommonCount = 3;
+  const primitives = getPrimitiveTriples(pMax);
+  const perimeterCounts = new Map();
+  let mostCommon = 120;
+  let mostCommonCount = 3;
 
-  primitives.forEach(primitive => {
-    let p = primitive.p;
+  primitives.forEach((primitive) => {
+    let { p } = primitive;
     while (p <= pMax) {
       perimeterCounts.set(p, perimeterCounts.has(p) ? perimeterCounts.get(p) + 1 : 1);
 

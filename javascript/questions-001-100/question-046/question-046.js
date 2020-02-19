@@ -14,11 +14,11 @@
 
 // What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
-const primal = require('../../util/primal');
+const primal = require(`../../util/primal`);
 
 function getSmallestOddComposite() {
-  let limit = 6000,
-    primes = primal.getPrimes(limit);
+  const limit = 6000;
+  const primes = primal.getPrimes(limit);
 
   for (let composite = 35; composite < limit; composite += 2) {
     if (!primal.isPrime(composite, primes)) {
@@ -33,11 +33,11 @@ function getSmallestOddComposite() {
           let root = 1;
 
           while (!proof) {
-            let expressionValue = prime + 2 * (root * root);
+            const expressionValue = prime + 2 * (root * root);
             if (expressionValue > composite) {
               break;
             }
-            proof = expressionValue == composite;
+            proof = expressionValue === composite;
 
             root++;
           }

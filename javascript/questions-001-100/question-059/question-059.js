@@ -11,31 +11,31 @@
 
 // Your task has been made easy, as the encryption key consists of three lower case characters. Using cipher, a string containing the encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the ASCII values in the original text.
 
-const cipher = require('./cipher');
+const cipher = require(`./cipher`);
 
 function getAsciiSum() {
-  let nums = cipher.split(',').map(num => parseInt(num, 10)),
-    keyLength = 3;
+  const nums = cipher.split(`,`).map((num) => parseInt(num, 10));
+  const keyLength = 3;
 
   // range of numbers [97, 98, ..., 122]
-  let charCodes = [...'abcdefghijklmnopqrstuvwxyz'].map(char => char.charCodeAt());
+  const charCodes = [...`abcdefghijklmnopqrstuvwxyz`].map((char) => char.charCodeAt());
 
   for (let i = 0; i < charCodes.length; i++) {
     for (let j = 0; j < charCodes.length; j++) {
       for (let k = 0; k < charCodes.length; k++) {
-        let key = [charCodes[i], charCodes[j], charCodes[k]],
-          decryptedAscii = nums.map((num, index) => num ^ key[index % keyLength]),
-          decrypted = decryptedAscii.map(num => String.fromCharCode(num)).join(''),
-          decryptedLower = decrypted.toLowerCase();
+        const key = [charCodes[i], charCodes[j], charCodes[k]];
+        const decryptedAscii = nums.map((num, index) => num ^ key[index % keyLength]);
+        const decrypted = decryptedAscii.map((num) => String.fromCharCode(num)).join(``);
+        const decryptedLower = decrypted.toLowerCase();
 
-        if (decryptedLower.includes(' the ')) {
+        if (decryptedLower.includes(` the `)) {
           return decryptedAscii.reduce((a, c) => a + c);
         }
       }
     }
   }
 
-  return 'Unable to decrypt the message.';
+  return `Unable to decrypt the message.`;
 }
 
 module.exports = getAsciiSum;

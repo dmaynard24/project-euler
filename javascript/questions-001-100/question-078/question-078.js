@@ -16,7 +16,7 @@ const shapes = require('../../util/shapes');
 
 function getLeastN(divisor) {
   // use mod later to prevent big ints
-  let mod = divisor * 10;
+  const mod = divisor * 10;
 
   return `couldn't find a solution for n in p(n) where n is less than ${limit}`;
 }

@@ -7,19 +7,11 @@
 
 // What is the total of all the name scores in the set?
 
-const names = require('./names');
+const names = require(`./names`);
 
 function getNameScoresSum() {
   names.sort();
-  return names.reduce((a, c, i) => {
-    return (
-      a +
-      [...c].reduce((a, c) => {
-        return a + (c.charCodeAt() - 64);
-      }, 0) *
-        (i + 1)
-    );
-  }, 0);
+  return names.reduce((a, c, i) => a + [...c].reduce((acc, curr) => acc + (curr.charCodeAt() - 64), 0) * (i + 1), 0);
 }
 
 module.exports = getNameScoresSum;

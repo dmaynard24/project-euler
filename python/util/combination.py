@@ -2,7 +2,7 @@ def get_combos(arr, pick):
   if pick == 0:
     return [[]]
 
-  if len(arr) < 1:
+  if len(arr) == 0:
     return []
 
   first = arr[0]

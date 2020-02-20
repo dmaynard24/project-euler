@@ -13,66 +13,92 @@
 // Find the least value of n for which p(n) is divisible by one million.
 
 const shapes = require(`../../util/shapes`);
-const bigInt = require(`big-integer`);
 
-function getLeastN() {
-  // partitionCounts[i] = partitionCounts[i - getNthPentagon(1)] + partitionCounts[i - getNthPentagon(-1)]
-  //                    - partitionCounts[i - getNthPentagon(2)] - partitionCounts[i - getNthPentagon(-2)]
-  //                    + partitionCounts[i - getNthPentagon(3)] + partitionCounts[i - getNthPentagon(-3)]
+function getLeastN(divisor) {
+  function getGeneralizedPentagon(i) {
+    if (i % 2 === 0) {
+      // when i is even, pass positive argument
+      return shapes.getNthPentagon(Math.floor(i / 2) + 1);
+    }
+    // when i is odd, pass negative argument
+    return shapes.getNthPentagon(-1 * Math.floor(i / 2) - 1);
+  }
 
-  // set count of partitions for zero to 1 for the sake of the generator
-  const partitionCounts = [bigInt(1)];
-  let index = 1;
-  while (index < Infinity) {
-    let partitionCount = bigInt(0);
+  function getTermSign(i) {
+    // every two indices, swap term signs
+    if (i % 4 < 2) {
+      return 1;
+    }
+    return -1;
+  }
+
+  // set the partition count of 0 equal to 1 for the sake of the generator
+  const partitionCounts = [1];
+  let n = 1;
+  while (n < Infinity) {
+    let partitionCount = 0;
+
     let i = 0;
     while (i < Infinity) {
-      const n = Math.floor(i / 2) + 1;
-      const generalizedPentagon = i % 2 === 0 ? shapes.getNthPentagon(n) : shapes.getNthPentagon(-1 * n);
+      const generalizedPentagon = getGeneralizedPentagon(i);
 
-      if (generalizedPentagon > index) {
+      if (generalizedPentagon > n) {
         break;
       }
 
-      const prevPartitionCount = partitionCounts[index - generalizedPentagon];
-      partitionCount = i % 4 < 2 ? partitionCount.add(prevPartitionCount) : partitionCount.minus(prevPartitionCount);
-
-      if (partitionCount.mod(1000000).equals(0)) {
-        return index;
-      }
-
+      const prevPartitionCount = partitionCounts[n - generalizedPentagon];
+      partitionCount += getTermSign(i) * prevPartitionCount;
       i++;
     }
 
+    // mod to avoid massive integers
+    partitionCount %= divisor;
+    if (partitionCount === 0) {
+      return n;
+    }
+
     partitionCounts.push(partitionCount);
-    index++;
+    n++;
   }
 
   return 0;
 }
 
-// generic function that could prove useful in the future
-function getPartitionCount(targetIndex) {
-  // partitionCounts[i] = partitionCounts[i - getNthPentagon(1)] + partitionCounts[i - getNthPentagon(-1)]
-  //                    - partitionCounts[i - getNthPentagon(2)] - partitionCounts[i - getNthPentagon(-2)]
-  //                    + partitionCounts[i - getNthPentagon(3)] + partitionCounts[i - getNthPentagon(-3)]
+// a more generic function to get the partition count of any target n, essentially p(n)
+// (not used to solve question 78)
+function getPartitionCount(targetN) {
+  function getGeneralizedPentagon(i) {
+    if (i % 2 === 0) {
+      // when i is even, pass positive argument
+      return shapes.getNthPentagon(Math.floor(i / 2) + 1);
+    }
+    // when i is odd, pass negative argument
+    return shapes.getNthPentagon(-1 * Math.floor(i / 2) - 1);
+  }
 
-  // set count of partitions for zero to 1 for the sake of the generator
+  function getTermSign(i) {
+    // every two indices, swap term signs
+    if (i % 4 < 2) {
+      return 1;
+    }
+    return -1;
+  }
+
+  // set the partition count of 0 equal to 1 for the sake of the generator
   const partitionCounts = [1];
-  for (let index = 1; index <= targetIndex; index++) {
+  for (n = 1; n <= targetN; n++) {
     let partitionCount = 0;
+
     let i = 0;
     while (i < Infinity) {
-      const n = Math.floor(i / 2) + 1;
-      const generalizedPentagon = i % 2 === 0 ? shapes.getNthPentagon(n) : shapes.getNthPentagon(-1 * n);
+      const generalizedPentagon = getGeneralizedPentagon(i);
 
-      if (generalizedPentagon > index) {
+      if (generalizedPentagon > n) {
         break;
       }
 
-      const prevPartitionCount = partitionCounts[index - generalizedPentagon];
-      partitionCount += n % 4 < 2 ? prevPartitionCount : -1 * prevPartitionCount;
-
+      const prevPartitionCount = partitionCounts[n - generalizedPentagon];
+      partitionCount += getTermSign(i) * prevPartitionCount;
       i++;
     }
 
@@ -82,9 +108,4 @@ function getPartitionCount(targetIndex) {
   return partitionCounts.pop();
 }
 
-console.log(getLeastN());
-// 100000 - 11224
-// 10000 - 599
-// 1000 - 449
-// 100 - 74
-// 10 - 9
+module.exports = getLeastN;

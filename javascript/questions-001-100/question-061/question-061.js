@@ -66,7 +66,7 @@ function getOrderedSet() {
           matchedSets[unmatchedKeys[j]] = true;
           set.push(i);
 
-          // immediately after pushing a new term, check exit condition
+          // immediately after pushing a new term, check base case
           if (set.length === setCount) {
             return set;
           }

@@ -85,7 +85,7 @@ def get_largest_concat():
       # store on all sets
       curr_set.append(curr_subset)
 
-      # exit condition
+      # base case
       if len(curr_set) == gon_count:
         # look for smallest subset in order to rotate
         smallest_set_index = 0

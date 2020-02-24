@@ -78,7 +78,7 @@ function getLargestConcat() {
       // store on all sets
       set.push(currSubset);
 
-      // exit condition
+      // base case
       if (set.length === gonCount) {
         // look for smallest subset in order to rotate
         let smallestSetIndex = 0;

@@ -86,9 +86,9 @@ def get_card_rank(card):
 
 
 def get_hand_rank(hand):
-  card_ranks = list(map(lambda card: get_card_rank(card), hand))
+  card_ranks = [get_card_rank(card) for card in hand]
   card_ranks.sort()
-  card_suits = list(map(lambda card: card[:][1], hand))
+  card_suits = [card[:][1] for card in hand]
   card_suits.sort()
 
   hand_is_straight = is_straight(card_ranks)

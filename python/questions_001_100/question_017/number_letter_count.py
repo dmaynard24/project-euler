@@ -9,9 +9,7 @@
 
 
 def get_number_letter_count(max):
-  return sum(
-      list(map(lambda num: len(get_words_from_number(num)), range(1,
-                                                                  max + 1))))
+  return sum([len(get_words_from_number(num)) for num in range(1, max + 1)])
 
 
 def get_words_from_number(num):

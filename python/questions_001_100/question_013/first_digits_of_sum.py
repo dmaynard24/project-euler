@@ -14,8 +14,7 @@ numbers = numbers.numbers
 
 
 def get_first_digits_of_sum(digit_count):
-  num_sum = sum(
-      list(map(lambda num: int(num[0:digit_count + 1]), numbers.split('\n'))))
+  num_sum = sum([int(num[0:digit_count + 1]) for num in numbers.split('\n')])
   digits_to_trim = digits.get_digit_count(num_sum) - digit_count
 
   return num_sum // 10**digits_to_trim

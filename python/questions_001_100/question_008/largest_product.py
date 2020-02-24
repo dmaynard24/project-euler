@@ -12,7 +12,7 @@ series = series.series
 def get_largest_product(digits):
   start = 0
   end = digits
-  nums = list(map(int, series.replace('\n', '')))
+  nums = [int(num) for num in series.replace('\n', '')]
   largest = 0
   product = None
 

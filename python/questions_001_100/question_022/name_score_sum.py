@@ -16,7 +16,6 @@ def get_name_score_sum():
 
   name_score_sum = 0
   for i, name in enumerate(names):
-    name_score_sum += sum(list(map(lambda char: ord(char) - 64,
-                                   name))) * (i + 1)
+    name_score_sum += sum([ord(char) - 64 for char in name]) * (i + 1)
 
   return name_score_sum

@@ -15,17 +15,15 @@
 # NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 
 import triangle
+triangle = triangle.triangle
 
 
 def get_maximum_path_sum():
-  sums = list(map(row_map, triangle.triangle.split('\n')))
+  sums = [[int(num) for num in row.strip().split(' ')]
+          for row in triangle.split('\n')]
 
   for i in range(len(sums) - 2, -1, -1):
     for j in range(len(sums[i])):
       sums[i][j] = max(sums[i + 1][j], sums[i + 1][j + 1]) + sums[i][j]
 
   return sums[0][0]
-
-
-def row_map(row):
-  return list(map(int, row.strip().split(' ')))

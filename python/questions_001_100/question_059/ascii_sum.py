@@ -16,7 +16,7 @@ cipher = cipher.cipher
 
 
 def get_ascii_sum():
-  nums = list(map(int, cipher.split(',')))
+  nums = [int(num) for num in cipher.split(',')]
   key_length = 3
 
   # basically list(range(97, 123))
@@ -30,7 +30,7 @@ def get_ascii_sum():
         decrypted_ascii = [
             num ^ key[i % key_length] for i, num in enumerate(nums)
         ]
-        decrypted = ''.join(list(map(lambda num: chr(num), decrypted_ascii)))
+        decrypted = ''.join([chr(num) for num in decrypted_ascii])
         decrypted_lower = decrypted.lower()
 
         if ' the ' in decrypted_lower:

@@ -17,8 +17,7 @@ matrix = matrix.matrix
 
 
 def get_minimal_path_sum():
-  grid = list(
-      map(lambda row: list(map(int, row.split(','))), matrix.split('\n')))
+  grid = [[int(num) for num in row.split(',')] for row in matrix.split('\n')]
   node_sums = []
 
   node_sums.append([])

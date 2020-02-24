@@ -40,7 +40,7 @@ def get_coefficient_product():
   largest_count = 0
   largest_product = 0
 
-  negatives = list(map(lambda prime_num: prime_num * -1, prime_nums))
+  negatives = [prime_num * -1 for prime_num in prime_nums]
   primes_range = negatives + prime_nums
 
   for a in primes_range:

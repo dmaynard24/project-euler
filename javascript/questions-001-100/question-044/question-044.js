@@ -30,6 +30,8 @@ function getPentagonDifference() {
 
     n++;
   }
+
+  return 0;
 }
 
 module.exports = getPentagonDifference;

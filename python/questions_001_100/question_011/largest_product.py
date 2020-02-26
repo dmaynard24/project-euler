@@ -50,10 +50,10 @@ def get_largest_product(digits):
       if y + digits <= 19:
         row = grid_arr[x]
         zero_at = -1
-        try:
-          zero_at = row.index(0, y)
-        except:
-          zero_at = -1
+        for i, num in enumerate(row[y:]):
+          if num == 0:
+            zero_at = i
+            break
         if zero_at == -1 or zero_at - y > digits - 1:
           new_largest = get_right(x, y)
           largest = max(new_largest, largest)

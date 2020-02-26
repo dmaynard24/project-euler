@@ -20,7 +20,7 @@ from python.util import digits
 
 
 def get_digit_fifth_power_sum():
-  fifth_powers = list(map(lambda digit: digit**5, range(10)))
+  fifth_powers = [digit**5 for digit in range(10)]
   power_sum = 0
 
   for i in range(2, 200_000):

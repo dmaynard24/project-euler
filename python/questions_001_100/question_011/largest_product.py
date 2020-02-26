@@ -8,11 +8,11 @@
 # What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
 import grid
+grid = grid.grid
 
 
 def get_largest_product(digits):
-  grid_arr = list(
-      map(lambda row: list(map(int, row.split())), grid.grid.split('\n')))
+  grid_arr = [[int(num) for num in row.split()] for row in grid.split('\n')]
 
   def get_up_right(x, y):
     product = grid_arr[x][y]
@@ -50,10 +50,10 @@ def get_largest_product(digits):
       if y + digits <= 19:
         row = grid_arr[x]
         zero_at = -1
-        try:
-          zero_at = row.index(0, y)
-        except:
-          zero_at = -1
+        for i, num in enumerate(row[y:]):
+          if num == 0:
+            zero_at = i
+            break
         if zero_at == -1 or zero_at - y > digits - 1:
           new_largest = get_right(x, y)
           largest = max(new_largest, largest)

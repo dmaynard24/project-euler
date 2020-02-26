@@ -51,21 +51,19 @@ def get_cycle_length(entire_value, max_cycle_length):
   for i in range(max_cycle_length):
     for length in range(1, max_cycle_length + 1):
       curr_set = entire_value[i:length]
-      try:
-        next_index = entire_value.index(curr_set, i + length)
-        curr_set = entire_value[i:next_index]
-        set_count = math.floor((len(entire_value) - i) / len(curr_set)) - 1
-        is_cycle = False
-
-        for j in range(set_count):
-          next_set_index = next_index + j * len(curr_set)
-          next_set = entire_value[next_set_index:next_set_index +
-                                  len(curr_set)]
-          is_cycle = (curr_set == next_set)
-
-        if is_cycle:
-          return len(curr_set)
-      except:
+      next_index = entire_value.find(curr_set, i + length)
+      if next_index == -1:
         continue
+      curr_set = entire_value[i:next_index]
+      set_count = math.floor((len(entire_value) - i) / len(curr_set)) - 1
+      is_cycle = False
+
+      for j in range(set_count):
+        next_set_index = next_index + j * len(curr_set)
+        next_set = entire_value[next_set_index:next_set_index + len(curr_set)]
+        is_cycle = (curr_set == next_set)
+
+      if is_cycle:
+        return len(curr_set)
 
   return 0

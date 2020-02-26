@@ -67,7 +67,7 @@ def get_ordered_set():
           matched_sets[unmatched_keys[j]] = True
           curr_set.append(i)
 
-          # immediately after pushing a new term, check exit condition
+          # immediately after pushing a new term, check base case
           if len(curr_set) == set_count:
             return curr_set
 

@@ -13,38 +13,20 @@ import math
 
 
 def get_distinct_cuboid_count(max_m):
-  cuboids = {}
+  def get_c(a, b):
+    return math.sqrt(a * a + b * b)
+
   count = 0
 
   for w in range(1, max_m + 1):
     for l in range(w, max_m + 1):
       for h in range(l, max_m + 1):
-        if (w, l, h) in cuboids:
-          continue
-
-        a = w
-        b = l + h
-        c = math.sqrt(a * a + b * b)
-
-        a = w + h
-        b = l
-        second_c = math.sqrt(a * a + b * b)
-
-        a = w + l
-        b = h
-        third_c = math.sqrt(a * a + b * b)
-
-        shortest_route = min(c, second_c, third_c)
+        first_c = get_c(w, l + h)
+        second_c = get_c(w + h, l)
+        third_c = get_c(w + l, h)
+        shortest_route = min(first_c, second_c, third_c)
         if math.floor(shortest_route) == shortest_route:
           count += 1
-
-        # cache all 6 rotations of the cuboid
-        cuboids[(w, l, h)] = 1
-        cuboids[(w, h, l)] = 1
-        cuboids[(l, w, h)] = 1
-        cuboids[(l, h, w)] = 1
-        cuboids[(h, w, l)] = 1
-        cuboids[(h, l, w)] = 1
 
   return count
 
@@ -56,4 +38,5 @@ def get_least_m(min_solution_count):
   return m
 
 
-print(get_least_m(2000))  # 100
+print(get_least_m(2_000))  # 100
+# print(get_least_m(1_000_000))  # ?

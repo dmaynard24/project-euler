@@ -5,8 +5,6 @@
 
 # Although there exists no rectangular grid that contains exactly two million rectangles, find the area of the grid with the nearest solution.
 
-import sys
-
 
 def get_rect_count(rect_w, rect_h):
   count = 0
@@ -20,7 +18,7 @@ def get_rect_count(rect_w, rect_h):
 
 def get_closest_area(target_count):
   closest_area = None
-  smallest_diff = sys.maxsize
+  smallest_diff = target_count
 
   # max our width at 100
   max_w = min(target_count // 2, 100)

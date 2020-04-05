@@ -7,7 +7,7 @@
 
 # Find the minimal path sum from the left column to the right column in matrix, a string containing an 80 by 80 matrix.
 
-import sys
+import sys, heapq
 
 matrix = '''131,673,234,103,18
 201,96,342,965,150
@@ -21,10 +21,16 @@ def get_minimal_path_sum():
   extent = len(grid)
 
   nodes = []
-  for row in grid:
+  for y, row in enumerate(grid):
     node_row = []
-    for num in row:
-      node = {'tentative': sys.maxsize, 'visited': False, 'value': num}
+    for x, num in enumerate(row):
+      node = {
+          'x': x,
+          'y': y,
+          'tentative': sys.maxsize,
+          'value': num,
+          'visited': False
+      }
       node_row.append(node)
     nodes.append(node_row)
 

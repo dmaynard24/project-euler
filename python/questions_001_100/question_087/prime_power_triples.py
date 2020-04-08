@@ -42,6 +42,3 @@ def get_prime_sum_count(limit):
           break
 
   return len(sums)
-
-
-print(get_prime_sum_count(50_000_000))  # 1097343

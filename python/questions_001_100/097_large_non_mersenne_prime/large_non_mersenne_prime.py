@@ -21,6 +21,3 @@ def get_last_ten_digits():
   start %= mod
   start += 1
   return start
-
-
-print(get_last_ten_digits())  # 8739992577

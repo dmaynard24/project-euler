@@ -32,8 +32,3 @@ def get_closest_area(target_count):
         smallest_diff = diff
 
   return closest_area
-
-
-print(get_closest_area(18))  # 6
-print(get_closest_area(60))  # 12
-print(get_closest_area(2_000_000))  # 2772

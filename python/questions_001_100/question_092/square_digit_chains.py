@@ -46,6 +46,3 @@ def get_chain_count(limit):
     start += 1
 
   return count
-
-
-print(get_chain_count(10_000_000))  # 8581146

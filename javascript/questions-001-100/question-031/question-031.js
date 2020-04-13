@@ -13,12 +13,11 @@ function getTwoPoundCombinationCount() {
   const coinValues = [200, 100, 50, 20, 10, 5, 2, 1];
 
   function getCoinComboCount(i, target) {
-    const coinVal = coinValues[i];
-
     if (target === 0 || i === coinValues.length - 1) {
       return 1;
     }
 
+    const coinVal = coinValues[i];
     const maxCoinCount = Math.floor(target / coinVal);
     let count = 0;
     for (let coinCount = maxCoinCount; coinCount >= 0; coinCount--) {

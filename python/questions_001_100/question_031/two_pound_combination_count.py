@@ -14,11 +14,10 @@ def get_two_pound_combination_count():
   coin_values = [200, 100, 50, 20, 10, 5, 2, 1]
 
   def get_coin_combo_count(i, target):
-    coin_val = coin_values[i]
-
     if target == 0 or i == len(coin_values) - 1:
       return 1
 
+    coin_val = coin_values[i]
     max_coin_count = int(target / coin_val)
     count = 0
     for coin_count in range(max_coin_count, -1, -1):

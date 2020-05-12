@@ -13,7 +13,7 @@
   "python.formatting.provider": "yapf",
   "python.formatting.yapfArgs": ["--style", "{indent_width: 2}"],
   "vscode_custom_css.imports": [
-    "file:///c:/Users/davem/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.10/synthwave-x-fluoromachine.css",
+    "file:///c:/Users/davem/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.11/synthwave-x-fluoromachine.css",
     "file:///c:/repos/project-euler/.vscode/theme-overrides.css"
   ],
   "workbench.colorCustomizations": {

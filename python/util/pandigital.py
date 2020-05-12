@@ -8,7 +8,7 @@ def is_pandigital(num, exclude_zero):
 
     while num > 0:
       mod = num % 10
-      if (exclude_zero == True and mod == 0) or digits.get(mod) is not None:
+      if (exclude_zero == True and mod == 0) or mod in digits:
         return False
 
       digits[mod] = 1

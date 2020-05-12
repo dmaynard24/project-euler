@@ -62,7 +62,7 @@ def get_largest_concat():
       curr_subset = possible_subsets[i]['set']
 
       # always check for cached
-      if cached_subsets.get(''.join(map(str, curr_subset))) is not None:
+      if ''.join(map(str, curr_subset)) in cached_subsets:
         continue
 
       if len(curr_set) == 0:
@@ -73,8 +73,8 @@ def get_largest_concat():
         # check continue cases on all sets except first
         if (possible_subsets[i]['sum'] != set_sum
             or curr_subset[1] != curr_set[-1][2]
-            or edge_vals.get(str(curr_subset[0])) is not None
-            or edge_vals.get(str(curr_subset[2])) is not None):
+            or str(curr_subset[0]) in edge_vals
+            or str(curr_subset[2]) in edge_vals):
           continue
 
       # check on only the last set
@@ -126,9 +126,9 @@ def get_largest_concat():
       # pop and remove cached edge_vals
       left_key = str(curr_set[-1][0])
       right_key = str(curr_set[-1][2])
-      if edge_vals.get(left_key) is not None:
+      if left_key in edge_vals:
         edge_vals.pop(left_key)
-      if edge_vals.get(right_key) is not None:
+      if right_key in edge_vals:
         edge_vals.pop(right_key)
       curr_set.pop()
 

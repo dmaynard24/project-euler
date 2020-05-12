@@ -47,7 +47,7 @@ def get_ordered_set():
 
     for i in range(start_value, limit):
       for j in range(len(unmatched_keys)):
-        if term_sets[unmatched_keys[j]].get(i) is not None:
+        if i in term_sets[unmatched_keys[j]]:
           # for every term except the last
           if len(curr_set) < set_count - 1:
             if i % 100 < 10:

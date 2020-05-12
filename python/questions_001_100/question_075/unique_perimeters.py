@@ -31,7 +31,7 @@ def get_unique_perimeters(p_max):
   for primitive in primitives:
     p = primitive['p']
     while p <= p_max:
-      if perimeter_counts.get(p) is not None:
+      if p in perimeter_counts:
         perimeter_counts[p] += 1
         if perimeter_counts[p] == 2:
           unique_counts -= 1

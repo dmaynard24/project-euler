@@ -53,7 +53,7 @@ def get_non_repeating_chain_count(limit):
 
         factorial_sums[val] = factorial_sum
 
-      if chain.get(factorial_sums.get(val)) is not None:
+      if factorial_sums.get(val) in chain:
         length = len(chain)
         if length == target_length:
           count += 1

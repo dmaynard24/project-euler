@@ -29,9 +29,9 @@ def get_summation_count(num):
       addend = None
 
       # check cache
-      if summation_counts.get(new_remaining) is not None:
+      if new_remaining in summation_counts:
         # check chained dict
-        if summation_counts[new_remaining].get(next_term_arg) is not None:
+        if next_term_arg in summation_counts[new_remaining]:
           cached_addend = summation_counts[new_remaining][next_term_arg]
       else:
         summation_counts[new_remaining] = {}

@@ -1,12 +1,14 @@
 const digits = require(`./digits`);
 
 function isArrayPalindrome(arr) {
-  for (let i = 0; i < arr.length / 2; i++) {
-    // leftIndex = i
-    // rightIndex = arr.length - 1 - i
-    if (arr[i] !== arr[arr.length - 1 - i]) {
+  let i = 0;
+  let j = arr.length - 1;
+  while (i < j) {
+    if (arr[i] !== arr[j]) {
       return false;
     }
+    i++;
+    j--;
   }
 
   return true;

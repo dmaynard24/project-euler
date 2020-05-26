@@ -42,7 +42,7 @@ def get_pandigital_sum():
 
       if len(concat) == 9 and pandigital.is_pandigital(int(concat),
                                                        exclude_zero=True):
-        if products.get(product) is None:
+        if product not in products:
           products[product] = 1
           pandigital_sum += product
 

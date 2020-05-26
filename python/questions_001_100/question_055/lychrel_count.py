@@ -37,7 +37,7 @@ def get_lychrel_count(limit):
       sum_str = str(original_sum)
 
       # cache reverse sums
-      if reverse_sums_arrs.get(sum_str) is None:
+      if sum_str not in reverse_sums_arrs:
         reverse_sums_arrs[sum_str] = digits.get_digits_reversed(original_sum)
 
       # calculate reverse sum with cached value
@@ -45,7 +45,7 @@ def get_lychrel_count(limit):
           reverse_sums_arrs.get(sum_str))
 
       # cache palindrome sums
-      if palindrome_sums.get(sum_str) is None:
+      if sum_str not in palindrome_sums:
         palindrome_sums[sum_str] = palindrome.is_array_palindrome(
             digits.get_digits_reversed(original_sum))
 

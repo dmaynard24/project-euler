@@ -45,7 +45,7 @@ def get_non_repeating_chain_count(limit):
 
     chain[val] = 1
     while did_loop == False:
-      if factorial_sums.get(val) is None:
+      if val not in factorial_sums:
         val_digits = digits.get_digits_reversed(val)
         factorial_sum = 0
         for digit in val_digits:

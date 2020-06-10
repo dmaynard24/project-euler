@@ -38,12 +38,13 @@ def get_ordered_set():
       '7': shapes.get_heptagons(limit),
       '8': shapes.get_octagons(limit)
   }
-  set_count = len(term_sets.keys())
+  set_count = len(term_sets)
 
   def get_next_term(curr_set, start_value, matched_sets):
     return_set = []
-    unmatched_keys = list(
-        filter(lambda key: matched_sets[key] == False, matched_sets.keys()))
+    unmatched_keys = [
+        key for key in matched_sets if matched_sets[key] == False
+    ]
 
     for i in range(start_value, limit):
       for j in range(len(unmatched_keys)):

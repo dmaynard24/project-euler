@@ -136,9 +136,10 @@ def get_largest_concat():
 
   solution_set = get_next_subset([], possible_subsets[0]['sum'], {}, {})
 
-  # flatten the solution sets, then filter down to only the 16-digit values
-  solution_set_ints = filter(
-      lambda int_val: digits.get_digit_count(int_val) == 16,
-      map(lambda ss: digits.get_int_from_digits(flatten(ss)), solution_set))
+  solution_set_ints = [
+      int_val for int_val in
+      [digits.get_int_from_digits(flatten(ss)) for ss in solution_set]
+      if digits.get_digit_count(int_val) == 16
+  ]
 
   return max(solution_set_ints)

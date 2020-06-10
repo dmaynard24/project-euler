@@ -7,4 +7,4 @@
 
 
 def get_last_ten_digits():
-  return sum(map(lambda val: val**val, range(1, 1_001))) % 10_000_000_000
+  return sum([val**val for val in range(1, 1_001)]) % 10_000_000_000

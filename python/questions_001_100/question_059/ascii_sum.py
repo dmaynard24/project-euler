@@ -20,8 +20,7 @@ def get_ascii_sum():
   key_length = 3
 
   # basically list(range(97, 123))
-  char_codes = list(
-      map(lambda char: ord(char), list('abcdefghijklmnopqrstuvwxyz')))
+  char_codes = [ord(char) for char in list('abcdefghijklmnopqrstuvwxyz')]
 
   for i in range(len(char_codes)):
     for j in range(len(char_codes)):

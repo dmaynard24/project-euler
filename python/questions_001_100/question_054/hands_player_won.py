@@ -168,9 +168,8 @@ def get_consecutive_counts_and_kicker(ranks):
 
 
 def get_hands_player_won(player):
-  hands = list(
-      map(lambda ten_cards: [ten_cards[:5], ten_cards[5:]],
-          map(lambda both_hands: both_hands.split(' '), poker.split('\n'))))
+  hands = [[ten_cards[:5], ten_cards[5:]] for ten_cards in
+           [both_hands.split(' ') for both_hands in poker.split('\n')]]
 
   # start checking hands
   win_count = 0

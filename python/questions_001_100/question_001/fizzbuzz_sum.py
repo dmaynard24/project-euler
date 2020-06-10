@@ -6,9 +6,5 @@
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
 
-def fizzbuzz(num):
-  return num % 3 == 0 or num % 5 == 0
-
-
 def get_fizzbuzz_sum(max):
-  return sum(filter(fizzbuzz, range(max)))
+  return sum([num for num in range(max) if num % 3 == 0 or num % 5 == 0])

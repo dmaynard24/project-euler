@@ -1,4 +1,5 @@
-import unittest, non_repeating_chain_count
+import unittest
+from . import non_repeating_chain_count
 
 
 class TestGetNonRepeatingChainCount(unittest.TestCase):

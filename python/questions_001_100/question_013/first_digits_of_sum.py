@@ -3,13 +3,9 @@
 # Problem 13
 # Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
+from ...util import digits
+from . import numbers
 
-from python.util import digits
-
-import numbers
 numbers = numbers.numbers
 
 

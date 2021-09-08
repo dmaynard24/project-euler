@@ -1,4 +1,5 @@
-import unittest, largest_collatz_sequence
+import unittest
+from . import largest_collatz_sequence
 
 
 class TestGetLargestCollatzSequence(unittest.TestCase):

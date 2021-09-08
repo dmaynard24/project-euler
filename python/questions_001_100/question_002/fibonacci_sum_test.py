@@ -1,4 +1,5 @@
-import unittest, fibonacci_sum
+import unittest
+from . import fibonacci_sum
 
 
 class TestGetFibonacciSum(unittest.TestCase):

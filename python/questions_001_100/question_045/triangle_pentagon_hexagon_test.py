@@ -1,4 +1,5 @@
-import unittest, triangle_pentagon_hexagon
+import unittest
+from . import triangle_pentagon_hexagon
 
 
 class TestGetTrianglePentagonHexagon(unittest.TestCase):

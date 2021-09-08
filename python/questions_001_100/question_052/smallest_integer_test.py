@@ -1,4 +1,5 @@
-import unittest, smallest_integer
+import unittest
+from . import smallest_integer
 
 
 class TestGetSmallestInteger(unittest.TestCase):

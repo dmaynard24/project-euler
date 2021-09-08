@@ -1,4 +1,5 @@
-import unittest, totient_permutation
+import unittest
+from . import totient_permutation
 
 
 class TestGetTotientPermutation(unittest.TestCase):

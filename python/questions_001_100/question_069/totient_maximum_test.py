@@ -1,4 +1,5 @@
-import unittest, totient_maximum
+import unittest
+from . import totient_maximum
 
 
 class TestGetTotientMaximum(unittest.TestCase):

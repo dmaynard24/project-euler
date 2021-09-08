@@ -1,4 +1,5 @@
-import unittest, shortest_passcode
+import unittest
+from . import shortest_passcode
 
 
 class TestGetShortestPasscode(unittest.TestCase):

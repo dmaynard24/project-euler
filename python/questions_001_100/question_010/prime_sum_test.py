@@ -1,4 +1,5 @@
-import unittest, prime_sum
+import unittest
+from . import prime_sum
 
 
 class TestGetPrimeSum(unittest.TestCase):

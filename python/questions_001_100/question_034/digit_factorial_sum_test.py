@@ -1,4 +1,5 @@
-import unittest, digit_factorial_sum
+import unittest
+from . import digit_factorial_sum
 
 
 class TestGetDigitFactorialSum(unittest.TestCase):

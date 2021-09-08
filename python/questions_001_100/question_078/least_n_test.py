@@ -1,4 +1,5 @@
-import unittest, least_n
+import unittest
+from . import least_n
 
 
 class TestGetLeastN(unittest.TestCase):

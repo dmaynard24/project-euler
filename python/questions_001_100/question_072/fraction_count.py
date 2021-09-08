@@ -11,11 +11,7 @@
 
 # How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, phi
+from ...util import primal, phi
 
 
 def get_fraction_count(max_d):

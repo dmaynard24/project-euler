@@ -18,11 +18,7 @@
 
 # What is the value of the first triangle number to have over five hundred divisors?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_first_triangle_with_divisors(divisors):

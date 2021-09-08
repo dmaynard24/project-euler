@@ -1,4 +1,5 @@
-import unittest, hands_player_won
+import unittest
+from . import hands_player_won
 
 
 class TestGetHandsPlayerWon(unittest.TestCase):

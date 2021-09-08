@@ -5,11 +5,7 @@
 
 # Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import pandigital, permutation
+from ...util import pandigital, permutation
 
 
 def get_smallest_integer(max_multiplier):

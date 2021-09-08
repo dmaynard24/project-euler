@@ -1,4 +1,5 @@
-import unittest, largest_palindrome_product
+import unittest
+from . import largest_palindrome_product
 
 
 class TestGetLargestPalindromeProduct(unittest.TestCase):

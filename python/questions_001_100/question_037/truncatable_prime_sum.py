@@ -7,11 +7,7 @@
 
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, digits
+from ...util import primal, digits
 
 
 def get_truncatable_prime_sum():

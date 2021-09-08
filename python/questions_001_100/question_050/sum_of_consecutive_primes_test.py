@@ -1,4 +1,5 @@
-import unittest, sum_of_consecutive_primes
+import unittest
+from . import sum_of_consecutive_primes
 
 
 class TestGetSumOfConsecutivePrimes(unittest.TestCase):

@@ -17,11 +17,7 @@
 
 # How many Lychrel numbers are there below ten-thousand?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits, palindrome
+from ...util import digits, palindrome
 
 
 def get_lychrel_count(limit):

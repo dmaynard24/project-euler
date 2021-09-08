@@ -5,11 +5,7 @@
 
 # What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_smallest_multiple(upper):

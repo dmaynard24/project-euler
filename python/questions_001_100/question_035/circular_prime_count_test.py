@@ -1,4 +1,5 @@
-import unittest, circular_prime_count
+import unittest
+from . import circular_prime_count
 
 
 class TestGetCircularPrimeCount(unittest.TestCase):

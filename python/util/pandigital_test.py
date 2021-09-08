@@ -1,4 +1,5 @@
-import unittest, pandigital
+import unittest
+from . import pandigital
 
 
 class TestPandigital(unittest.TestCase):

@@ -17,11 +17,7 @@
 
 # Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_totient_maximum(max_n):

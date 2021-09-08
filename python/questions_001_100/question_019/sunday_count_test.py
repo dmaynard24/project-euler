@@ -1,4 +1,5 @@
-import unittest, sunday_count
+import unittest
+from . import sunday_count
 
 
 class TestGetSundayCount(unittest.TestCase):

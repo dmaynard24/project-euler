@@ -21,11 +21,7 @@
 
 # How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_non_repeating_chain_count(limit):

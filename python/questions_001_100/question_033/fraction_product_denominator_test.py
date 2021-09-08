@@ -1,4 +1,5 @@
-import unittest, fraction_product_denominator
+import unittest
+from . import fraction_product_denominator
 
 
 class TestGetFractionProductDenominator(unittest.TestCase):

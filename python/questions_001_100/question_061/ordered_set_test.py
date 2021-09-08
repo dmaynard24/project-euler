@@ -1,4 +1,5 @@
-import unittest, ordered_set
+import unittest
+from . import ordered_set
 
 
 class TestGetOrderedSet(unittest.TestCase):

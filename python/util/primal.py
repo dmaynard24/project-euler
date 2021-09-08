@@ -59,7 +59,9 @@ def get_prime_factors(num, primes):
     while num % 2 == 0:
       base_exp['exp'] += 1
       num /= 2
-    prime_factors.append(base_exp)
+    prime_factors.append(
+        {key: int(value)
+         for (key, value) in base_exp.items()})
 
   sqrt = math.sqrt(num)
   for i in range(3, math.floor(sqrt + 2), 2):
@@ -71,10 +73,12 @@ def get_prime_factors(num, primes):
         while num % i == 0:
           base_exp['exp'] += 1
           num /= i
-        prime_factors.append(base_exp)
+        prime_factors.append(
+            {key: int(value)
+             for (key, value) in base_exp.items()})
 
   if num > 2:
-    prime_factors.append({'base': num, 'exp': 1})
+    prime_factors.append({'base': int(num), 'exp': 1})
 
   return prime_factors
 

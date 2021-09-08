@@ -1,4 +1,5 @@
-import unittest, first_triangle_with_divisors
+import unittest
+from . import first_triangle_with_divisors
 
 
 class TestGetFirstTriangleWithDivisors(unittest.TestCase):

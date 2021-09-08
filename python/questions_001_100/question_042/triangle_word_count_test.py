@@ -1,4 +1,5 @@
-import unittest, triangle_word_count
+import unittest
+from . import triangle_word_count
 
 
 class TestGetTriangleWordCount(unittest.TestCase):

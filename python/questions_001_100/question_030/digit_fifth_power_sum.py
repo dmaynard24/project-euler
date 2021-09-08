@@ -12,11 +12,7 @@
 
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_digit_fifth_power_sum():

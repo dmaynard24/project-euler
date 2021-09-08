@@ -8,11 +8,7 @@
 
 # Find the sum of the digits in the number 100!
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_factorial_digit_sum(num):

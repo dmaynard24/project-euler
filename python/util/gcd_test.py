@@ -1,4 +1,5 @@
-import unittest, gcd
+import unittest
+from . import gcd
 
 
 class TestGcd(unittest.TestCase):

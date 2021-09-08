@@ -5,11 +5,7 @@
 
 # How many n-digit positive integers exist which are also an nth power?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_powerful_integer_count():

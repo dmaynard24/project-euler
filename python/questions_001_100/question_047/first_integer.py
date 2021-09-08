@@ -14,11 +14,7 @@
 
 # Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_first_integer(target_count):

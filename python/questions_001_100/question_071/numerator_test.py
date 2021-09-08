@@ -1,4 +1,5 @@
-import unittest, numerator
+import unittest
+from . import numerator
 
 
 class TestGetNumerator(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, diagonal_sum
+import unittest
+from . import diagonal_sum
 
 
 class TestGetDiagonalSum(unittest.TestCase):

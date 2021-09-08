@@ -16,11 +16,7 @@
 
 # Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import pythagorean_triples
+from ...util import pythagorean_triples
 
 
 def get_unique_perimeters(p_max):

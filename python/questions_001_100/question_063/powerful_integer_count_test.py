@@ -1,4 +1,5 @@
-import unittest, powerful_integer_count
+import unittest
+from . import powerful_integer_count
 
 
 class TestGetPowerfulIntegerCount(unittest.TestCase):

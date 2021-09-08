@@ -10,11 +10,7 @@
 
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import shapes
+from ...util import shapes
 
 
 def get_triangle_pentagon_hexagon():

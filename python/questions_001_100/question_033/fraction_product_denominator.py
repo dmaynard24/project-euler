@@ -9,11 +9,7 @@
 
 # If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits, gcd
+from ...util import digits, gcd
 
 
 def get_fraction_product_denominator():

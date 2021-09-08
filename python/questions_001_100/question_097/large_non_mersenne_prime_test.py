@@ -1,4 +1,5 @@
-import unittest, large_non_mersenne_prime
+import unittest
+from . import large_non_mersenne_prime
 
 
 class TestGetLastTenDigits(unittest.TestCase):

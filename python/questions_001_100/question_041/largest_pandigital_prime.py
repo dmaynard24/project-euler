@@ -5,11 +5,7 @@
 
 # What is the largest n-digit pandigital prime that exists?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits, primal
+from ...util import digits, primal
 
 
 # instead of using my isPandigital utility function (../../util/pandigital),

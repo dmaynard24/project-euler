@@ -1,4 +1,5 @@
-import unittest, fizzbuzz_sum
+import unittest
+from . import fizzbuzz_sum
 
 
 class TestGetFizzbuzzSum(unittest.TestCase):

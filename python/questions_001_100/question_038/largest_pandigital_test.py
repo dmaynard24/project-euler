@@ -1,4 +1,5 @@
-import unittest, largest_pandigital
+import unittest
+from . import largest_pandigital
 
 
 class TestGetLargestPandigital(unittest.TestCase):

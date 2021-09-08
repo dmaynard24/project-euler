@@ -1,4 +1,5 @@
-import unittest, square_root_digital_sum
+import unittest
+from . import square_root_digital_sum
 
 
 class TestGetSquareRootDigitalSum(unittest.TestCase):

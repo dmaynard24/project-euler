@@ -1,4 +1,5 @@
-import unittest, route_count
+import unittest
+from . import route_count
 
 
 class TestGetRouteCount(unittest.TestCase):

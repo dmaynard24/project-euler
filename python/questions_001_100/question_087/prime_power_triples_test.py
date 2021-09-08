@@ -1,4 +1,5 @@
-import unittest, prime_power_triples
+import unittest
+from . import prime_power_triples
 
 
 class TestGetPrimeSumCount(unittest.TestCase):

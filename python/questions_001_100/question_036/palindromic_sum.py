@@ -7,11 +7,7 @@
 
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import palindrome
+from ...util import palindrome
 
 
 def get_palindromic_sum(limit):

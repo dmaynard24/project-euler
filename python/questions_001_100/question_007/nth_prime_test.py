@@ -1,4 +1,5 @@
-import unittest, nth_prime
+import unittest
+from . import nth_prime
 
 
 class TestGetNthPrime(unittest.TestCase):

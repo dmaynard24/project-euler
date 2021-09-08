@@ -1,4 +1,5 @@
-import unittest, smallest_cube
+import unittest
+from . import smallest_cube
 
 
 class TestGetSmallestCube(unittest.TestCase):

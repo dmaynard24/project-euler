@@ -7,13 +7,9 @@
 
 # Given that the three characters are always asked for in order, analyse the file so as to determine the shortest possible secret passcode of unknown length.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
+from ...util import digits
+from . import keylog
 
-from python.util import digits
-
-import keylog
 keylog = keylog.keylog
 
 

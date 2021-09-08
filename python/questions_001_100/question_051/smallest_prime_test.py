@@ -1,4 +1,5 @@
-import unittest, smallest_prime
+import unittest
+from . import smallest_prime
 
 
 class TestGetSmallestPrime(unittest.TestCase):

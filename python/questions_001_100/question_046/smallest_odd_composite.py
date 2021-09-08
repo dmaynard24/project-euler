@@ -14,11 +14,7 @@
 
 # What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_smallest_odd_composite():

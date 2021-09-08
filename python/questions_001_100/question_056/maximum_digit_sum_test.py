@@ -1,4 +1,5 @@
-import unittest, maximum_digit_sum
+import unittest
+from . import maximum_digit_sum
 
 
 class TestGetMaximumDigitSum(unittest.TestCase):

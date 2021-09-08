@@ -10,11 +10,7 @@
 
 # How many numbers below fifty million can be expressed as the sum of a prime square, prime cube, and prime fourth power?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_prime_sum_count(limit):

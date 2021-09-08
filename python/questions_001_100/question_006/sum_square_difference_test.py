@@ -1,4 +1,5 @@
-import unittest, sum_square_difference
+import unittest
+from . import sum_square_difference
 
 
 class TestGetSumSquareDifference(unittest.TestCase):

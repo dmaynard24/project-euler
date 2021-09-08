@@ -5,11 +5,7 @@
 
 # What is the 10 001st prime number?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_nth_prime(n):

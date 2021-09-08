@@ -11,11 +11,8 @@
 
 # By listing the set of reduced proper fractions for d ≤ 1,000,000 in ascending order of size, find the numerator of the fraction immediately to the left of 3/7.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, coprime
+import sys
+from ...util import primal, coprime
 
 
 def get_numerator(max_d):

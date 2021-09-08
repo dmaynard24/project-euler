@@ -1,4 +1,5 @@
-import unittest, amicable_sum
+import unittest
+from . import amicable_sum
 
 
 class TestGetAmicableSum(unittest.TestCase):

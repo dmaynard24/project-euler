@@ -1,4 +1,5 @@
-import unittest, largest_concat
+import unittest
+from . import largest_concat
 
 
 class TestGetLargestConcat(unittest.TestCase):

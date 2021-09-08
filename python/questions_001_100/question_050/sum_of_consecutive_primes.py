@@ -10,11 +10,7 @@
 
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_sum_of_consecutive_primes(limit):

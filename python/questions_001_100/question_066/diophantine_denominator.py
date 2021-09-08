@@ -21,11 +21,7 @@
 
 # Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import period
+from ...util import period
 import math
 
 

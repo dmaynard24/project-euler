@@ -7,11 +7,7 @@
 
 # For which value of p ≤ 1000, is the number of solutions maximised?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import pythagorean_triples
+from ...util import pythagorean_triples
 
 
 def get_most_common_perimeter(p_max):

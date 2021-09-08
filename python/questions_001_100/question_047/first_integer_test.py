@@ -1,4 +1,5 @@
-import unittest, first_integer
+import unittest
+from . import first_integer
 
 
 class TestGetFirstInteger(unittest.TestCase):

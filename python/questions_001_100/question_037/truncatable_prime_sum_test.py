@@ -1,4 +1,5 @@
-import unittest, truncatable_prime_sum
+import unittest
+from . import truncatable_prime_sum
 
 
 class TestGetTruncatablePrimeSum(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, diophantine_denominator
+import unittest
+from . import diophantine_denominator
 
 
 class TestGetDiophantineDenominator(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, last_ten_digits
+import unittest
+from . import last_ten_digits
 
 
 class TestGetLastTenDigits(unittest.TestCase):

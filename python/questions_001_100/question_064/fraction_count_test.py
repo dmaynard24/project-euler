@@ -1,4 +1,5 @@
-import unittest, fraction_count
+import unittest
+from . import fraction_count
 
 
 class TestGetPowerfulIntegerCount(unittest.TestCase):

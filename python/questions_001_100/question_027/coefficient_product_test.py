@@ -1,4 +1,5 @@
-import unittest, coefficient_product
+import unittest
+from . import coefficient_product
 
 
 class TestGetCoefficientProduct(unittest.TestCase):

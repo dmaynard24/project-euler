@@ -11,11 +11,7 @@
 
 # How many fractions lie between 1/3 and 1/2 in the sorted set of reduced proper fractions for d ≤ 12,000?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, coprime
+from ...util import primal, coprime
 
 
 def get_fraction_count(max_d):

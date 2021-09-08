@@ -1,4 +1,5 @@
-import unittest, most_common_perimeter
+import unittest
+from . import most_common_perimeter
 
 
 class TestGetMostCommonPerimeter(unittest.TestCase):

@@ -12,7 +12,8 @@
 # Find the minimal path sum in the matrix string containing a 80 by 80 matrix, from the top left to the bottom right by only moving right and down.
 
 import sys
-import matrix
+from . import matrix
+
 matrix = matrix.matrix
 
 

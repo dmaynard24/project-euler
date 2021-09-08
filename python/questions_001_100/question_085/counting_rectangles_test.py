@@ -1,4 +1,5 @@
-import unittest, counting_rectangles
+import unittest
+from . import counting_rectangles
 
 
 class TestGetClosestArea(unittest.TestCase):

@@ -5,11 +5,7 @@
 
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import palindrome
+from ...util import palindrome
 
 
 def get_largest_palindrome_product(digits):

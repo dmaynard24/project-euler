@@ -1,4 +1,5 @@
-import unittest, unique_perimeters
+import unittest
+from . import unique_perimeters
 
 
 class TestGetUniquePerimeters(unittest.TestCase):

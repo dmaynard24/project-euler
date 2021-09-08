@@ -1,4 +1,5 @@
-import unittest, nth_permutation
+import unittest
+from . import nth_permutation
 
 
 class TestGetNthPermutation(unittest.TestCase):

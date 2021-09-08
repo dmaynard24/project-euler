@@ -1,4 +1,5 @@
-import unittest, minimal_path_sum
+import unittest
+from . import minimal_path_sum
 
 
 class TestGetMinimalPathSum(unittest.TestCase):

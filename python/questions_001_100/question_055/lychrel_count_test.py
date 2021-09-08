@@ -1,4 +1,5 @@
-import unittest, lychrel_count
+import unittest
+from . import lychrel_count
 
 
 class TestGetLychrelCount(unittest.TestCase):

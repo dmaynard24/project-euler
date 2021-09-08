@@ -1,4 +1,5 @@
-import unittest, combination_counts
+import unittest
+from . import combination_counts
 
 
 class TestGetCombinationCounts(unittest.TestCase):

@@ -29,11 +29,7 @@
 
 # Find the sum of digits in the numerator of the 100th convergent of the continued fraction for e.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 import math
 
 

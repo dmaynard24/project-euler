@@ -1,4 +1,5 @@
-import unittest, square_digit_chains
+import unittest
+from . import square_digit_chains
 
 
 class TestGetChainCount(unittest.TestCase):

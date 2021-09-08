@@ -7,7 +7,7 @@
 
 # Find the minimal path sum from the left column to the right column in matrix, a string containing an 80 by 80 matrix.
 
-import sys, heapq
+import sys
 
 matrix = '''131,673,234,103,18
 201,96,342,965,150

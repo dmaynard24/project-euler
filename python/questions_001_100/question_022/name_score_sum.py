@@ -7,7 +7,8 @@
 
 # What is the total of all the name scores in the set?
 
-import names
+from . import names
+
 names = names.names
 
 

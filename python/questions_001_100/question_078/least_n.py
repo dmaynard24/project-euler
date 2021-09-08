@@ -12,11 +12,7 @@
 # O   O   O   O   O
 # Find the least value of n for which p(n) is divisible by one million.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import shapes
+from ...util import shapes
 
 
 def get_least_n(divisor):

@@ -1,4 +1,5 @@
-import unittest, non_abundant_sum
+import unittest
+from . import non_abundant_sum
 
 
 class TestGetNonAbundantSum(unittest.TestCase):

@@ -16,11 +16,7 @@
 
 # In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_fraction_count(iteration_count):

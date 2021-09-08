@@ -1,4 +1,5 @@
-import unittest, largest_product
+import unittest
+from . import largest_product
 
 
 class TestGetLargestProduct(unittest.TestCase):

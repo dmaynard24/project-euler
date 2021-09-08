@@ -1,4 +1,5 @@
-import unittest, numerator_sum
+import unittest
+from . import numerator_sum
 
 
 class TestGetNumeratorSum(unittest.TestCase):

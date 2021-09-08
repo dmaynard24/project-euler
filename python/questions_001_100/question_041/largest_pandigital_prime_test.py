@@ -1,4 +1,5 @@
-import unittest, largest_pandigital_prime
+import unittest
+from . import largest_pandigital_prime
 
 
 class TestGetLargestPandigitalPrime(unittest.TestCase):

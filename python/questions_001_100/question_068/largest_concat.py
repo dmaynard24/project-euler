@@ -20,11 +20,7 @@
 
 # Using the numbers 1 to 10, and depending on arrangements, it is possible to form 16- and 17-digit strings. What is the maximum 16-digit string for a "magic" 5-gon ring?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits, combination, permutation
+from ...util import digits, combination, permutation
 
 
 def get_all_perms(arr, pick):

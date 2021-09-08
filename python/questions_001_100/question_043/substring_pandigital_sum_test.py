@@ -1,4 +1,5 @@
-import unittest, substring_pandigital_sum
+import unittest
+from . import substring_pandigital_sum
 
 
 class TestGetSubstringPandigitalSum(unittest.TestCase):

@@ -5,11 +5,7 @@
 
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_smallest_cube(count):

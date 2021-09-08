@@ -1,4 +1,5 @@
-import unittest, digit_fifth_power_sum
+import unittest
+from . import digit_fifth_power_sum
 
 
 class TestGetDigitFifthPowerSum(unittest.TestCase):

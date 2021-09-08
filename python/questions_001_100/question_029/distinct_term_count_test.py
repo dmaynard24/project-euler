@@ -1,4 +1,5 @@
-import unittest, distinct_term_count
+import unittest
+from . import distinct_term_count
 
 
 class TestGetDistinctTermCount(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, fibonacci_term
+import unittest
+from . import fibonacci_term
 
 
 class TestGetFibonacciTerm(unittest.TestCase):

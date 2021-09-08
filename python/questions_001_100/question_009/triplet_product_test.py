@@ -1,4 +1,5 @@
-import unittest, triplet_product
+import unittest
+from . import triplet_product
 
 
 class TestGetTripletProduct(unittest.TestCase):

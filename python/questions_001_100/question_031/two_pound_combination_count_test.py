@@ -1,4 +1,5 @@
-import unittest, two_pound_combination_count
+import unittest
+from . import two_pound_combination_count
 
 
 class TestGetTwoPoundCombinationCount(unittest.TestCase):

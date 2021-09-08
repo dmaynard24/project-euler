@@ -1,4 +1,5 @@
-import unittest, pentagonal_difference
+import unittest
+from . import pentagonal_difference
 
 
 class TestGetPentagonalDifference(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, first_digits_of_sum
+import unittest
+from . import first_digits_of_sum
 
 
 class TestGetFirstDigitsOfSum(unittest.TestCase):

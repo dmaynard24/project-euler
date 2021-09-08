@@ -7,11 +7,7 @@
 
 # How many circular primes are there below one million?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, digits
+from ...util import primal, digits
 
 
 def get_circular_prime_count(limit):

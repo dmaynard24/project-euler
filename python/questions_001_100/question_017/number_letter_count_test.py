@@ -1,4 +1,5 @@
-import unittest, number_letter_count
+import unittest
+from . import number_letter_count
 
 
 class TestGetNumberLetterCount(unittest.TestCase):

@@ -9,11 +9,7 @@
 
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import factors
+from ...util import factors
 
 
 def get_non_abundant_sum():

@@ -8,11 +8,7 @@
 
 # Evaluate the sum of all the amicable numbers under 10000.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import factors
+from ...util import factors
 
 
 def get_amicable_sum(limit):

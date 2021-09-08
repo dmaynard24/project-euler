@@ -12,11 +12,7 @@
 
 # How many starting numbers below ten million will arrive at 89?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_chain_count(limit):

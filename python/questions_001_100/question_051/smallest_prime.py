@@ -7,11 +7,7 @@
 
 # Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, digits, combination
+from ...util import primal, digits, combination
 
 
 def get_all_combos(length):

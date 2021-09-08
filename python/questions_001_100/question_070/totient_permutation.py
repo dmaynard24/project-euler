@@ -8,11 +8,8 @@
 
 # Find the value of n, 1 < n < 10^7, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, permutation, phi
+import sys
+from ...util import primal, permutation, phi
 
 
 def get_totient_permutation(limit):

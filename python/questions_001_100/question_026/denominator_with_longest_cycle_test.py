@@ -1,4 +1,5 @@
-import unittest, denominator_with_longest_cycle
+import unittest
+from . import denominator_with_longest_cycle
 
 
 class TestGetDenominatorWithLongestCycle(unittest.TestCase):

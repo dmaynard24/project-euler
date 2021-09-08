@@ -9,11 +9,7 @@
 
 # HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import pandigital
+from ...util import pandigital
 import math
 
 

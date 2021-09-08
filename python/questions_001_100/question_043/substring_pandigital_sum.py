@@ -14,11 +14,7 @@
 # d8d9d10=289 is divisible by 17
 # Find the sum of all 0 to 9 pandigital numbers with this property.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits, pandigital
+from ...util import digits, pandigital
 
 
 def get_remaining_digit(digits):

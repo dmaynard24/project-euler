@@ -1,4 +1,5 @@
-import unittest, power_digit_sum
+import unittest
+from . import power_digit_sum
 
 
 class TestGetPowerDigitSum(unittest.TestCase):

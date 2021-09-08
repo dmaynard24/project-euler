@@ -44,7 +44,8 @@
 
 # How many hands does Player 1 win?
 
-import poker
+from . import poker
+
 poker = poker.poker
 
 

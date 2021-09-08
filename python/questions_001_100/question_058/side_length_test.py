@@ -1,4 +1,5 @@
-import unittest, side_length
+import unittest
+from . import side_length
 
 
 class TestGetSideLength(unittest.TestCase):

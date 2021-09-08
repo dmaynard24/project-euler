@@ -11,11 +11,7 @@
 
 # What is the first value which can be written as the sum of primes in over five thousand different ways?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal
+from ...util import primal
 
 
 def get_prime_summation_count(combo_count):

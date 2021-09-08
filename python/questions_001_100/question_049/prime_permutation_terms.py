@@ -7,11 +7,7 @@
 
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, permutation, digits
+from ...util import primal, permutation, digits
 
 
 def get_prime_permutation_terms():

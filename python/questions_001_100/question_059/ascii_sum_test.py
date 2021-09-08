@@ -1,4 +1,5 @@
-import unittest, ascii_sum
+import unittest
+from . import ascii_sum
 
 
 class TestGetAsciiSum(unittest.TestCase):

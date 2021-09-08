@@ -5,11 +5,8 @@
 
 # Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import primal, digits
+import sys
+from ...util import primal, digits
 
 
 def get_lowest_prime_sum(count):

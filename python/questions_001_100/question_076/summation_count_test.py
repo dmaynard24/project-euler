@@ -1,4 +1,5 @@
-import unittest, summation_count
+import unittest
+from . import summation_count
 
 
 class TestGetSummationCount(unittest.TestCase):

@@ -5,11 +5,7 @@
 
 # Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import digits
+from ...util import digits
 
 
 def get_maximum_digit_sum(limit):

@@ -1,4 +1,5 @@
-import unittest, palindromic_sum
+import unittest
+from . import palindromic_sum
 
 
 class TestGetPalindromicSum(unittest.TestCase):

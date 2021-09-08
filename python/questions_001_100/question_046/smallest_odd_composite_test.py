@@ -1,4 +1,5 @@
-import unittest, smallest_odd_composite
+import unittest
+from . import smallest_odd_composite
 
 
 class TestGetSmallestOddComposite(unittest.TestCase):

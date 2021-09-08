@@ -1,4 +1,5 @@
-import unittest, smallest_multiple
+import unittest
+from . import smallest_multiple
 
 
 class TestGetSmallestMultiple(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, name_score_sum
+import unittest
+from . import name_score_sum
 
 
 class TestGetNameScoreSum(unittest.TestCase):

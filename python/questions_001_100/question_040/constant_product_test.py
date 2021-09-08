@@ -1,4 +1,5 @@
-import unittest, constant_product
+import unittest
+from . import constant_product
 
 
 class TestGetConstantProduct(unittest.TestCase):

@@ -1,4 +1,5 @@
-import unittest, prime_permutation_terms
+import unittest
+from . import prime_permutation_terms
 
 
 class TestGetLastTenDigits(unittest.TestCase):

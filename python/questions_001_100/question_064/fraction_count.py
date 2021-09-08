@@ -22,11 +22,7 @@
 
 # How many continued fractions for N≤10000 have an odd period?
 
-import sys, os
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.append(root_dir)
-
-from python.util import period
+from ...util import period
 
 
 def get_fraction_count(max):

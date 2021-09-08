@@ -18,6 +18,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:python": "python -m unittest discover -p '*_test.py'",
     "yapf": "yapf -ir --style=\"{indent_width: 2}\" files ."
   },
   "repository": {

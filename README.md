@@ -25,7 +25,7 @@ python -m unittest python/questions_001_100/question_078/*_test.py"
 In order to run all the tests:
 
 ```
-python -m unittest discover -p "*_test.py"
+python -m unittest discover -p '*_test.py'
 ```
 
 Or, you may use this npm script shorthand:

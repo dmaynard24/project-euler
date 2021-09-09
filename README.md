@@ -19,7 +19,7 @@ Be sure to have [Python](https://www.python.org/) installed.
 To run a single test suite and observe the performance of a single solution, use Python's [unittest](https://docs.python.org/3/library/unittest.html) CLI with the path to the question module specified by file path. For example, to test question 78, run:
 
 ```
-python -m unittest python/questions_001_100/question_078/*_test.py"
+python -m unittest python/questions_001_100/question_078/*_test.py
 ```
 
 In order to run all the tests:

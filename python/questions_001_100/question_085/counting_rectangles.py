@@ -11,7 +11,7 @@ def get_rect_count(rect_w, rect_h):
 
   for w in range(1, rect_w + 1):
     for h in range(1, rect_h + 1):
-      count += ((rect_w - w) + 1) * ((rect_h - h) + 1)
+      count += (rect_w - w + 1) * (rect_h - h + 1)
 
   return count
 

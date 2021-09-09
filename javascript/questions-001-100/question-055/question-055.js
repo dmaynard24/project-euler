@@ -33,7 +33,7 @@ function getLychrelCount(limit) {
       const sumStr = sum.toString();
 
       // cache reverse sums
-      if (reverseSumsArrs.get(sumStr) === undefined) {
+      if (!reverseSumsArrs.has(sumStr)) {
         reverseSumsArrs.set(sumStr, sum.toArray(10).value.reverse());
       }
 
@@ -46,7 +46,7 @@ function getLychrelCount(limit) {
       sum = sum.add(reverseSum);
 
       // cache palindrome sums
-      if (palindromeSums.get(sumStr) === undefined) {
+      if (!palindromeSums.has(sumStr)) {
         palindromeSums.set(sumStr, palindrome.isArrayPalindrome(sum.toArray(10).value));
       }
 

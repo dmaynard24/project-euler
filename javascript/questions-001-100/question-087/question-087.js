@@ -18,7 +18,7 @@ function getPrimeSumCount(limit) {
   const primeNums = primal.getPrimeNumbers(primes);
   const smallestCube = 2 ** 3;
   const smallestFourth = 2 ** 4;
-  const sums = new Map();
+  const sums = new Set();
 
   for (let i = 0; i < primeNums.length; i++) {
     const square = primeNums[i] ** 2;
@@ -34,7 +34,7 @@ function getPrimeSumCount(limit) {
         const fourth = primeNums[k] ** 4;
         const primeSum = square + cube + fourth;
         if (primeSum < limit) {
-          sums.set(primeSum, 1);
+          sums.add(primeSum);
         } else {
           break;
         }

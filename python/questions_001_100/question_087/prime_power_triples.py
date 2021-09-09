@@ -19,7 +19,7 @@ def get_prime_sum_count(limit):
   prime_nums = primal.get_prime_numbers(primes)
   smallest_cube = 2**3
   smallest_fourth = 2**4
-  sums = {}
+  sums = set()
 
   for square_root in prime_nums:
     square = square_root**2
@@ -33,7 +33,7 @@ def get_prime_sum_count(limit):
         fourth = fourth_root**4
         prime_sum = square + cube + fourth
         if prime_sum < limit:
-          sums[prime_sum] = 1
+          sums.add(prime_sum)
         else:
           break
 

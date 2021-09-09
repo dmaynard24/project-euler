@@ -40,3 +40,4 @@ def get_least_m(min_solution_count):
 
 print(get_least_m(2_000))  # 100
 # print(get_least_m(1_000_000))  # ?
+# NOTE: use util/pythagorean_triples ???

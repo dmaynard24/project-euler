@@ -92,6 +92,26 @@ JavaScript and Python solutions to the [Project Euler](https://projecteuler.net)
 | [Question #92](https://projecteuler.net/problem=92) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/questions-001-100/question-092/question-092.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/questions_001_100/question_092/square_digit_chains.py) |
 | [Question #97](https://projecteuler.net/problem=97) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/questions-001-100/question-097/question-097.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/questions_001_100/question_097/large_non_mersenne_prime.py) |
 
+## Utilities
+
+These are shared modules that are referenced throughout many of the solutions. For example, the **digits** module is used for doing common operations on numeric values such as: listing the digits in any integer number, counting the number of digits in any integer number, etc.
+
+| Utility | JavaScript Module | Python Module |
+| - | - | - |
+| combination | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/combination.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/combination.py) |
+| coprime | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/coprime.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/coprime.py) |
+| digits | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/digits.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/digits.py) |
+| factors | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/factors.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/factors.py) |
+| gcd (greatest common divisor) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/gcd.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/gcd.py) |
+| palindrome | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/palindrome.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/palindrome.py) |
+| pandigital | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/pandigital.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/pandigital.py) |
+| period | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/period.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/period.py) |
+| permutation | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/permutation.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/permutation.py) |
+| phi | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/phi.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/phi.py) |
+| primal (prime numbers) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/primal.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/primal.py) |
+| pythagorean triples | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/pythagorean-triples.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/pythagorean_triples.py) |
+| shapes | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/shapes.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/shapes.py) |
+
 ## Testing
 
 ### JavaScript

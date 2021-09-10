@@ -5,7 +5,7 @@ JavaScript and Python solutions to the [Project Euler](https://projecteuler.net)
 ## Solutions
 
 | Project Euler Question | JavaScript Solution | Python Solution |
-| - | - | - |
+| :- | :- | :- |
 | [Question #1](https://projecteuler.net/problem=1) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/questions-001-100/question-001/question-001.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/questions_001_100/question_001/fizzbuzz_sum.py) |
 | [Question #2](https://projecteuler.net/problem=2) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/questions-001-100/question-002/question-002.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/questions_001_100/question_002/fibonacci_sum.py) |
 | [Question #3](https://projecteuler.net/problem=3) | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/questions-001-100/question-003/question-003.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/questions_001_100/question_003/largest_prime_factor.py) |
@@ -97,7 +97,7 @@ JavaScript and Python solutions to the [Project Euler](https://projecteuler.net)
 These are shared modules that are referenced throughout many of the solutions. For example, the **digits** module is used for doing common operations on numeric values such as: listing the digits in any integer number, counting the number of digits in any integer number, etc.
 
 | Utility | JavaScript Module | Python Module |
-| - | - | - |
+| :- | :- | :- |
 | combination | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/combination.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/combination.py) |
 | coprime | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/coprime.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/coprime.py) |
 | digits | [JavaScript](https://github.com/dmaynard24/project-euler/blob/master/javascript/util/digits.js) | [Python](https://github.com/dmaynard24/project-euler/blob/master/python/util/digits.py) |
